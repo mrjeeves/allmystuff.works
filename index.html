@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>allmystuff.works — A personal cloud, with a real human one click away</title>
+  <meta name="description" content="Your own private mesh network for the devices and tools you actually use. WebRTC under the hood, a real human on tap when you need one." />
+  <meta property="og:title" content="allmystuff.works" />
+  <meta property="og:description" content="A personal cloud, with a real human one click away." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23faf6ef'/%3E%3Cg stroke='%233d6b65' stroke-width='1.4' fill='none'%3E%3Ccircle cx='10' cy='12' r='2.4'/%3E%3Ccircle cx='22' cy='11' r='2.4'/%3E%3Ccircle cx='12' cy='22' r='2.4'/%3E%3Ccircle cx='22' cy='21' r='2.4'/%3E%3Cpath d='M10 12 L22 11 M10 12 L12 22 M22 11 L22 21 M12 22 L22 21 M10 12 L22 21 M22 11 L12 22'/%3E%3C/g%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-header" data-elevate>
+    <a class="brand" href="/" aria-label="allmystuff.works home">
+      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+        <g stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round">
+          <circle cx="10" cy="12" r="2.4"/>
+          <circle cx="22" cy="11" r="2.4"/>
+          <circle cx="12" cy="22" r="2.4"/>
+          <circle cx="22" cy="21" r="2.4"/>
+          <path d="M10 12 L22 11 M10 12 L12 22 M22 11 L22 21 M12 22 L22 21 M10 12 L22 21 M22 11 L12 22"/>
+        </g>
+      </svg>
+      <span class="brand-name">allmystuff<span class="brand-tld">.works</span></span>
+    </a>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="#networks">Networks</a>
+      <a href="#how">How it works</a>
+      <a href="#summon">Summon help</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="site-cta">
+      <a class="link" href="#signin">Sign in</a>
+      <a class="btn btn-primary" href="#signup">Start free</a>
+    </div>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <div id="mobile-nav" class="mobile-nav" hidden>
+    <a href="#networks">Networks</a>
+    <a href="#how">How it works</a>
+    <a href="#summon">Summon help</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#faq">FAQ</a>
+    <a class="link" href="#signin">Sign in</a>
+    <a class="btn btn-primary" href="#signup">Start free</a>
+  </div>
+
+  <main id="main">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="dot"></span> Tech concierge, for your stuff.</p>
+        <h1>All my stuff.<br/><em>Works.</em></h1>
+        <p class="lede">A personal cloud that you actually own — your laptops, your phone, your home server, your weird side project — woven into a private mesh over WebRTC, with a real human one click away when things get strange.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary btn-lg" href="#signup">Start free — no card</a>
+          <a class="btn btn-ghost btn-lg" href="#how">See how it works <span aria-hidden="true">→</span></a>
+        </div>
+        <ul class="hero-points" role="list">
+          <li><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Your own network. Not a shared bucket.</li>
+          <li><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> We run STUN &amp; TURN so peer-to-peer just works.</li>
+          <li><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> A real human shows up if you ask.</li>
+        </ul>
+      </div>
+
+      <figure class="hero-art" aria-hidden="true">
+        <svg class="mesh" viewBox="0 0 360 360">
+          <defs>
+            <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#f3e2c6" stop-opacity="0.9"/>
+              <stop offset="100%" stop-color="#f3e2c6" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <circle cx="180" cy="180" r="160" fill="url(#glow)"/>
+
+          <g class="mesh-lines" stroke="#cdbfa8" stroke-width="1" fill="none">
+            <path d="M70 90 L180 60 M70 90 L120 200 M70 90 L210 220 M180 60 L290 100 M180 60 L210 220 M290 100 L300 230 M290 100 L210 220 M120 200 L210 220 M120 200 L150 300 M210 220 L300 230 M210 220 L240 310 M150 300 L240 310 M300 230 L240 310"/>
+          </g>
+
+          <g class="mesh-nodes">
+            <g class="node node-hub" transform="translate(210 220)">
+              <circle r="22" fill="#3d6b65"/>
+              <circle r="22" fill="none" stroke="#3d6b65" stroke-opacity="0.25" stroke-width="10" class="pulse"/>
+              <text x="0" y="4" text-anchor="middle" fill="#faf6ef" font-size="11" font-family="ui-sans-serif, system-ui">you</text>
+            </g>
+            <g class="node" transform="translate(70 90)">
+              <circle r="13" fill="#fbf7f1" stroke="#3d6b65" stroke-width="1.5"/>
+              <text x="0" y="3" text-anchor="middle" font-size="11" fill="#3d6b65" font-family="ui-sans-serif, system-ui">📱</text>
+            </g>
+            <g class="node" transform="translate(180 60)">
+              <circle r="13" fill="#fbf7f1" stroke="#3d6b65" stroke-width="1.5"/>
+              <text x="0" y="3" text-anchor="middle" font-size="11" fill="#3d6b65" font-family="ui-sans-serif, system-ui">💻</text>
+            </g>
+            <g class="node" transform="translate(290 100)">
+              <circle r="13" fill="#fbf7f1" stroke="#3d6b65" stroke-width="1.5"/>
+              <text x="0" y="3" text-anchor="middle" font-size="11" fill="#3d6b65" font-family="ui-sans-serif, system-ui">🖥️</text>
+            </g>
+            <g class="node" transform="translate(120 200)">
+              <circle r="13" fill="#fbf7f1" stroke="#3d6b65" stroke-width="1.5"/>
+              <text x="0" y="3" text-anchor="middle" font-size="11" fill="#3d6b65" font-family="ui-sans-serif, system-ui">🧠</text>
+            </g>
+            <g class="node" transform="translate(300 230)">
+              <circle r="13" fill="#fbf7f1" stroke="#3d6b65" stroke-width="1.5"/>
+              <text x="0" y="3" text-anchor="middle" font-size="11" fill="#3d6b65" font-family="ui-sans-serif, system-ui">📷</text>
+            </g>
+            <g class="node" transform="translate(150 300)">
+              <circle r="13" fill="#fbf7f1" stroke="#3d6b65" stroke-width="1.5"/>
+              <text x="0" y="3" text-anchor="middle" font-size="11" fill="#3d6b65" font-family="ui-sans-serif, system-ui">📁</text>
+            </g>
+            <g class="node node-help" transform="translate(240 310)">
+              <circle r="15" fill="#b8895a"/>
+              <text x="0" y="4" text-anchor="middle" font-size="13" fill="#faf6ef" font-family="ui-sans-serif, system-ui">🙋</text>
+            </g>
+          </g>
+        </svg>
+        <figcaption class="mesh-caption">A small private network. Yours.</figcaption>
+      </figure>
+    </section>
+
+    <section class="strip" aria-label="What's inside the box">
+      <div class="strip-inner">
+        <span>Trystero mesh</span>
+        <span class="dot-sep" aria-hidden="true">·</span>
+        <span>WebRTC peer-to-peer</span>
+        <span class="dot-sep" aria-hidden="true">·</span>
+        <span>STUN + TURN on us</span>
+        <span class="dot-sep" aria-hidden="true">·</span>
+        <span>cloud-mesh agents</span>
+        <span class="dot-sep" aria-hidden="true">·</span>
+        <span>real-human help</span>
+      </div>
+    </section>
+
+    <section id="networks" class="section">
+      <div class="section-head">
+        <p class="eyebrow"><span class="dot"></span> Networks</p>
+        <h2>Your own little cloud. <em>Without the cloud.</em></h2>
+        <p class="section-lede">A <strong>network</strong> is your private mesh — the devices and services you choose, talking directly to each other. No central server pretending to be the source of truth. You hold the keys; we just help the packets find each other.</p>
+      </div>
+
+      <div class="cards">
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M3 12h18M12 3a13 13 0 010 18M12 3a13 13 0 000 18" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+          </div>
+          <h3>Peer-to-peer, by design</h3>
+          <p>Your devices connect <em>directly</em> when they can — through <a href="https://github.com/dmotz/trystero" target="_blank" rel="noopener">Trystero</a> on top of WebRTC. We never sit in the data path between them.</p>
+        </article>
+
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M4 14a4 4 0 014-4 6 6 0 0111.5 1.5A3.5 3.5 0 0119 18H8a4 4 0 01-4-4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>STUN &amp; TURN, included</h3>
+          <p><code>stun.allmystuff.works</code> and <code>turn.allmystuff.works</code> are part of every plan, including the free tier. Authenticated per account so freeloaders don't bog down your throughput.</p>
+        </article>
+
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><rect x="3.5" y="6" width="17" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M7 10h10M7 14h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <h3>Bring any device</h3>
+          <p>Phones, laptops, that Raspberry Pi in the closet, a VPS, a tablet your kid uses. If it speaks WebRTC — and most modern things do — it can join.</p>
+        </article>
+
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7l8-4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M9 12l2.2 2.2L15 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>Quiet by default</h3>
+          <p>We can see that your devices are <em>talking</em>. We can't see <em>what</em> they say. Your network's traffic is end-to-end encrypted between peers.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="how" class="section section-alt">
+      <div class="section-head">
+        <p class="eyebrow"><span class="dot"></span> How it works</p>
+        <h2>Three small steps, one calm cloud.</h2>
+      </div>
+
+      <ol class="steps" role="list">
+        <li>
+          <span class="step-num">1</span>
+          <h3>Make an account</h3>
+          <p>Email, a passphrase, done. Your free account unlocks our STUN and TURN — throttled per second, not capped by month, so it always works, even at the end of the month.</p>
+        </li>
+        <li>
+          <span class="step-num">2</span>
+          <h3>Spin up a network</h3>
+          <p>Name it. Invite your other devices with a QR code or a one-time link. They join the mesh and start gossiping about which agents they run and what they can do.</p>
+        </li>
+        <li>
+          <span class="step-num">3</span>
+          <h3>Put your stuff to work</h3>
+          <p>Files, models, notes, scripts, a personal LLM, a backup target — anything one of your devices runs is available to the others. Need a hand? <a href="#summon">Summon a real human</a>.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section id="agents" class="section">
+      <div class="section-head two-col">
+        <div>
+          <p class="eyebrow"><span class="dot"></span> Cloud-mesh agents</p>
+          <h2>A friendly fork of the agents you might already know.</h2>
+        </div>
+        <p class="section-lede">We maintain a fork of <a href="https://myownllm.net" target="_blank" rel="noopener">myownllm.net</a>'s <strong>cloud-mesh</strong> agent framework — same shape, same APIs, with a few additions we needed in order to summon a human into your living room without it being weird.</p>
+      </div>
+
+      <div class="agent-grid">
+        <div class="agent">
+          <h3>What you get from upstream</h3>
+          <ul role="list">
+            <li>Drop-in agents that announce themselves on the mesh</li>
+            <li>Capability discovery between peers</li>
+            <li>Streaming results across devices</li>
+            <li>Local-first model and tool orchestration</li>
+          </ul>
+        </div>
+        <div class="agent agent-ours">
+          <h3>What we added</h3>
+          <ul role="list">
+            <li>Consent-gated <strong>remote view</strong> of a device's screen</li>
+            <li>Consent-gated <strong>remote control</strong> with one-tap revoke</li>
+            <li>A handoff channel for a real human helper</li>
+            <li>Audit log on the device — not on our servers</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="callout">Every remote-view session asks again, in person, on the device being viewed. There's no silent helper mode. There never will be.</p>
+    </section>
+
+    <section id="summon" class="section section-warm">
+      <div class="section-head">
+        <p class="eyebrow"><span class="dot"></span> Summon a human</p>
+        <h2>The bit that makes us a concierge.</h2>
+        <p class="section-lede">Some problems aren't tickets. They're "why is the printer doing that" and "I think I broke email" and "I'd just like someone to look at this with me for ten minutes." Press the button, and a real, vetted human shows up on your network — only the device you pick, only for as long as you say.</p>
+      </div>
+
+      <div class="summon-grid">
+        <div class="summon-card">
+          <span class="summon-step">First</span>
+          <h3>You press <em>Summon</em></h3>
+          <p>Pick what's bothering you from a short list, or type it out. Pick which device you want them to see. Nothing happens until you say so.</p>
+        </div>
+        <div class="summon-card">
+          <span class="summon-step">Then</span>
+          <h3>A helper joins your mesh</h3>
+          <p>They get a temporary, scoped peer on <em>your</em> network — not a screen-share through a third party. The session ends when you close it. Or when the timer runs out. Whichever comes first.</p>
+        </div>
+        <div class="summon-card">
+          <span class="summon-step">After</span>
+          <h3>You decide what stays</h3>
+          <p>Audit trail is on your device. The helper's notes, if you want them, are saved to your network. We keep a receipt for billing, and that's it.</p>
+        </div>
+      </div>
+
+      <div class="summon-cta">
+        <a class="btn btn-primary btn-lg" href="#signup">Try a free 5-minute session</a>
+        <span class="summon-fine">First one's on us, once per account.</span>
+      </div>
+    </section>
+
+    <section id="pricing" class="section">
+      <div class="section-head">
+        <p class="eyebrow"><span class="dot"></span> Pricing</p>
+        <h2>Pay for throughput. Not for permission.</h2>
+        <p class="section-lede">Every plan, even the free one, gets a real account on our infrastructure — your network needs an authenticated identity to use STUN/TURN. The difference is how much we let your packets move at any one moment.</p>
+      </div>
+
+      <div class="plans">
+        <article class="plan">
+          <header>
+            <h3>Free</h3>
+            <p class="plan-price"><span class="amount">$0</span><span class="per">forever</span></p>
+            <p class="plan-tag">For curious people and small networks.</p>
+          </header>
+          <ul role="list" class="plan-feats">
+            <li><svg viewBox="0 0 16 16"><path d="M3 8l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Up to <strong>1 network</strong>, 4 devices</li>
+            <li><svg viewBox="0 0 16 16"><path d="M3 8l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> STUN + TURN, throttled to <strong>~1 Mbps</strong> per second</li>
+            <li><svg viewBox="0 0 16 16"><path d="M3 8l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> No monthly bandwidth cap</li>
+            <li><svg viewBox="0 0 16 16"><path d="M3 8l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Cloud-mesh agents, full feature set</li>
+            <li><svg viewBox="0 0 16 16"><path d="M3 8l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> One free 5-min Summon session</li>
+          </ul>
+          <a class="btn btn-ghost btn-block" href="#signup">Create account</a>
+        </article>
+
+        <article class="plan plan-featured">
+          <span class="plan-badge">Most popular</span>
+          <header>
+            <h3>Concierge</h3>
+            <p class="plan-price"><span class="amount">$12</span><span class="per">/ month</span></p>
+            <p class="plan-tag">For a household, a hobbyist, a small team.</p>
+          </header>
+          <ul role="list" class="plan-feats">
+            <li><svg viewBox="0 0 16 16"><path d="M3 8l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Up to <strong>5 networks</strong>, 25 devices</li>
+            <li><svg viewBox="0 0 16 16"><path d="M3 8l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> TURN throttled to <strong>~25 Mbps</strong> per second</li>
+            <li><svg viewBox="0 0 16 16"><path d="M3 8l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Priority Summon queue</li>
+            <li><svg viewBox="0 0 16 16"><path d="M3 8l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> 60 minutes of human help / month</li>
+            <li><svg viewBox="0 0 16 16"><path d="M3 8l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Audit-log retention on device</li>
+          </ul>
+          <a class="btn btn-primary btn-block" href="#signup">Start 14-day trial</a>
+        </article>
+
+        <article class="plan">
+          <header>
+            <h3>Workshop</h3>
+            <p class="plan-price"><span class="amount">$39</span><span class="per">/ month</span></p>
+            <p class="plan-tag">For makers, prosumers, the home-lab crowd.</p>
+          </header>
+          <ul role="list" class="plan-feats">
+            <li><svg viewBox="0 0 16 16"><path d="M3 8l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> <strong>Unlimited</strong> networks &amp; devices</li>
+            <li><svg viewBox="0 0 16 16"><path d="M3 8l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> TURN throttled to <strong>~250 Mbps</strong> per second</li>
+            <li><svg viewBox="0 0 16 16"><path d="M3 8l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Dedicated TURN region of your choice</li>
+            <li><svg viewBox="0 0 16 16"><path d="M3 8l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> 3 hours of human help / month</li>
+            <li><svg viewBox="0 0 16 16"><path d="M3 8l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Self-host the TURN if you ever want to</li>
+          </ul>
+          <a class="btn btn-ghost btn-block" href="#signup">Start 14-day trial</a>
+        </article>
+      </div>
+
+      <p class="plan-note">Need a one-time hand instead of a subscription? <a href="#summon">Book a single Summon session</a> from $25.</p>
+    </section>
+
+    <section id="faq" class="section section-alt">
+      <div class="section-head">
+        <p class="eyebrow"><span class="dot"></span> FAQ</p>
+        <h2>Reasonable questions, honest answers.</h2>
+      </div>
+
+      <div class="faq">
+        <details>
+          <summary>Why do I need an account just to use the free tier?</summary>
+          <p>Because <code>stun.allmystuff.works</code> and <code>turn.allmystuff.works</code> are real servers we run, and unauthenticated relays are catnip for abuse. An account lets us throttle per-account rather than block everyone on a noisy ISP. Free still means free — we just want to know which "you" is using it.</p>
+        </details>
+        <details>
+          <summary>What exactly do you throttle on the free tier?</summary>
+          <p>Per-second throughput, not total bandwidth. You can move as many bytes as you like over a month; you just can't move them all in one explosive burst. In practice this is plenty for chat, sync, voice, and most file-shuffling. It starts to pinch on heavy video relay through TURN — that's where the paid plans help.</p>
+        </details>
+        <details>
+          <summary>Is this a Tailscale / Zerotier?</summary>
+          <p>Not quite. Those give you a virtual network at the IP layer. We give you a <em>peer mesh at the application layer</em> over WebRTC, with cloud-mesh agents on top. Closer cousins: Trystero, libp2p, IPFS. The headline difference is the human-on-tap part.</p>
+        </details>
+        <details>
+          <summary>You're forking myownllm.net's cloud-mesh agents — why?</summary>
+          <p>Their framework is great, and most of our work is upstream-compatible. We add a handful of things specific to remote viewing and to summoning a human, plus tighter consent prompts. We send fixes back when we can.</p>
+        </details>
+        <details>
+          <summary>Can you see what's on my screen during a Summon session?</summary>
+          <p>Only the helper assigned to your session, only the device you picked, only while the session is active, and only with a fresh confirmation tap on the device being viewed. We can see <em>that</em> a session happened (for billing); we don't record its contents.</p>
+        </details>
+        <details>
+          <summary>Can I run my own TURN server?</summary>
+          <p>Yes, on Workshop and above. You point your clients at your own URL and we stop billing you for relay. People mostly don't bother — running a TURN that's actually reliable is more work than it sounds.</p>
+        </details>
+        <details>
+          <summary>What happens if I cancel?</summary>
+          <p>Your network keeps working, peer to peer. You lose access to our STUN/TURN beyond the free tier and to Summon. Nothing on your devices vanishes — we never had it.</p>
+        </details>
+      </div>
+    </section>
+
+    <section id="signup" class="section section-final">
+      <div class="final-card">
+        <p class="eyebrow"><span class="dot"></span> Ready when you are</p>
+        <h2>Start with a network. We'll handle the rest.</h2>
+        <p>Free tier, no card, full feature set. Set it up in the time it takes to make coffee.</p>
+        <form class="signup-form" onsubmit="return false" aria-label="Sign up for early access">
+          <label class="sr-only" for="email">Email address</label>
+          <input id="email" name="email" type="email" placeholder="you@somewhere.nice" autocomplete="email" required />
+          <button class="btn btn-primary btn-lg" type="submit">Create my network</button>
+        </form>
+        <p class="final-fine">We'll send one email to confirm. That's it. No drip campaign, no growth-hacker nonsense.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a class="brand" href="/" aria-label="allmystuff.works home">
+          <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+            <g stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round">
+              <circle cx="10" cy="12" r="2.4"/>
+              <circle cx="22" cy="11" r="2.4"/>
+              <circle cx="12" cy="22" r="2.4"/>
+              <circle cx="22" cy="21" r="2.4"/>
+              <path d="M10 12 L22 11 M10 12 L12 22 M22 11 L22 21 M12 22 L22 21 M10 12 L22 21 M22 11 L12 22"/>
+            </g>
+          </svg>
+          <span class="brand-name">allmystuff<span class="brand-tld">.works</span></span>
+        </a>
+        <p>A small private cloud, a real human nearby. Made for people who'd rather not host their lives on someone else's roadmap.</p>
+      </div>
+
+      <div class="footer-cols">
+        <div>
+          <h4>Product</h4>
+          <ul role="list">
+            <li><a href="#networks">Networks</a></li>
+            <li><a href="#agents">Agents</a></li>
+            <li><a href="#summon">Summon</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Infrastructure</h4>
+          <ul role="list">
+            <li><code>stun.allmystuff.works</code></li>
+            <li><code>turn.allmystuff.works</code></li>
+            <li><a href="#">Status</a></li>
+            <li><a href="#">Region map</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Made with</h4>
+          <ul role="list">
+            <li><a href="https://github.com/dmotz/trystero" target="_blank" rel="noopener">Trystero</a></li>
+            <li><a href="#">cloud-mesh fork</a></li>
+            <li><a href="https://myownllm.net" target="_blank" rel="noopener">myownllm.net</a> (upstream)</li>
+            <li>WebRTC, of course</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Company</h4>
+          <ul role="list">
+            <li><a href="#">About</a></li>
+            <li><a href="#">Privacy</a></li>
+            <li><a href="#">Terms</a></li>
+            <li><a href="mailto:hello@allmystuff.works">hello@allmystuff.works</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-fine">
+      <p>&copy; <span id="year"></span> allmystuff.works. Your stuff, your network, your call.</p>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
