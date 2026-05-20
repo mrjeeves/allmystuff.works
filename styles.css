@@ -427,7 +427,7 @@ p { margin: 0 0 1em; }
 
 .steps {
   list-style: none;
-  padding: 0; margin: 0;
+  padding: 0; margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
@@ -570,8 +570,8 @@ p { margin: 0 0 1em; }
 }
 .plan-featured:hover { transform: translateY(-8px); }
 .plan-featured h3, .plan-featured .plan-tag { color: var(--bg); }
-.plan-featured .amount { color: var(--bg); }
-.plan-featured .per { color: var(--accent-soft); }
+.plan-featured .plan-price .amount { color: var(--bg); }
+.plan-featured .plan-price .per { color: var(--accent-soft); }
 .plan-featured .plan-feats { color: var(--bg-warm); }
 .plan-featured .plan-feats svg { color: var(--accent-soft); }
 .plan-featured .btn-primary { background: var(--accent); color: var(--ink); }
