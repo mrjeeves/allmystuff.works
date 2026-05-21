@@ -288,6 +288,54 @@ p { margin: 0 0 1em; }
   width: 100%;
   max-width: 480px;
 }
+
+/* hero constellation */
+.constellation {
+  width: 100%; height: auto;
+  filter: drop-shadow(0 20px 30px rgba(74, 56, 30, 0.08));
+}
+.constellation-lines path {
+  stroke-dasharray: 4 4;
+  animation: constellationFlow 12s linear infinite;
+}
+@keyframes constellationFlow {
+  to { stroke-dashoffset: -32; }
+}
+.thing-tick {
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: scale(0.5);
+  animation: thingTick 14s ease-in-out infinite;
+}
+.thing-1 .thing-tick { animation-delay: 0.2s; }
+.thing-2 .thing-tick { animation-delay: 2.2s; }
+.thing-3 .thing-tick { animation-delay: 4.2s; }
+.thing-4 .thing-tick { animation-delay: 6.2s; }
+.thing-5 .thing-tick { animation-delay: 8.2s; }
+@keyframes thingTick {
+  0%, 3%   { opacity: 0; transform: scale(0.5); }
+  6%, 12%  { opacity: 1; transform: scale(1); }
+  18%, 100% { opacity: 0; transform: scale(0.5); }
+}
+.thing-pulse {
+  transform-origin: center;
+  animation: thingPulseRing 3.4s ease-out infinite;
+}
+@keyframes thingPulseRing {
+  0%   { transform: scale(1);   opacity: 0.5; }
+  80%  { transform: scale(1.7); opacity: 0; }
+  100% { transform: scale(1.7); opacity: 0; }
+}
+.hero-caption {
+  text-align: center;
+  font-size: 0.88rem;
+  color: var(--muted);
+  font-style: italic;
+  margin-top: 12px;
+}
+
+/* trick-section lens (moved from hero) */
 .lens {
   width: 100%; height: auto;
   filter: drop-shadow(0 20px 30px rgba(74, 56, 30, 0.08));
@@ -317,7 +365,10 @@ p { margin: 0 0 1em; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .trust-lines path, .pulse, html { animation: none !important; scroll-behavior: auto; }
+  .trust-lines path, .pulse, .constellation-lines path, .thing-tick, .thing-pulse, .game-flow path, html {
+    animation: none !important; scroll-behavior: auto;
+  }
+  .thing-tick { opacity: 0; }
 }
 
 /* ============================================================
@@ -981,6 +1032,107 @@ p { margin: 0 0 1em; }
 .footer-fine p { margin: 0; }
 
 /* ============================================================
+   chant (the proof beat)
+   ============================================================ */
+
+.chant {
+  text-align: center;
+  padding: clamp(60px, 9vw, 110px) clamp(20px, 4vw, 40px);
+  background:
+    radial-gradient(900px 360px at 50% -10%, var(--accent-soft) 0%, transparent 60%),
+    radial-gradient(700px 320px at 50% 110%, var(--teal-soft) 0%, transparent 60%),
+    var(--bg);
+  border-top: 1px solid var(--line-soft);
+  border-bottom: 1px solid var(--line-soft);
+}
+.chant-eyebrow {
+  font-size: 0.82rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--teal);
+  margin: 0 0 24px;
+}
+.chant-line {
+  font-family: var(--font-serif);
+  font-size: clamp(1.25rem, 2.4vw, 1.8rem);
+  font-weight: 400;
+  line-height: 1.45;
+  color: var(--ink);
+  max-width: 880px;
+  margin: 0 auto 8px;
+}
+.chant-line em {
+  color: var(--ink);
+  font-style: italic;
+}
+.chant-sep {
+  color: var(--accent);
+  margin: 0 0.4em;
+  font-style: normal;
+}
+.chant-tail {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1rem, 1.6vw, 1.2rem);
+  color: var(--accent-deep);
+  margin: 22px 0 0;
+}
+
+/* ============================================================
+   trick (the explanation beat)
+   ============================================================ */
+
+.trick-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: clamp(28px, 5vw, 60px);
+  align-items: center;
+}
+.trick-copy h2 { margin-top: 0; }
+.trick-copy .section-lede { font-size: 1.12rem; color: var(--ink-soft); margin-top: 0; }
+.trick-points {
+  list-style: none; padding: 0;
+  margin: 26px 0 0;
+  display: grid; gap: 18px;
+}
+.trick-points li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 16px;
+  align-items: start;
+}
+.trick-marker {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  color: var(--accent);
+  line-height: 1;
+  padding-top: 2px;
+}
+.trick-points h3 {
+  font-size: 1.1rem;
+  margin: 0 0 4px;
+}
+.trick-points p {
+  color: var(--ink-soft);
+  margin: 0;
+  font-size: 0.96rem;
+}
+.trick-art {
+  margin: 0;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: clamp(18px, 3vw, 28px);
+  box-shadow: var(--shadow-sm);
+}
+.trick-caption {
+  text-align: center;
+  font-size: 0.88rem;
+  color: var(--muted);
+  font-style: italic;
+  margin-top: 10px;
+}
+.trick-caption em { color: var(--accent-deep); }
+
+/* ============================================================
    scenes (worked-out examples)
    ============================================================ */
 
@@ -1010,6 +1162,29 @@ p { margin: 0 0 1em; }
     var(--surface);
   border-color: var(--accent);
   box-shadow: var(--shadow-md);
+  padding: clamp(28px, 4vw, 44px);
+}
+.scene-feature-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: clamp(24px, 4vw, 44px);
+  align-items: center;
+}
+.scene-demo {
+  margin: 0;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: clamp(16px, 2.6vw, 24px);
+  box-shadow: var(--shadow-sm);
+}
+.scene-demo svg { width: 100%; height: auto; display: block; }
+.game-flow path {
+  stroke-dasharray: 4 4;
+  animation: gameFlow 1.4s linear infinite;
+}
+@keyframes gameFlow {
+  to { stroke-dashoffset: -16; }
 }
 .scene-tag {
   display: inline-block;
@@ -1192,8 +1367,10 @@ p { margin: 0 0 1em; }
   .pay-grid { grid-template-columns: 1fr; }
   .scenes { grid-template-columns: 1fr; }
   .scene-feature { grid-column: auto; }
+  .scene-feature-grid { grid-template-columns: 1fr; gap: 22px; }
   .parts { grid-template-columns: 1fr; }
   .seam-grid { grid-template-columns: 1fr; gap: 14px; }
+  .trick-grid { grid-template-columns: 1fr; gap: 28px; }
 
   .footer-inner { grid-template-columns: 1fr; }
   .footer-cols { grid-template-columns: repeat(2, 1fr); }
