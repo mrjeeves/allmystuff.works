@@ -301,31 +301,19 @@ p { margin: 0 0 1em; }
 @keyframes constellationFlow {
   to { stroke-dashoffset: -32; }
 }
-.thing-tick {
-  opacity: 0;
+.hero-center {
   transform-box: fill-box;
   transform-origin: center;
-  transform: scale(0.5);
-  animation: thingTick 14s ease-in-out infinite;
 }
-.thing-1 .thing-tick { animation-delay: 0.2s; }
-.thing-2 .thing-tick { animation-delay: 2.2s; }
-.thing-3 .thing-tick { animation-delay: 4.2s; }
-.thing-4 .thing-tick { animation-delay: 6.2s; }
-.thing-5 .thing-tick { animation-delay: 8.2s; }
-@keyframes thingTick {
-  0%, 3%   { opacity: 0; transform: scale(0.5); }
-  6%, 12%  { opacity: 1; transform: scale(1); }
-  18%, 100% { opacity: 0; transform: scale(0.5); }
-}
-.thing-pulse {
+.hero-center-ring {
+  transform-box: fill-box;
   transform-origin: center;
-  animation: thingPulseRing 3.4s ease-out infinite;
+  animation: heroCenterRing 4.2s ease-out infinite;
 }
-@keyframes thingPulseRing {
-  0%   { transform: scale(1);   opacity: 0.5; }
-  80%  { transform: scale(1.7); opacity: 0; }
-  100% { transform: scale(1.7); opacity: 0; }
+@keyframes heroCenterRing {
+  0%   { transform: scale(0.7); opacity: 0.55; }
+  70%  { transform: scale(1.6); opacity: 0;    }
+  100% { transform: scale(1.6); opacity: 0;    }
 }
 .hero-caption {
   text-align: center;
@@ -334,6 +322,7 @@ p { margin: 0 0 1em; }
   font-style: italic;
   margin-top: 12px;
 }
+.hero-caption em { color: var(--accent-deep); }
 
 /* trick-section lens (moved from hero) */
 .lens {
@@ -365,10 +354,10 @@ p { margin: 0 0 1em; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .trust-lines path, .pulse, .constellation-lines path, .thing-tick, .thing-pulse, .game-flow path, html {
+  .trust-lines path, .pulse, .constellation-lines path, .hero-center-ring,
+  .game-flow path, .setup-lines path, html {
     animation: none !important; scroll-behavior: auto;
   }
-  .thing-tick { opacity: 0; }
 }
 
 /* ============================================================
@@ -1640,14 +1629,22 @@ p { margin: 0 0 1em; }
 
 /* "brains stack" callout */
 .stack-note {
-  margin: clamp(24px, 3.5vw, 36px) 0 0;
-  padding: clamp(20px, 3vw, 28px) clamp(22px, 3vw, 32px);
+  margin: clamp(36px, 5vw, 56px) auto 0;
+  max-width: 720px;
+  padding: clamp(22px, 3vw, 32px) clamp(24px, 3vw, 36px);
   background:
-    radial-gradient(500px 200px at 10% 0%, var(--teal-soft) 0%, transparent 60%),
+    radial-gradient(600px 240px at 10% 0%, var(--teal-soft) 0%, transparent 60%),
     var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
 }
+.stack-note-head {
+  margin: 0 0 14px;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  color: var(--ink-soft);
+}
+.stack-note-head strong { color: var(--ink); }
 .stack-line {
   display: flex; align-items: center; gap: 12px;
   margin: 0 0 8px;
@@ -1848,7 +1845,7 @@ p { margin: 0 0 1em; }
 
 .scenes {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 18px;
 }
 .scene {
@@ -2024,8 +2021,24 @@ p { margin: 0 0 1em; }
 }
 
 /* ============================================================
-   seams (software / AI / people)
+   seams (software / AI / people) — embedded inside the system
    ============================================================ */
+
+.system-seams {
+  margin: clamp(32px, 4vw, 48px) auto 0;
+  max-width: var(--maxw);
+}
+.system-seams-lead {
+  max-width: 720px;
+  margin: 0 auto clamp(20px, 3vw, 28px);
+  text-align: center;
+  font-family: var(--font-serif);
+  font-size: clamp(1.05rem, 1.6vw, 1.2rem);
+  font-style: italic;
+  color: var(--ink-soft);
+  line-height: 1.45;
+}
+.system-seams-lead em { color: var(--accent-deep); font-style: italic; }
 
 .seam-grid {
   display: grid;
@@ -2033,12 +2046,28 @@ p { margin: 0 0 1em; }
   gap: 22px;
 }
 .seam {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  position: relative;
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
-  padding: 28px 26px;
+  padding: 28px 26px 26px;
+  transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+}
+.seam:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--accent);
+}
+.seam-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 30px; height: 30px;
+  background: var(--accent-soft);
+  color: var(--accent-deep);
+  border-radius: 50%;
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 12px;
 }
 .seam h3 {
   font-size: 1.2rem;
@@ -2049,6 +2078,7 @@ p { margin: 0 0 1em; }
   margin: 0;
   font-size: 0.96rem;
 }
+.seam p em { color: var(--accent-deep); }
 
 /* ============================================================
    responsive

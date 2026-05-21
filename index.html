@@ -4,9 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>allmystuff.works — All my stuff. Works.</title>
-  <meta name="description" content="Tech that works when you turn it on. Not tech you work to keep on. Starts with the stuff you already own; grows only when you want it to." />
+  <meta name="description" content="The hardware you already own, finally on speaking terms. Print from anywhere, see every camera, find any photo by asking — without making you an IT person." />
   <meta property="og:title" content="allmystuff.works" />
-  <meta property="og:description" content="Tech that works when you turn it on. Not tech you work to keep on." />
+  <meta property="og:description" content="The hardware you already own, finally on speaking terms — without making you an IT person." />
   <meta property="og:type" content="website" />
   <link rel="icon" href="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23faf6ef'/%3E%3Cg stroke='%233d6b65' stroke-width='1.4' fill='none'%3E%3Ccircle cx='10' cy='12' r='2.4'/%3E%3Ccircle cx='22' cy='11' r='2.4'/%3E%3Ccircle cx='12' cy='22' r='2.4'/%3E%3Ccircle cx='22' cy='21' r='2.4'/%3E%3Cpath d='M10 12 L22 11 M10 12 L12 22 M22 11 L22 21 M12 22 L22 21 M10 12 L22 21 M22 11 L12 22'/%3E%3C/g%3E%3C/svg%3E" />
   <link rel="stylesheet" href="styles.css" />
@@ -28,8 +28,9 @@
       <span class="brand-name">allmystuff<span class="brand-tld">.works</span></span>
     </a>
     <nav class="site-nav" aria-label="Primary">
-      <a href="#setup">How it works</a>
       <a href="#scenes">What it does</a>
+      <a href="#system">How it works</a>
+      <a href="#pieces">The pieces</a>
       <a href="#pay">Pay</a>
     </nav>
     <div class="site-cta">
@@ -42,8 +43,9 @@
   </header>
 
   <div id="mobile-nav" class="mobile-nav" hidden>
-    <a href="#setup">How it works</a>
     <a href="#scenes">What it does</a>
+    <a href="#system">How it works</a>
+    <a href="#pieces">The pieces</a>
     <a href="#pay">Pay</a>
     <a href="#faq">FAQ</a>
     <a class="link" href="#signin">Sign in</a>
@@ -52,15 +54,33 @@
 
   <main id="main">
 
-    <!-- ─────────── Hero: the promise ─────────── -->
+    <!-- ─────────── Hero: the promise, made concrete ─────────── -->
     <section class="hero">
       <div class="hero-copy">
         <p class="eyebrow"><span class="dot"></span> A Critical Error Computing product</p>
         <h1>All my stuff.<br/><em>Works.</em></h1>
-        <p class="lede">Tech that works when you turn it on. Not tech you work to keep on. Starts with the stuff you already own — and grows only when you want it to.</p>
+        <p class="lede">Tech that works when you turn it on. Not tech you work to keep on. Your phone, your laptop, your printer, your cameras, the server in the basement — finally on speaking terms.</p>
+        <ul class="hero-points" role="list">
+          <li>
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Print from the airport
+          </li>
+          <li>
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            See every camera, from anywhere
+          </li>
+          <li>
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Find any photo by asking for it
+          </li>
+          <li>
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            A real human when you'd rather not figure it out
+          </li>
+        </ul>
         <div class="hero-actions">
           <a class="btn btn-primary btn-lg" href="#signup">Start free</a>
-          <a class="btn btn-ghost btn-lg" href="#setup">How it works <span aria-hidden="true">→</span></a>
+          <a class="btn btn-ghost btn-lg" href="#scenes">See what it does <span aria-hidden="true">→</span></a>
         </div>
       </div>
 
@@ -76,252 +96,56 @@
 
           <circle cx="200" cy="140" r="170" fill="url(#hero-glow)"/>
 
-          <g class="constellation-lines" stroke="#b8895a" stroke-width="1.2" fill="none" opacity="0.5">
+          <g class="constellation-lines" stroke="#b8895a" stroke-width="1.2" fill="none" opacity="0.55">
+            <path d="M70 80 L200 140"/>
+            <path d="M240 60 L200 140"/>
+            <path d="M320 130 L200 140"/>
+            <path d="M270 220 L200 140"/>
+            <path d="M110 230 L200 140"/>
             <path d="M70 80 Q 160 30 240 60"/>
             <path d="M240 60 Q 310 90 320 130"/>
             <path d="M320 130 Q 320 190 270 220"/>
             <path d="M270 220 Q 180 250 110 230"/>
             <path d="M110 230 Q 50 200 70 80"/>
-            <path d="M70 80 Q 140 130 320 130"/>
-            <path d="M240 60 Q 220 160 110 230"/>
-            <path d="M270 220 Q 160 170 70 80"/>
           </g>
 
           <g class="thing thing-1" transform="translate(70 80)">
             <circle r="22" fill="#fbf7f1" stroke="#3d6b65" stroke-width="1.5"/>
             <text y="6" text-anchor="middle" font-size="20">📱</text>
-            <g class="thing-tick" transform="translate(17 -14)">
-              <circle r="9" fill="#3d6b65"/>
-              <path d="M-3.5 0 L-1 2.5 L4 -3" stroke="#faf6ef" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-            </g>
           </g>
-
           <g class="thing thing-2" transform="translate(240 60)">
             <circle r="22" fill="#fbf7f1" stroke="#3d6b65" stroke-width="1.5"/>
             <text y="6" text-anchor="middle" font-size="20">💻</text>
-            <g class="thing-tick" transform="translate(17 -14)">
-              <circle r="9" fill="#3d6b65"/>
-              <path d="M-3.5 0 L-1 2.5 L4 -3" stroke="#faf6ef" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-            </g>
           </g>
-
           <g class="thing thing-3" transform="translate(320 130)">
             <circle r="22" fill="#fbf7f1" stroke="#3d6b65" stroke-width="1.5"/>
             <text y="6" text-anchor="middle" font-size="20">🖨️</text>
-            <g class="thing-tick" transform="translate(17 -14)">
-              <circle r="9" fill="#3d6b65"/>
-              <path d="M-3.5 0 L-1 2.5 L4 -3" stroke="#faf6ef" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-            </g>
           </g>
-
           <g class="thing thing-4" transform="translate(270 220)">
             <circle r="22" fill="#fbf7f1" stroke="#3d6b65" stroke-width="1.5"/>
             <text y="6" text-anchor="middle" font-size="20">📷</text>
-            <g class="thing-tick" transform="translate(17 -14)">
-              <circle r="9" fill="#3d6b65"/>
-              <path d="M-3.5 0 L-1 2.5 L4 -3" stroke="#faf6ef" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-            </g>
           </g>
-
           <g class="thing thing-5" transform="translate(110 230)">
             <circle r="22" fill="#fbf7f1" stroke="#3d6b65" stroke-width="1.5"/>
             <text y="6" text-anchor="middle" font-size="20">🗄️</text>
-            <g class="thing-tick" transform="translate(17 -14)">
-              <circle r="9" fill="#3d6b65"/>
-              <path d="M-3.5 0 L-1 2.5 L4 -3" stroke="#faf6ef" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-            </g>
           </g>
 
-          <g class="thing thing-6" transform="translate(190 150)">
-            <circle r="22" fill="#3d6b65"/>
-            <text y="6" text-anchor="middle" font-size="20">✨</text>
+          <g class="hero-center" transform="translate(200 140)">
+            <circle class="hero-center-ring" r="34" fill="none" stroke="#b8895a" stroke-width="1" opacity="0.4"/>
+            <circle r="24" fill="#3d6b65"/>
+            <text y="7" text-anchor="middle" font-size="22">✨</text>
           </g>
         </svg>
-        <figcaption class="hero-caption">Quietly humming. <em>Without you having to make it.</em></figcaption>
+        <figcaption class="hero-caption">Five different makers. <em>One conversation.</em></figcaption>
       </figure>
     </section>
 
-    <!-- ─────────── How it works: brain + limbs ─────────── -->
-    <section id="setup" class="section section-alt">
+    <!-- ─────────── Scenes: what it actually lets you do ─────────── -->
+    <section id="scenes" class="section section-alt">
       <div class="section-head">
-        <p class="eyebrow"><span class="dot"></span> How it works</p>
-        <h2>Stack brains for power. <em>Add limbs for reach.</em></h2>
-        <p class="section-lede">Brains run the software and host your AI; the more you have, the more the system can do at once. Limbs add new rooms to see, sense, fix, and speak from. <em>None of it is subscription-gated</em> — you pay for the hardware once and own the capacity, forever.</p>
-      </div>
-
-      <figure class="setup-diagram" aria-label="The system: one brain, many limbs">
-        <svg viewBox="0 0 600 360">
-          <defs>
-            <radialGradient id="setup-glow" cx="50%" cy="50%" r="55%">
-              <stop offset="0%" stop-color="#f3e2c6" stop-opacity="0.55"/>
-              <stop offset="100%" stop-color="#f3e2c6" stop-opacity="0"/>
-            </radialGradient>
-          </defs>
-          <circle cx="300" cy="180" r="200" fill="url(#setup-glow)"/>
-
-          <g class="setup-lines" stroke="#b8895a" stroke-width="1.2" fill="none" opacity="0.55">
-            <path d="M300 180 L90 80"/>
-            <path d="M300 180 L510 80"/>
-            <path d="M300 180 L60 200"/>
-            <path d="M300 180 L540 200"/>
-            <path d="M300 180 L160 310"/>
-            <path d="M300 180 L440 310"/>
-          </g>
-
-          <g transform="translate(90 80)">
-            <circle r="32" fill="#fbf7f1" stroke="#3d6b65" stroke-width="1.6"/>
-            <text y="8" text-anchor="middle" font-size="24">🔔</text>
-            <text y="56" text-anchor="middle" font-size="11" fill="#3d6b65" font-weight="600" font-family="ui-sans-serif">Bell</text>
-            <text y="70" text-anchor="middle" font-size="9" fill="#7a6e5e" font-family="ui-sans-serif">summon</text>
-          </g>
-          <g transform="translate(510 80)">
-            <circle r="32" fill="#fbf7f1" stroke="#3d6b65" stroke-width="1.6"/>
-            <text y="8" text-anchor="middle" font-size="24">🎙️</text>
-            <text y="56" text-anchor="middle" font-size="11" fill="#3d6b65" font-weight="600" font-family="ui-sans-serif">Lapel</text>
-            <text y="70" text-anchor="middle" font-size="9" fill="#7a6e5e" font-family="ui-sans-serif">capture</text>
-          </g>
-          <g transform="translate(60 200)">
-            <circle r="32" fill="#fbf7f1" stroke="#3d6b65" stroke-width="1.6"/>
-            <text y="8" text-anchor="middle" font-size="22">🌡️</text>
-            <text y="56" text-anchor="middle" font-size="11" fill="#3d6b65" font-weight="600" font-family="ui-sans-serif">Pulse</text>
-            <text y="70" text-anchor="middle" font-size="9" fill="#7a6e5e" font-family="ui-sans-serif">sense</text>
-          </g>
-          <g transform="translate(540 200)">
-            <circle r="32" fill="#fbf7f1" stroke="#3d6b65" stroke-width="1.6"/>
-            <text y="8" text-anchor="middle" font-size="22">🔌</text>
-            <text y="56" text-anchor="middle" font-size="11" fill="#3d6b65" font-weight="600" font-family="ui-sans-serif">Latch</text>
-            <text y="70" text-anchor="middle" font-size="9" fill="#7a6e5e" font-family="ui-sans-serif">bridge</text>
-          </g>
-          <g transform="translate(160 310)">
-            <circle r="30" fill="#fbf7f1" stroke="#b8895a" stroke-width="1.6" stroke-dasharray="3 3"/>
-            <text y="6" text-anchor="middle" font-size="20">🖨️</text>
-            <text y="50" text-anchor="middle" font-size="10" fill="#7a6e5e" font-family="ui-sans-serif" font-style="italic">your printer</text>
-          </g>
-          <g transform="translate(440 310)">
-            <circle r="30" fill="#fbf7f1" stroke="#b8895a" stroke-width="1.6" stroke-dasharray="3 3"/>
-            <text y="6" text-anchor="middle" font-size="20">📷</text>
-            <text y="50" text-anchor="middle" font-size="10" fill="#7a6e5e" font-family="ui-sans-serif" font-style="italic">your cameras</text>
-          </g>
-
-          <g transform="translate(300 180)">
-            <circle r="76" fill="#3d6b65"/>
-            <circle r="62" fill="none" stroke="#f5ecdc" stroke-width="1" opacity="0.35"/>
-            <text y="-10" text-anchor="middle" font-size="36">✨</text>
-            <text y="20" text-anchor="middle" font-size="13" fill="#faf6ef" font-weight="600" font-family="ui-sans-serif">your brain</text>
-            <text y="38" text-anchor="middle" font-size="10" fill="#f5ecdc" opacity="0.75" font-family="ui-sans-serif">hosts your AI</text>
-          </g>
-
-          <text x="300" y="346" text-anchor="middle" font-size="11" fill="#7a6e5e" font-style="italic" font-family="ui-sans-serif">brain = your laptop · a Roam or Counter · the Probe · or any computer with a GPU (a "Den+")</text>
-          <text x="300" y="360" text-anchor="middle" font-size="10" fill="#7a6e5e" font-style="italic" font-family="ui-sans-serif">(and yes — keep one at home, carry another in your bag)</text>
-        </svg>
-      </figure>
-
-      <div class="setup-block">
-        <header class="setup-head">
-          <p class="setup-label">First, the brains</p>
-          <h3>Each brain is a stream of work. <em>Add as you grow.</em></h3>
-        </header>
-
-        <div class="brains">
-          <article class="brain">
-            <span class="brain-glyph" aria-hidden="true">💻</span>
-            <p class="brain-tag">Already yours</p>
-            <h4>Your computer</h4>
-            <p>Any laptop or desktop with our app installed. Most people start here.</p>
-            <p class="brain-price"><strong>$0</strong></p>
-          </article>
-
-          <article class="brain">
-            <span class="brain-glyph" aria-hidden="true">🛰️</span>
-            <p class="brain-tag">Battery or AC</p>
-            <h4>Roam &amp; Counter</h4>
-            <p>Same kit — touchscreen, mic, speakers, camera, ports. <strong>Roam</strong> runs on battery, so you can carry one in your bag. <strong>Counter</strong> is AC-only with more horsepower, for the kitchen shelf. Pick either, or both — they stack like any other brains.</p>
-            <p class="brain-price"><strong>$499</strong> each</p>
-          </article>
-
-          <article class="brain">
-            <span class="brain-glyph" aria-hidden="true">🗄️</span>
-            <p class="brain-tag">Workhorse</p>
-            <h4>The Probe</h4>
-            <p>Entry naval-class machine (by <a href="https://criticalerrorcomputing.com">Critical Error Computing</a>). More AI at once, more storage, more rooms it can comfortably watch.</p>
-            <p class="brain-price">from <strong>$1,249</strong></p>
-          </article>
-
-          <article class="brain brain-feature">
-            <span class="brain-glyph" aria-hidden="true">🎮</span>
-            <p class="brain-tag">"Den+"</p>
-            <h4>Any brain with a GPU</h4>
-            <p>A "Den+" is just a computer with a dedicated GPU. Your existing gaming PC counts. So does everything in CEC's naval lineup above the Probe — Fighter, Corvette, Frigate, Destroyer, all of them ship with one. The GPU is what lets a laptop become a thin client for AAA games and heavier AI.</p>
-            <p class="brain-price">your gaming PC, or from <strong>$1,699</strong></p>
-          </article>
-        </div>
-
-        <aside class="stack-note" aria-label="Brains stack">
-          <p class="stack-line"><span class="stack-pip">🧠</span> &nbsp;<em>one task at a time</em></p>
-          <p class="stack-line"><span class="stack-pip">🧠</span><span class="stack-pip">🧠</span> &nbsp;<em>game while your AI sorts photos</em></p>
-          <p class="stack-line"><span class="stack-pip">🧠</span><span class="stack-pip">🧠</span><span class="stack-pip">🧠</span> &nbsp;<em>+ home automations</em></p>
-          <p class="stack-line"><span class="stack-pip">🧠</span><span class="stack-pip">🧠</span><span class="stack-pip">🧠</span><span class="stack-pip">🧠</span> &nbsp;<em>+ monitoring, render, dev &mdash; keep going</em></p>
-          <p class="stack-tail"><strong>No subscription gates this.</strong> Buy what you can. Own what you bought.</p>
-        </aside>
-      </div>
-
-      <div class="setup-block">
-        <header class="setup-head">
-          <p class="setup-label">Then, the limbs</p>
-          <h3>Any, none, all. <em>Each one widens the system.</em></h3>
-        </header>
-
-        <ul class="hw-extras" role="list">
-          <li>
-            <span class="hw-extra-verb">Summon</span>
-            <div class="hw-extra-body">
-              <h4>Bell</h4>
-              <p>Touchscreen, beam-mic, room-filling speakers, physical Summon button. Adds another room where a human is one tap away — and a face for the AI to speak through.</p>
-            </div>
-            <span class="hw-extra-price">from <strong>$149</strong></span>
-          </li>
-          <li>
-            <span class="hw-extra-verb">Capture · voice</span>
-            <div class="hw-extra-body">
-              <h4>Lapel</h4>
-              <p>Clip-on voice recorder with a beam-forming mic. <em>No camera, by design.</em> Adds ears wherever you walk.</p>
-            </div>
-            <span class="hw-extra-price">from <strong>$79</strong></span>
-          </li>
-          <li>
-            <span class="hw-extra-verb">Sense</span>
-            <div class="hw-extra-body">
-              <h4>Pulse</h4>
-              <p>A growing line of sensors — power, temp, humidity, leak, USB sniff. Plugs into a nearby Bell, Roam, Counter, or Probe. Adds whatever the house wasn't telling you.</p>
-            </div>
-            <span class="hw-extra-price">from <strong>$39</strong></span>
-          </li>
-          <li>
-            <span class="hw-extra-verb">Bridge · external</span>
-            <div class="hw-extra-body">
-              <h4>Latch Mobile</h4>
-              <p>USB-and-HDMI doorway in a portable tin. Adds any machine that doesn't run our software to the system — a printer, a tower, a friend's PC. Carry it to where the trouble is.</p>
-            </div>
-            <span class="hw-extra-price"><strong>$99</strong></span>
-          </li>
-          <li>
-            <span class="hw-extra-verb">Bridge · internal</span>
-            <div class="hw-extra-body">
-              <h4>Latch Pro</h4>
-              <p>Same trick on a PCIe card — deeper access, fixed to one machine. Adds permanent reach: wake it, see its BIOS, watch the fans, even when the OS is asleep. Ships pre-installed in <em>every</em> CEC naval-class machine.</p>
-            </div>
-            <span class="hw-extra-price"><strong>$99</strong></span>
-          </li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- Scenes: the architecture in action -->
-    <section id="scenes" class="section">
-      <div class="section-head">
-        <p class="eyebrow"><span class="dot"></span> Some things this lets you do</p>
-        <h2>The boxes alone are just boxes. <em>Together they're magic.</em></h2>
-        <p class="section-lede">Same architecture every time — one brain doing the thinking, a few limbs doing the reaching. Each scene below shows which boxes are doing the work.</p>
+        <p class="eyebrow"><span class="dot"></span> What it does</p>
+        <h2>Pick anything below. <em>The same little system handles all of it.</em></h2>
+        <p class="section-lede">Four real situations the app handles without you having to wire anything up, learn what an IP address is, or open a router admin page. After you've seen a few, the trick will be obvious.</p>
       </div>
 
       <div class="scenes">
@@ -329,9 +153,9 @@
           <div class="scene-feature-grid">
             <div>
               <p class="scene-tag">The headline trick</p>
-              <h3>Game on a $300 laptop. <em>Your Den+ does the rendering.</em></h3>
-              <p>Den+ has the GPU. Your laptop is just the screen. Steam library, AAA titles, real frame rates — from the couch, the kitchen, the office, a hotel. Your own GeForce Experience, except it's actually <em>yours</em>.</p>
-              <p class="scene-uses">Brain: <strong>any computer with a dedicated GPU</strong> (your gaming PC, a CEC heavyweight — that's what "Den+" means). Add a <strong>Stream</strong> relay if you're out of the house.</p>
+              <h3>Game on a $300 laptop. <em>Your big rig does the rendering.</em></h3>
+              <p>Steam library, AAA titles, real frame rates — from the couch, the kitchen, the office, a hotel. The laptop in your lap is just the screen. The desktop in the den is doing the work. Your own GeForce Experience, except it's actually <em>yours</em>.</p>
+              <p class="scene-uses">Needs: <strong>any computer with a real GPU</strong> at home (your gaming PC counts) and the app on whatever you're holding. Add a relay bump for the road.</p>
             </div>
             <figure class="scene-demo" aria-hidden="true">
               <svg viewBox="0 0 280 200">
@@ -353,8 +177,8 @@
                   <circle cx="60" cy="38" r="8" fill="#f5ecdc" opacity="0.6"/>
                   <rect x="20" y="58" width="80" height="3" rx="1" fill="#f5ecdc" opacity="0.4"/>
                   <rect x="-6" y="80" width="132" height="6" rx="2" fill="#1a1814"/>
-                  <text x="60" y="100" text-anchor="middle" font-size="9" fill="#3d6b65" font-family="ui-sans-serif" font-weight="600">your laptop</text>
-                  <text x="60" y="112" text-anchor="middle" font-size="8" fill="#7a6e5e">the screen</text>
+                  <text x="60" y="100" text-anchor="middle" font-size="9" fill="#3d6b65" font-family="ui-sans-serif" font-weight="600">the laptop in your lap</text>
+                  <text x="60" y="112" text-anchor="middle" font-size="8" fill="#7a6e5e">just the screen</text>
                 </g>
 
                 <g class="game-flow" stroke="#b8895a" stroke-width="1.6" fill="none" opacity="0.85">
@@ -378,8 +202,8 @@
                   <text x="35" y="86" text-anchor="middle" font-size="8" fill="#b8895a" font-weight="600" font-family="ui-sans-serif">GPU</text>
                   <circle cx="20" cy="92" r="1" fill="#b8895a"/>
                   <circle cx="50" cy="92" r="1" fill="#b8895a"/>
-                  <text x="35" y="124" text-anchor="middle" font-size="9" fill="#3d6b65" font-weight="600" font-family="ui-sans-serif">Den+</text>
-                  <text x="35" y="136" text-anchor="middle" font-size="8" fill="#7a6e5e">the GPU</text>
+                  <text x="35" y="124" text-anchor="middle" font-size="9" fill="#3d6b65" font-weight="600" font-family="ui-sans-serif">the rig in the den</text>
+                  <text x="35" y="136" text-anchor="middle" font-size="8" fill="#7a6e5e">doing the work</text>
                 </g>
               </svg>
             </figure>
@@ -389,61 +213,245 @@
         <article class="scene">
           <p class="scene-tag">Remember</p>
           <h3>A decade of photos, filed by themselves.</h3>
-          <p>Lapel catches the moment. The brain's AI sorts it. The Probe (or a beefier rig) keeps it. Find anything in a sentence, from any device. Nobody outside your house has seen it.</p>
-          <p class="scene-uses">Brain: <strong>Counter</strong> or <strong>the Probe</strong>. Limbs: <strong>Lapel</strong>.</p>
+          <p>Your AI watches what comes in, sorts it the way you would, keeps it where you keep things. Find anything in a sentence — <em>"dad and the lake, before grandma got the dog"</em> — from any device. Nothing has left the house.</p>
+          <p class="scene-uses">Needs: <strong>any computer at home</strong> running the app. Add a Probe if you'd like room for everything you've ever shot.</p>
         </article>
 
         <article class="scene">
           <p class="scene-tag">Fix</p>
           <h3>Help arrives before something breaks.</h3>
-          <p>Latch Pro watches the BIOS, the fans, the boot screen. Pulse catches the temp creeping. Your AI files a Summon ticket before you'd notice. A human shows up already up to speed.</p>
-          <p class="scene-uses">Brain: <strong>any</strong>. Limbs: <strong>Latch Pro</strong> · <strong>Pulse</strong> · Summon.</p>
+          <p>A fan running hot, a SMART warning, a temperature creeping in the closet, a battery starting to drift — the AI sees the pattern and files a Summon before it's actually a problem. The human who shows up is already up to speed.</p>
+          <p class="scene-uses">Needs: <strong>any computer at home</strong>. Add a Pulse for an outlet to watch, or a Latch to see inside a machine that isn't ours.</p>
         </article>
 
         <article class="scene">
           <p class="scene-tag">Travel</p>
-          <h3>A brain in your bag. <em>Latch Mobile in the other pocket.</em></h3>
-          <p>Carry a Roam and your whole system rides with you — same AI, same Summon button, same access to the brain at home. Pair it with a Latch Mobile and you can diagnose a friend's tower, a hotel printer, or your own laptop's stubborn BIOS, all from the same kit.</p>
-          <p class="scene-uses">Second brain: <strong>Roam</strong>. Bridge: <strong>Latch Mobile</strong>. (First brain stays home.)</p>
+          <h3>Your whole setup, in your bag.</h3>
+          <p>Carry a Roam — a battery-powered touchscreen with the same Summon button — and the system at home travels with you. Same AI, same photos, same one tap to a person. Plug in a Latch Mobile and you can fix a friend's tower or a hotel printer from the same little kit.</p>
+          <p class="scene-uses">Needs: a <strong>Roam</strong> in your bag, plus a <strong>Latch Mobile</strong> when you need to reach something that isn't yours.</p>
         </article>
       </div>
     </section>
 
-    <!-- Seams: the invisible parts living on the brain -->
-    <section id="seams" class="section section-warm">
+    <!-- ─────────── System: the architecture revealed ─────────── -->
+    <section id="system" class="section">
       <div class="section-head">
-        <p class="eyebrow"><span class="dot"></span> The bits between the boxes</p>
-        <h2>Three things you don't have to think about. <em>Because the brain does.</em></h2>
-        <p class="section-lede">All three of these live on your brain. They're what turn "a box and some limbs" into "all my stuff works."</p>
+        <p class="eyebrow"><span class="dot"></span> How it works</p>
+        <h2>All four of those are the same trick. <em>One brain thinking; limbs reaching.</em></h2>
+        <p class="section-lede">Every scene above runs on the same little pattern. One box does the thinking and holds your AI. Other small boxes reach into rooms, voices, sensors, and machines it can't get to on its own. That's the whole system.</p>
       </div>
 
-      <div class="seam-grid">
-        <div class="seam">
-          <h3>Connection software</h3>
-          <p>The brain handles the seams between every limb and every other device on your network. You don't see a tunnel; you see an outcome — print, watch, sync, restore, render-over-there.</p>
+      <figure class="setup-diagram" aria-label="The system: one brain at the center, several limbs reaching outward, and the stuff you already own around the edge">
+        <svg viewBox="0 0 600 360">
+          <defs>
+            <radialGradient id="setup-glow" cx="50%" cy="50%" r="55%">
+              <stop offset="0%" stop-color="#f3e2c6" stop-opacity="0.55"/>
+              <stop offset="100%" stop-color="#f3e2c6" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <circle cx="300" cy="180" r="200" fill="url(#setup-glow)"/>
+
+          <g class="setup-lines" stroke="#b8895a" stroke-width="1.2" fill="none" opacity="0.55">
+            <path d="M300 180 L90 80"/>
+            <path d="M300 180 L510 80"/>
+            <path d="M300 180 L60 200"/>
+            <path d="M300 180 L540 200"/>
+            <path d="M300 180 L160 310"/>
+            <path d="M300 180 L440 310"/>
+          </g>
+
+          <g transform="translate(90 80)">
+            <circle r="32" fill="#fbf7f1" stroke="#3d6b65" stroke-width="1.6"/>
+            <text y="8" text-anchor="middle" font-size="24">🔔</text>
+            <text y="56" text-anchor="middle" font-size="11" fill="#3d6b65" font-weight="600" font-family="ui-sans-serif">Bell</text>
+            <text y="70" text-anchor="middle" font-size="9" fill="#7a6e5e" font-family="ui-sans-serif">a wall to summon from</text>
+          </g>
+          <g transform="translate(510 80)">
+            <circle r="32" fill="#fbf7f1" stroke="#3d6b65" stroke-width="1.6"/>
+            <text y="8" text-anchor="middle" font-size="24">🎙️</text>
+            <text y="56" text-anchor="middle" font-size="11" fill="#3d6b65" font-weight="600" font-family="ui-sans-serif">Lapel</text>
+            <text y="70" text-anchor="middle" font-size="9" fill="#7a6e5e" font-family="ui-sans-serif">ears that walk with you</text>
+          </g>
+          <g transform="translate(60 200)">
+            <circle r="32" fill="#fbf7f1" stroke="#3d6b65" stroke-width="1.6"/>
+            <text y="8" text-anchor="middle" font-size="22">🌡️</text>
+            <text y="56" text-anchor="middle" font-size="11" fill="#3d6b65" font-weight="600" font-family="ui-sans-serif">Pulse</text>
+            <text y="70" text-anchor="middle" font-size="9" fill="#7a6e5e" font-family="ui-sans-serif">sensors in the house</text>
+          </g>
+          <g transform="translate(540 200)">
+            <circle r="32" fill="#fbf7f1" stroke="#3d6b65" stroke-width="1.6"/>
+            <text y="8" text-anchor="middle" font-size="22">🔌</text>
+            <text y="56" text-anchor="middle" font-size="11" fill="#3d6b65" font-weight="600" font-family="ui-sans-serif">Latch</text>
+            <text y="70" text-anchor="middle" font-size="9" fill="#7a6e5e" font-family="ui-sans-serif">a doorway into other gear</text>
+          </g>
+          <g transform="translate(160 310)">
+            <circle r="30" fill="#fbf7f1" stroke="#b8895a" stroke-width="1.6" stroke-dasharray="3 3"/>
+            <text y="6" text-anchor="middle" font-size="20">🖨️</text>
+            <text y="50" text-anchor="middle" font-size="10" fill="#7a6e5e" font-family="ui-sans-serif" font-style="italic">your printer</text>
+          </g>
+          <g transform="translate(440 310)">
+            <circle r="30" fill="#fbf7f1" stroke="#b8895a" stroke-width="1.6" stroke-dasharray="3 3"/>
+            <text y="6" text-anchor="middle" font-size="20">📷</text>
+            <text y="50" text-anchor="middle" font-size="10" fill="#7a6e5e" font-family="ui-sans-serif" font-style="italic">your cameras</text>
+          </g>
+
+          <g transform="translate(300 180)">
+            <circle r="76" fill="#3d6b65"/>
+            <circle r="62" fill="none" stroke="#f5ecdc" stroke-width="1" opacity="0.35"/>
+            <text y="-12" text-anchor="middle" font-size="34">✨</text>
+            <text y="18" text-anchor="middle" font-size="13" fill="#faf6ef" font-weight="600" font-family="ui-sans-serif">the brain</text>
+            <text y="34" text-anchor="middle" font-size="10" fill="#f5ecdc" opacity="0.75" font-family="ui-sans-serif">runs the app · hosts your AI</text>
+          </g>
+
+          <text x="300" y="350" text-anchor="middle" font-size="11" fill="#7a6e5e" font-style="italic" font-family="ui-sans-serif">Solid circles: hardware the system gives you. Dashed circles: hardware you already own.</text>
+        </svg>
+      </figure>
+
+      <div class="system-seams">
+        <p class="system-seams-lead">And living on every brain — the three things that turn boxes and reach into <em>"all my stuff works"</em>:</p>
+        <div class="seam-grid">
+          <div class="seam">
+            <span class="seam-num">1</span>
+            <h3>The connection software</h3>
+            <p>The brain handles every seam — between its limbs, between every device on your network, and out to your stuff in the world. You don't see a tunnel; you see an outcome. Print. Watch. Sync. Restore. Render-over-there.</p>
+          </div>
+          <div class="seam">
+            <span class="seam-num">2</span>
+            <h3>Your local AI</h3>
+            <p>Lives on your brain, not ours. Learns your setup. Watches your limbs. Notices things before you would. We can't see what it sees — and that's <em>why</em> we don't bill for it.</p>
+          </div>
+          <div class="seam">
+            <span class="seam-num">3</span>
+            <h3>A real human, on tap</h3>
+            <p>Tap Summon from any limb — a Bell on the wall, the Roam in your bag, your phone, the brain itself. Whoever's on shift picks up. Your AI hands them the minimum they need to fix the thing.</p>
+          </div>
         </div>
-        <div class="seam">
-          <h3>Your local AI</h3>
-          <p>Lives on the brain. Learns your setup. Watches your limbs. Triages problems before you'd notice. Ours never sees what yours sees — and that's <em>why</em> the watching is free.</p>
+      </div>
+
+      <aside class="stack-note" aria-label="More brains do more at once">
+        <p class="stack-note-head"><strong>Want more at once?</strong> Add another brain.</p>
+        <p class="stack-line"><span class="stack-pip">🧠</span> &nbsp;<em>one task at a time</em></p>
+        <p class="stack-line"><span class="stack-pip">🧠</span><span class="stack-pip">🧠</span> &nbsp;<em>game while your AI sorts photos</em></p>
+        <p class="stack-line"><span class="stack-pip">🧠</span><span class="stack-pip">🧠</span><span class="stack-pip">🧠</span> &nbsp;<em>+ the house automating itself</em></p>
+        <p class="stack-line"><span class="stack-pip">🧠</span><span class="stack-pip">🧠</span><span class="stack-pip">🧠</span><span class="stack-pip">🧠</span> &nbsp;<em>+ monitoring, render, dev — keep going</em></p>
+        <p class="stack-tail">Keep one in the house, carry another in your bag. <strong>No subscription gates this.</strong> Buy what you can, own what you bought.</p>
+      </aside>
+    </section>
+
+    <!-- ─────────── Pieces: what you'd buy (if anything) ─────────── -->
+    <section id="pieces" class="section section-alt">
+      <div class="section-head">
+        <p class="eyebrow"><span class="dot"></span> The pieces</p>
+        <h2>You probably don't need any of this. <em>If you want some, here's what.</em></h2>
+        <p class="section-lede">The software runs on what you already own — that's where most people start, and it's enough for a lot of houses. Add a box when you find yourself wishing the system reached one more room, one more machine, or had a bit more power on tap.</p>
+      </div>
+
+      <div class="setup-block">
+        <header class="setup-head">
+          <p class="setup-label">Brains — pick one (or more)</p>
+          <h3>Anything that runs the app and hosts your AI.</h3>
+          <p>Cheapest is whatever you already own. Better, when you grow into it, is something that can carry more at once.</p>
+        </header>
+
+        <div class="brains">
+          <article class="brain">
+            <span class="brain-glyph" aria-hidden="true">💻</span>
+            <p class="brain-tag">Already yours</p>
+            <h4>Your computer</h4>
+            <p>Any laptop or desktop with the app installed. Most people start exactly here.</p>
+            <p class="brain-price"><strong>$0</strong></p>
+          </article>
+
+          <article class="brain">
+            <span class="brain-glyph" aria-hidden="true">🛰️</span>
+            <p class="brain-tag">Battery or AC</p>
+            <h4>Roam &amp; Counter</h4>
+            <p>Same kit — touchscreen, mic, speakers, camera, ports. <strong>Roam</strong> runs on battery (the one for your bag). <strong>Counter</strong> is AC-only with more horsepower (the one for the kitchen shelf).</p>
+            <p class="brain-price"><strong>$499</strong> each</p>
+          </article>
+
+          <article class="brain">
+            <span class="brain-glyph" aria-hidden="true">🗄️</span>
+            <p class="brain-tag">Workhorse</p>
+            <h4>The Probe</h4>
+            <p>Entry naval-class machine by <a href="https://criticalerrorcomputing.com">Critical Error Computing</a>. More AI at once, more storage, more rooms it can comfortably watch.</p>
+            <p class="brain-price">from <strong>$1,249</strong></p>
+          </article>
+
+          <article class="brain brain-feature">
+            <span class="brain-glyph" aria-hidden="true">🎮</span>
+            <p class="brain-tag">"Den+"</p>
+            <h4>Any brain with a GPU</h4>
+            <p>"Den+" just means a computer with a dedicated GPU. Your gaming PC counts. So does every CEC heavyweight above the Probe — Fighter, Corvette, Frigate, Destroyer all ship with one. The GPU is what unlocks AAA gaming over the wire and the bigger AI models.</p>
+            <p class="brain-price">your gaming PC, or from <strong>$1,699</strong></p>
+          </article>
         </div>
-        <div class="seam">
-          <h3>A real human</h3>
-          <p>Tap Summon from any limb (Bell, Roam, Counter, your phone, the brain itself). Whoever's on shift picks up — your AI hands them the minimum they need to fix the thing.</p>
-        </div>
+      </div>
+
+      <div class="setup-block">
+        <header class="setup-head">
+          <p class="setup-label">Limbs — add when you want reach</p>
+          <h3>Each one widens what the system can see, hear, or talk to.</h3>
+          <p>Buy them à la carte. None are required, and none are subscription-gated — once it's yours, it's yours.</p>
+        </header>
+
+        <ul class="hw-extras" role="list">
+          <li>
+            <span class="hw-extra-verb">Summon</span>
+            <div class="hw-extra-body">
+              <h4>Bell</h4>
+              <p>Touchscreen, beam-mic, room-filling speakers, a physical Summon button. Adds another room where a human is one tap away — and a face for the AI to speak through.</p>
+            </div>
+            <span class="hw-extra-price">from <strong>$149</strong></span>
+          </li>
+          <li>
+            <span class="hw-extra-verb">Capture · voice</span>
+            <div class="hw-extra-body">
+              <h4>Lapel</h4>
+              <p>Clip-on voice recorder with a beam-forming mic. <em>No camera, by design.</em> Adds ears wherever you walk.</p>
+            </div>
+            <span class="hw-extra-price">from <strong>$79</strong></span>
+          </li>
+          <li>
+            <span class="hw-extra-verb">Sense</span>
+            <div class="hw-extra-body">
+              <h4>Pulse</h4>
+              <p>A growing line of small sensors — power, temp, humidity, leak, USB sniff. Plugs into a nearby Bell, Roam, Counter, or Probe. Adds whatever the house wasn't telling you.</p>
+            </div>
+            <span class="hw-extra-price">from <strong>$39</strong></span>
+          </li>
+          <li>
+            <span class="hw-extra-verb">Bridge · external</span>
+            <div class="hw-extra-body">
+              <h4>Latch Mobile</h4>
+              <p>USB-and-HDMI doorway in a portable tin. Brings any machine that doesn't run our software into the fold — a printer, a tower, a friend's PC. Carry it to where the trouble is.</p>
+            </div>
+            <span class="hw-extra-price"><strong>$99</strong></span>
+          </li>
+          <li>
+            <span class="hw-extra-verb">Bridge · internal</span>
+            <div class="hw-extra-body">
+              <h4>Latch Pro</h4>
+              <p>Same trick on a PCIe card — deeper access, fixed to one machine. Wake it from sleep, see its BIOS, watch the fans, even when the OS is asleep. Already inside every CEC naval-class machine; sold standalone for the other ones.</p>
+            </div>
+            <span class="hw-extra-price"><strong>$99</strong></span>
+          </li>
+        </ul>
       </div>
     </section>
 
     <!-- ─────────── Pay ─────────── -->
     <section id="pay" class="section">
       <div class="section-head">
-        <p class="eyebrow"><span class="dot"></span> What you pay for</p>
+        <p class="eyebrow"><span class="dot"></span> Pay</p>
         <h2>Software is free. <em>Speed and humans, only if you need them.</em></h2>
+        <p class="section-lede">It costs us almost nothing per user, so we don't bill you for it. The two things that genuinely cost money — bandwidth on the relay, and minutes of a real technician — are the two things you pay for, and only if you actually want them.</p>
       </div>
 
       <div class="pay-grid">
         <article class="pay">
           <p class="pay-tag">Always free</p>
-          <h3>Everything that's free</h3>
+          <h3>The whole system</h3>
           <ul class="pay-list" role="list">
             <li>The app on every device you own</li>
             <li>Your local AI on every brain you've got</li>
@@ -456,7 +464,7 @@
         </article>
 
         <article class="pay">
-          <p class="pay-tag">When you need speed</p>
+          <p class="pay-tag">When you want speed</p>
           <h3>Relay bumps</h3>
           <ul class="pay-list" role="list">
             <li><strong>$10 / mo · 10 Mbps</strong> — calls, voice, file moves</li>
@@ -572,8 +580,9 @@
         <div>
           <h4>Product</h4>
           <ul role="list">
-            <li><a href="#setup">How it works</a></li>
             <li><a href="#scenes">What it does</a></li>
+            <li><a href="#system">How it works</a></li>
+            <li><a href="#pieces">The pieces</a></li>
             <li><a href="#pay">Pay</a></li>
             <li><a href="#faq">FAQ</a></li>
           </ul>
