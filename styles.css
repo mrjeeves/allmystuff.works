@@ -1500,6 +1500,172 @@ p { margin: 0 0 1em; }
 .trick-caption em { color: var(--accent-deep); }
 
 /* ============================================================
+   grow stages (the spine: where you start, grow as you go)
+   ============================================================ */
+
+.grow-stages {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  max-width: 880px;
+  display: grid;
+  gap: 0;
+  position: relative;
+  counter-reset: grow;
+}
+.grow-stages::before {
+  content: "";
+  position: absolute;
+  left: 32px;
+  top: 32px;
+  bottom: 32px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--accent-soft) 0%, var(--teal-soft) 50%, var(--accent-soft) 100%);
+  border-radius: 2px;
+  z-index: 0;
+}
+.grow-stage {
+  position: relative;
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 24px;
+  padding: 22px 0;
+  align-items: start;
+}
+.grow-stage + .grow-stage {
+  margin-top: -2px;
+}
+.grow-num {
+  position: relative;
+  z-index: 1;
+  width: 64px; height: 64px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--surface);
+  border: 2px solid var(--accent);
+  color: var(--accent-deep);
+  border-radius: 50%;
+  font-family: var(--font-serif);
+  font-size: 1.7rem;
+  font-weight: 500;
+  line-height: 1;
+  box-shadow: 0 0 0 6px var(--bg-soft);
+  flex-shrink: 0;
+}
+.grow-stage-feature .grow-num {
+  background: var(--ink);
+  color: var(--bg);
+  border-color: var(--ink);
+}
+.grow-body {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 26px 28px;
+  transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+}
+.grow-stage:hover .grow-body {
+  transform: translateX(2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--accent);
+}
+.grow-stage-feature .grow-body {
+  background:
+    radial-gradient(600px 200px at 100% 0%, var(--accent-soft) 0%, transparent 60%),
+    var(--surface);
+  border-color: var(--accent);
+  box-shadow: var(--shadow-md);
+}
+.grow-feature-flag {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--bg);
+  background: var(--ink);
+  padding: 4px 10px;
+  border-radius: 999px;
+  z-index: 2;
+}
+.grow-add {
+  display: inline-block;
+  font-size: 0.74rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--teal);
+  background: var(--teal-soft);
+  padding: 4px 12px;
+  border-radius: 999px;
+  margin: 0 0 12px;
+}
+.grow-stage-feature .grow-add {
+  background: var(--accent-soft);
+  color: var(--accent-deep);
+}
+.grow-body h3 {
+  font-family: var(--font-serif);
+  font-size: clamp(1.25rem, 2.2vw, 1.55rem);
+  font-weight: 500;
+  margin: 0 0 10px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+.grow-body > p {
+  color: var(--ink-soft);
+  margin: 0 0 14px;
+  font-size: 1rem;
+}
+.grow-extras {
+  list-style: none; padding: 0; margin: 0 0 14px;
+  display: grid; gap: 8px;
+}
+.grow-extras li {
+  position: relative;
+  padding-left: 18px;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+.grow-extras li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0.55em;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0.6;
+}
+.grow-extras strong { color: var(--ink); font-weight: 600; }
+.grow-extras em { color: var(--muted); font-style: normal; font-size: 0.88rem; }
+.grow-cost {
+  margin: 0 !important;
+  padding-top: 14px;
+  border-top: 1px dashed var(--line);
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+.grow-cost strong {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--ink);
+}
+.grow-cost span {
+  margin-left: 4px;
+}
+
+@media (max-width: 720px) {
+  .grow-stages::before { left: 24px; }
+  .grow-stage {
+    grid-template-columns: 48px 1fr;
+    gap: 16px;
+  }
+  .grow-num {
+    width: 48px; height: 48px;
+    font-size: 1.3rem;
+    box-shadow: 0 0 0 5px var(--bg-soft);
+  }
+  .grow-body { padding: 20px 22px; }
+  .grow-feature-flag { top: 8px; right: 8px; font-size: 0.66rem; padding: 3px 8px; }
+}
+
+/* ============================================================
    scenes (worked-out examples)
    ============================================================ */
 
