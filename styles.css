@@ -458,8 +458,8 @@ p { margin: 0 0 1em; }
 
 .hardware-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
   align-items: stretch;
 }
 .hardware-card {
@@ -667,6 +667,78 @@ p { margin: 0 0 1em; }
   margin-top: 32px;
 }
 
+.sub-pricing { margin-bottom: 56px; }
+.sub-pricing:last-of-type { margin-bottom: 0; }
+.sub-pricing-head {
+  text-align: center;
+  max-width: 580px;
+  margin: 0 auto 28px;
+}
+.sub-pricing-head .eyebrow { justify-content: center; }
+.sub-pricing-head h3 {
+  font-size: clamp(1.5rem, 2.4vw, 1.9rem);
+  margin: 0 0 8px;
+}
+.sub-pricing-head p {
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+.relay-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+.relay-tier {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 22px 20px;
+  text-align: center;
+  transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+}
+.relay-tier:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+  border-color: var(--accent);
+}
+.relay-featured {
+  border-color: var(--accent);
+  background:
+    linear-gradient(180deg, var(--accent-soft) 0%, transparent 40%),
+    var(--surface);
+}
+.relay-name {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--ink);
+  margin: 0 0 4px;
+}
+.relay-price {
+  font-size: 0.95rem;
+  color: var(--muted);
+  margin: 0 0 10px;
+}
+.relay-price strong {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--ink);
+}
+.relay-spec {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  color: var(--teal);
+  margin: 0 0 6px;
+}
+.relay-tag {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin: 0;
+  line-height: 1.4;
+}
+
 /* ============================================================
    faq
    ============================================================ */
@@ -825,7 +897,8 @@ p { margin: 0 0 1em; }
   .section-head.two-col > p { padding-bottom: 0; }
 
   .steps { grid-template-columns: 1fr; gap: 16px; }
-  .hardware-grid { grid-template-columns: 1fr; }
+  .hardware-grid { grid-template-columns: repeat(2, 1fr); }
+  .relay-grid { grid-template-columns: repeat(2, 1fr); }
   .summon-grid { grid-template-columns: 1fr; }
   .plans { grid-template-columns: 1fr; }
   .plan-featured { transform: none; }
@@ -840,4 +913,6 @@ p { margin: 0 0 1em; }
   .hero-actions .btn { flex: 1; }
   .footer-cols { grid-template-columns: 1fr 1fr; }
   .strip-inner { font-size: 0.85rem; gap: 8px; }
+  .hardware-grid { grid-template-columns: 1fr; }
+  .relay-grid { grid-template-columns: 1fr; }
 }
