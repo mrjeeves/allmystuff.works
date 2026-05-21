@@ -1274,7 +1274,65 @@ p { margin: 0 0 1em; }
   font-size: 1.5rem;
 }
 
-/* group 2 — big iron from CEC */
+/* group 2 — CEC naval lineup */
+.naval {
+  list-style: none;
+  padding: 16px 18px;
+  margin: 0 0 14px;
+  display: flex; flex-wrap: wrap; gap: 6px;
+  align-items: stretch;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  counter-reset: naval;
+}
+.naval-class {
+  flex: 1 1 100px;
+  min-width: 88px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 10px 6px;
+  border-radius: 10px;
+  background: var(--bg-warm);
+  border: 1px solid transparent;
+  transition: background 200ms ease, border-color 200ms ease;
+  position: relative;
+}
+.naval-class:hover { background: var(--accent-soft); border-color: var(--accent); }
+.naval-denplus {
+  background: var(--teal-soft);
+}
+.naval-denplus:hover { background: var(--accent-soft); }
+.naval-name {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--ink);
+  text-align: center;
+  line-height: 1.15;
+}
+.naval-price {
+  font-size: 0.74rem;
+  color: var(--muted);
+  margin-top: 4px;
+  white-space: nowrap;
+}
+.naval-key {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 6px;
+  font-size: 0.86rem;
+  color: var(--muted);
+  margin: 0 0 24px;
+  justify-content: center;
+}
+.naval-key-dot {
+  display: inline-block;
+  width: 12px; height: 12px;
+  border-radius: 3px;
+  margin-right: 4px;
+  vertical-align: -2px;
+}
+.naval-key-base { background: var(--bg-warm); border: 1px solid var(--line); }
+.naval-key-denplus { background: var(--teal-soft); border: 1px solid var(--teal); }
+
 .hw-cec {
   display: grid;
   grid-template-columns: 1fr 1fr;
