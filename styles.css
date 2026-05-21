@@ -1564,8 +1564,8 @@ p { margin: 0 0 1em; }
 /* brain cards (the "pick one" row) */
 .brains {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 14px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
 }
 .brain {
   position: relative;
@@ -1631,10 +1631,7 @@ p { margin: 0 0 1em; }
   color: var(--ink);
 }
 
-@media (max-width: 1180px) {
-  .brains { grid-template-columns: repeat(3, 1fr); }
-}
-@media (max-width: 720px) {
+@media (max-width: 960px) {
   .brains { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 480px) {
