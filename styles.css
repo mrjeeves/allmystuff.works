@@ -2021,6 +2021,33 @@ p { margin: 0 0 1em; }
 }
 
 /* ============================================================
+   bridge — a single dramatic line between scenes and system
+   ============================================================ */
+
+.bridge {
+  padding: clamp(50px, 8vw, 90px) clamp(20px, 4vw, 40px);
+  text-align: center;
+  background:
+    radial-gradient(900px 320px at 50% 50%, var(--accent-soft) 0%, transparent 65%),
+    var(--bg);
+  border-top: 1px solid var(--line-soft);
+  border-bottom: 1px solid var(--line-soft);
+}
+.bridge-line {
+  max-width: 880px;
+  margin: 0 auto;
+  font-family: var(--font-serif);
+  font-size: clamp(1.7rem, 3.6vw, 2.8rem);
+  font-weight: 400;
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.bridge-line em {
+  color: var(--accent-deep);
+}
+
+/* ============================================================
    seams (software / AI / people) — embedded inside the system
    ============================================================ */
 
