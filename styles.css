@@ -453,6 +453,49 @@ p { margin: 0 0 1em; }
 .steps p { color: var(--ink-soft); margin: 0; }
 
 /* ============================================================
+   tracks (sub-sections inside hardware/pricing)
+   ============================================================ */
+
+.track + .track {
+  margin-top: clamp(48px, 8vw, 84px);
+  padding-top: clamp(36px, 5vw, 56px);
+  border-top: 1px dashed var(--line);
+}
+.track-head {
+  max-width: 720px;
+  margin: 0 0 clamp(24px, 4vw, 40px);
+}
+.track-label {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--accent-deep);
+  background: var(--accent-soft);
+  padding: 5px 12px;
+  border-radius: 999px;
+  margin: 0 0 14px;
+}
+.track-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin: 0 0 10px;
+}
+.track-lede {
+  color: var(--ink-soft);
+  font-size: 1.05rem;
+  margin: 0;
+}
+.track-fine {
+  margin: 20px 0 0;
+  font-size: 0.92rem;
+  color: var(--muted);
+  max-width: 720px;
+}
+
+/* ============================================================
    hardware
    ============================================================ */
 
@@ -461,6 +504,9 @@ p { margin: 0 0 1em; }
   grid-template-columns: repeat(3, 1fr);
   gap: 18px;
   align-items: stretch;
+}
+.hardware-grid-4 {
+  grid-template-columns: repeat(4, 1fr);
 }
 .hardware-card {
   background: var(--surface);
@@ -601,6 +647,14 @@ p { margin: 0 0 1em; }
   gap: 18px;
   align-items: stretch;
 }
+.plans-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+.plan-slim { padding: 26px 22px; }
+.plan-slim h3 { font-size: 1.2rem; }
+.plan-slim .plan-price .amount { font-size: 2.1rem; }
+.plan-slim .plan-feats { font-size: 0.92rem; gap: 8px; margin-bottom: 18px; }
+.plan-slim header { margin-bottom: 14px; }
 .plan {
   background: var(--surface);
   border: 1px solid var(--line);
@@ -825,14 +879,19 @@ p { margin: 0 0 1em; }
   .section-head.two-col > p { padding-bottom: 0; }
 
   .steps { grid-template-columns: 1fr; gap: 16px; }
-  .hardware-grid { grid-template-columns: 1fr; }
+  .hardware-grid, .hardware-grid-4 { grid-template-columns: 1fr; }
   .summon-grid { grid-template-columns: 1fr; }
-  .plans { grid-template-columns: 1fr; }
+  .plans, .plans-4 { grid-template-columns: 1fr; }
   .plan-featured { transform: none; }
   .plan-featured:hover { transform: translateY(-2px); }
 
   .footer-inner { grid-template-columns: 1fr; }
   .footer-cols { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 961px) and (max-width: 1180px) {
+  .hardware-grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .plans-4 { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 520px) {
