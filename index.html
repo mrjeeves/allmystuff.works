@@ -139,7 +139,6 @@
           <g class="thing thing-6" transform="translate(190 150)">
             <circle r="22" fill="#3d6b65"/>
             <text y="6" text-anchor="middle" font-size="20">✨</text>
-            <circle r="22" fill="none" stroke="#3d6b65" stroke-opacity="0.25" stroke-width="8" class="thing-pulse"/>
           </g>
         </svg>
         <figcaption class="hero-caption">Quietly humming. <em>Without you having to make it.</em></figcaption>
@@ -147,25 +146,77 @@
     </section>
 
     <!-- ─────────── Beat 2: PROOF ─────────── -->
-    <section class="chant" aria-label="What this lets you do">
-      <p class="chant-eyebrow">All of this. From the device in your hand.</p>
-      <p class="chant-line">
-        <em>Print from the airport.</em>
-        <span class="chant-sep" aria-hidden="true">·</span>
-        <em>Find any photo by talking.</em>
-        <span class="chant-sep" aria-hidden="true">·</span>
-        <em>Reach the home server.</em>
-        <span class="chant-sep" aria-hidden="true">·</span>
-        <em>Game on a $300 laptop.</em>
-      </p>
-      <p class="chant-line">
-        <em>Fix the printer from the road.</em>
-        <span class="chant-sep" aria-hidden="true">·</span>
-        <em>Restore a new computer in minutes.</em>
-        <span class="chant-sep" aria-hidden="true">·</span>
-        <em>See your cameras on the screen you're at.</em>
-      </p>
-      <p class="chant-tail">…and you never become IT.</p>
+    <section class="proofs" aria-label="Some things this gets you">
+      <p class="proofs-eyebrow"><span class="dot"></span> Concretely</p>
+      <h2 class="proofs-title">Yes, <em>all of these.</em> From whichever screen you're at.</h2>
+
+      <div class="proofs-grid">
+        <article class="proof">
+          <div class="proof-art" aria-hidden="true">
+            <span class="proof-icon proof-icon-from">✈️</span>
+            <svg class="proof-arrow" viewBox="0 0 32 16" aria-hidden="true">
+              <path d="M2 8 L26 8 M20 3 L26 8 L20 13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="proof-icon proof-icon-to">🖨️</span>
+          </div>
+          <p>Print from the airport.</p>
+        </article>
+
+        <article class="proof">
+          <div class="proof-art" aria-hidden="true">
+            <span class="proof-icon proof-icon-from">🗣️</span>
+            <svg class="proof-arrow" viewBox="0 0 32 16" aria-hidden="true">
+              <path d="M2 8 L26 8 M20 3 L26 8 L20 13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="proof-icon proof-icon-to">🖼️</span>
+          </div>
+          <p>Find any photo by talking.</p>
+        </article>
+
+        <article class="proof">
+          <div class="proof-art" aria-hidden="true">
+            <span class="proof-icon proof-icon-from">🛋️</span>
+            <svg class="proof-arrow" viewBox="0 0 32 16" aria-hidden="true">
+              <path d="M2 8 L26 8 M20 3 L26 8 L20 13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="proof-icon proof-icon-to">🗄️</span>
+          </div>
+          <p>Reach the home server.</p>
+        </article>
+
+        <article class="proof proof-feature">
+          <div class="proof-art" aria-hidden="true">
+            <span class="proof-icon proof-icon-from">💻</span>
+            <svg class="proof-arrow" viewBox="0 0 32 16" aria-hidden="true">
+              <path d="M2 8 L26 8 M20 3 L26 8 L20 13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="proof-icon proof-icon-to">🎮</span>
+          </div>
+          <p>Game on a $300 laptop.</p>
+        </article>
+
+        <article class="proof">
+          <div class="proof-art" aria-hidden="true">
+            <span class="proof-icon proof-icon-from">🚗</span>
+            <svg class="proof-arrow" viewBox="0 0 32 16" aria-hidden="true">
+              <path d="M2 8 L26 8 M20 3 L26 8 L20 13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="proof-icon proof-icon-to">🖨️</span>
+          </div>
+          <p>Fix the printer from the road.</p>
+        </article>
+
+        <article class="proof">
+          <div class="proof-art" aria-hidden="true">
+            <span class="proof-icon proof-icon-from">⏱️</span>
+            <svg class="proof-arrow" viewBox="0 0 32 16" aria-hidden="true">
+              <path d="M2 8 L26 8 M20 3 L26 8 L20 13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="proof-icon proof-icon-to">💻</span>
+          </div>
+          <p>Restore a new laptop in minutes.</p>
+        </article>
+      </div>
     </section>
 
     <!-- ─────────── Beat 3: EXPLANATION ─────────── -->
@@ -246,7 +297,6 @@
 
             <g transform="translate(160 120)" class="lens-core">
               <circle r="28" fill="#3d6b65"/>
-              <circle r="28" fill="none" stroke="#3d6b65" stroke-opacity="0.2" stroke-width="10" class="pulse"/>
               <circle r="14" fill="none" stroke="#f5ecdc" stroke-width="1" opacity="0.7"/>
               <circle r="4" fill="#f5ecdc"/>
               <text y="46" text-anchor="middle" font-size="10" fill="#3d6b65" font-family="ui-sans-serif" font-weight="600">your AI</text>
@@ -361,191 +411,162 @@
       </div>
     </section>
 
-    <!-- ─────────── Beat 5: ECOSYSTEM ─────────── -->
+    <!-- ─────────── Beat 5: HOW IT FITS ─────────── -->
     <section id="map" class="section">
       <div class="section-head">
-        <p class="eyebrow"><span class="dot"></span> The ecosystem</p>
-        <h2>Every box optional. <em>Every box plays nice with every other box.</em></h2>
-        <p class="section-lede">Pick none, pick one, pick the set. The software is the same. The AI is the same. Hardware fills the gaps that the things you already own don't.</p>
+        <p class="eyebrow"><span class="dot"></span> How the pieces fit</p>
+        <h2>Three layers. <em>That's the whole product.</em></h2>
+        <p class="section-lede">It doesn't matter who made what. The software and the AI are the same, and they make all of it feel like one thing. Skip any layer you don't need.</p>
       </div>
 
-      <figure class="map" aria-label="The allmystuff.works ecosystem">
-        <svg viewBox="0 0 720 420" class="map-svg">
-          <defs>
-            <radialGradient id="house-glow" cx="50%" cy="50%" r="60%">
-              <stop offset="0%" stop-color="#f3e2c6" stop-opacity="0.45"/>
-              <stop offset="100%" stop-color="#f3e2c6" stop-opacity="0"/>
-            </radialGradient>
-            <linearGradient id="house-edge" x1="0" x2="0" y1="0" y2="1">
-              <stop offset="0%" stop-color="#3d6b65" stop-opacity="0.5"/>
-              <stop offset="100%" stop-color="#3d6b65" stop-opacity="0.15"/>
-            </linearGradient>
-          </defs>
+      <ol class="layers" role="list">
+        <li class="layer">
+          <span class="layer-num">①</span>
+          <div class="layer-body">
+            <h3>Hardware</h3>
+            <p>Whatever you already own, plus a Probe or Den+ rated gaming rig from <a href="https://criticalerrorcomputing.com">Critical Error Computing</a>, plus a few of our small accessories — Bell, Lapel, Pulse, Latch. Mix and match.</p>
+          </div>
+        </li>
+        <li class="layer layer-mid">
+          <span class="layer-num">②</span>
+          <div class="layer-body">
+            <h3>Software, with a local AI</h3>
+            <p>The free, always-on layer that runs on every device. Connects the seams. Watches your stuff for you — on <em>your</em> hardware, never ours. This is the part that makes the rest feel like one product.</p>
+          </div>
+        </li>
+        <li class="layer">
+          <span class="layer-num">③</span>
+          <div class="layer-body">
+            <h3>A real human, on tap</h3>
+            <p>One button. Anyone on shift can answer; your AI carries the context so they don't need to remember you. They only ever see the minimum needed to fix the thing.</p>
+          </div>
+        </li>
+      </ol>
 
-          <rect x="30" y="40" width="460" height="340" rx="24" fill="url(#house-glow)" stroke="url(#house-edge)" stroke-dasharray="6 6" stroke-width="1.5"/>
-          <text x="50" y="68" font-size="11" font-weight="600" letter-spacing="0.12em" fill="#3d6b65" font-family="ui-sans-serif">YOUR NETWORK</text>
-
-          <rect x="520" y="40" width="170" height="340" rx="24" fill="#fbf7f1" stroke="#ebe1cd" stroke-width="1.5"/>
-          <text x="540" y="68" font-size="11" font-weight="600" letter-spacing="0.12em" fill="#b8895a" font-family="ui-sans-serif">OUR SIDE</text>
-
-          <g transform="translate(260 220)">
-            <circle r="44" fill="#3d6b65"/>
-            <circle r="44" fill="none" stroke="#3d6b65" stroke-opacity="0.2" stroke-width="10" class="pulse"/>
-            <circle r="22" fill="none" stroke="#f5ecdc" stroke-width="1" opacity="0.7"/>
-            <circle r="6" fill="#f5ecdc"/>
-            <text y="64" text-anchor="middle" font-size="11" fill="#3d6b65" font-weight="600" font-family="ui-sans-serif">your AI</text>
-          </g>
-
-          <g transform="translate(95 110)" class="map-node">
-            <circle r="22" fill="#fbf7f1" stroke="#b8895a" stroke-width="1.6"/>
-            <text y="4" text-anchor="middle" font-size="14">📎</text>
-            <text y="42" text-anchor="middle" font-size="10" fill="#3d6b65" font-weight="600">Lapel</text>
-            <text y="56" text-anchor="middle" font-size="9" fill="#7a6e5e">capture</text>
-          </g>
-          <g transform="translate(95 220)" class="map-node">
-            <circle r="22" fill="#fbf7f1" stroke="#b8895a" stroke-width="1.6"/>
-            <text y="4" text-anchor="middle" font-size="14">🛰️</text>
-            <text y="42" text-anchor="middle" font-size="10" fill="#3d6b65" font-weight="600">Roam</text>
-            <text y="56" text-anchor="middle" font-size="9" fill="#7a6e5e">route</text>
-          </g>
-          <g transform="translate(95 330)" class="map-node">
-            <circle r="22" fill="#fbf7f1" stroke="#b8895a" stroke-width="1.6"/>
-            <text y="4" text-anchor="middle" font-size="14">📺</text>
-            <text y="42" text-anchor="middle" font-size="10" fill="#3d6b65" font-weight="600">Counter</text>
-            <text y="56" text-anchor="middle" font-size="9" fill="#7a6e5e">process</text>
-          </g>
-          <g transform="translate(425 110)" class="map-node">
-            <circle r="22" fill="#fbf7f1" stroke="#b8895a" stroke-width="1.6"/>
-            <text y="4" text-anchor="middle" font-size="13">🗄️</text>
-            <text y="42" text-anchor="middle" font-size="10" fill="#3d6b65" font-weight="600">Den / Den+</text>
-            <text y="56" text-anchor="middle" font-size="9" fill="#7a6e5e">record · render</text>
-          </g>
-          <g transform="translate(425 220)" class="map-node">
-            <circle r="22" fill="#fbf7f1" stroke="#b8895a" stroke-width="1.6"/>
-            <text y="4" text-anchor="middle" font-size="14">🔔</text>
-            <text y="42" text-anchor="middle" font-size="10" fill="#3d6b65" font-weight="600">Bell</text>
-            <text y="56" text-anchor="middle" font-size="9" fill="#7a6e5e">summon</text>
-          </g>
-          <g transform="translate(425 330)" class="map-node">
-            <circle r="22" fill="#fbf7f1" stroke="#b8895a" stroke-width="1.6"/>
-            <text y="4" text-anchor="middle" font-size="13">🌡️</text>
-            <text y="42" text-anchor="middle" font-size="10" fill="#3d6b65" font-weight="600">Pulse</text>
-            <text y="56" text-anchor="middle" font-size="9" fill="#7a6e5e">sense</text>
-          </g>
-
-          <g transform="translate(385 100)">
-            <rect x="-12" y="-7" width="24" height="14" rx="3" fill="#3d6b65"/>
-            <text y="3.5" text-anchor="middle" font-size="7" fill="#f5ecdc" font-weight="600">L+</text>
-          </g>
-          <text x="385" y="130" text-anchor="middle" font-size="8.5" fill="#7a6e5e" font-style="italic">Latch Pro inside</text>
-
-          <g class="trust-lines" stroke="#b8895a" stroke-width="1.2" fill="none" opacity="0.7">
-            <path d="M118 110 L218 215"/>
-            <path d="M118 220 L218 220"/>
-            <path d="M118 330 L218 225"/>
-            <path d="M402 110 L302 215"/>
-            <path d="M402 220 L302 220"/>
-            <path d="M402 330 L302 225"/>
-          </g>
-
-          <g class="trust-lines" stroke="#3d6b65" stroke-width="1.4" fill="none" opacity="0.9">
-            <path d="M304 220 L568 200"/>
-            <path d="M304 220 L568 205"/>
-          </g>
-
-          <g transform="translate(595 200)">
-            <circle r="22" fill="#b8895a"/>
-            <text y="5" text-anchor="middle" font-size="13" fill="#faf6ef">∴</text>
-            <text y="44" text-anchor="middle" font-size="10" fill="#3d6b65" font-weight="600" font-family="ui-sans-serif">our AI</text>
-          </g>
-
-          <g class="trust-lines" stroke="#3d6b65" stroke-width="1.2" fill="none" opacity="0.55">
-            <path d="M617 200 L640 290"/>
-          </g>
-
-          <g transform="translate(645 305)">
-            <circle r="20" fill="#fbf7f1" stroke="#3d6b65" stroke-width="1.6"/>
-            <text y="6" text-anchor="middle" font-size="17">🙋</text>
-            <text y="42" text-anchor="middle" font-size="10" fill="#3d6b65" font-weight="600" font-family="ui-sans-serif">a human</text>
-            <text y="56" text-anchor="middle" font-size="9" fill="#7a6e5e">on shift</text>
-          </g>
-
-          <g transform="translate(260 100)">
-            <rect x="-46" y="-18" width="92" height="36" rx="8" fill="#fbf7f1" stroke="#3d6b65" stroke-width="1.4"/>
-            <text y="5" text-anchor="middle" font-size="11" fill="#3d6b65" font-weight="600" font-family="ui-sans-serif">you, any screen</text>
-          </g>
-          <g class="trust-lines" stroke="#3d6b65" stroke-width="1.2" fill="none" opacity="0.7">
-            <path d="M260 118 L260 178"/>
-          </g>
-        </svg>
-        <figcaption class="map-caption">Start with one box, or none. Add the rest when life gives you the gaps.</figcaption>
-      </figure>
+      <p class="layers-note">Layer 2 is free, forever. Layer 1 is what you choose to buy. Layer 3 is what you choose to ask for. <em>That's the whole price list.</em></p>
     </section>
 
     <!-- ─────────── Beat 6: HARDWARE ─────────── -->
     <section id="hardware" class="section section-alt">
       <div class="section-head">
-        <p class="eyebrow"><span class="dot"></span> The family of boxes</p>
-        <h2>Nine little jobs. <em>Pick the ones the things you own don't already do.</em></h2>
+        <p class="eyebrow"><span class="dot"></span> Hardware</p>
+        <h2>Imagine being <em>served</em> by your stuff.</h2>
+        <p class="section-lede">"I want to play the game I bought from the couch." "I want to dictate a note in the kitchen and find it from my desk." "I want someone to come look when this thing won't boot." Each piece of hardware is one of those answers. Most of it, you already have.</p>
       </div>
 
-      <ul class="parts" role="list">
-        <li class="part">
-          <span class="part-verb">Capture</span>
-          <h3>Lapel</h3>
-          <p>Clip-on recorder. A thought, a photo, a moment.</p>
-          <p class="part-price">from <strong>$79</strong></p>
-        </li>
-        <li class="part">
-          <span class="part-verb">Route</span>
-          <h3>Roam</h3>
-          <p>Battery Pi 5 with ports. Carry it where the wiring isn't.</p>
-          <p class="part-price">from <strong>$249</strong></p>
-        </li>
-        <li class="part">
-          <span class="part-verb">Process</span>
-          <h3>Counter</h3>
-          <p>Tabletop micro-NUC. Where your local AI usually lives.</p>
-          <p class="part-price">from <strong>$599</strong></p>
-        </li>
-        <li class="part">
-          <span class="part-verb">Record</span>
-          <h3>Den</h3>
-          <p>Closet-grade server. Hot-swap bays, ECC, 10G. <em>Latch Pro inside.</em></p>
-          <p class="part-price">from <strong>$2,499</strong></p>
-        </li>
-        <li class="part part-highlight">
-          <span class="part-badge">New</span>
-          <span class="part-verb">Record + Render</span>
-          <h3>Den+</h3>
-          <p>A Den with a real GPU. Household render farm, gaming rig, and laptop-as-screen relay. <em>Latch Pro inside.</em></p>
-          <p class="part-price">from <strong>$3,999</strong></p>
-        </li>
-        <li class="part">
-          <span class="part-verb">Diagnose · external</span>
-          <h3>Latch</h3>
-          <p>Portable USB-and-HDMI doorway. Not tied to a host — carry it to a friend's machine.</p>
-          <p class="part-price"><strong>$99</strong></p>
-        </li>
-        <li class="part">
-          <span class="part-verb">Diagnose · internal</span>
-          <h3>Latch Pro</h3>
-          <p>PCIe card with deeper access. Framebuffer, power, BMC-style sensors. Ships in every Den / Den+.</p>
-          <p class="part-price"><strong>$99</strong></p>
-        </li>
-        <li class="part">
-          <span class="part-verb">Sense</span>
-          <h3>Pulse</h3>
-          <p>Sensor line — power, temp, humidity, leak, USB sniff. Plugs into a nearby Bell, Roam, Counter, or Den.</p>
-          <p class="part-price">from <strong>$39</strong></p>
-        </li>
-        <li class="part">
-          <span class="part-verb">Act</span>
-          <h3>Bell</h3>
-          <p>Touchscreen, beam-mic, room-filling speakers, physical Summon button. The face of the help loop.</p>
-          <p class="part-price">from <strong>$149</strong></p>
-        </li>
-      </ul>
+      <!-- 1. Already yours -->
+      <div class="hw-group">
+        <header class="hw-group-head">
+          <p class="hw-group-label">① Already yours</p>
+          <h3>Whatever's in your life <em>counts.</em></h3>
+          <p>Phones, laptops, printers, cameras, NASes, smart-home gear. No brand requirements. Install the app and they join the ecosystem.</p>
+        </header>
+        <div class="hw-already" aria-hidden="true">
+          <span class="hw-glyph">📱</span>
+          <span class="hw-glyph">💻</span>
+          <span class="hw-glyph">🖨️</span>
+          <span class="hw-glyph">📷</span>
+          <span class="hw-glyph">🗄️</span>
+          <span class="hw-glyph">💡</span>
+          <span class="hw-glyph">🔊</span>
+          <span class="hw-glyph">⌚</span>
+        </div>
+      </div>
+
+      <!-- 2. The big iron — from CEC -->
+      <div class="hw-group">
+        <header class="hw-group-head">
+          <p class="hw-group-label">② The big iron · from <a href="https://criticalerrorcomputing.com">Critical Error Computing</a></p>
+          <h3>Real horsepower, two ways.</h3>
+          <p>Critical Error makes the workhorse hardware. We make the software that turns it into "all your stuff." Buy the boxes from them; the ecosystem is on us.</p>
+        </header>
+
+        <div class="hw-cec">
+          <article class="hw-card hw-card-feature">
+            <p class="hw-tag">Closet-grade</p>
+            <h4>The Probe</h4>
+            <p>The household server. Hot-swap bays, ECC, 10G ethernet, Latch Pro inside. We call it <em>"Den"</em> as ecosystem shorthand — same box.</p>
+            <p class="hw-price">from <strong>$2,499</strong></p>
+            <a class="hw-link" href="https://criticalerrorcomputing.com">See the Probe on criticalerrorcomputing.com <span aria-hidden="true">→</span></a>
+          </article>
+
+          <article class="hw-card">
+            <p class="hw-tag">Gaming &amp; render</p>
+            <h4>Any <em>"Den+ rated"</em> rig</h4>
+            <p>Critical Error makes several gaming machines. The ones with an Nvidia or workstation GPU earn <em>"Den+ rated"</em> in this ecosystem — that GPU is what lets a $300 laptop play AAA games.</p>
+            <p class="hw-price">several models</p>
+            <a class="hw-link" href="https://criticalerrorcomputing.com">See the gaming lineup on criticalerrorcomputing.com <span aria-hidden="true">→</span></a>
+          </article>
+        </div>
+      </div>
+
+      <!-- 3. The small things — from us -->
+      <div class="hw-group">
+        <header class="hw-group-head">
+          <p class="hw-group-label">③ The small things · from us</p>
+          <h3>One specific job each. <em>Pick the jobs you actually need done.</em></h3>
+          <p>Want a button to talk to a human? A way to dictate a thought walking through the kitchen? A camera somewhere you don't usually have one? Each of these is one of those answers.</p>
+        </header>
+
+        <ul class="hw-extras" role="list">
+          <li>
+            <span class="hw-extra-verb">Summon</span>
+            <div class="hw-extra-body">
+              <h4>Bell</h4>
+              <p>Touchscreen, beam-mic, room-filling speakers, and a physical Summon button.</p>
+            </div>
+            <span class="hw-extra-price">from <strong>$149</strong></span>
+          </li>
+          <li>
+            <span class="hw-extra-verb">Capture · voice</span>
+            <div class="hw-extra-body">
+              <h4>Lapel</h4>
+              <p>Clip-on voice recorder with a beam-forming mic. Press once for a thought, hold for a longer note. <em>No camera — by design.</em></p>
+            </div>
+            <span class="hw-extra-price">from <strong>$79</strong></span>
+          </li>
+          <li>
+            <span class="hw-extra-verb">Route · with eyes</span>
+            <div class="hw-extra-body">
+              <h4>Roam</h4>
+              <p>Battery Pi 5 with ports, a wide-angle camera, and a mic. Set it down where the action is; reach it from a different room.</p>
+            </div>
+            <span class="hw-extra-price">from <strong>$249</strong></span>
+          </li>
+          <li>
+            <span class="hw-extra-verb">Process · with eyes</span>
+            <div class="hw-extra-body">
+              <h4>Counter</h4>
+              <p>Tabletop micro-NUC with a camera and far-field mic. Where your local AI lives if you skip the Probe.</p>
+            </div>
+            <span class="hw-extra-price">from <strong>$599</strong></span>
+          </li>
+          <li>
+            <span class="hw-extra-verb">Sense</span>
+            <div class="hw-extra-body">
+              <h4>Pulse</h4>
+              <p>A line of sensors — power, temp, humidity, leak, USB sniff. Each plugs into a nearby Bell, Roam, Counter, or Probe.</p>
+            </div>
+            <span class="hw-extra-price">from <strong>$39</strong></span>
+          </li>
+          <li>
+            <span class="hw-extra-verb">Diagnose · external</span>
+            <div class="hw-extra-body">
+              <h4>Latch</h4>
+              <p>USB-and-HDMI doorway in a tin. Portable, not tied to a host — carry it to a friend's machine.</p>
+            </div>
+            <span class="hw-extra-price"><strong>$99</strong></span>
+          </li>
+          <li>
+            <span class="hw-extra-verb">Diagnose · internal</span>
+            <div class="hw-extra-body">
+              <h4>Latch Pro</h4>
+              <p>PCIe card with deeper access. Same price, more reach. Ships inside every Probe and every Den+ rated rig.</p>
+            </div>
+            <span class="hw-extra-price"><strong>$99</strong></span>
+          </li>
+        </ul>
+      </div>
     </section>
 
     <!-- ─────────── Beat 7: SEAMS ─────────── -->
@@ -581,23 +602,42 @@
       <div class="pay-grid">
         <article class="pay">
           <p class="pay-tag">Always free</p>
-          <h3>The whole product</h3>
-          <p>All software. Your local AI. Every box you've bought. A 1 Mbps relay for when devices can't reach each other directly.</p>
-          <p class="pay-price">$0</p>
+          <h3>Everything that's free</h3>
+          <ul class="pay-list" role="list">
+            <li>The app on every device you own</li>
+            <li>Your local AI (on a Probe, Counter, or Den+)</li>
+            <li>Every feature unlocked — not a trial</li>
+            <li><strong>1 Mbps</strong> TURN relay when peer-to-peer can't connect</li>
+            <li>Uncapped per month — only throughput is throttled</li>
+            <li>Summon access at the pay-per-session rate</li>
+          </ul>
+          <p class="pay-price">$0<span class="pay-unit"> forever</span></p>
         </article>
 
         <article class="pay">
-          <p class="pay-tag">Optional: more speed</p>
+          <p class="pay-tag">When you need speed</p>
           <h3>Relay bumps</h3>
-          <p>Only if a 1 Mbps relay is cramping you — game streaming, big file moves. Cap is throughput per second, not bytes per month.</p>
-          <p class="pay-price">$10 · $20 · $30<span class="pay-unit"> /mo for 10× · 100× · 200×</span></p>
+          <ul class="pay-list" role="list">
+            <li><strong>$10 / mo · 10 Mbps</strong> — calls, voice, file moves</li>
+            <li><strong>$20 / mo · 100 Mbps</strong> — 4K cameras, screen-share, render-over-there</li>
+            <li><strong>$30 / mo · 200 Mbps</strong> — game streaming on the road, multiple streams</li>
+            <li>Cap is per second, never per month</li>
+            <li>Cancel anytime, prorated</li>
+          </ul>
+          <p class="pay-price">$10 — $30<span class="pay-unit"> / month</span></p>
         </article>
 
         <article class="pay">
-          <p class="pay-tag">Optional: a person</p>
+          <p class="pay-tag">When you'd rather not</p>
           <h3>Human minutes</h3>
-          <p>$25 for the first 15 minutes, $1/min after. Or subscribe from $19/mo for priority access and included time.</p>
-          <p class="pay-price">$25<span class="pay-unit"> /session, or $19+/mo</span></p>
+          <ul class="pay-list" role="list">
+            <li><strong>$25 / session</strong> — first 15 min included, $1/min after, no subscription</li>
+            <li><strong>$19 / mo</strong> — priority queue + 30 min/mo included, $1/min after</li>
+            <li><strong>$69 / mo</strong> — front of queue + 90 min/mo, planned check-ins, $1/min after</li>
+            <li>Anyone on shift answers — your AI carries the context</li>
+            <li>Unused minutes don't roll, sessions never expire</li>
+          </ul>
+          <p class="pay-price">$25<span class="pay-unit"> / session, or from $19 / mo</span></p>
         </article>
       </div>
 
@@ -701,7 +741,7 @@
       </div>
     </div>
     <div class="footer-fine">
-      <p>&copy; <span id="year"></span> allmystuff.works. Your stuff, your AI, your call.</p>
+      <p>An initiative of <a href="https://criticalerrorcomputing.com">Critical Error Computing</a>. &nbsp;·&nbsp; &copy; <span id="year"></span> allmystuff.works.</p>
     </div>
   </footer>
 
