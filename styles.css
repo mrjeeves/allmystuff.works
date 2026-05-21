@@ -1500,7 +1500,149 @@ p { margin: 0 0 1em; }
 .trick-caption em { color: var(--accent-deep); }
 
 /* ============================================================
-   grow stages (the spine: where you start, grow as you go)
+   setup (architecture: brain + limbs)
+   ============================================================ */
+
+.setup-diagram {
+  margin: 0 auto clamp(36px, 5vw, 56px);
+  max-width: 720px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-xl);
+  padding: clamp(20px, 3vw, 32px);
+  box-shadow: var(--shadow-md);
+}
+.setup-diagram svg {
+  width: 100%; height: auto; display: block;
+}
+.setup-lines path {
+  stroke-dasharray: 4 4;
+  animation: trustFlow 8s linear infinite;
+}
+.setup-block + .setup-block {
+  margin-top: clamp(48px, 7vw, 80px);
+  padding-top: clamp(36px, 5vw, 56px);
+  border-top: 1px dashed var(--line);
+}
+.setup-head {
+  max-width: 760px;
+  margin: 0 0 clamp(22px, 3vw, 30px);
+}
+.setup-label {
+  display: inline-block;
+  font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--accent-deep);
+  background: var(--accent-soft);
+  padding: 5px 12px;
+  border-radius: 999px;
+  margin: 0 0 12px;
+}
+.setup-head h3 {
+  font-family: var(--font-serif);
+  font-size: clamp(1.35rem, 2.4vw, 1.8rem);
+  font-weight: 500;
+  margin: 0 0 10px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+.setup-head > p {
+  color: var(--ink-soft);
+  margin: 0;
+  font-size: 1rem;
+}
+.setup-foot {
+  margin: 22px 0 0;
+  padding: 16px 20px;
+  border-left: 3px solid var(--accent);
+  background: var(--surface);
+  border-radius: 8px;
+  color: var(--ink-soft);
+  font-size: 0.98rem;
+}
+.setup-foot em { color: var(--accent-deep); }
+
+/* brain cards (the "pick one" row) */
+.brains {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+}
+.brain {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 22px 20px;
+  display: flex; flex-direction: column;
+  transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+}
+.brain:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--accent);
+}
+.brain-feature {
+  background: linear-gradient(180deg, var(--accent-soft) 0%, var(--surface) 60%);
+  border-color: var(--accent);
+  box-shadow: var(--shadow-sm);
+}
+.brain-glyph {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 48px; height: 48px;
+  background: var(--teal-soft);
+  border-radius: 12px;
+  font-size: 1.6rem;
+  margin: 0 0 12px;
+}
+.brain-feature .brain-glyph {
+  background: var(--accent-soft);
+}
+.brain-tag {
+  font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--teal);
+  margin: 0 0 6px;
+}
+.brain h4 {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 500;
+  margin: 0 0 8px;
+  color: var(--ink);
+  text-transform: none;
+  letter-spacing: -0.01em;
+}
+.brain > p:not(.brain-tag):not(.brain-price) {
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  margin: 0 0 14px;
+  flex: 1;
+}
+.brain-price {
+  margin: 0;
+  padding-top: 12px;
+  border-top: 1px dashed var(--line);
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+.brain-price strong {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+@media (max-width: 1180px) {
+  .brains { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 720px) {
+  .brains { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 480px) {
+  .brains { grid-template-columns: 1fr; }
+}
+
+/* ============================================================
+   grow stages (legacy — unused now, kept for safety)
    ============================================================ */
 
 .grow-stages {
