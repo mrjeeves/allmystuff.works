@@ -981,6 +981,191 @@ p { margin: 0 0 1em; }
 .footer-fine p { margin: 0; }
 
 /* ============================================================
+   scenes (worked-out examples)
+   ============================================================ */
+
+.scenes {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+.scene {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 30px 28px;
+  display: flex; flex-direction: column;
+  transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+}
+.scene:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--accent);
+}
+.scene-feature {
+  grid-column: 1 / -1;
+  background:
+    radial-gradient(600px 220px at 90% 0%, var(--accent-soft) 0%, transparent 60%),
+    radial-gradient(400px 200px at 0% 100%, var(--teal-soft) 0%, transparent 60%),
+    var(--surface);
+  border-color: var(--accent);
+  box-shadow: var(--shadow-md);
+}
+.scene-tag {
+  display: inline-block;
+  font-size: 0.74rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--accent-deep);
+  background: var(--accent-soft);
+  padding: 4px 12px;
+  border-radius: 999px;
+  margin: 0 0 14px;
+  align-self: flex-start;
+}
+.scene h3 {
+  font-size: 1.35rem;
+  margin-bottom: 12px;
+  line-height: 1.2;
+}
+.scene-feature h3 { font-size: 1.7rem; }
+.scene > p { color: var(--ink-soft); margin: 0 0 12px; }
+.scene > p:last-child { margin-bottom: 0; }
+.scene-uses {
+  font-size: 0.88rem;
+  color: var(--muted);
+  font-style: italic;
+  padding-top: 12px;
+  border-top: 1px dashed var(--line);
+  margin-top: auto !important;
+}
+.scene-uses strong { color: var(--teal); font-style: normal; font-weight: 600; }
+
+/* ============================================================
+   ecosystem map
+   ============================================================ */
+
+.map {
+  margin: 0 auto;
+  max-width: 880px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-xl);
+  padding: clamp(20px, 4vw, 36px);
+  box-shadow: var(--shadow-md);
+}
+.map-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.map-node circle {
+  transition: stroke 200ms ease, fill 200ms ease;
+}
+.map-node:hover circle:first-child {
+  stroke: var(--accent-deep);
+  stroke-width: 2.2;
+}
+.map-caption {
+  margin: 18px auto 0;
+  text-align: center;
+  font-size: 0.92rem;
+  color: var(--muted);
+  font-style: italic;
+}
+
+/* ============================================================
+   hardware parts (the family)
+   ============================================================ */
+
+.parts {
+  list-style: none; padding: 0; margin: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.part {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 24px 22px;
+  display: flex; flex-direction: column;
+  transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+}
+.part:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--accent);
+}
+.part-highlight {
+  border-color: var(--accent);
+  background: linear-gradient(180deg, var(--accent-soft) 0%, var(--surface) 50%);
+  box-shadow: var(--shadow-md);
+}
+.part-badge {
+  position: absolute; top: -10px; right: 18px;
+  background: var(--ink); color: var(--bg);
+  font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+.part-verb {
+  font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 8px;
+}
+.part h3 {
+  font-size: 1.25rem;
+  margin-bottom: 8px;
+}
+.part p {
+  font-size: 0.93rem;
+  color: var(--ink-soft);
+  margin: 0 0 14px;
+  flex: 1;
+}
+.part-price {
+  font-size: 0.92rem;
+  color: var(--muted);
+  margin: 0 !important;
+  padding-top: 12px;
+  border-top: 1px dashed var(--line);
+  flex: 0;
+}
+.part-price strong {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+/* ============================================================
+   seams (software / AI / people)
+   ============================================================ */
+
+.seam-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+.seam {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 28px 26px;
+}
+.seam h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+.seam p {
+  color: var(--ink-soft);
+  margin: 0;
+  font-size: 0.96rem;
+}
+
+/* ============================================================
    responsive
    ============================================================ */
 
@@ -1005,6 +1190,10 @@ p { margin: 0 0 1em; }
   .pillars { grid-template-columns: 1fr; gap: 14px; }
   .verbs { grid-template-columns: 1fr; }
   .pay-grid { grid-template-columns: 1fr; }
+  .scenes { grid-template-columns: 1fr; }
+  .scene-feature { grid-column: auto; }
+  .parts { grid-template-columns: 1fr; }
+  .seam-grid { grid-template-columns: 1fr; gap: 14px; }
 
   .footer-inner { grid-template-columns: 1fr; }
   .footer-cols { grid-template-columns: repeat(2, 1fr); }
@@ -1014,6 +1203,7 @@ p { margin: 0 0 1em; }
   .hardware-grid-4 { grid-template-columns: repeat(2, 1fr); }
   .plans-4 { grid-template-columns: repeat(2, 1fr); }
   .verbs { grid-template-columns: repeat(3, 1fr); }
+  .parts { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 520px) {
