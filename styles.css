@@ -286,38 +286,38 @@ p { margin: 0 0 1em; }
   position: relative;
   justify-self: center;
   width: 100%;
-  max-width: 460px;
+  max-width: 480px;
 }
-.mesh {
+.lens {
   width: 100%; height: auto;
-  filter: drop-shadow(0 30px 40px rgba(74, 56, 30, 0.08));
+  filter: drop-shadow(0 20px 30px rgba(74, 56, 30, 0.08));
 }
-.mesh-lines path {
-  stroke-dasharray: 4 4;
-  animation: meshFlow 8s linear infinite;
+.trust-lines path {
+  stroke-dasharray: 3 3;
+  animation: trustFlow 6s linear infinite;
 }
-@keyframes meshFlow {
-  to { stroke-dashoffset: -32; }
+@keyframes trustFlow {
+  to { stroke-dashoffset: -24; }
 }
 .pulse {
   transform-origin: center;
   animation: pulseRing 2.6s ease-out infinite;
 }
 @keyframes pulseRing {
-  0%   { transform: scale(1);   opacity: 0.5; }
-  80%  { transform: scale(1.8); opacity: 0; }
-  100% { transform: scale(1.8); opacity: 0; }
+  0%   { transform: scale(1);   opacity: 0.45; }
+  80%  { transform: scale(1.7); opacity: 0; }
+  100% { transform: scale(1.7); opacity: 0; }
 }
-.mesh-caption {
+.lens-caption {
   text-align: center;
   font-size: 0.85rem;
   color: var(--muted);
   font-style: italic;
-  margin-top: 4px;
+  margin-top: 8px;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .mesh-lines path, .pulse, html { animation: none !important; scroll-behavior: auto; }
+  .trust-lines path, .pulse, html { animation: none !important; scroll-behavior: auto; }
 }
 
 /* ============================================================
@@ -386,6 +386,124 @@ p { margin: 0 0 1em; }
   align-items: end;
 }
 .section-head.two-col > p { margin-bottom: 0; padding-bottom: 4px; }
+
+/* ============================================================
+   pillars (the story)
+   ============================================================ */
+
+.pillars {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+.pillar {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 32px 30px;
+  position: relative;
+  transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+}
+.pillar:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--accent);
+}
+.pillar-mid {
+  background: linear-gradient(180deg, var(--teal-soft) 0%, var(--surface) 60%);
+  border-color: var(--teal);
+}
+.pillar-num {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 10px;
+}
+.pillar h3 {
+  font-size: 1.25rem;
+  margin-bottom: 10px;
+}
+.pillar p { color: var(--ink-soft); margin: 0; font-size: 0.98rem; }
+
+/* ============================================================
+   verbs (hardware strip)
+   ============================================================ */
+
+.verbs {
+  list-style: none; padding: 0; margin: 0;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+}
+.verbs li {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 22px 20px;
+  display: flex; flex-direction: column;
+  transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+}
+.verbs li:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--accent);
+}
+.verb {
+  font-size: 0.74rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--accent-deep);
+  margin-bottom: 8px;
+}
+.verbs h3 { font-size: 1.1rem; margin-bottom: 6px; }
+.verbs p { font-size: 0.92rem; color: var(--ink-soft); margin: 0 0 12px; flex: 1; }
+.verb-price {
+  font-size: 0.86rem;
+  color: var(--muted);
+  margin: 0;
+  padding-top: 10px;
+  border-top: 1px dashed var(--line);
+}
+
+/* ============================================================
+   pay (what you actually pay for)
+   ============================================================ */
+
+.pay-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+.pay {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 28px 26px;
+  display: flex; flex-direction: column;
+}
+.pay-tag {
+  font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--teal);
+  margin: 0 0 10px;
+}
+.pay h3 { font-size: 1.2rem; margin-bottom: 8px; }
+.pay > p:not(.pay-tag):not(.pay-price) {
+  color: var(--ink-soft); font-size: 0.96rem; margin: 0 0 16px; flex: 1;
+}
+.pay-price {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: var(--ink);
+  margin: 0;
+  line-height: 1.1;
+}
+.pay-unit {
+  font-family: var(--font-sans);
+  font-size: 0.86rem;
+  color: var(--muted);
+  font-weight: 400;
+  margin-left: 6px;
+}
 
 /* ============================================================
    cards (networks)
@@ -884,6 +1002,9 @@ p { margin: 0 0 1em; }
   .plans, .plans-4 { grid-template-columns: 1fr; }
   .plan-featured { transform: none; }
   .plan-featured:hover { transform: translateY(-2px); }
+  .pillars { grid-template-columns: 1fr; gap: 14px; }
+  .verbs { grid-template-columns: 1fr; }
+  .pay-grid { grid-template-columns: 1fr; }
 
   .footer-inner { grid-template-columns: 1fr; }
   .footer-cols { grid-template-columns: repeat(2, 1fr); }
@@ -892,6 +1013,7 @@ p { margin: 0 0 1em; }
 @media (min-width: 961px) and (max-width: 1180px) {
   .hardware-grid-4 { grid-template-columns: repeat(2, 1fr); }
   .plans-4 { grid-template-columns: repeat(2, 1fr); }
+  .verbs { grid-template-columns: repeat(3, 1fr); }
 }
 
 @media (max-width: 520px) {

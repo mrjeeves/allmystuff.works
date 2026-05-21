@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>allmystuff.works — Your stuff, doing its job, from whichever screen you're at</title>
-  <meta name="description" content="Your printer prints. Your cameras show. Your server serves. The other machines in your life, working for you — from the device in your hand. And a real human one tap away when one of them won't." />
+  <title>allmystuff.works — Your stuff, doing its job.</title>
+  <meta name="description" content="A local AI between you and us, so your devices do their job and a human only ever sees the minimum." />
   <meta property="og:title" content="allmystuff.works" />
-  <meta property="og:description" content="Your stuff, doing its job. Without you having to be IT." />
+  <meta property="og:description" content="Your stuff. Works. A local AI on your side, a real human on ours." />
   <meta property="og:type" content="website" />
   <link rel="icon" href="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23faf6ef'/%3E%3Cg stroke='%233d6b65' stroke-width='1.4' fill='none'%3E%3Ccircle cx='10' cy='12' r='2.4'/%3E%3Ccircle cx='22' cy='11' r='2.4'/%3E%3Ccircle cx='12' cy='22' r='2.4'/%3E%3Ccircle cx='22' cy='21' r='2.4'/%3E%3Cpath d='M10 12 L22 11 M10 12 L12 22 M22 11 L22 21 M12 22 L22 21 M10 12 L22 21 M22 11 L12 22'/%3E%3C/g%3E%3C/svg%3E" />
   <link rel="stylesheet" href="styles.css" />
@@ -28,11 +28,10 @@
       <span class="brand-name">allmystuff<span class="brand-tld">.works</span></span>
     </a>
     <nav class="site-nav" aria-label="Primary">
-      <a href="#stuff">What works</a>
-      <a href="#how">How it works</a>
+      <a href="#story">The trick</a>
       <a href="#hardware">Hardware</a>
       <a href="#summon">Summon</a>
-      <a href="#pricing">Pricing</a>
+      <a href="#pay">Pay</a>
     </nav>
     <div class="site-cta">
       <a class="link" href="#signin">Sign in</a>
@@ -44,11 +43,10 @@
   </header>
 
   <div id="mobile-nav" class="mobile-nav" hidden>
-    <a href="#stuff">What works</a>
-    <a href="#how">How it works</a>
+    <a href="#story">The trick</a>
     <a href="#hardware">Hardware</a>
     <a href="#summon">Summon</a>
-    <a href="#pricing">Pricing</a>
+    <a href="#pay">Pay</a>
     <a href="#faq">FAQ</a>
     <a class="link" href="#signin">Sign in</a>
     <a class="btn btn-primary" href="#signup">Start free</a>
@@ -59,647 +57,227 @@
       <div class="hero-copy">
         <p class="eyebrow"><span class="dot"></span> Tech that does its job.</p>
         <h1>All my stuff.<br/><em>Works.</em></h1>
-        <p class="lede">You don't want to <em>use</em> a computer. You want it to print, find, watch, back up, show, and stay out of your way. We make the devices in your life do those things — from whichever screen you happen to be at. And when one of them won't, a real human is one tap away.</p>
+        <p class="lede">A local AI watches your stuff so a person doesn't have to. When you need a hand, a real human shows up — and only ever sees the minimum.</p>
         <div class="hero-actions">
-          <a class="btn btn-primary btn-lg" href="#signup">Start free — no card</a>
-          <a class="btn btn-ghost btn-lg" href="#how">See how it works <span aria-hidden="true">→</span></a>
+          <a class="btn btn-primary btn-lg" href="#signup">Start free</a>
+          <a class="btn btn-ghost btn-lg" href="#story">The trick <span aria-hidden="true">→</span></a>
         </div>
-        <ul class="hero-points" role="list">
-          <li><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Every device's interface, on the screen in your hand.</li>
-          <li><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Optional hardware, from a clip-on recorder to a closet-grade server.</li>
-          <li><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> A real human, for what you'd rather not figure out.</li>
-        </ul>
       </div>
 
       <figure class="hero-art" aria-hidden="true">
-        <svg class="mesh" viewBox="0 0 360 360">
+        <svg class="lens" viewBox="0 0 360 240">
           <defs>
-            <radialGradient id="glow" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stop-color="#f3e2c6" stop-opacity="0.9"/>
+            <radialGradient id="glow-you" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#f3e2c6" stop-opacity="0.7"/>
               <stop offset="100%" stop-color="#f3e2c6" stop-opacity="0"/>
             </radialGradient>
+            <radialGradient id="glow-ai" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#d8e5e1" stop-opacity="0.9"/>
+              <stop offset="100%" stop-color="#d8e5e1" stop-opacity="0"/>
+            </radialGradient>
           </defs>
-          <circle cx="180" cy="180" r="160" fill="url(#glow)"/>
 
-          <g class="mesh-lines" stroke="#b8895a" stroke-width="1.5" fill="none" opacity="0.9">
-            <path d="M210 220 L70 90 M210 220 L180 60 M210 220 L290 100 M210 220 L120 200 M210 220 L300 230 M210 220 L150 300 M210 220 L240 310"/>
+          <circle cx="60" cy="120" r="58" fill="url(#glow-you)"/>
+          <circle cx="160" cy="120" r="62" fill="url(#glow-ai)"/>
+
+          <g class="trust-lines" stroke="#b8895a" stroke-width="1.2" fill="none" opacity="0.85">
+            <path d="M40 80 L150 116"/>
+            <path d="M30 110 L150 118"/>
+            <path d="M40 140 L150 122"/>
+            <path d="M55 95  L150 117"/>
+            <path d="M55 145 L150 121"/>
+            <path d="M75 105 L150 118"/>
+            <path d="M75 135 L150 120"/>
           </g>
 
-          <g class="mesh-nodes">
-            <g class="node node-hub" transform="translate(210 220)">
-              <circle r="22" fill="#3d6b65"/>
-              <circle r="22" fill="none" stroke="#3d6b65" stroke-opacity="0.25" stroke-width="10" class="pulse"/>
-              <text x="0" y="4" text-anchor="middle" fill="#faf6ef" font-size="11" font-family="ui-sans-serif, system-ui">you</text>
-            </g>
-            <g class="node" transform="translate(70 90)">
-              <circle r="13" fill="#fbf7f1" stroke="#3d6b65" stroke-width="1.5"/>
-              <text x="0" y="3" text-anchor="middle" font-size="11" fill="#3d6b65" font-family="ui-sans-serif, system-ui">📱</text>
-            </g>
-            <g class="node" transform="translate(180 60)">
-              <circle r="13" fill="#fbf7f1" stroke="#3d6b65" stroke-width="1.5"/>
-              <text x="0" y="3" text-anchor="middle" font-size="11" fill="#3d6b65" font-family="ui-sans-serif, system-ui">💻</text>
-            </g>
-            <g class="node" transform="translate(290 100)">
-              <circle r="13" fill="#fbf7f1" stroke="#3d6b65" stroke-width="1.5"/>
-              <text x="0" y="3" text-anchor="middle" font-size="11" fill="#3d6b65" font-family="ui-sans-serif, system-ui">🖥️</text>
-            </g>
-            <g class="node node-ours" transform="translate(120 200)">
-              <circle r="14" fill="#fbf7f1" stroke="#b8895a" stroke-width="1.8"/>
-              <text x="0" y="3" text-anchor="middle" font-size="11" fill="#3d6b65" font-family="ui-sans-serif, system-ui">🏠</text>
-            </g>
-            <g class="node" transform="translate(300 230)">
-              <circle r="13" fill="#fbf7f1" stroke="#3d6b65" stroke-width="1.5"/>
-              <text x="0" y="3" text-anchor="middle" font-size="11" fill="#3d6b65" font-family="ui-sans-serif, system-ui">📷</text>
-            </g>
-            <g class="node" transform="translate(150 300)">
-              <circle r="13" fill="#fbf7f1" stroke="#3d6b65" stroke-width="1.5"/>
-              <text x="0" y="3" text-anchor="middle" font-size="11" fill="#3d6b65" font-family="ui-sans-serif, system-ui">📁</text>
-            </g>
-            <g class="node node-help" transform="translate(240 310)">
-              <circle r="15" fill="#b8895a"/>
-              <text x="0" y="4" text-anchor="middle" font-size="13" fill="#faf6ef" font-family="ui-sans-serif, system-ui">🙋</text>
-            </g>
+          <g class="trust-lines" stroke="#3d6b65" stroke-width="1.2" fill="none" opacity="0.85">
+            <path d="M170 119 L250 119"/>
+            <path d="M170 122 L250 121"/>
+          </g>
+
+          <g class="trust-lines" stroke="#3d6b65" stroke-width="1.2" fill="none" opacity="0.6">
+            <path d="M270 120 L320 120"/>
+          </g>
+
+          <g class="you-cluster">
+            <g transform="translate(40 80)"><circle r="9" fill="#fbf7f1" stroke="#b8895a" stroke-width="1.4"/><text y="3" text-anchor="middle" font-size="9">📷</text></g>
+            <g transform="translate(30 110)"><circle r="9" fill="#fbf7f1" stroke="#b8895a" stroke-width="1.4"/><text y="3" text-anchor="middle" font-size="9">📁</text></g>
+            <g transform="translate(40 140)"><circle r="9" fill="#fbf7f1" stroke="#b8895a" stroke-width="1.4"/><text y="3" text-anchor="middle" font-size="9">🖨️</text></g>
+            <g transform="translate(55 95)"><circle r="9" fill="#fbf7f1" stroke="#b8895a" stroke-width="1.4"/><text y="3" text-anchor="middle" font-size="9">🎙️</text></g>
+            <g transform="translate(55 145)"><circle r="9" fill="#fbf7f1" stroke="#b8895a" stroke-width="1.4"/><text y="3" text-anchor="middle" font-size="9">💻</text></g>
+            <g transform="translate(75 105)"><circle r="9" fill="#fbf7f1" stroke="#b8895a" stroke-width="1.4"/><text y="3" text-anchor="middle" font-size="9">📱</text></g>
+            <g transform="translate(75 135)"><circle r="9" fill="#fbf7f1" stroke="#b8895a" stroke-width="1.4"/><text y="3" text-anchor="middle" font-size="9">🏠</text></g>
+          </g>
+
+          <g transform="translate(160 120)" class="lens-core">
+            <circle r="28" fill="#3d6b65"/>
+            <circle r="28" fill="none" stroke="#3d6b65" stroke-opacity="0.2" stroke-width="10" class="pulse"/>
+            <circle r="14" fill="none" stroke="#f5ecdc" stroke-width="1" opacity="0.7"/>
+            <circle r="4" fill="#f5ecdc"/>
+            <text y="46" text-anchor="middle" font-size="10" fill="#3d6b65" font-family="ui-sans-serif" font-weight="600">your AI</text>
+          </g>
+
+          <g transform="translate(260 120)">
+            <circle r="14" fill="#b8895a"/>
+            <text y="4" text-anchor="middle" font-size="11" fill="#faf6ef">∴</text>
+            <text y="34" text-anchor="middle" font-size="10" fill="#3d6b65" font-family="ui-sans-serif" font-weight="600">our AI</text>
+          </g>
+
+          <g transform="translate(325 120)">
+            <circle r="14" fill="#fbf7f1" stroke="#3d6b65" stroke-width="1.5"/>
+            <text y="4" text-anchor="middle" font-size="13">🙋</text>
+            <text y="34" text-anchor="middle" font-size="10" fill="#3d6b65" font-family="ui-sans-serif" font-weight="600">a human</text>
           </g>
         </svg>
-        <figcaption class="mesh-caption">Use the device in your hand. Reach the rest.</figcaption>
+        <figcaption class="lens-caption">Lots in. Little out. A person only sees the minimum.</figcaption>
       </figure>
     </section>
 
-    <section class="strip" aria-label="What it does">
+    <section class="strip" aria-label="The point">
       <div class="strip-inner">
-        <span>Print</span>
+        <span>It shouldn't be hard to benefit from your tech.</span>
         <span class="dot-sep" aria-hidden="true">·</span>
-        <span>See</span>
-        <span class="dot-sep" aria-hidden="true">·</span>
-        <span>Reach</span>
-        <span class="dot-sep" aria-hidden="true">·</span>
-        <span>Sync</span>
-        <span class="dot-sep" aria-hidden="true">·</span>
-        <span>Restore</span>
-        <span class="dot-sep" aria-hidden="true">·</span>
-        <span>Without being IT</span>
+        <span>And it shouldn't always cost you to use it.</span>
       </div>
     </section>
 
-    <section id="stuff" class="section">
+    <section id="story" class="section">
       <div class="section-head">
-        <p class="eyebrow"><span class="dot"></span> What "works" looks like</p>
-        <h2>The interface of every machine, <em>on the screen in your hand.</em></h2>
-        <p class="section-lede">No VPN to administer. No "wait, what's the IP?" Just the controls of whatever device you need, on whatever device you're at. Your stuff, doing its job — without making you a sysadmin.</p>
+        <p class="eyebrow"><span class="dot"></span> The trick</p>
+        <h2>Three parts. <em>One idea.</em></h2>
       </div>
 
-      <div class="cards">
-        <article class="card">
-          <div class="card-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M7 9V4h10v5M5 9h14a2 2 0 012 2v6a2 2 0 01-2 2h-2v-3H7v3H5a2 2 0 01-2-2v-6a2 2 0 012-2z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
-          </div>
-          <h3>Print from anywhere</h3>
-          <p>Send to your home printer from the airport, the office, the couch. From your phone, your laptop, the tablet your kid borrowed. Without driver hunting or "is it on the same network?"</p>
+      <div class="pillars">
+        <article class="pillar">
+          <span class="pillar-num">①</span>
+          <h3>Software that solves the problem</h3>
+          <p>Not a tunnel to administer. The thing you actually wanted: print, see, sync, restore. Connecting your stuff is our job; using it is yours.</p>
         </article>
 
-        <article class="card">
-          <div class="card-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M3 7l5-3 5 3 8-4v13l-8 4-5-3-5 3z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="8" cy="10" r="1.6" fill="currentColor"/></svg>
-          </div>
-          <h3>See your stuff</h3>
-          <p>Home cameras, the baby monitor, the dog cam, the smart-home dashboard. On the screen you're at, wherever you are. Without their cloud app, without their account.</p>
+        <article class="pillar pillar-mid">
+          <span class="pillar-num">②</span>
+          <h3>A local AI, on both sides</h3>
+          <p>Yours watches your stuff so a person doesn't have to. Ours triages so a person can show up fast. Private by construction. Cheap because nobody's renting a GPU per glance.</p>
         </article>
 
-        <article class="card">
-          <div class="card-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><rect x="3" y="5" width="14" height="10" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M7 19h6M10 15v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M15 8l5 4-5 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
-          </div>
-          <h3>Reach the other machine</h3>
-          <p>The document on your work laptop. The render you left running. The terminal session on the home server. From the device that's closest — with the other machine asking before it lets you in.</p>
-        </article>
-
-        <article class="card">
-          <div class="card-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M4 8l8-4 8 4-8 4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M4 12l8 4 8-4M4 16l8 4 8-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
-          </div>
-          <h3>Backups that come back</h3>
-          <p>Photos, files, voice memos, whatever — flow to the device with the room for them. Find their way back when you need them. Restore on a new laptop in the time it takes to log in.</p>
+        <article class="pillar">
+          <span class="pillar-num">③</span>
+          <h3>Hardware where it helps</h3>
+          <p>Boxes that <em>capture</em>, <em>record</em>, <em>route</em>, <em>process</em>, and <em>act</em> on the bits of your life. Optional, additive. Software never gates on hardware; hardware never gates on a plan.</p>
         </article>
       </div>
     </section>
 
-    <section id="how" class="section section-alt">
+    <section id="hardware" class="section section-alt">
       <div class="section-head">
-        <p class="eyebrow"><span class="dot"></span> How it works</p>
-        <h2>Three steps. No new things to administer.</h2>
+        <p class="eyebrow"><span class="dot"></span> Hardware</p>
+        <h2>Five verbs. <em>Pick what fits.</em></h2>
       </div>
 
-      <ol class="steps" role="list">
+      <ul class="verbs" role="list">
         <li>
-          <span class="step-num">1</span>
-          <h3>Install the app where you are</h3>
-          <p>Phone, laptop, tablet — whatever you tend to be at. This is the screen the rest of your stuff is going to reach you on.</p>
+          <span class="verb">Capture</span>
+          <h3>Lapel</h3>
+          <p>Clip-on recorder. A thought, a photo, a moment.</p>
+          <p class="verb-price">from $79</p>
         </li>
         <li>
-          <span class="step-num">2</span>
-          <h3>Install it on what you want to reach</h3>
-          <p>The home server. The printer's controlling Pi. The work laptop. The always-on box in the closet. The app announces what each one can do — print, store, show, record — and your other devices can use it.</p>
+          <span class="verb">Route</span>
+          <h3>Roam</h3>
+          <p>Battery Pi 5 with ports. For the places without wiring.</p>
+          <p class="verb-price">from $249</p>
         </li>
         <li>
-          <span class="step-num">3</span>
-          <h3>Use it. <em>Summon</em> when you'd rather not.</h3>
-          <p>No port forwarding. No VPN. No "did you check the IP?" If something won't work — or you'd just rather a human did it — press <a href="#summon">Summon</a>. We're a concierge, not a chatbot.</p>
+          <span class="verb">Process</span>
+          <h3>Counter</h3>
+          <p>Tabletop micro-NUC. Where your local AI quietly lives.</p>
+          <p class="verb-price">from $599</p>
         </li>
-      </ol>
-    </section>
-
-    <section id="hardware" class="section">
-      <div class="section-head two-col">
-        <div>
-          <p class="eyebrow"><span class="dot"></span> Hardware</p>
-          <h2>Two lines of boxes. <em>Yours</em>, and <em>ours.</em></h2>
-        </div>
-        <p class="section-lede">The app runs on what you already own — so hardware is always optional. The <strong>connection line</strong> is for plugging a screen, a port, or a brain into a corner of your life that didn't have one. The <strong>concierge line</strong> is what lets a real human reach further into your setup when you press Summon — only with your say-so, only while you say so.</p>
-      </div>
-
-      <div class="track">
-        <header class="track-head">
-          <p class="track-label">Connection hardware</p>
-          <h3 class="track-title">Boxes for the things <em>you own.</em></h3>
-          <p class="track-lede">From a clip-on recorder to a closet-grade mini-datacenter. Same app, same network, four sizes — pick the one that fits the room.</p>
-        </header>
-
-        <div class="hardware-grid hardware-grid-4">
-          <article class="hardware-card">
-            <div class="hardware-art" aria-hidden="true">
-              <svg viewBox="0 0 120 80">
-                <defs><linearGradient id="hw-lapel" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f5ecdc"/><stop offset="100%" stop-color="#e0d3b7"/></linearGradient></defs>
-                <ellipse cx="60" cy="68" rx="22" ry="2.5" fill="#000" opacity="0.06"/>
-                <rect x="44" y="22" width="32" height="44" rx="8" fill="url(#hw-lapel)" stroke="#cdbfa8"/>
-                <circle cx="60" cy="34" r="5" fill="#3d6b65"/>
-                <circle cx="60" cy="34" r="2" fill="#0e2826"/>
-                <circle cx="60" cy="52" r="6" fill="#b8895a"/>
-                <path d="M50 18 Q60 10 70 18" fill="none" stroke="#cdbfa8" stroke-width="1.5"/>
-                <rect x="55" y="62" width="10" height="2" rx="1" fill="#cdbfa8"/>
-              </svg>
-            </div>
-            <p class="hardware-tier">Wearable</p>
-            <h3>Lapel</h3>
-            <p class="hardware-price">from <strong>$79</strong></p>
-            <p class="hardware-desc">Clip-on recorder. Press once to capture a thought, twice for a photo, hold for video. Syncs to whichever of your boxes is around. Battery lasts a day.</p>
-            <ul role="list" class="hardware-feats">
-              <li>Beam-forming mic, wide-angle camera</li>
-              <li>USB-C charge, magnetic clip</li>
-              <li>Auto-files to your Hub or Den</li>
-              <li>Hardware mic mute, hardware shutter</li>
-            </ul>
-          </article>
-
-          <article class="hardware-card">
-            <div class="hardware-art" aria-hidden="true">
-              <svg viewBox="0 0 120 80">
-                <defs><linearGradient id="hw-roam" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f5ecdc"/><stop offset="100%" stop-color="#e0d3b7"/></linearGradient></defs>
-                <ellipse cx="60" cy="66" rx="36" ry="2.5" fill="#000" opacity="0.06"/>
-                <rect x="28" y="22" width="64" height="40" rx="6" fill="url(#hw-roam)" stroke="#cdbfa8"/>
-                <rect x="32" y="26" width="56" height="22" rx="2" fill="#0e2826"/>
-                <circle cx="40" cy="34" r="2" fill="#b8895a"/>
-                <rect x="46" y="32" width="38" height="2" rx="1" fill="#f5ecdc" opacity="0.5"/>
-                <rect x="46" y="37" width="28" height="2" rx="1" fill="#f5ecdc" opacity="0.35"/>
-                <rect x="46" y="42" width="22" height="2" rx="1" fill="#f5ecdc" opacity="0.35"/>
-                <rect x="32" y="52" width="8" height="6" rx="1" fill="#cdbfa8"/>
-                <rect x="42" y="52" width="6" height="6" rx="1" fill="#cdbfa8"/>
-                <rect x="50" y="52" width="10" height="6" rx="1" fill="#cdbfa8"/>
-                <rect x="62" y="54" width="14" height="3" rx="0.5" fill="#3d6b65"/>
-                <rect x="78" y="54" width="10" height="3" rx="0.5" fill="#3d6b65"/>
-              </svg>
-            </div>
-            <p class="hardware-tier">Battery-powered</p>
-            <h3>Roam</h3>
-            <p class="hardware-price">from <strong>$249</strong></p>
-            <p class="hardware-desc">A Pi 5 in a milled-aluminum tin with a small screen, a few hours of battery, and just enough ports. Carry it to where the wiring isn't. Light processing while you're out.</p>
-            <ul role="list" class="hardware-feats">
-              <li>4″ touchscreen + Summon button</li>
-              <li>USB-A, USB-C, HDMI, Gigabit ethernet</li>
-              <li>~6h battery, hot-swap pack</li>
-              <li>Wi-Fi 6, Bluetooth, ambient sensors</li>
-            </ul>
-          </article>
-
-          <article class="hardware-card hardware-featured">
-            <span class="hardware-badge">Most popular</span>
-            <div class="hardware-art" aria-hidden="true">
-              <svg viewBox="0 0 120 80">
-                <defs><linearGradient id="hw-counter" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#3d6b65"/><stop offset="100%" stop-color="#2e524d"/></linearGradient></defs>
-                <ellipse cx="60" cy="68" rx="44" ry="3" fill="#000" opacity="0.08"/>
-                <rect x="14" y="14" width="92" height="50" rx="5" fill="url(#hw-counter)"/>
-                <rect x="18" y="18" width="84" height="22" rx="2" fill="#0e2826"/>
-                <circle cx="34" cy="29" r="3" fill="#b8895a"/>
-                <text x="60" y="32" text-anchor="middle" font-size="6" fill="#f5ecdc" opacity="0.75" font-family="ui-sans-serif">Tap to Summon</text>
-                <rect x="18" y="44" width="6" height="3" rx="0.5" fill="#f5ecdc" opacity="0.55"/>
-                <rect x="26" y="44" width="6" height="3" rx="0.5" fill="#f5ecdc" opacity="0.55"/>
-                <rect x="34" y="44" width="10" height="3" rx="0.5" fill="#f5ecdc" opacity="0.55"/>
-                <rect x="46" y="44" width="10" height="3" rx="0.5" fill="#f5ecdc" opacity="0.55"/>
-                <rect x="58" y="44" width="6" height="3" rx="0.5" fill="#f5ecdc" opacity="0.55"/>
-                <rect x="66" y="44" width="6" height="3" rx="0.5" fill="#f5ecdc" opacity="0.55"/>
-                <rect x="74" y="44" width="12" height="3" rx="0.5" fill="#f5ecdc" opacity="0.55"/>
-                <rect x="88" y="44" width="12" height="3" rx="0.5" fill="#f5ecdc" opacity="0.55"/>
-                <rect x="18" y="50" width="10" height="3" rx="0.5" fill="#f5ecdc" opacity="0.35"/>
-                <rect x="30" y="50" width="10" height="3" rx="0.5" fill="#f5ecdc" opacity="0.35"/>
-                <rect x="42" y="50" width="6" height="3" rx="0.5" fill="#f5ecdc" opacity="0.35"/>
-                <rect x="50" y="50" width="6" height="3" rx="0.5" fill="#f5ecdc" opacity="0.35"/>
-                <rect x="58" y="50" width="6" height="3" rx="0.5" fill="#f5ecdc" opacity="0.35"/>
-                <rect x="66" y="50" width="12" height="3" rx="0.5" fill="#f5ecdc" opacity="0.35"/>
-                <rect x="80" y="50" width="6" height="3" rx="0.5" fill="#f5ecdc" opacity="0.35"/>
-                <rect x="88" y="50" width="12" height="3" rx="0.5" fill="#f5ecdc" opacity="0.35"/>
-                <circle cx="22" cy="58" r="1.2" fill="#b8895a"/>
-                <circle cx="28" cy="58" r="1.2" fill="#f5ecdc" opacity="0.5"/>
-              </svg>
-            </div>
-            <p class="hardware-tier">Tabletop, AC-only</p>
-            <h3>Counter</h3>
-            <p class="hardware-price">from <strong>$599</strong></p>
-            <p class="hardware-desc">A palm-sized micro-NUC with the biggest port-count we can fit. No battery, lives on the counter or behind the TV. Quietly runs the house — backups, photos, smart-home, media.</p>
-            <ul role="list" class="hardware-feats">
-              <li>7″ touchscreen + Summon button</li>
-              <li>6× USB, dual HDMI, 2.5G ethernet, SD</li>
-              <li>Wi-Fi 6E, Bluetooth, full sensor suite</li>
-              <li>Multi-core CPU, NVMe storage</li>
-            </ul>
-          </article>
-
-          <article class="hardware-card">
-            <div class="hardware-art" aria-hidden="true">
-              <svg viewBox="0 0 120 80">
-                <defs><linearGradient id="hw-den" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2a2520"/><stop offset="100%" stop-color="#1a1814"/></linearGradient></defs>
-                <ellipse cx="60" cy="72" rx="46" ry="3" fill="#000" opacity="0.08"/>
-                <rect x="18" y="8" width="84" height="60" rx="3" fill="url(#hw-den)"/>
-                <rect x="22" y="12" width="76" height="8" rx="1" fill="#0a0807"/>
-                <circle cx="28" cy="16" r="1.5" fill="#3d6b65"/>
-                <circle cx="34" cy="16" r="1.5" fill="#b8895a"/>
-                <text x="60" y="18" text-anchor="middle" font-size="4" fill="#b8895a" opacity="0.8" font-family="ui-sans-serif">DEN</text>
-                <rect x="22" y="24" width="76" height="9" rx="1" fill="#0a0807"/>
-                <rect x="26" y="26" width="68" height="5" rx="0.5" fill="#1a1814" stroke="#3d6b65" stroke-opacity="0.4"/>
-                <circle cx="30" cy="28.5" r="0.8" fill="#b8895a"/>
-                <rect x="22" y="36" width="76" height="9" rx="1" fill="#0a0807"/>
-                <rect x="26" y="38" width="68" height="5" rx="0.5" fill="#1a1814" stroke="#3d6b65" stroke-opacity="0.4"/>
-                <circle cx="30" cy="40.5" r="0.8" fill="#b8895a"/>
-                <rect x="22" y="48" width="76" height="9" rx="1" fill="#0a0807"/>
-                <rect x="26" y="50" width="68" height="5" rx="0.5" fill="#1a1814" stroke="#3d6b65" stroke-opacity="0.4"/>
-                <circle cx="30" cy="52.5" r="0.8" fill="#3d6b65"/>
-                <rect x="22" y="60" width="76" height="5" rx="1" fill="#0a0807"/>
-                <circle cx="92" cy="62.5" r="1.5" fill="#3d6b65"/>
-                <circle cx="86" cy="62.5" r="1.5" fill="#3d6b65"/>
-              </svg>
-            </div>
-            <p class="hardware-tier">NAS-class</p>
-            <h3>Den</h3>
-            <p class="hardware-price">from <strong>$2,499</strong></p>
-            <p class="hardware-desc">A closet-grade mini-datacenter. Bays for real storage, ECC memory, ten-gig everywhere, room for a GPU. The household's photo library, video archive, and compute server, all in one quiet box.</p>
-            <ul role="list" class="hardware-feats">
-              <li>4–8 hot-swap bays, ECC memory</li>
-              <li>Dual 10G ethernet, dual PSU option</li>
-              <li>Optional GPU for transcode &amp; local compute</li>
-              <li>Ships with a Summon session to set it up</li>
-            </ul>
-          </article>
-        </div>
-      </div>
-
-      <div class="track">
-        <header class="track-head">
-          <p class="track-label">Concierge hardware</p>
-          <h3 class="track-title">What helps a human <em>help you.</em></h3>
-          <p class="track-lede">Optional, additive, and only ever active when you press the button. Each one widens the doorway the concierge can step through — without giving them the keys to the rest of your house.</p>
-        </header>
-
-        <div class="hardware-grid hardware-grid-4">
-          <article class="hardware-card hardware-featured">
-            <span class="hardware-badge">Start here</span>
-            <div class="hardware-art" aria-hidden="true">
-              <svg viewBox="0 0 120 80">
-                <defs><linearGradient id="hw-bell" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f5ecdc"/><stop offset="100%" stop-color="#e0d3b7"/></linearGradient></defs>
-                <ellipse cx="60" cy="66" rx="34" ry="2.5" fill="#000" opacity="0.06"/>
-                <rect x="32" y="18" width="56" height="44" rx="5" fill="url(#hw-bell)" stroke="#cdbfa8"/>
-                <rect x="36" y="22" width="48" height="22" rx="2" fill="#3d6b65"/>
-                <circle cx="60" cy="31" r="3" fill="#b8895a"/>
-                <text x="60" y="40" text-anchor="middle" font-size="4" fill="#f5ecdc" opacity="0.75" font-family="ui-sans-serif">Summon</text>
-                <g opacity="0.7">
-                  <rect x="40" y="48" width="3" height="6" rx="1" fill="#3d6b65"/>
-                  <rect x="44" y="46" width="3" height="10" rx="1" fill="#3d6b65"/>
-                  <rect x="48" y="48" width="3" height="6" rx="1" fill="#3d6b65"/>
-                </g>
-                <g opacity="0.6">
-                  <circle cx="74" cy="51" r="6" fill="none" stroke="#3d6b65" stroke-width="0.8"/>
-                  <circle cx="74" cy="51" r="3" fill="#3d6b65"/>
-                </g>
-                <rect x="36" y="56" width="48" height="3" rx="1" fill="#000" opacity="0.18"/>
-              </svg>
-            </div>
-            <p class="hardware-tier">The summoning device</p>
-            <h3>Bell</h3>
-            <p class="hardware-price">from <strong>$149</strong></p>
-            <p class="hardware-desc">A small touchscreen with a Summon button, a beam-forming mic, and speakers that actually carry across a room. Press it from the couch and talk to a real human like they're standing there.</p>
-            <ul role="list" class="hardware-feats">
-              <li>5″ touchscreen + physical Summon button</li>
-              <li>Four-mic array, clear-voice speakers</li>
-              <li>USB-A, USB-C, HDMI, ethernet, Wi-Fi 6</li>
-              <li>Wall, desk, or counter mounts</li>
-            </ul>
-          </article>
-
-          <article class="hardware-card">
-            <div class="hardware-art" aria-hidden="true">
-              <svg viewBox="0 0 120 80">
-                <defs><linearGradient id="hw-latch" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#3d6b65"/><stop offset="100%" stop-color="#2e524d"/></linearGradient></defs>
-                <ellipse cx="60" cy="66" rx="32" ry="2.5" fill="#000" opacity="0.06"/>
-                <rect x="34" y="26" width="52" height="36" rx="4" fill="url(#hw-latch)"/>
-                <rect x="38" y="30" width="44" height="14" rx="1.5" fill="#0e2826"/>
-                <text x="60" y="40" text-anchor="middle" font-size="5" fill="#b8895a" font-family="ui-sans-serif">BIOS</text>
-                <rect x="38" y="48" width="8" height="3" rx="0.5" fill="#b8895a"/>
-                <rect x="48" y="48" width="6" height="3" rx="0.5" fill="#f5ecdc" opacity="0.5"/>
-                <rect x="56" y="48" width="10" height="3" rx="0.5" fill="#f5ecdc" opacity="0.5"/>
-                <rect x="68" y="48" width="14" height="3" rx="0.5" fill="#f5ecdc" opacity="0.5"/>
-                <rect x="38" y="54" width="44" height="4" rx="0.5" fill="#0a0807"/>
-                <circle cx="42" cy="56" r="0.8" fill="#3d6b65"/>
-                <circle cx="46" cy="56" r="0.8" fill="#b8895a"/>
-              </svg>
-            </div>
-            <p class="hardware-tier">USB out-of-band</p>
-            <h3>Latch</h3>
-            <p class="hardware-price">from <strong>$99</strong></p>
-            <p class="hardware-desc">A JetKVM-style box that sits between us and a machine of yours, USB-and-HDMI deep. We see the boot screen, not just the OS. Useful when the OS is what's broken.</p>
-            <ul role="list" class="hardware-feats">
-              <li>HDMI capture + USB keyboard/mouse emulation</li>
-              <li>Power button passthrough, ATX header</li>
-              <li>Standalone — works even with the host off</li>
-              <li>Tap-to-arm on the Bell, auto-disarms after</li>
-            </ul>
-          </article>
-
-          <article class="hardware-card">
-            <div class="hardware-art" aria-hidden="true">
-              <svg viewBox="0 0 120 80">
-                <defs><linearGradient id="hw-latchpro" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2a2520"/><stop offset="100%" stop-color="#1a1814"/></linearGradient></defs>
-                <ellipse cx="60" cy="68" rx="36" ry="2.5" fill="#000" opacity="0.06"/>
-                <rect x="22" y="20" width="76" height="44" rx="3" fill="url(#hw-latchpro)"/>
-                <rect x="22" y="30" width="76" height="6" rx="1" fill="#0a0807"/>
-                <rect x="22" y="40" width="76" height="6" rx="1" fill="#0a0807"/>
-                <rect x="22" y="50" width="76" height="6" rx="1" fill="#0a0807"/>
-                <text x="60" y="27" text-anchor="middle" font-size="4" fill="#b8895a" opacity="0.7" font-family="ui-sans-serif">PCIe ×4</text>
-                <rect x="86" y="60" width="14" height="3" rx="0.5" fill="#b8895a"/>
-                <circle cx="30" cy="33" r="0.8" fill="#3d6b65"/>
-                <circle cx="30" cy="43" r="0.8" fill="#3d6b65"/>
-                <circle cx="30" cy="53" r="0.8" fill="#3d6b65"/>
-                <rect x="36" y="32" width="16" height="2" rx="0.5" fill="#f5ecdc" opacity="0.35"/>
-                <rect x="36" y="42" width="22" height="2" rx="0.5" fill="#f5ecdc" opacity="0.35"/>
-                <rect x="36" y="52" width="14" height="2" rx="0.5" fill="#f5ecdc" opacity="0.35"/>
-              </svg>
-            </div>
-            <p class="hardware-tier">PCIe out-of-band</p>
-            <h3>Latch Pro</h3>
-            <p class="hardware-price">from <strong>$349</strong></p>
-            <p class="hardware-desc">A PCIe card-and-bracket version of Latch. Lives inside the host, sees the framebuffer directly, drives power, talks to fans and sensors. Full enterprise-grade IPMI without enterprise pricing.</p>
-            <ul role="list" class="hardware-feats">
-              <li>PCIe x4, framebuffer capture, virtual media</li>
-              <li>Power, reset, BMC-style sensor read-out</li>
-              <li>Wake-on-LAN, scheduled boot, hardware kill switch</li>
-              <li>For Counter, Den, and your own towers</li>
-            </ul>
-          </article>
-
-          <article class="hardware-card">
-            <div class="hardware-art" aria-hidden="true">
-              <svg viewBox="0 0 120 80">
-                <defs><linearGradient id="hw-pulse" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f5ecdc"/><stop offset="100%" stop-color="#e0d3b7"/></linearGradient></defs>
-                <ellipse cx="60" cy="68" rx="30" ry="2.5" fill="#000" opacity="0.06"/>
-                <rect x="38" y="22" width="44" height="42" rx="6" fill="url(#hw-pulse)" stroke="#cdbfa8"/>
-                <rect x="42" y="26" width="36" height="18" rx="2" fill="#0e2826"/>
-                <path d="M44 35 L50 35 L52 30 L56 40 L60 32 L64 38 L68 33 L74 35 L78 35" fill="none" stroke="#b8895a" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round"/>
-                <text x="60" y="56" text-anchor="middle" font-size="3.5" fill="#3d6b65" font-family="ui-sans-serif">847 W</text>
-                <rect x="50" y="58" width="20" height="2" rx="0.5" fill="#3d6b65" opacity="0.25"/>
-                <rect x="50" y="58" width="13" height="2" rx="0.5" fill="#3d6b65"/>
-                <circle cx="44" cy="51" r="1" fill="#3d6b65"/>
-                <circle cx="76" cy="51" r="1" fill="#b8895a"/>
-              </svg>
-            </div>
-            <p class="hardware-tier">Sensing &amp; diagnostics</p>
-            <h3>Pulse</h3>
-            <p class="hardware-price">from <strong>$39</strong></p>
-            <p class="hardware-desc">A growing family of plug-in sensors — power monitor, temperature/humidity, door/leak, USB current/data sniffer. The concierge sees what the machines can't tell us.</p>
-            <ul role="list" class="hardware-feats">
-              <li>Inline power monitor (wall &amp; per-port)</li>
-              <li>Room temp, humidity, airflow, dust</li>
-              <li>USB sniffer for diagnosing weird peripherals</li>
-              <li>All data stays on your Hub unless a session is live</li>
-            </ul>
-          </article>
-        </div>
-      </div>
-
-      <p class="callout">Hardware never gates software. Buy a Lapel, no plan needed. Buy a Latch Pro, no plan needed. Every box ships with a one-tap test session so you know it works before the courier's truck is out of the driveway.</p>
+        <li>
+          <span class="verb">Record</span>
+          <h3>Den</h3>
+          <p>Closet-grade server. Photos, video, the whole archive.</p>
+          <p class="verb-price">from $2,499</p>
+        </li>
+        <li>
+          <span class="verb">Act</span>
+          <h3>Bell, Latch, Pulse</h3>
+          <p>What lets a human help — speaker, KVM, power &amp; env sensors.</p>
+          <p class="verb-price">from $39</p>
+        </li>
+      </ul>
     </section>
 
     <section id="summon" class="section section-warm">
       <div class="section-head">
-        <p class="eyebrow"><span class="dot"></span> Summon a human</p>
-        <h2>For the things you'd <em>rather not figure out.</em></h2>
-        <p class="section-lede">"Why is the printer doing that." "I think I broke email." "Can you just set this up for me." "Can you migrate me to the new laptop?" Press the button, pick what's bothering you, and a real, vetted human shows up — only the device you pick, only for as long as you say. Setup help, fix help, do-it-for-me help. Same button.</p>
+        <p class="eyebrow"><span class="dot"></span> Summon</p>
+        <h2>A human, one tap away. <em>Eyes off everything else.</em></h2>
+        <p class="section-lede">Your local AI handles what it can and triages what it can't. The minimum needed to fix the thing is what reaches a person — never your kitchen, never your photos, never your screen unless that's where the problem lives. Whoever's on shift can pick it up; <em>your AI is the one who knows your setup</em>, not them.</p>
       </div>
-
-      <div class="summon-grid">
-        <div class="summon-card">
-          <span class="summon-step">Setup</span>
-          <h3>"Just do it for me."</h3>
-          <p>Configure the new printer. Wire backups to the Hub. Migrate your old laptop onto the new one. Get the cameras showing on the right screens. We'll do it — or do it together while you watch.</p>
-        </div>
-        <div class="summon-card">
-          <span class="summon-step">Fix</span>
-          <h3>"It used to work."</h3>
-          <p>Something stopped behaving. The cameras lost the password. The home server is yelling. The phone won't talk to the printer anymore. Press Summon, someone takes a look.</p>
-        </div>
-        <div class="summon-card">
-          <span class="summon-step">Reach</span>
-          <h3>"On <em>your</em> screen, please."</h3>
-          <p>A scoped, temporary peer joins on the device you pick — not a screen-share through someone else's cloud. Ends when you close it. Audit trail is on your machine, not ours.</p>
-        </div>
-      </div>
-
       <div class="summon-cta">
-        <a class="btn btn-primary btn-lg" href="#signup">Book a Summon session</a>
-        <span class="summon-fine">Sessions from $25, no subscription required.</span>
+        <a class="btn btn-primary btn-lg" href="#signup">Try a session — $25 for 15 min</a>
+        <span class="summon-fine">Or stay free forever. We don't charge for software.</span>
       </div>
     </section>
 
-    <section id="pricing" class="section">
+    <section id="pay" class="section">
       <div class="section-head">
-        <p class="eyebrow"><span class="dot"></span> Pricing</p>
-        <h2>Two subscriptions. <em>One for speed,</em> one for a human.</h2>
-        <p class="section-lede">They're independent. Plenty of people only ever pay for one — plenty never pay for either. Start free, and add what's actually cramping you.</p>
+        <p class="eyebrow"><span class="dot"></span> What you pay for</p>
+        <h2>Software, free. <em>Speed and humans, only if you need them.</em></h2>
       </div>
 
-      <div class="track">
-        <header class="track-head">
-          <p class="track-label">Relay</p>
-          <h3 class="track-title">For when your devices can't reach each other <em>directly.</em></h3>
-          <p class="track-lede">Most of the time, your stuff finds its way to your stuff peer-to-peer and we're not in the middle. When it can't — strict NATs, carrier-grade ISPs, captive Wi-Fi — we relay the bits through a TURN server. Start free; crank it up only if bandwidth is cramping your style.</p>
-        </header>
+      <div class="pay-grid">
+        <article class="pay">
+          <p class="pay-tag">Always free</p>
+          <h3>The whole product</h3>
+          <p>All the software. Your local AI. Every hardware box you've bought. A 1 Mbps relay for when devices can't reach each other directly.</p>
+          <p class="pay-price">$0</p>
+        </article>
 
-        <div class="plans plans-4">
-          <article class="plan plan-slim">
-            <header>
-              <h3>Trickle</h3>
-              <p class="plan-price"><span class="amount">$0</span><span class="per">forever</span></p>
-              <p class="plan-tag">Free. Plenty for printing &amp; sync.</p>
-            </header>
-            <ul role="list" class="plan-feats">
-              <li><svg viewBox="0 0 16 16"><path d="M3 8l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> <strong>1 Mbps</strong> TURN relay</li>
-              <li><svg viewBox="0 0 16 16"><path d="M3 8l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Direct P2P always, free, uncapped</li>
-              <li><svg viewBox="0 0 16 16"><path d="M3 8l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> All software features</li>
-            </ul>
-            <a class="btn btn-ghost btn-block" href="#signup">Start free</a>
-          </article>
+        <article class="pay">
+          <p class="pay-tag">Optional: more speed</p>
+          <h3>Relay bumps</h3>
+          <p>Only if a 1 Mbps relay is cramping you. Cap is throughput per second, not bytes per month.</p>
+          <p class="pay-price">$10 · $20 · $30<span class="pay-unit"> /mo for 10× · 100× · 200×</span></p>
+        </article>
 
-          <article class="plan plan-slim">
-            <header>
-              <h3>Stream</h3>
-              <p class="plan-price"><span class="amount">$10</span><span class="per">/ month</span></p>
-              <p class="plan-tag">A camera, a call, a voice memo.</p>
-            </header>
-            <ul role="list" class="plan-feats">
-              <li><svg viewBox="0 0 16 16"><path d="M3 8l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> <strong>10 Mbps</strong> TURN relay</li>
-              <li><svg viewBox="0 0 16 16"><path d="M3 8l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> SD video without choking</li>
-              <li><svg viewBox="0 0 16 16"><path d="M3 8l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Picks 10× nearest relays</li>
-            </ul>
-            <a class="btn btn-ghost btn-block" href="#signup">Upgrade</a>
-          </article>
-
-          <article class="plan plan-slim plan-featured">
-            <span class="plan-badge">Sweet spot</span>
-            <header>
-              <h3>Cascade</h3>
-              <p class="plan-price"><span class="amount">$20</span><span class="per">/ month</span></p>
-              <p class="plan-tag">Most households land here.</p>
-            </header>
-            <ul role="list" class="plan-feats">
-              <li><svg viewBox="0 0 16 16"><path d="M3 8l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> <strong>100 Mbps</strong> TURN relay</li>
-              <li><svg viewBox="0 0 16 16"><path d="M3 8l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> 4K cameras, screen-share, big file moves</li>
-              <li><svg viewBox="0 0 16 16"><path d="M3 8l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Multi-region relay pool</li>
-            </ul>
-            <a class="btn btn-primary btn-block" href="#signup">Upgrade</a>
-          </article>
-
-          <article class="plan plan-slim">
-            <header>
-              <h3>Firehose</h3>
-              <p class="plan-price"><span class="amount">$30</span><span class="per">/ month</span></p>
-              <p class="plan-tag">Workshops, makers, home-lab.</p>
-            </header>
-            <ul role="list" class="plan-feats">
-              <li><svg viewBox="0 0 16 16"><path d="M3 8l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> <strong>200 Mbps</strong> TURN relay</li>
-              <li><svg viewBox="0 0 16 16"><path d="M3 8l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Multiple 4K streams in parallel</li>
-              <li><svg viewBox="0 0 16 16"><path d="M3 8l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Dedicated relay region of your choice</li>
-            </ul>
-            <a class="btn btn-ghost btn-block" href="#signup">Upgrade</a>
-          </article>
-        </div>
-
-        <p class="track-fine">Caps are <em>throughput</em>, not totals. You can do as much over a month as you want — you just can't blast it through faster than your tier. And again: when devices reach each other directly, none of this matters.</p>
+        <article class="pay">
+          <p class="pay-tag">Optional: a person</p>
+          <h3>Human minutes</h3>
+          <p>$25 for the first 15 minutes, $1/min after. Or subscribe from $19/mo for priority access and included time. Anyone on shift can help — your AI carries the context.</p>
+          <p class="pay-price">$25<span class="pay-unit"> /session, or $19+/mo</span></p>
+        </article>
       </div>
 
-      <div class="track">
-        <header class="track-head">
-          <p class="track-label">Concierge</p>
-          <h3 class="track-title">A real human, trained in this stuff, <em>on a subscription.</em></h3>
-          <p class="track-lede">Not a chatbot. Not a $9 offshore tier. Vetted technicians who can actually fix the thing — and who'll get to know your setup if you stick around. Pick how much of them you'd like on hand.</p>
-        </header>
-
-        <div class="plans">
-          <article class="plan">
-            <header>
-              <h3>Drop-in</h3>
-              <p class="plan-price"><span class="amount">$19</span><span class="per">/ month</span></p>
-              <p class="plan-tag">For "every once in a while."</p>
-            </header>
-            <ul role="list" class="plan-feats">
-              <li><svg viewBox="0 0 16 16"><path d="M3 8l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> <strong>Priority Summon queue</strong> — minutes, not hours</li>
-              <li><svg viewBox="0 0 16 16"><path d="M3 8l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> <strong>15 min</strong> of session time included / month</li>
-              <li><svg viewBox="0 0 16 16"><path d="M3 8l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> <strong>$1.50/min</strong> after that, no surprise rates</li>
-              <li><svg viewBox="0 0 16 16"><path d="M3 8l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Setup help: a printer, a camera, a single migration</li>
-            </ul>
-            <a class="btn btn-ghost btn-block" href="#signup">Start 14-day trial</a>
-          </article>
-
-          <article class="plan plan-featured">
-            <span class="plan-badge">Most popular</span>
-            <header>
-              <h3>House Call</h3>
-              <p class="plan-price"><span class="amount">$69</span><span class="per">/ month</span></p>
-              <p class="plan-tag">A real relationship with a real human.</p>
-            </header>
-            <ul role="list" class="plan-feats">
-              <li><svg viewBox="0 0 16 16"><path d="M3 8l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Front of the queue, named team of three</li>
-              <li><svg viewBox="0 0 16 16"><path d="M3 8l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> <strong>1 hour</strong> of session time included / month</li>
-              <li><svg viewBox="0 0 16 16"><path d="M3 8l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> <strong>$1.20/min</strong> after, scheduled visits at no extra</li>
-              <li><svg viewBox="0 0 16 16"><path d="M3 8l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Annual tune-up: backups, updates, audit</li>
-              <li><svg viewBox="0 0 16 16"><path d="M3 8l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Full new-laptop / new-house migration included</li>
-            </ul>
-            <a class="btn btn-primary btn-block" href="#signup">Start 14-day trial</a>
-          </article>
-
-          <article class="plan">
-            <header>
-              <h3>Live-in</h3>
-              <p class="plan-price"><span class="amount">$199</span><span class="per">/ month</span></p>
-              <p class="plan-tag">Like having a sysadmin on staff. Without one.</p>
-            </header>
-            <ul role="list" class="plan-feats">
-              <li><svg viewBox="0 0 16 16"><path d="M3 8l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> A named concierge who knows your setup</li>
-              <li><svg viewBox="0 0 16 16"><path d="M3 8l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> <strong>4 hours</strong> of session time included / month</li>
-              <li><svg viewBox="0 0 16 16"><path d="M3 8l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> <strong>$1.00/min</strong> after, 24/7 emergency line</li>
-              <li><svg viewBox="0 0 16 16"><path d="M3 8l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Quarterly check-ins, proactive maintenance</li>
-              <li><svg viewBox="0 0 16 16"><path d="M3 8l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Concierge hardware (Bell, Latch, Pulse) at cost</li>
-            </ul>
-            <a class="btn btn-ghost btn-block" href="#signup">Start 14-day trial</a>
-          </article>
-        </div>
-      </div>
-
-      <p class="plan-note">Don't want a subscription? <a href="#summon">Pay for a single Summon session</a> from $25. Don't want a human? Stay on Trickle forever — it really is free.</p>
+      <p class="plan-note">Bigger setup? Business or fleet? <a href="mailto:hello@allmystuff.works">Talk to us</a> — we'll quote something that fits, without staffing a named person against your account.</p>
     </section>
 
     <section id="faq" class="section section-alt">
       <div class="section-head">
         <p class="eyebrow"><span class="dot"></span> FAQ</p>
-        <h2>Reasonable questions, honest answers.</h2>
+        <h2>Reasonable questions.</h2>
       </div>
 
       <div class="faq">
         <details>
-          <summary>Do I need to understand networking?</summary>
-          <p>No. That's the entire point. Install our app on the devices you care about, use them. If something doesn't work, press Summon and a real human handles it. You should never have to learn what a port is.</p>
+          <summary>What does the local AI actually do?</summary>
+          <p>It watches your devices for you — sorting photos, noticing the printer's offline, hearing the camera dropouts — so a human (us, or you) doesn't have to. It runs on your own hardware. We can't see it; we don't keep it.</p>
         </details>
         <details>
-          <summary>Is this a Tailscale / ZeroTier?</summary>
-          <p>No, and we're not trying to be. They give you a virtual network — useful if you know what to <em>do</em> with one, and a lot of exposure if you don't. We give you outcomes: print from anywhere, see your cameras, reach the other machine, restore from a backup. No VPN for you to administer.</p>
-        </details>
-        <details>
-          <summary>So how do you reach my other devices, then?</summary>
-          <p>Each device runs our app, which announces what it can do (print, store, show, record) to the other devices on your account. When you ask one device for something the other can do, they talk directly, peer-to-peer, only for as long as needed. No new always-on network for you to forget about and worry about.</p>
-        </details>
-        <details>
-          <summary>Why do I need an account just to use the free tier?</summary>
-          <p>When your devices can't reach each other directly, we relay the traffic — and unauthenticated relays are catnip for abuse. An account lets us throttle per-account rather than block everyone on a noisy ISP. Free still means free; we just need to know which "you" is using it.</p>
-        </details>
-        <details>
-          <summary>What gets throttled on the free tier?</summary>
-          <p>How fast the traffic moves <em>through us</em>, per second. Not how much. You can do as much over a month as you like — you just can't blast it through at full speed. Plenty for printing, sync, voice, and most file-shuffling. Heavy video starts to want a paid tier.</p>
+          <summary>So how does a human help, if they can't see anything?</summary>
+          <p>When you press Summon, your AI prepares a minimum-viable picture of the problem: the error, the relevant log line, the one screen that matters. A human gets that — not your house. If we need more, the device asks you, in plain English, before showing it.</p>
         </details>
         <details>
           <summary>Do I have to buy your hardware?</summary>
-          <p>No. The app runs on what you already own — laptop, phone, NAS, a Pi, a beat-up tower. Hardware is for filling gaps: a printer with no brains, a camera with no app worth using, a stubborn corner of the house. Plenty of customers never buy any.</p>
+          <p>No. The software runs on what you own. Hardware exists for capture, record, route, process, and act — five jobs the things in your life don't already do well. Skip all of it if you like.</p>
         </details>
         <details>
-          <summary>Can you see what's on my screen during a Summon session?</summary>
-          <p>Only the human helper assigned to your session, only the device you picked, only while the session is active, and only after a fresh confirmation tap on the device being viewed. We can see <em>that</em> a session happened (for billing); we don't record its contents.</p>
+          <summary>Why is the free tier actually free?</summary>
+          <p>Because the expensive part of helping people is human time, and the local AI cuts a lot of it out. Software, relay (slowly), and your AI cost us little. We charge for speed when bits move through us, and minutes when a person is in the loop. That's it.</p>
         </details>
         <details>
           <summary>What happens if I cancel?</summary>
-          <p>Your devices still talk to each other when they can reach each other directly. You lose our relay beyond the free tier, and you lose Summon. Hardware you bought is yours forever — it just falls back to free-tier relay speeds. Nothing on your devices vanishes; we never had it.</p>
+          <p>Your devices keep talking to each other when they can reach each other directly. Your AI keeps running on your hardware. You drop to the free relay and pay-per-session Summon. Nothing on your devices vanishes — we never had it.</p>
         </details>
       </div>
     </section>
@@ -707,14 +285,14 @@
     <section id="signup" class="section section-final">
       <div class="final-card">
         <p class="eyebrow"><span class="dot"></span> Ready when you are</p>
-        <h2>Install the app. Use your stuff. <em>That's it.</em></h2>
-        <p>Free tier, no card, every feature. Set it up in the time it takes to make coffee.</p>
+        <h2>Install. Use your stuff. <em>That's it.</em></h2>
+        <p>Free tier, no card, every feature.</p>
         <form class="signup-form" onsubmit="return false" aria-label="Sign up for early access">
           <label class="sr-only" for="email">Email address</label>
           <input id="email" name="email" type="email" placeholder="you@somewhere.nice" autocomplete="email" required />
           <button class="btn btn-primary btn-lg" type="submit">Send me the app</button>
         </form>
-        <p class="final-fine">One email to confirm. That's it. No drip campaign, no growth-hacker nonsense.</p>
+        <p class="final-fine">One email to confirm. No drip.</p>
       </div>
     </section>
   </main>
@@ -734,26 +312,17 @@
           </svg>
           <span class="brand-name">allmystuff<span class="brand-tld">.works</span></span>
         </a>
-        <p>Things that work, for the people who own them. Made for everyone who'd rather not be IT support for their own house.</p>
+        <p>Things that work, for the people who own them.</p>
       </div>
 
       <div class="footer-cols">
         <div>
           <h4>Product</h4>
           <ul role="list">
-            <li><a href="#stuff">What works</a></li>
+            <li><a href="#story">The trick</a></li>
             <li><a href="#hardware">Hardware</a></li>
             <li><a href="#summon">Summon</a></li>
-            <li><a href="#pricing">Pricing</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4>Infrastructure</h4>
-          <ul role="list">
-            <li><code>stun.allmystuff.works</code></li>
-            <li><code>turn.allmystuff.works</code></li>
-            <li><a href="#">Status</a></li>
-            <li><a href="#">Region map</a></li>
+            <li><a href="#pay">Pay</a></li>
           </ul>
         </div>
         <div>
@@ -762,7 +331,7 @@
             <li><a href="#">Docs</a></li>
             <li><a href="#faq">FAQ</a></li>
             <li><a href="#">Changelog</a></li>
-            <li><a href="#">Hardware shipping</a></li>
+            <li><a href="#">Status</a></li>
           </ul>
         </div>
         <div>
@@ -777,7 +346,7 @@
       </div>
     </div>
     <div class="footer-fine">
-      <p>&copy; <span id="year"></span> allmystuff.works. Your stuff, your network, your call.</p>
+      <p>&copy; <span id="year"></span> allmystuff.works. Your stuff, your AI, your call.</p>
     </div>
   </footer>
 
