@@ -220,7 +220,6 @@
         <header class="setup-head">
           <p class="setup-label">First, the brains</p>
           <h3>Each brain is a stream of work. <em>Add as you grow.</em></h3>
-          <p>Brains run the software and host your AI. Stack two and you can game on one while your AI sorts photos on the other. Stack three and run home automations on top. Stack four and monitor the workshop. The system divides work across whatever's around — start where you are, add when you outgrow it.</p>
         </header>
 
         <div class="brains">
@@ -257,12 +256,12 @@
           </article>
         </div>
 
-        <aside class="stack-note" aria-label="Brains aggregate">
-          <p class="stack-line"><span class="stack-pip">🧠</span> &nbsp;<em>one task at a time on this brain</em></p>
-          <p class="stack-line"><span class="stack-pip">🧠</span><span class="stack-pip">🧠</span> &nbsp;<em>game streaming + AI photo sort, in parallel</em></p>
-          <p class="stack-line"><span class="stack-pip">🧠</span><span class="stack-pip">🧠</span><span class="stack-pip">🧠</span> &nbsp;<em>game + AI + home automations, all at once</em></p>
-          <p class="stack-line"><span class="stack-pip">🧠</span><span class="stack-pip">🧠</span><span class="stack-pip">🧠</span><span class="stack-pip">🧠</span> &nbsp;<em>add monitoring, render farm, dev sandbox &mdash; just keep adding</em></p>
-          <p class="stack-tail">Brains stack. Tasks split across them. <strong>No subscription gates the capacity</strong> — buy what you can afford, own what you bought.</p>
+        <aside class="stack-note" aria-label="Brains stack">
+          <p class="stack-line"><span class="stack-pip">🧠</span> &nbsp;<em>one task at a time</em></p>
+          <p class="stack-line"><span class="stack-pip">🧠</span><span class="stack-pip">🧠</span> &nbsp;<em>game while your AI sorts photos</em></p>
+          <p class="stack-line"><span class="stack-pip">🧠</span><span class="stack-pip">🧠</span><span class="stack-pip">🧠</span> &nbsp;<em>+ home automations</em></p>
+          <p class="stack-line"><span class="stack-pip">🧠</span><span class="stack-pip">🧠</span><span class="stack-pip">🧠</span><span class="stack-pip">🧠</span> &nbsp;<em>+ monitoring, render, dev &mdash; keep going</em></p>
+          <p class="stack-tail"><strong>No subscription gates this.</strong> Buy what you can. Own what you bought.</p>
         </aside>
       </div>
 
@@ -270,7 +269,6 @@
         <header class="setup-head">
           <p class="setup-label">Then, the limbs</p>
           <h3>Any, none, all. <em>Each one widens the system.</em></h3>
-          <p>Three of these (Bell, Lapel, Pulse) run our software directly and join the system. Two (Latch Mobile, Latch Pro) bridge machines that <em>don't</em> run our software in. Each one is another place the system can see, sense, fix, or speak from.</p>
         </header>
 
         <ul class="hw-extras" role="list">
@@ -315,8 +313,6 @@
             <span class="hw-extra-price"><strong>$99</strong></span>
           </li>
         </ul>
-
-        <p class="setup-foot">More limbs &rarr; more places the AI watches, more things it can fix without a human, more rooms a Summon can reach. The system gets wider every time you add one. <em>Never narrower.</em></p>
       </div>
     </section>
 
@@ -500,14 +496,37 @@
           <summary>How is the software free?</summary>
           <p>Because it runs on your hardware, not ours. We sell hardware (the CEC naval lineup) and we sell human Summon time. The software, your local AI, and the always-on 1 Mbps relay cost us almost nothing per user, so we don't bill for them. If you ever want faster relay throughput or guaranteed minutes with a technician, those are the things you pay for — and only those.</p>
         </details>
+
         <details>
           <summary>How private is "private"?</summary>
           <p>Your local AI runs on your own brain — laptop, Counter, Probe, whatever. We can't read what it sees. When you press Summon, our AI gets only the one-sentence summary needed to route the ticket. The human on shift gets only the specific screen or device you approve, only while the session is live. We can see <em>that</em> a session happened (for billing). We don't record what was on it.</p>
         </details>
+
+        <details>
+          <summary>Will my existing stuff work — old printer, off-brand cameras, weird smart-home gear?</summary>
+          <p>Probably. Anything with a standards-based interface (a network printer, an RTSP camera, Matter, Zigbee, HomeKit, generic USB) joins through your brain directly. Anything stranger — a printer with a USB cable, a tower without our app, a peripheral your laptop pretends doesn't exist — joins through a Latch Mobile. The point is to bring whatever you've already paid for into the fold, not to make you replace it.</p>
+        </details>
+
+        <details>
+          <summary>What if I'm not technical at all?</summary>
+          <p>That's the entire point. The brain handles the networking. The AI handles the watching. Summon hands you a real person when something's beyond either. You shouldn't have to learn what an IP address is to make a printer print — and with this, you don't.</p>
+        </details>
+
+        <details>
+          <summary>What happens if my internet goes out?</summary>
+          <p>Your brain and your limbs are on your local network, so they keep talking to each other. Cameras still show. Printers still print. Your local AI keeps watching. You lose remote access from outside the house (reaching the home server from the airport) and Summon (which needs to reach our humans). Both come back the moment the internet does.</p>
+        </details>
+
         <details>
           <summary>Am I locked in if I buy the hardware?</summary>
           <p>No. The software works on anything you already own, so you don't have to buy anything to start. If you do buy hardware from us — a Bell, a Roam, the Probe, a CEC heavyweight — it's yours forever. Cancel anytime and every box keeps running the app and your local AI. Your data has always lived on your devices, not ours, so there's nothing on our side for you to lose.</p>
         </details>
+
+        <details>
+          <summary>Why is Latch Mobile $99 if Latch Pro is also $99?</summary>
+          <p>Different shapes of the same idea. Mobile is external — sits beside any machine over USB and HDMI, portable, not tied to a host. Pro is internal — PCIe, fixed to one machine, deeper access (BIOS, fans, power). Different tradeoffs, comparable bill of materials. Every CEC machine ships with a Latch Pro already inside; you'd buy a standalone Pro to put one in a non-CEC tower.</p>
+        </details>
+
         <details>
           <summary>Is this just Tailscale or a VPN?</summary>
           <p>Opposite premise. Tailscale gives you a virtual network to administer — useful if you already know what to <em>do</em> with one. We give you the outcomes: print from anywhere, see your cameras, restore a new laptop, render-over-there, fix-it-from-the-road. There's no tunnel to configure and no IPs to remember; the brain handles all of that.</p>
