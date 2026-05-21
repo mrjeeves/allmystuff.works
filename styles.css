@@ -453,45 +453,95 @@ p { margin: 0 0 1em; }
 .steps p { color: var(--ink-soft); margin: 0; }
 
 /* ============================================================
-   agents
+   hardware
    ============================================================ */
 
-.agent-grid {
+.hardware-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 22px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  align-items: stretch;
 }
-.agent {
+.hardware-card {
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
-  padding: 30px 28px;
+  padding: 26px 26px 28px;
+  display: flex; flex-direction: column;
+  position: relative;
+  transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
 }
-.agent-ours {
-  background:
-    linear-gradient(180deg, var(--accent-soft) 0%, transparent 80%),
-    var(--surface);
+.hardware-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
   border-color: var(--accent);
 }
-.agent h3 { margin-bottom: 14px; }
-.agent ul {
-  list-style: none; padding: 0; margin: 0;
-  display: grid; gap: 10px;
+.hardware-featured {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-md);
+  background:
+    linear-gradient(180deg, var(--accent-soft) 0%, transparent 35%),
+    var(--surface);
 }
-.agent li {
-  padding-left: 22px;
-  position: relative;
+.hardware-badge {
+  position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+  background: var(--accent); color: var(--ink);
+  font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 999px;
+}
+.hardware-art {
+  background: linear-gradient(180deg, var(--bg-warm) 0%, var(--bg-soft) 100%);
+  border-radius: var(--radius);
+  margin-bottom: 18px;
+  padding: 18px;
+  display: flex; align-items: center; justify-content: center;
+}
+.hardware-art svg { width: 100%; height: auto; max-height: 110px; }
+.hardware-tier {
+  font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--teal);
+  margin: 0 0 6px;
+}
+.hardware-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 4px;
+}
+.hardware-price {
+  font-size: 1rem;
+  color: var(--muted);
+  margin: 0 0 14px;
+}
+.hardware-price strong {
+  font-family: var(--font-serif);
+  font-size: 1.7rem;
+  font-weight: 500;
+  color: var(--ink);
+}
+.hardware-desc {
   color: var(--ink-soft);
-  font-size: 0.98rem;
+  font-size: 0.96rem;
+  margin: 0 0 18px;
 }
-.agent li::before {
+.hardware-feats {
+  list-style: none; padding: 0; margin: 0;
+  display: grid; gap: 8px;
+  flex: 1;
+  font-size: 0.94rem;
+  color: var(--ink-soft);
+}
+.hardware-feats li {
+  padding-left: 20px;
+  position: relative;
+}
+.hardware-feats li::before {
   content: "";
   position: absolute; left: 0; top: 0.55em;
   width: 8px; height: 8px;
   background: var(--teal);
   border-radius: 50%;
 }
-.agent-ours li::before { background: var(--accent-deep); }
+.hardware-featured .hardware-feats li::before { background: var(--accent-deep); }
 
 .callout {
   margin-top: 28px;
@@ -775,7 +825,7 @@ p { margin: 0 0 1em; }
   .section-head.two-col > p { padding-bottom: 0; }
 
   .steps { grid-template-columns: 1fr; gap: 16px; }
-  .agent-grid { grid-template-columns: 1fr; }
+  .hardware-grid { grid-template-columns: 1fr; }
   .summon-grid { grid-template-columns: 1fr; }
   .plans { grid-template-columns: 1fr; }
   .plan-featured { transform: none; }

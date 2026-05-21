@@ -1,14 +1,14 @@
 # allmystuff.works
 
-Marketing site for **allmystuff.works** — a personal-cloud / tech-concierge service.
+Marketing site for **allmystuff.works** — an integrated stack for the
+technology in your life.
 
-You get your own private mesh network (a "network") that connects your devices
-over WebRTC via [Trystero](https://github.com/dmotz/trystero), with our
-authenticated STUN and TURN servers (`stun.allmystuff.works`,
-`turn.allmystuff.works`) included on every plan. On top of that runs our
-friendly fork of [myownllm.net](https://myownllm.net)'s `cloud-mesh` agent
-framework, with additions for consent-gated remote view / remote control —
-so you can summon a real human into your network when something gets weird.
+The pitch is end-to-end: our app on every device you already own,
+hardware from us when you need more (Anchor ~$99 → Hub ~$999 →
+Station ~$10K), a private network tying it all together via
+authenticated STUN/TURN at `stun.allmystuff.works` /
+`turn.allmystuff.works`, and a real human one click away when
+something stops behaving. Not "just another Tailscale."
 
 ## Stack
 
