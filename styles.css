@@ -1680,6 +1680,15 @@ p { margin: 0 0 1em; }
   .parts { grid-template-columns: 1fr; }
   .seam-grid { grid-template-columns: 1fr; gap: 14px; }
   .trick-grid { grid-template-columns: 1fr; gap: 28px; }
+  .hw-cec { grid-template-columns: 1fr; }
+  .hw-extras li {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 22px 22px;
+  }
+  .hw-extra-price { text-align: left; }
+  .layer { grid-template-columns: 1fr; gap: 8px; padding: 22px 22px; text-align: center; }
+  .layer-num { font-size: 2rem; }
 
   .footer-inner { grid-template-columns: 1fr; }
   .footer-cols { grid-template-columns: repeat(2, 1fr); }
