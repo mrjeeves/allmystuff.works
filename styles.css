@@ -321,7 +321,7 @@ p { margin: 0 0 1em; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .trust-lines path, .pulse, .setup-lines path, .brain-link-flow, html {
+  .trust-lines path, .pulse, html {
     animation: none !important; scroll-behavior: auto;
   }
 }
@@ -1460,25 +1460,14 @@ p { margin: 0 0 1em; }
 
 .setup-diagram {
   margin: 0 auto clamp(36px, 5vw, 56px);
-  max-width: 720px;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-xl);
-  padding: clamp(20px, 3vw, 32px);
-  box-shadow: var(--shadow-md);
+  max-width: 880px;
+  padding: 0;
 }
-.setup-diagram svg {
-  width: 100%; height: auto; display: block;
-}
-.setup-lines path {
-  stroke-dasharray: 4 4;
-  animation: trustFlow 8s linear infinite;
-}
-.brain-link-flow {
-  animation: brainLinkFlow 2.4s linear infinite;
-}
-@keyframes brainLinkFlow {
-  to { stroke-dashoffset: -24; }
+.setup-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 22px 36px rgba(74, 56, 30, 0.14));
 }
 .setup-block + .setup-block {
   margin-top: clamp(48px, 7vw, 80px);
