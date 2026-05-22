@@ -249,9 +249,9 @@ p { margin: 0 0 1em; }
 .hero {
   max-width: var(--maxw);
   margin: 0 auto;
-  padding: clamp(50px, 9vw, 110px) clamp(20px, 4vw, 40px) clamp(40px, 6vw, 70px);
+  padding: clamp(40px, 8vw, 90px) clamp(20px, 4vw, 40px) clamp(40px, 6vw, 60px);
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
+  grid-template-columns: 1.1fr 1fr;
   gap: clamp(24px, 5vw, 60px);
   align-items: center;
 }
@@ -279,31 +279,19 @@ p { margin: 0 0 1em; }
 .hero-art {
   margin: 0;
   width: 100%;
-  max-width: 440px;
+  max-width: 460px;
   justify-self: center;
 }
-.hero-placeholder {
-  aspect-ratio: 1 / 1;
-  width: 100%;
-  background: var(--bg-warm);
-  border: 1.5px dashed var(--accent);
-  border-radius: var(--radius-lg);
-  display: grid;
-  place-content: center;
-  text-align: center;
-  padding: 24px;
-  gap: 6px;
-  color: var(--muted);
+.constellation {
+  width: 100%; height: auto;
+  filter: drop-shadow(0 20px 30px rgba(74, 56, 30, 0.08));
 }
-.hero-placeholder-label {
-  font-family: var(--font-serif);
-  font-size: 1.3rem;
-  font-style: italic;
+.constellation-lines line {
+  stroke-dasharray: 5 5;
+  animation: constellationFlow 10s linear infinite;
 }
-.hero-placeholder-hint {
-  font-size: 0.78rem;
-  opacity: 0.7;
-  letter-spacing: 0.02em;
+@keyframes constellationFlow {
+  to { stroke-dashoffset: -40; }
 }
 
 /* trick-section lens (moved from hero) */
@@ -336,7 +324,7 @@ p { margin: 0 0 1em; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .trust-lines path, .pulse, .setup-lines path, .brain-link-flow, html {
+  .trust-lines path, .pulse, .setup-lines path, .brain-link-flow, .constellation-lines line, html {
     animation: none !important; scroll-behavior: auto;
   }
 }
@@ -2036,7 +2024,7 @@ p { margin: 0 0 1em; }
   .site-header { grid-template-columns: auto 1fr auto; }
 
   .hero { grid-template-columns: 1fr; padding-top: 40px; padding-bottom: 30px; }
-  .hero-art { max-width: 320px; margin: 0 auto; }
+  .hero-art { max-width: 380px; margin: 0 auto; }
 
   .section-head.two-col { grid-template-columns: 1fr; gap: 12px; }
   .section-head.two-col > p { padding-bottom: 0; }

@@ -67,11 +67,45 @@
       </div>
 
       <figure class="hero-art" aria-hidden="true">
-        <!-- TODO: replace with hero image. Suggested: square or 4:5 ratio, ~880px wide. -->
-        <div class="hero-placeholder">
-          <span class="hero-placeholder-label">Hero image</span>
-          <span class="hero-placeholder-hint">square-ish · ~880px wide</span>
-        </div>
+        <svg class="constellation" viewBox="0 0 400 280">
+          <defs>
+            <radialGradient id="hero-glow" cx="50%" cy="50%" r="58%">
+              <stop offset="0%" stop-color="#f3e2c6" stop-opacity="0.6"/>
+              <stop offset="55%" stop-color="#f3e2c6" stop-opacity="0.18"/>
+              <stop offset="100%" stop-color="#f3e2c6" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+
+          <circle cx="200" cy="140" r="180" fill="url(#hero-glow)"/>
+
+          <g class="constellation-lines" stroke="#b8895a" stroke-width="1.4" fill="none" opacity="0.55">
+            <line x1="85"  y1="80"  x2="305" y2="65"/>
+            <line x1="85"  y1="80"  x2="110" y2="220"/>
+            <line x1="85"  y1="80"  x2="315" y2="210"/>
+            <line x1="305" y1="65"  x2="110" y2="220"/>
+            <line x1="305" y1="65"  x2="315" y2="210"/>
+            <line x1="110" y1="220" x2="315" y2="210"/>
+          </g>
+
+          <g class="constellation-nodes">
+            <g transform="translate(85 80)">
+              <circle r="24" fill="#fbf7f1" stroke="#3d6b65" stroke-width="1.4"/>
+              <circle r="9" fill="#3d6b65"/>
+            </g>
+            <g transform="translate(305 65)">
+              <circle r="24" fill="#fbf7f1" stroke="#3d6b65" stroke-width="1.4"/>
+              <circle r="9" fill="#3d6b65"/>
+            </g>
+            <g transform="translate(110 220)">
+              <circle r="24" fill="#fbf7f1" stroke="#3d6b65" stroke-width="1.4"/>
+              <circle r="9" fill="#3d6b65"/>
+            </g>
+            <g transform="translate(315 210)">
+              <circle r="24" fill="#fbf7f1" stroke="#3d6b65" stroke-width="1.4"/>
+              <circle r="9" fill="#3d6b65"/>
+            </g>
+          </g>
+        </svg>
       </figure>
     </section>
 
