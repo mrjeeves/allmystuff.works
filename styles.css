@@ -286,12 +286,22 @@ p { margin: 0 0 1em; }
   width: 100%; height: auto;
   filter: drop-shadow(0 20px 30px rgba(74, 56, 30, 0.08));
 }
-.constellation-lines line {
-  stroke-dasharray: 5 5;
-  animation: constellationFlow 10s linear infinite;
+.constellation-lines path {
+  stroke-dasharray: 4 5;
+  animation: constellationFlow 11s linear infinite;
 }
 @keyframes constellationFlow {
-  to { stroke-dashoffset: -40; }
+  to { stroke-dashoffset: -36; }
+}
+.constellation-core-pulse {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: constellationCorePulse 4.4s ease-out infinite;
+}
+@keyframes constellationCorePulse {
+  0%   { transform: scale(0.7); opacity: 0.55; }
+  70%  { transform: scale(2.0); opacity: 0;    }
+  100% { transform: scale(2.0); opacity: 0;    }
 }
 
 /* trick-section lens (moved from hero) */
@@ -324,7 +334,8 @@ p { margin: 0 0 1em; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .trust-lines path, .pulse, .setup-lines path, .brain-link-flow, .constellation-lines line, html {
+  .trust-lines path, .pulse, .setup-lines path, .brain-link-flow,
+  .constellation-lines path, .constellation-core-pulse, html {
     animation: none !important; scroll-behavior: auto;
   }
 }
