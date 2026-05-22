@@ -249,10 +249,14 @@ p { margin: 0 0 1em; }
 .hero {
   max-width: var(--maxw);
   margin: 0 auto;
-  padding: clamp(60px, 11vw, 130px) clamp(20px, 4vw, 40px) clamp(50px, 8vw, 90px);
+  padding: clamp(50px, 9vw, 110px) clamp(20px, 4vw, 40px) clamp(40px, 6vw, 70px);
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: clamp(24px, 5vw, 60px);
+  align-items: center;
 }
 .hero-copy {
-  max-width: 760px;
+  max-width: 620px;
 }
 .hero h1 {
   margin-top: 0.2em;
@@ -270,6 +274,29 @@ p { margin: 0 0 1em; }
 .hero-actions {
   display: flex; flex-wrap: wrap; gap: 14px;
   margin: 1.5em 0 0;
+}
+
+.hero-art {
+  margin: 0;
+  width: 100%;
+  max-width: 440px;
+  justify-self: center;
+}
+.mesh {
+  width: 100%; height: auto;
+  filter: drop-shadow(0 22px 36px rgba(74, 56, 30, 0.1));
+}
+.mesh-lines line {
+  stroke-dasharray: 6 8;
+  animation: meshFlow 9s linear infinite;
+}
+.mesh-line-2 { animation-delay: -1.4s; }
+.mesh-line-3 { animation-delay: -2.8s; }
+.mesh-line-4 { animation-delay: -4.2s; }
+.mesh-line-5 { animation-delay: -5.6s; }
+.mesh-line-6 { animation-delay: -7.0s; }
+@keyframes meshFlow {
+  to { stroke-dashoffset: -56; }
 }
 
 /* trick-section lens (moved from hero) */
@@ -302,7 +329,7 @@ p { margin: 0 0 1em; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .trust-lines path, .pulse, .setup-lines path, .brain-link-flow, html {
+  .trust-lines path, .pulse, .setup-lines path, .brain-link-flow, .mesh-lines line, html {
     animation: none !important; scroll-behavior: auto;
   }
 }
@@ -2001,7 +2028,8 @@ p { margin: 0 0 1em; }
   .nav-toggle { display: flex; }
   .site-header { grid-template-columns: auto 1fr auto; }
 
-  .hero { padding-top: 56px; padding-bottom: 30px; }
+  .hero { grid-template-columns: 1fr; padding-top: 40px; padding-bottom: 30px; }
+  .hero-art { max-width: 320px; margin: 0 auto; }
 
   .section-head.two-col { grid-template-columns: 1fr; gap: 12px; }
   .section-head.two-col > p { padding-bottom: 0; }
