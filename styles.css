@@ -355,7 +355,7 @@ p { margin: 0 0 1em; }
 
 @media (prefers-reduced-motion: reduce) {
   .trust-lines path, .pulse, .constellation-lines path, .hero-center-ring,
-  .game-flow path, .setup-lines path, html {
+  .setup-lines path, html {
     animation: none !important; scroll-behavior: auto;
   }
 }
@@ -1845,7 +1845,7 @@ p { margin: 0 0 1em; }
 
 .scenes {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 18px;
 }
 .scene {
@@ -1860,38 +1860,6 @@ p { margin: 0 0 1em; }
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
   border-color: var(--accent);
-}
-.scene-feature {
-  grid-column: 1 / -1;
-  background:
-    radial-gradient(600px 220px at 90% 0%, var(--accent-soft) 0%, transparent 60%),
-    radial-gradient(400px 200px at 0% 100%, var(--teal-soft) 0%, transparent 60%),
-    var(--surface);
-  border-color: var(--accent);
-  box-shadow: var(--shadow-md);
-  padding: clamp(28px, 4vw, 44px);
-}
-.scene-feature-grid {
-  display: grid;
-  grid-template-columns: 1.1fr 1fr;
-  gap: clamp(24px, 4vw, 44px);
-  align-items: center;
-}
-.scene-demo {
-  margin: 0;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: clamp(16px, 2.6vw, 24px);
-  box-shadow: var(--shadow-sm);
-}
-.scene-demo svg { width: 100%; height: auto; display: block; }
-.game-flow path {
-  stroke-dasharray: 4 4;
-  animation: gameFlow 1.4s linear infinite;
-}
-@keyframes gameFlow {
-  to { stroke-dashoffset: -16; }
 }
 .scene-tag {
   display: inline-block;
@@ -1908,18 +1876,8 @@ p { margin: 0 0 1em; }
   margin-bottom: 12px;
   line-height: 1.2;
 }
-.scene-feature h3 { font-size: 1.7rem; }
 .scene > p { color: var(--ink-soft); margin: 0 0 12px; }
 .scene > p:last-child { margin-bottom: 0; }
-.scene-uses {
-  font-size: 0.88rem;
-  color: var(--muted);
-  font-style: italic;
-  padding-top: 12px;
-  border-top: 1px dashed var(--line);
-  margin-top: auto !important;
-}
-.scene-uses strong { color: var(--teal); font-style: normal; font-weight: 600; }
 
 /* ============================================================
    ecosystem map
@@ -2133,8 +2091,6 @@ p { margin: 0 0 1em; }
   .verbs { grid-template-columns: 1fr; }
   .pay-grid { grid-template-columns: 1fr; }
   .scenes { grid-template-columns: 1fr; }
-  .scene-feature { grid-column: auto; }
-  .scene-feature-grid { grid-template-columns: 1fr; gap: 22px; }
   .parts { grid-template-columns: 1fr; }
   .seam-grid { grid-template-columns: 1fr; gap: 14px; }
   .trick-grid { grid-template-columns: 1fr; gap: 28px; }
