@@ -249,80 +249,28 @@ p { margin: 0 0 1em; }
 .hero {
   max-width: var(--maxw);
   margin: 0 auto;
-  padding: clamp(40px, 8vw, 90px) clamp(20px, 4vw, 40px) clamp(40px, 6vw, 60px);
-  display: grid;
-  grid-template-columns: 1.1fr 1fr;
-  gap: clamp(24px, 5vw, 60px);
-  align-items: center;
+  padding: clamp(60px, 11vw, 130px) clamp(20px, 4vw, 40px) clamp(50px, 8vw, 90px);
 }
-
+.hero-copy {
+  max-width: 760px;
+}
 .hero h1 {
   margin-top: 0.2em;
 }
 .hero .lede { max-width: 32rem; margin-top: 0.8em; }
+.hero-sub {
+  max-width: 56ch;
+  margin-top: 0.9em;
+  color: var(--ink-soft);
+  font-size: 1.02rem;
+  line-height: 1.55;
+}
+.hero-sub em { color: var(--accent-deep); }
 
 .hero-actions {
   display: flex; flex-wrap: wrap; gap: 14px;
-  margin: 1.5em 0 1.6em;
+  margin: 1.5em 0 0;
 }
-
-.hero-points {
-  display: grid; gap: 10px;
-  list-style: none; padding: 0; margin: 0;
-  color: var(--ink-soft);
-  font-size: 0.98rem;
-}
-.hero-points li {
-  display: flex; align-items: center; gap: 10px;
-}
-.hero-points svg {
-  width: 16px; height: 16px;
-  color: var(--teal);
-  flex-shrink: 0;
-}
-
-.hero-art {
-  margin: 0;
-  position: relative;
-  justify-self: center;
-  width: 100%;
-  max-width: 480px;
-}
-
-/* hero constellation */
-.constellation {
-  width: 100%; height: auto;
-  filter: drop-shadow(0 20px 30px rgba(74, 56, 30, 0.08));
-}
-.constellation-lines path {
-  stroke-dasharray: 4 4;
-  animation: constellationFlow 12s linear infinite;
-}
-@keyframes constellationFlow {
-  to { stroke-dashoffset: -32; }
-}
-.hero-center {
-  transform-box: fill-box;
-  transform-origin: center;
-}
-.hero-center-ring {
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: heroCenterRing 4.2s ease-out infinite;
-}
-@keyframes heroCenterRing {
-  0%   { transform: scale(0.7); opacity: 0.55; }
-  70%  { transform: scale(1.6); opacity: 0;    }
-  100% { transform: scale(1.6); opacity: 0;    }
-}
-.hero-caption {
-  text-align: center;
-  font-size: 0.88rem;
-  color: var(--muted);
-  font-style: italic;
-  margin-top: 12px;
-}
-.hero-caption em { color: var(--accent-deep); }
 
 /* trick-section lens (moved from hero) */
 .lens {
@@ -354,8 +302,7 @@ p { margin: 0 0 1em; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .trust-lines path, .pulse, .constellation-lines path, .hero-center-ring,
-  .setup-lines path, html {
+  .trust-lines path, .pulse, .setup-lines path, .brain-link-flow, html {
     animation: none !important; scroll-behavior: auto;
   }
 }
@@ -1508,6 +1455,12 @@ p { margin: 0 0 1em; }
   stroke-dasharray: 4 4;
   animation: trustFlow 8s linear infinite;
 }
+.brain-link-flow {
+  animation: brainLinkFlow 2.4s linear infinite;
+}
+@keyframes brainLinkFlow {
+  to { stroke-dashoffset: -24; }
+}
 .setup-block + .setup-block {
   margin-top: clamp(48px, 7vw, 80px);
   padding-top: clamp(36px, 5vw, 56px);
@@ -1979,33 +1932,6 @@ p { margin: 0 0 1em; }
 }
 
 /* ============================================================
-   bridge — a single dramatic line between scenes and system
-   ============================================================ */
-
-.bridge {
-  padding: clamp(50px, 8vw, 90px) clamp(20px, 4vw, 40px);
-  text-align: center;
-  background:
-    radial-gradient(900px 320px at 50% 50%, var(--accent-soft) 0%, transparent 65%),
-    var(--bg);
-  border-top: 1px solid var(--line-soft);
-  border-bottom: 1px solid var(--line-soft);
-}
-.bridge-line {
-  max-width: 880px;
-  margin: 0 auto;
-  font-family: var(--font-serif);
-  font-size: clamp(1.7rem, 3.6vw, 2.8rem);
-  font-weight: 400;
-  line-height: 1.18;
-  letter-spacing: -0.01em;
-  color: var(--ink);
-}
-.bridge-line em {
-  color: var(--accent-deep);
-}
-
-/* ============================================================
    seams (software / AI / people) — embedded inside the system
    ============================================================ */
 
@@ -2075,8 +2001,7 @@ p { margin: 0 0 1em; }
   .nav-toggle { display: flex; }
   .site-header { grid-template-columns: auto 1fr auto; }
 
-  .hero { grid-template-columns: 1fr; padding-top: 40px; padding-bottom: 30px; }
-  .hero-art { max-width: 380px; margin: 0 auto; }
+  .hero { padding-top: 56px; padding-bottom: 30px; }
 
   .section-head.two-col { grid-template-columns: 1fr; gap: 12px; }
   .section-head.two-col > p { padding-bottom: 0; }
