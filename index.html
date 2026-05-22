@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>allmystuff.works — All my stuff. Works.</title>
+  <meta name="description" content="The hardware you already own, finally on speaking terms. Print from anywhere, see every camera, find any photo by asking — without making you an IT person." />
+  <meta property="og:title" content="allmystuff.works" />
+  <meta property="og:description" content="The hardware you already own, finally on speaking terms — without making you an IT person." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23faf6ef'/%3E%3Cg stroke='%233d6b65' stroke-width='1.4' fill='none'%3E%3Ccircle cx='10' cy='12' r='2.4'/%3E%3Ccircle cx='22' cy='11' r='2.4'/%3E%3Ccircle cx='12' cy='22' r='2.4'/%3E%3Ccircle cx='22' cy='21' r='2.4'/%3E%3Cpath d='M10 12 L22 11 M10 12 L12 22 M22 11 L22 21 M12 22 L22 21 M10 12 L22 21 M22 11 L12 22'/%3E%3C/g%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-header" data-elevate>
+    <a class="brand" href="/" aria-label="allmystuff.works home">
+      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+        <g stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round">
+          <circle cx="10" cy="12" r="2.4"/>
+          <circle cx="22" cy="11" r="2.4"/>
+          <circle cx="12" cy="22" r="2.4"/>
+          <circle cx="22" cy="21" r="2.4"/>
+          <path d="M10 12 L22 11 M10 12 L12 22 M22 11 L22 21 M12 22 L22 21 M10 12 L22 21 M22 11 L12 22"/>
+        </g>
+      </svg>
+      <span class="brand-name">allmystuff<span class="brand-tld">.works</span></span>
+    </a>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="#scenes">What it does</a>
+      <a href="#system">How it works</a>
+      <a href="#pieces">The pieces</a>
+      <a href="#pay">Pay</a>
+    </nav>
+    <div class="site-cta">
+      <a class="link" href="#signin">Sign in</a>
+      <a class="btn btn-primary" href="#signup">Start free</a>
+    </div>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <div id="mobile-nav" class="mobile-nav" hidden>
+    <a href="#scenes">What it does</a>
+    <a href="#system">How it works</a>
+    <a href="#pieces">The pieces</a>
+    <a href="#pay">Pay</a>
+    <a href="#faq">FAQ</a>
+    <a class="link" href="#signin">Sign in</a>
+    <a class="btn btn-primary" href="#signup">Start free</a>
+  </div>
+
+  <main id="main">
+
+    <!-- ─────────── Hero: the promise, made concrete ─────────── -->
+    <section class="hero">
+      <div class="hero-copy">
+        <h1>All my stuff.<br/><em>Works.</em></h1>
+        <p class="lede">Yours can too. <em>Find out how.</em></p>
+        <p class="hero-sub">Software, a few optional boxes, and a real human — for the gear you already own. So it actually cooperates. <em>And keeps cooperating, with or without us.</em></p>
+        <div class="hero-actions">
+          <a class="btn btn-primary btn-lg" href="#signup">Start free</a>
+          <a class="btn btn-ghost btn-lg" href="#scenes">See it work <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+
+      <figure class="hero-art" aria-hidden="true">
+        <img class="hero-image" src="hero.png" alt="" />
+      </figure>
+    </section>
+
+    <!-- ─────────── Scenes: what it actually lets you do ─────────── -->
+    <section id="scenes" class="section section-alt">
+      <div class="section-head">
+        <p class="eyebrow"><span class="dot"></span> What it does</p>
+        <h2>Works together. <em>Stays yours.</em></h2>
+        <p class="section-lede">Everything you own, in one quiet conversation. And it <em>stays</em> in conversation — even if we vanish, even if the cloud goes dark, even if the AI you like gets bought by someone you don't. You paid once. You keep the stuff. <em>That's the whole pitch.</em></p>
+      </div>
+
+      <div class="scenes">
+        <article class="scene">
+          <p class="scene-tag">Render where the GPU is</p>
+          <h3>Game on a laptop. <em>The rig in the den does the work.</em></h3>
+          <img class="scene-image" src="render-where-the-gpu-is.png" alt="" />
+          <p>Steam library, AAA titles, real frame rates — from the couch, the kitchen, a hotel in Denver. The big PC at home renders. The laptop in your lap is the screen.</p>
+        </article>
+
+        <article class="scene">
+          <p class="scene-tag">Local AI</p>
+          <h3>An AI watching <em>for the thing about to break</em>.</h3>
+          <img class="scene-image" src="local-ai.png" alt="" />
+          <p>Lives on your brain, not ours. Notices the fan working too hard, the drive drifting, the camera offline — then nudges you, so you can decide whether to Summon someone.</p>
+        </article>
+
+        <article class="scene">
+          <p class="scene-tag">Summon</p>
+          <h3>A real person, <em>one tap away</em>.</h3>
+          <img class="scene-image" src="summon.png" alt="" />
+          <p>Press Summon from anywhere. Whoever's on shift picks up. Your AI hands them the context. Usually a five-minute fix, not a Saturday.</p>
+        </article>
+
+        <article class="scene">
+          <p class="scene-tag">Yours, not theirs</p>
+          <h3>Pull a file off your NAS. <em>Without using someone else's cloud.</em></h3>
+          <img class="scene-image" src="reach.png" alt="" />
+          <p>Same with the cameras, the smart-home gear, the folder on the home machine. All reachable from whichever device is in your hand — peer-to-peer between machines you own, never sitting on someone else's servers. Nothing to be reread, repriced, or revoked.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ─────────── System: the architecture revealed ─────────── -->
+    <section id="system" class="section">
+      <div class="section-head">
+        <p class="eyebrow"><span class="dot"></span> How it works</p>
+        <h2>Brains in conversation. <em>Reach in every direction.</em></h2>
+        <p class="section-lede">Each brain runs the app, hosts your AI, listens for Summon. They find each other and divide the work between them. With internet, they stay in conversation from anywhere. Without it, each one becomes its own powerhouse island — and everything inside the walls keeps working. The reach goes wherever the brains can't: rooms, voices, sensors, machines that weren't built with us in mind.</p>
+      </div>
+
+      <figure class="setup-diagram" aria-label="Two brains in conversation with each other, surrounded by the reach hardware on each side and the stuff you already own around the edges">
+        <img class="setup-image" src="how-it-works.png" alt="" />
+      </figure>
+
+      <div class="system-seams">
+        <p class="system-seams-lead">Three things ride on every brain. <em>They are the whole secret.</em></p>
+        <div class="seam-grid">
+          <div class="seam">
+            <span class="seam-num">1</span>
+            <h3>The connection software</h3>
+            <p>The brain handles every seam — across its reach, between every device on your network, and out to your stuff in the world. You don't see a tunnel; you see an outcome. Print. Watch. Sync. Restore. Render-over-there.</p>
+          </div>
+          <div class="seam">
+            <span class="seam-num">2</span>
+            <h3>Your local AI</h3>
+            <p>Lives on your brain, not ours. Learns your setup. Watches the whole reach. Notices things before you would. We can't see what it sees — and that's <em>why</em> we don't bill for it.</p>
+          </div>
+          <div class="seam">
+            <span class="seam-num">3</span>
+            <h3>A real human, one tap away</h3>
+            <p>Tap Summon from anywhere — a Bell on the wall, the Roam in your bag, your phone, the brain itself. Whoever's on shift picks up. Your AI hands them the minimum they need to fix the thing.</p>
+          </div>
+        </div>
+      </div>
+
+      <aside class="stack-note" aria-label="More brains do more at once">
+        <p class="stack-note-head"><strong>Want it doing more at once?</strong> Add another brain.</p>
+        <p class="stack-line"><span class="stack-pip">🧠</span> &nbsp;<em>one task at a time</em></p>
+        <p class="stack-line"><span class="stack-pip">🧠</span><span class="stack-pip">🧠</span> &nbsp;<em>game in one room while the AI sorts photos in the other</em></p>
+        <p class="stack-line"><span class="stack-pip">🧠</span><span class="stack-pip">🧠</span><span class="stack-pip">🧠</span> &nbsp;<em>+ the house quietly automating itself</em></p>
+        <p class="stack-line"><span class="stack-pip">🧠</span><span class="stack-pip">🧠</span><span class="stack-pip">🧠</span><span class="stack-pip">🧠</span> &nbsp;<em>+ monitoring, render-over-there, a side project — keep going</em></p>
+        <p class="stack-tail">Keep one in the house. Carry another in your bag. <strong>Nothing locks the capacity behind a subscription.</strong> Buy what you can; own what you bought.</p>
+      </aside>
+    </section>
+
+    <!-- ─────────── Pieces: what you'd buy (if anything) ─────────── -->
+    <section id="pieces" class="section section-alt">
+      <div class="section-head">
+        <p class="eyebrow"><span class="dot"></span> The pieces</p>
+        <h2>Most people start with the laptop they already own. <em>Here's the menu, if you want more.</em></h2>
+        <p class="section-lede">Nothing on this page is required. The app runs on the gear you already have, and for a lot of houses that's the whole story. Add a box on the day you find yourself wishing the system reached another room — or had a bit more horsepower on tap.</p>
+      </div>
+
+      <div class="setup-block">
+        <header class="setup-head">
+          <p class="setup-label">Brains — the boxes that do the thinking</p>
+          <h3>Anything that runs the app and holds your AI.</h3>
+          <p>Cheapest is what you already own. Better, when you grow into it, is something that can carry more at the same time.</p>
+        </header>
+
+        <div class="brains">
+          <article class="brain">
+            <span class="brain-glyph" aria-hidden="true">💻</span>
+            <p class="brain-tag">Already yours</p>
+            <h4>Your computer</h4>
+            <p>Any laptop or desktop with the app installed. Most people start exactly here.</p>
+            <p class="brain-price"><strong>$0</strong></p>
+          </article>
+
+          <article class="brain">
+            <span class="brain-glyph" aria-hidden="true">🛰️</span>
+            <p class="brain-tag">Battery or AC</p>
+            <h4>Roam &amp; Counter</h4>
+            <p>Same kit — touchscreen, mic, speakers, camera, ports. <strong>Roam</strong> runs on battery (the one for your bag). <strong>Counter</strong> is AC-only with more horsepower (the one for the kitchen shelf).</p>
+            <p class="brain-price"><strong>$499</strong> each</p>
+          </article>
+
+          <article class="brain">
+            <span class="brain-glyph" aria-hidden="true">🗄️</span>
+            <p class="brain-tag">Workhorse</p>
+            <h4>The Probe</h4>
+            <p>Entry naval-class machine by <a href="https://criticalerrorcomputing.com">Critical Error Computing</a>. More AI at once, more storage, more rooms it can comfortably watch.</p>
+            <p class="brain-price">from <strong>$1,249</strong></p>
+          </article>
+
+          <article class="brain brain-feature">
+            <span class="brain-glyph" aria-hidden="true">🎮</span>
+            <p class="brain-tag">"Den+"</p>
+            <h4>Any brain with a GPU</h4>
+            <p>"Den+" just means a computer with a dedicated GPU. Your gaming PC counts. So does every CEC heavyweight above the Probe — Fighter, Corvette, Frigate, Destroyer all ship with one. The GPU is what unlocks AAA gaming over the wire and the bigger AI models.</p>
+            <p class="brain-price">your gaming PC, or from <strong>$1,699</strong></p>
+          </article>
+        </div>
+      </div>
+
+      <div class="setup-block">
+        <header class="setup-head">
+          <p class="setup-label">Reach — boxes that go where the brain can't</p>
+          <h3>Each one widens what the system can see, hear, or talk to.</h3>
+          <p>Buy them à la carte. None are required. None are subscription-gated. Once you own one, it's yours — and so is what it does.</p>
+        </header>
+
+        <ul class="hw-extras" role="list">
+          <li>
+            <span class="hw-extra-verb">Summon</span>
+            <div class="hw-extra-body">
+              <h4>Bell</h4>
+              <p>Touchscreen, beam-mic, room-filling speakers, a physical Summon button. Adds another room where a human is one tap away — and a face for the AI to speak through.</p>
+            </div>
+            <span class="hw-extra-price">from <strong>$149</strong></span>
+          </li>
+          <li>
+            <span class="hw-extra-verb">Capture · voice</span>
+            <div class="hw-extra-body">
+              <h4>Lapel</h4>
+              <p>Clip-on voice recorder with a beam-forming mic. <em>No camera, by design.</em> Adds ears wherever you walk.</p>
+            </div>
+            <span class="hw-extra-price">from <strong>$79</strong></span>
+          </li>
+          <li>
+            <span class="hw-extra-verb">Sense</span>
+            <div class="hw-extra-body">
+              <h4>Pulse</h4>
+              <p>A growing line of small sensors — power, temp, humidity, leak, USB sniff. Plugs into a nearby Bell, Roam, Counter, or Probe. Adds whatever the house wasn't telling you.</p>
+            </div>
+            <span class="hw-extra-price">from <strong>$39</strong></span>
+          </li>
+          <li>
+            <span class="hw-extra-verb">Bridge · external</span>
+            <div class="hw-extra-body">
+              <h4>Latch Mobile</h4>
+              <p>USB-and-HDMI doorway in a portable tin. Brings any machine that doesn't run our software into the fold — a printer, a tower, a friend's PC. Carry it to where the trouble is.</p>
+            </div>
+            <span class="hw-extra-price"><strong>$99</strong></span>
+          </li>
+          <li>
+            <span class="hw-extra-verb">Bridge · internal</span>
+            <div class="hw-extra-body">
+              <h4>Latch Pro</h4>
+              <p>Same trick on a PCIe card — deeper access, fixed to one machine. Wake it from sleep, see its BIOS, watch the fans, even when the OS is asleep. Already inside every CEC naval-class machine; sold standalone for the other ones.</p>
+            </div>
+            <span class="hw-extra-price"><strong>$99</strong></span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ─────────── Pay ─────────── -->
+    <section id="pay" class="section">
+      <div class="section-head">
+        <p class="eyebrow"><span class="dot"></span> Pay</p>
+        <h2>We sell hardware and minutes of support. <em>Everything else is free.</em></h2>
+        <p class="section-lede">The software, your AI, and a small always-on relay cost us almost nothing per user, so we don't bill for them. The two things that actually cost money — bandwidth on the fast relay, and a real technician's time — are the two things you can pay for. Only if you want to.</p>
+      </div>
+
+      <div class="pay-grid">
+        <article class="pay">
+          <p class="pay-tag">Always free</p>
+          <h3>The whole system</h3>
+          <ul class="pay-list" role="list">
+            <li>The app on every device you own</li>
+            <li>Your local AI on every brain you've got</li>
+            <li>Every feature unlocked — not a trial</li>
+            <li><strong>1 Mbps</strong> TURN relay when peer-to-peer can't connect</li>
+            <li>Uncapped per month — only throughput is throttled</li>
+            <li>Summon access at the pay-per-session rate</li>
+          </ul>
+          <p class="pay-price">$0<span class="pay-unit"> forever</span></p>
+        </article>
+
+        <article class="pay">
+          <p class="pay-tag">When you want speed</p>
+          <h3>Relay bumps</h3>
+          <ul class="pay-list" role="list">
+            <li><strong>$10 / mo · 10 Mbps</strong> — calls, voice, file moves</li>
+            <li><strong>$20 / mo · 100 Mbps</strong> — 4K cameras, screen-share, render-over-there</li>
+            <li><strong>$30 / mo · 200 Mbps</strong> — game streaming on the road, multiple streams</li>
+            <li>Cap is per second, never per month</li>
+            <li>Cancel anytime, prorated</li>
+          </ul>
+          <p class="pay-price">$10 — $30<span class="pay-unit"> / month</span></p>
+        </article>
+
+        <article class="pay">
+          <p class="pay-tag">When you'd rather not</p>
+          <h3>Real-human support</h3>
+          <ul class="pay-list" role="list">
+            <li><strong>$25 / session</strong> — first 15 min included, $1/min after</li>
+            <li><strong>$19 / mo</strong> — priority queue + 30 min/mo, $1/min after</li>
+            <li><strong>$69 / mo</strong> — front of queue + 90 min/mo, planned check-ins</li>
+            <li>Anyone on shift answers — your AI carries the context</li>
+          </ul>
+          <p class="pay-price">$25<span class="pay-unit"> / session, or from $19 / mo</span></p>
+        </article>
+      </div>
+
+      <p class="plan-note">Business, fleet, or just bigger than this fits? <a href="mailto:hello@allmystuff.works">Talk to us</a>.</p>
+    </section>
+
+    <!-- ─────────── FAQ ─────────── -->
+    <section id="faq" class="section section-alt">
+      <div class="section-head">
+        <p class="eyebrow"><span class="dot"></span> FAQ</p>
+        <h2>Reasonable questions.</h2>
+      </div>
+
+      <div class="faq">
+        <details>
+          <summary>How is the software free?</summary>
+          <p>Because it runs on your hardware, not ours. We sell hardware (the CEC naval lineup) and we sell minutes of support from a real technician. The software, your local AI, and the always-on 1 Mbps relay cost us almost nothing per user, so we don't bill for them. If you ever want faster relay throughput or guaranteed time with a technician, those are the things you pay for — and only those.</p>
+        </details>
+
+        <details>
+          <summary>How private is "private"?</summary>
+          <p>Your local AI runs on your own brain — laptop, Counter, Probe, whatever. We can't read what it sees. When you press Summon, our AI gets only the one-sentence summary needed to route the ticket. The human on shift gets only the specific screen or device you approve, only while the session is live. We can see <em>that</em> a session happened (for billing). We don't record what was on it.</p>
+        </details>
+
+        <details>
+          <summary>Will my existing stuff work — old printer, off-brand cameras, weird smart-home gear?</summary>
+          <p>Probably. Anything with a standards-based interface (a network printer, an RTSP camera, Matter, Zigbee, HomeKit, generic USB) joins through your brain directly. Anything stranger — a printer with a USB cable, a tower without our app, a peripheral your laptop pretends doesn't exist — joins through a Latch Mobile. The point is to bring whatever you've already paid for into the fold, not to make you replace it.</p>
+        </details>
+
+        <details>
+          <summary>What if I'm not technical at all?</summary>
+          <p>That's the entire point. The brain handles the networking. The AI handles the watching. Summon hands you a real person when something's beyond either. You shouldn't have to learn what an IP address is to make a printer print — and with this, you don't.</p>
+        </details>
+
+        <details>
+          <summary>What happens if my internet goes out?</summary>
+          <p>Your brain and its reach are on your local network, so they keep talking to each other. Cameras still show. Printers still print. Your local AI keeps watching. You lose remote access from outside the house (reaching the home server from the airport) and Summon (which needs to reach our humans). Both come back the moment the internet does.</p>
+        </details>
+
+        <details>
+          <summary>Am I locked in if I buy the hardware?</summary>
+          <p>No. The software works on anything you already own, so you don't have to buy anything to start. If you do buy hardware from us — a Bell, a Roam, the Probe, a CEC heavyweight — it's yours forever. Cancel anytime and every box keeps running the app and your local AI. Your data has always lived on your devices, not ours, so there's nothing on our side for you to lose.</p>
+        </details>
+
+        <details>
+          <summary>Why is Latch Mobile $99 if Latch Pro is also $99?</summary>
+          <p>Different shapes of the same idea. Mobile is external — sits beside any machine over USB and HDMI, portable, not tied to a host. Pro is internal — PCIe, fixed to one machine, deeper access (BIOS, fans, power). Different tradeoffs, comparable bill of materials. Every CEC machine ships with a Latch Pro already inside; you'd buy a standalone Pro to put one in a non-CEC tower.</p>
+        </details>
+
+        <details>
+          <summary>Is this just Tailscale or a VPN?</summary>
+          <p>Opposite premise. Tailscale gives you a virtual network to administer — useful if you already know what to <em>do</em> with one. We give you the outcomes: print from anywhere, see your cameras, restore a new laptop, render-over-there, fix-it-from-the-road. There's no tunnel to configure and no IPs to remember; the brain handles all of that.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- ─────────── Signup (sacred) ─────────── -->
+    <section id="signup" class="section section-final">
+      <div class="final-card">
+        <p class="eyebrow"><span class="dot"></span> Ready when you are</p>
+        <h2>Install. Use your stuff. <em>That's it.</em></h2>
+        <p>Free tier. No card. Every feature on. Add a box the day life finds you a gap. Add minutes the day you'd rather not.</p>
+        <form class="signup-form" onsubmit="return false" aria-label="Sign up for early access">
+          <label class="sr-only" for="email">Email address</label>
+          <input id="email" name="email" type="email" placeholder="you@somewhere.nice" autocomplete="email" required />
+          <button class="btn btn-primary btn-lg" type="submit">Send me the app</button>
+        </form>
+        <p class="final-fine">One email to confirm. No drip.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a class="brand" href="/" aria-label="allmystuff.works home">
+          <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+            <g stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round">
+              <circle cx="10" cy="12" r="2.4"/>
+              <circle cx="22" cy="11" r="2.4"/>
+              <circle cx="12" cy="22" r="2.4"/>
+              <circle cx="22" cy="21" r="2.4"/>
+              <path d="M10 12 L22 11 M10 12 L12 22 M22 11 L22 21 M12 22 L22 21 M10 12 L22 21 M22 11 L12 22"/>
+            </g>
+          </svg>
+          <span class="brand-name">allmystuff<span class="brand-tld">.works</span></span>
+        </a>
+        <p>Tech that works when you turn it on.</p>
+      </div>
+
+      <div class="footer-cols">
+        <div>
+          <h4>Product</h4>
+          <ul role="list">
+            <li><a href="#scenes">What it does</a></li>
+            <li><a href="#system">How it works</a></li>
+            <li><a href="#pieces">The pieces</a></li>
+            <li><a href="#pay">Pay</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Hardware</h4>
+          <ul role="list">
+            <li><a href="https://criticalerrorcomputing.com">The naval lineup</a></li>
+            <li><a href="https://criticalerrorcomputing.com">The Probe</a></li>
+            <li><a href="https://criticalerrorcomputing.com">Den+ rated rigs</a></li>
+            <li><a href="https://criticalerrorcomputing.com">criticalerrorcomputing.com</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Company</h4>
+          <ul role="list">
+            <li><a href="#">About</a></li>
+            <li><a href="#">Privacy</a></li>
+            <li><a href="#">Terms</a></li>
+            <li><a href="mailto:hello@allmystuff.works">hello@allmystuff.works</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-fine">
+      <p>A <a href="https://criticalerrorcomputing.com">Critical Error Computing</a> product. &nbsp;·&nbsp; &copy; <span id="year"></span> allmystuff.works.</p>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
