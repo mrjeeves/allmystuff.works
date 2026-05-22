@@ -282,21 +282,28 @@ p { margin: 0 0 1em; }
   max-width: 440px;
   justify-self: center;
 }
-.mesh {
-  width: 100%; height: auto;
-  filter: drop-shadow(0 22px 36px rgba(74, 56, 30, 0.1));
+.hero-placeholder {
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  background: var(--bg-warm);
+  border: 1.5px dashed var(--accent);
+  border-radius: var(--radius-lg);
+  display: grid;
+  place-content: center;
+  text-align: center;
+  padding: 24px;
+  gap: 6px;
+  color: var(--muted);
 }
-.mesh-lines line {
-  stroke-dasharray: 6 8;
-  animation: meshFlow 9s linear infinite;
+.hero-placeholder-label {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  font-style: italic;
 }
-.mesh-line-2 { animation-delay: -1.4s; }
-.mesh-line-3 { animation-delay: -2.8s; }
-.mesh-line-4 { animation-delay: -4.2s; }
-.mesh-line-5 { animation-delay: -5.6s; }
-.mesh-line-6 { animation-delay: -7.0s; }
-@keyframes meshFlow {
-  to { stroke-dashoffset: -56; }
+.hero-placeholder-hint {
+  font-size: 0.78rem;
+  opacity: 0.7;
+  letter-spacing: 0.02em;
 }
 
 /* trick-section lens (moved from hero) */
@@ -329,7 +336,7 @@ p { margin: 0 0 1em; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .trust-lines path, .pulse, .setup-lines path, .brain-link-flow, .mesh-lines line, html {
+  .trust-lines path, .pulse, .setup-lines path, .brain-link-flow, html {
     animation: none !important; scroll-behavior: auto;
   }
 }
