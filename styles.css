@@ -1853,8 +1853,8 @@ p { margin: 0 0 1em; }
 .scene-image {
   display: block;
   width: 100%;
-  max-width: 240px;
-  margin: 4px auto 16px;
+  max-width: 400px;
+  margin: 6px auto 18px;
   aspect-ratio: 1 / 1;
   object-fit: contain;
   filter: drop-shadow(0 14px 22px rgba(74, 56, 30, 0.12));
