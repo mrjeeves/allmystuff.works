@@ -72,6 +72,32 @@
       <span class="eyebrow no-rule">Download · free forever · MIT licensed · no account required</span>
       <h1 style="font-family: var(--font-display); font-weight: 700; font-size: clamp(40px, 5.4vw, 76px); line-height: 1.02; letter-spacing: -0.01em; margin: 20px 0 18px; text-wrap: pretty;">Install. Join. Claim. Access your stuff.</h1>
       <p class="lede" style="max-width: 62ch;">Every download below is the full thing — every feature, every device, $0. The whole flow is <a href="#after" style="color: var(--accent);">four steps</a>, and they're at the bottom of this page.</p>
+
+      <!-- For this machine — filled in by the platform sniff at the bottom of the
+           page; stays hidden on phones and anything it can't read confidently. -->
+      <div id="for-you" hidden style="margin-top: 30px; max-width: 980px;">
+        <div style="background: linear-gradient(180deg, var(--surface), var(--bg-2)); border: 1px solid var(--accent-line); border-radius: 8px; padding: 20px 24px; box-shadow: 0 14px 40px -12px oklch(0.64 0.255 350 / 0.2); display: flex; align-items: center; gap: 18px; flex-wrap: wrap;">
+          <svg viewBox="0 0 256 256" aria-hidden="true" style="width: 46px; height: 46px; flex-shrink: 0; filter: drop-shadow(0 8px 18px oklch(0.64 0.255 350 / 0.35));">
+            <rect x="8" y="8" width="240" height="240" rx="56" fill="var(--accent)"></rect>
+            <g stroke="#ffffff" stroke-width="13" fill="none" stroke-linecap="round" opacity="0.9">
+              <path d="M128 74 L77 165 M128 74 L181 160 M77 165 L181 160"></path>
+            </g>
+            <circle cx="128" cy="72" r="27" fill="#ffffff"></circle>
+            <circle cx="76" cy="166" r="22" fill="#ffffff"></circle>
+            <circle cx="182" cy="160" r="22" fill="#ffffff"></circle>
+          </svg>
+          <div style="min-width: 0; flex: 1;">
+            <div style="font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px;">for this machine · best guess, everything else is below</div>
+            <div id="fy-name" style="font-family: var(--font-display); font-size: 24px; font-weight: 600; line-height: 1.1;"></div>
+            <div id="fy-meta" style="font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); margin-top: 7px;"></div>
+          </div>
+          <div style="display: flex; gap: 14px; align-items: center; flex-wrap: wrap;">
+            <a class="btn btn-primary" id="fy-btn" href="https://github.com/mrjeeves/AllMyStuff/releases/latest">Download</a>
+            <a id="fy-alt" hidden href="https://github.com/mrjeeves/AllMyStuff/releases/latest" style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent);"></a>
+          </div>
+        </div>
+      </div>
+
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr)); gap: 16px; margin-top: 30px; max-width: 980px;">
         <div class="cmd">
           <div class="head"><span>Linux · macOS — the one-liner</span><span>sh</span></div>
@@ -228,6 +254,41 @@
 </div>
 
 <script>
+(function () {
+  "use strict";
+  // "For this machine" — a best guess from the user agent, never load-bearing.
+  // Phones, ChromeOS, and anything ambiguous keep the card hidden; the asset
+  // upgrader below turns the button into a direct download when it can.
+  var box = document.getElementById("for-you");
+  if (!box) return;
+  var ua = navigator.userAgent || "";
+  if (/Android|iPhone|iPad|iPod|Mobile|CrOS/i.test(ua)) return;
+  if (/Macintosh/i.test(ua) && navigator.maxTouchPoints > 1) return; // iPad in a trenchcoat
+  var pick = null;
+  if (/Windows/i.test(ua)) {
+    pick = { name: "Windows", meta: "installer · setup.exe · windows 10 / 11 · x64", btn: "Download for Windows", end: "-setup.exe" };
+  } else if (/Macintosh|Mac OS X/i.test(ua)) {
+    pick = { name: "macOS", meta: ".dmg · apple silicon · macos 11+", btn: "Download for macOS", end: "_aarch64.dmg",
+             alt: { text: "Intel Mac? The x64 .dmg →", end: "_x64.dmg" } };
+  } else if (/Linux|X11/i.test(ua)) {
+    var arm = /aarch64|arm64/i.test(ua);
+    pick = { name: "Linux", meta: "appimage · " + (arm ? "arm64" : "x86_64") + " — or the one-liner below grabs the right build", btn: "Download for Linux", end: arm ? "_aarch64.AppImage" : "_amd64.AppImage" };
+  }
+  if (!pick) return;
+  document.getElementById("fy-name").textContent = pick.name;
+  document.getElementById("fy-meta").textContent = pick.meta;
+  var btn = document.getElementById("fy-btn");
+  btn.textContent = pick.btn;
+  btn.setAttribute("data-asset-end", pick.end);
+  if (pick.alt) {
+    var alt = document.getElementById("fy-alt");
+    alt.textContent = pick.alt.text;
+    alt.setAttribute("data-asset-end", pick.alt.end);
+    alt.hidden = false;
+  }
+  box.hidden = false;
+})();
+
 (function () {
   "use strict";
   // Progressive enhancement: resolve versioned asset links from the latest
