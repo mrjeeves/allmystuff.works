@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FAQ — reasonable questions · allmystuff.works</title>
+<meta name="description" content="Every reasonable question about allmystuff.works, answered plainly: how the app stays free, what the hardware is for, what a Concierge technician can see, what the Private Line buys you, and whether you're locked in. (No.)">
+<meta name="theme-color" content="#070711">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="icon" sizes="48x48 32x32 16x16" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="FAQ — reasonable questions">
+<meta property="og:description" content="How is the whole app free? Why hardware? What can a technician see? Am I locked in? Plain answers, grouped by pillar.">
+<meta property="og:url" content="https://allmystuff.works/faq/">
+<meta property="og:image" content="https://allmystuff.works/og.png">
+<link rel="stylesheet" href="../ds/cec/tokens/fonts.css">
+<link rel="stylesheet" href="../ds/cec/tokens/colors.css">
+<link rel="stylesheet" href="../ds/cec/tokens/typography.css">
+<link rel="stylesheet" href="../ds/cec/tokens/spacing.css">
+<link rel="stylesheet" href="../ds/cec/tokens/base.css">
+<link rel="stylesheet" href="../ds/cec/styles.css">
+<style>
+  body { margin: 0; background: oklch(0.135 0.022 285); }
+  .qa { display: grid; gap: 0; border-top: 1px solid var(--border); }
+  .qa details { border-bottom: 1px solid var(--border); padding: 4px 0; }
+  .qa summary { cursor: pointer; padding: 18px 4px; font-family: var(--font-display); font-size: 21px; font-weight: 600; list-style: none; display: flex; justify-content: space-between; align-items: baseline; gap: 14px; }
+  .qa summary::-webkit-details-marker { display: none; }
+  .qa summary::after { content: "+"; color: var(--accent); font-family: var(--font-mono); font-size: 16px; flex-shrink: 0; }
+  .qa details[open] summary::after { content: "–"; }
+  .qa p { padding: 0 4px 20px; color: var(--dim); line-height: 1.6; max-width: 68ch; }
+  .qa a { color: var(--accent); }
+  .group-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin: clamp(40px, 5vw, 56px) 0 18px; }
+  .group-head:first-of-type { margin-top: 0; }
+  .group-head h2 { font-size: var(--display-s); }
+  .group-head .pillar { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); }
+  .group-head .pillar a { color: var(--accent); }
+</style>
+</head>
+<body>
+<div style="min-height: 100vh; background: var(--bg); color: var(--text); font-family: var(--font-body); overflow-x: clip;">
+
+  <!-- ════════ NAV ════════ -->
+  <nav style="position: sticky; top: 0; z-index: 50; background: oklch(0.135 0.022 285 / 0.74); backdrop-filter: blur(14px) saturate(1.2); border-bottom: 1px solid var(--border);">
+    <div class="wrap" style="display: flex; align-items: center; justify-content: space-between; height: 66px; gap: 18px;">
+      <a href="../" style="display: flex; align-items: center; gap: 11px;">
+        <svg viewBox="0 0 256 256" aria-hidden="true" style="width: 30px; height: 30px; color: var(--accent);">
+          <g stroke="currentColor" stroke-width="13" fill="none" stroke-linecap="round">
+            <path d="M128 74 L77 165 M128 74 L181 160 M77 165 L181 160"></path>
+          </g>
+          <circle cx="128" cy="72" r="27" fill="currentColor"></circle>
+          <circle cx="76" cy="166" r="22" fill="currentColor"></circle>
+          <circle cx="182" cy="160" r="22" fill="currentColor"></circle>
+        </svg>
+        <span style="font-family: var(--font-display); font-weight: 700; font-size: 20px; letter-spacing: 0.01em;">allmystuff<span style="color: var(--dim); font-weight: 500;">.works</span></span>
+      </a>
+      <div style="display: flex; gap: 22px; align-items: center;">
+        <a href="../software/" style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim);">The software</a>
+        <a href="../hardware/" style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim);">The hardware</a>
+        <a href="../service/" style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim);">The service</a>
+        <a href="./" style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text); border-bottom: 2px solid var(--accent); padding-bottom: 2px;">FAQ</a>
+      </div>
+      <div style="display: flex; gap: 12px; align-items: center;">
+        <span class="chip"><span class="dot"></span>Open source</span>
+        <a class="btn btn-primary btn-sm" href="../download/">Download free</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ════════ HERO ════════ -->
+  <header style="position: relative; padding: clamp(48px, 6vw, 84px) 0 clamp(32px, 4vw, 48px); overflow: hidden;">
+    <div class="grid-bg"></div>
+    <div class="glow" style="width: 460px; height: 400px; right: -8%; top: -22%; background: var(--accent); opacity: 0.10;"></div>
+    <div class="wrap" style="position: relative; z-index: 2; max-width: min(880px, 92vw);">
+      <span class="eyebrow no-rule">FAQ · answered plainly, grouped by pillar</span>
+      <h1 style="font-family: var(--font-display); font-weight: 700; font-size: clamp(40px, 5.4vw, 76px); line-height: 1.02; letter-spacing: -0.01em; margin: 20px 0 18px; text-wrap: pretty;">Reasonable questions.</h1>
+      <p class="lede">Everything people actually ask about the software, the hardware, and the service. Something missing? <a href="mailto:hello@allmystuff.works" style="color: var(--accent);">hello@allmystuff.works</a> — a human reads it.</p>
+    </div>
+  </header>
+
+  <!-- ════════ QUESTIONS ════════ -->
+  <section class="section" style="padding-top: 0;">
+    <div class="wrap" style="max-width: min(880px, 92vw);">
+
+      <!-- Pillar 01 · The software -->
+      <div class="group-head">
+        <h2>The software</h2>
+        <span class="pillar">pillar 01 · <a href="../software/">its page →</a></span>
+      </div>
+      <div class="qa">
+        <details>
+          <summary>How is the whole app free?</summary>
+          <p>Because it runs on your hardware, not ours. We sell hardware — the Access line, and CEC's custom builds — and two services: a real technician's time by the minute, and a Private Line for people who want relay servers of their own. The app, the mesh, and the always-on 1 Mbps relay cost us almost nothing per user, so we don't bill for them.</p>
+        </details>
+        <details>
+          <summary>Is this a VPN? A Tailscale?</summary>
+          <p>Same itch, different animal. A VPN answers "how do my machines reach each other?" by building a network — a subnet with IPs, ports, and rules to manage. This mesh answers it with routes: your devices carry capabilities (a screen, a shell, a folder), and the graph connects exactly the pairs you've granted, for exactly as long as a route is live. The Private Line runs that introduction layer on servers of your own — VPN-grade exclusivity, on a mesh that was already private by design.</p>
+        </details>
+        <details>
+          <summary>How private is "private"?</summary>
+          <p>Streams travel directly between your devices, encrypted end to end — keys live on your machines, not on a server. When a relay has to carry traffic, it passes data it can't decrypt. A Concierge session starts with your approval, shows only what you approved, and we can see <em>that</em> a session happened (for billing), not what was on it.</p>
+        </details>
+        <details>
+          <summary>What happens if my internet goes out?</summary>
+          <p>Your devices are on your local network, so they keep talking to each other — consoles, terminals, files, all of it. You lose reach from outside the house and you lose Summon, and both come back the moment the internet does.</p>
+        </details>
+        <details>
+          <summary>Am I locked in?</summary>
+          <p>No. The code is MIT-licensed, the introduction servers are settings you can point at your own box, and any hardware you buy keeps working without us. Cancel everything and every device keeps running the app. Your data never lived on our side to begin with.</p>
+        </details>
+      </div>
+
+      <!-- Pillar 02 · The hardware -->
+      <div class="group-head">
+        <h2>The hardware</h2>
+        <span class="pillar">pillar 02 · <a href="../hardware/">its page →</a></span>
+      </div>
+      <div class="qa">
+        <details>
+          <summary>Why would I need the hardware if the software is free?</summary>
+          <p>The software needs a live OS to run on. The Access line is for the days there isn't one — crashed, frozen, stuck in BIOS, or refusing to boot. A witness watches the machine's video signal and presses its buttons, so it stays on your graph with its OS gone. <a href="../hardware/">Watch it save a machine.</a></p>
+        </details>
+        <details>
+          <summary>Do the Access boxes work without the app?</summary>
+          <p>Yes. Each one runs CEC's open-source firmware fork and stands on its own as an out-of-band console. The app is what puts it on the same graph as everything else you own — but no subscription, account, or cloud is ever required to use hardware you bought.</p>
+        </details>
+      </div>
+
+      <!-- Pillar 03 · The service -->
+      <div class="group-head">
+        <h2>The service</h2>
+        <span class="pillar">pillar 03 · <a href="../service/">its page →</a></span>
+      </div>
+      <div class="qa">
+        <details>
+          <summary>What can a Concierge technician actually see and do?</summary>
+          <p>Only what you approve, only while you allow it. A session starts with your explicit yes, shows just what you approved, is logged end to end, and you can watch live or pull the plug mid-session. $25 per 15 minutes, $20 with a plan — by invitation while we grow the team. <a href="../service/#concierge">The three ways to pay.</a></p>
+        </details>
+        <details>
+          <summary>What exactly is the Private Line?</summary>
+          <p>Normally your mesh introduces itself through our shared servers, with a free 1 Mbps relay when a direct path is blocked. The Private Line is that whole layer, dedicated to you: your own signaling, STUN, and TURN servers at 1 Gbps with unlimited bandwidth, serving your devices and nobody else's. $10 a month, cancel anytime, and the free shared layer is always there underneath. <a href="../service/#private-line">Compare it to the free layer.</a></p>
+        </details>
+      </div>
+
+      <!-- Still curious -->
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-top: clamp(40px, 5vw, 56px); padding-top: 24px; border-top: 1px solid var(--border);">
+        <p style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); margin: 0;">Still curious? The code answers everything the copy doesn't.</p>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+          <a class="btn btn-ghost btn-sm" href="https://github.com/mrjeeves/AllMyStuff">Read the source <span aria-hidden="true">→</span></a>
+          <a class="btn btn-ghost btn-sm" href="mailto:hello@allmystuff.works">Email a human</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ FOOTER ════════ -->
+  <footer style="border-top: 1px solid var(--border); padding: clamp(36px, 4vw, 52px) 0 32px;">
+    <div class="wrap" style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <img src="../assets/cec-logo.png" alt="Critical Error Computing" style="height: 26px; width: auto;">
+        <span style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);">A Critical Error Computing product · Humble, TX</span>
+      </div>
+      <div style="display: flex; gap: 18px; flex-wrap: wrap;">
+        <a href="../" style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim);">allmystuff.works</a>
+        <a href="../download/" style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim);">Download the app</a>
+        <a href="https://github.com/mrjeeves/AllMyStuff" style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim);">GitHub</a>
+      </div>
+      <span style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);">© 2026 allmystuff.works · MIT</span>
+    </div>
+  </footer>
+</div>
+</body>
+</html>

@@ -10,8 +10,16 @@ Static site, no build step.
 
 ## Layout
 
-- `index.html` — the homepage (uses `support.js`, the x-dc runtime).
-- `hardware/` — the Access line page: OS-down recovery demo, wiring diagram, full specs. Plain HTML + vanilla JS, no framework.
+The site is organized around the three pillars — powerful free software,
+affordable hardware, excellent support staff — each with a page of its own.
+The homepage is the overview/connector: hero, the three pillars, one teaser
+per pillar, download, and the top three FAQs with a "More questions" link.
+
+- `index.html` — the homepage/overview (uses `support.js`, the x-dc runtime).
+- `software/` — pillar 01, the free app: the four scenes (console, shell + files, sharing, fleet) and the graph/mesh explainer. Plain HTML.
+- `hardware/` — pillar 02, the Access line: OS-down recovery demo, wiring diagram, full specs. Plain HTML + vanilla JS, no framework.
+- `service/` — pillar 03, two services / four products: Concierge with its three options (Pay as you go, Priority, Looked after) and the Private Line, compared against the free shared layer. Plain HTML.
+- `faq/` — every question, grouped by pillar.
 - `download/` — downloads for every platform. Static links to `releases/latest`; a small script upgrades them to direct versioned asset URLs via the GitHub API when reachable.
 - `install.sh` / `install.ps1` — the one-liner URLs the site advertises (`curl -fsSL https://allmystuff.works/install.sh | sh`). They are thin stubs that fetch and run the canonical installers maintained in the app repo (`AllMyStuff/scripts/install.{sh,ps1}`), forwarding all flags — one source of truth, zero drift.
 
