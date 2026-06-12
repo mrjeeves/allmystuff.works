@@ -77,6 +77,28 @@
   .spec-row .v.none { color: var(--faint); }
   .spec-row.head .v { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
   .spec-note { padding: 11px 16px; border-top: 1px solid var(--border); font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); }
+
+  /* ---- Latency demo ---- */
+  .lat-demo { border: 1px solid var(--border); border-radius: 6px; padding: 18px 18px 20px; background: var(--bg-2); cursor: crosshair; touch-action: none; }
+  .lat-legend { display: flex; justify-content: center; gap: 22px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; color: var(--faint); margin-bottom: 14px; flex-wrap: wrap; }
+  .lat-legend i { font-style: normal; display: inline-flex; align-items: center; gap: 6px; }
+  .lat-legend .ring { width: 11px; height: 11px; border-radius: 50%; border: 2px solid var(--dim); }
+  .lat-legend .blob { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); }
+  .lat-panels { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 620px) { .lat-panels { grid-template-columns: 1fr; } }
+  .lat-tag { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 9px; }
+  .lat-tag b { font-family: var(--font-display); font-size: 19px; font-weight: 600; }
+  .lat-tag span { font-family: var(--font-mono); font-size: 12px; }
+  .lat-panel.std .lat-tag span { color: var(--warn); }
+  .lat-panel.pro .lat-tag span { color: var(--ok); }
+  .lat-stage { position: relative; height: 168px; border-radius: 5px; overflow: hidden; background-color: #07080c; background-image: linear-gradient(oklch(0.4 0.04 285 / 0.18) 1px, transparent 1px), linear-gradient(90deg, oklch(0.4 0.04 285 / 0.18) 1px, transparent 1px); background-size: 26px 26px; }
+  .lat-line { position: absolute; height: 2px; transform-origin: left center; pointer-events: none; opacity: 0.5; }
+  .lat-panel.std .lat-line { background: var(--warn); }
+  .lat-panel.pro .lat-line { background: var(--ok); }
+  .lat-true { position: absolute; width: 16px; height: 16px; border-radius: 50%; border: 2px solid var(--text); transform: translate(-50%, -50%); pointer-events: none; }
+  .lat-ghost { position: absolute; width: 17px; height: 17px; border-radius: 50%; transform: translate(-50%, -50%); pointer-events: none; }
+  .lat-panel.std .lat-ghost { background: var(--warn); box-shadow: 0 0 14px var(--warn); }
+  .lat-panel.pro .lat-ghost { background: var(--ok); box-shadow: 0 0 14px var(--ok); }
 </style>
 </head>
 <body>
@@ -230,6 +252,43 @@
           </g>
         </svg>
       </div>
+    </div>
+  </section>
+
+  <!-- ════════ LATENCY ════════ -->
+  <section id="latency" class="section" style="padding-top: 0;">
+    <div class="wrap">
+      <div style="max-width: 840px; margin-bottom: clamp(36px, 4vw, 52px);">
+        <span class="eyebrow">Feel it · live in your browser</span>
+        <h2 class="display-l" style="margin: 16px 0 18px;">Latency is the difference between watching and driving.</h2>
+        <p class="lede">Move your cursor across the panels. The hollow ring is your hand; the glowing dot is what the remote screen would show. Standard capture answers a beat behind — Pro stays glued to you.</p>
+      </div>
+      <div class="lat-demo" id="lat-demo">
+        <div class="lat-legend">
+          <i><span class="ring"></span>your cursor</i>
+          <i><span class="blob"></span>what the remote screen shows</i>
+          <i style="color: var(--dim);">move your cursor across the panels →</i>
+        </div>
+        <div class="lat-panels">
+          <div class="lat-panel std">
+            <div class="lat-tag"><b>Standard</b><span>90–230 ms</span></div>
+            <div class="lat-stage" data-lat="150">
+              <span class="lat-line"></span>
+              <span class="lat-ghost"></span>
+              <span class="lat-true"></span>
+            </div>
+          </div>
+          <div class="lat-panel pro">
+            <div class="lat-tag"><b>Pro</b><span>20–30 ms</span></div>
+            <div class="lat-stage" data-lat="28">
+              <span class="lat-line"></span>
+              <span class="lat-ghost"></span>
+              <span class="lat-true"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="kicker-tag" style="display: block; text-align: center; margin-top: 16px; opacity: 0.8;">standard capture · access cube &amp; internal — pro capture · internal pro &amp; access pro</p>
     </div>
   </section>
 
@@ -569,6 +628,64 @@
     timer = setTimeout(next, 200);
   }
   idle();
+})();
+
+(function () {
+  "use strict";
+  // Latency demo — the ghost dot replays your cursor from `data-lat` ms ago.
+  var demo = document.getElementById("lat-demo");
+  if (!demo) return;
+  var hover = false;
+  var src = { x: 0.5, y: 0.5 };
+  var hist = [];
+  var panels = [];
+  demo.querySelectorAll(".lat-stage").forEach(function (el) {
+    panels.push({
+      lat: Number(el.getAttribute("data-lat")) || 0,
+      stage: el,
+      trueEl: el.querySelector(".lat-true"),
+      ghostEl: el.querySelector(".lat-ghost"),
+      lineEl: el.querySelector(".lat-line")
+    });
+  });
+  demo.addEventListener("pointerenter", function () { hover = true; });
+  demo.addEventListener("pointerleave", function () { hover = false; });
+  demo.addEventListener("pointermove", function (e) {
+    var r = demo.getBoundingClientRect();
+    src.x = Math.max(0, Math.min(1, (e.clientX - r.left) / r.width));
+    src.y = Math.max(0, Math.min(1, (e.clientY - r.top) / r.height));
+  });
+  var t0 = performance.now();
+  function loop(t) {
+    var x, y;
+    if (hover) { x = src.x; y = src.y; }
+    else {
+      var s = (t - t0) / 1000;
+      x = 0.5 + 0.40 * Math.sin(s * 1.5);
+      y = 0.5 + 0.16 * Math.sin(s * 2.3 + 1);
+    }
+    hist.push({ t: t, x: x, y: y });
+    if (hist.length > 320) hist.shift();
+    panels.forEach(function (p) {
+      p.trueEl.style.left = x * 100 + "%";
+      p.trueEl.style.top = y * 100 + "%";
+      var tt = t - p.lat;
+      var q = hist[0];
+      for (var i = hist.length - 1; i >= 0; i--) {
+        if (hist[i].t <= tt) { q = hist[i]; break; }
+      }
+      p.ghostEl.style.left = q.x * 100 + "%";
+      p.ghostEl.style.top = q.y * 100 + "%";
+      var w = p.stage.clientWidth, h = p.stage.clientHeight;
+      var dx = (x - q.x) * w, dy = (y - q.y) * h;
+      p.lineEl.style.left = q.x * 100 + "%";
+      p.lineEl.style.top = q.y * 100 + "%";
+      p.lineEl.style.width = Math.hypot(dx, dy) + "px";
+      p.lineEl.style.transform = "rotate(" + Math.atan2(dy, dx) + "rad)";
+    });
+    window.requestAnimationFrame(loop);
+  }
+  window.requestAnimationFrame(loop);
 })();
 </script>
 </body>
