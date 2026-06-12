@@ -33,6 +33,20 @@
   .cmd .body { padding: 15px 16px; font-family: var(--font-mono); font-size: 13px; color: var(--text); overflow-x: auto; white-space: nowrap; }
   .cmd .body .p { color: var(--faint); }
   .note { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); line-height: 1.7; }
+
+  /* ---- Install tabs + copy buttons (the myownmesh.net wiring) ---- */
+  #oneliner { margin-top: 30px; max-width: 980px; }
+  #for-you:not([hidden]) + #oneliner { margin-top: 16px; }
+  .term-tab { appearance: none; background: none; border: none; border-bottom: 2px solid transparent; cursor: pointer; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); padding: 11px 13px 9px; }
+  .term-tab:hover { color: var(--dim); }
+  .term-tab[aria-selected="true"] { color: var(--text); border-bottom-color: var(--accent); }
+  .term-tab[aria-selected="true"]:hover { color: var(--text); }
+  .snippet { display: none; position: relative; }
+  .snippet.active { display: block; }
+  .snippet .body { padding-right: 96px; }
+  .copy-btn { position: absolute; top: 50%; right: 10px; transform: translateY(-50%); appearance: none; background: var(--surface); border: 1px solid var(--border); border-radius: 3px; cursor: pointer; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim); padding: 5px 11px; transition: color var(--dur-fast) ease, border-color var(--dur-fast) ease; }
+  .copy-btn:hover { color: var(--text); border-color: var(--border-bright); }
+  .copy-btn.copied { color: var(--ok); border-color: var(--ok); }
 </style>
 </head>
 <body>
@@ -98,14 +112,28 @@
         </div>
       </div>
 
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr)); gap: 16px; margin-top: 30px; max-width: 980px;">
-        <div class="cmd">
-          <div class="head"><span>Linux · macOS — the one-liner</span><span>sh</span></div>
-          <div class="body"><span class="p">$</span> curl -fsSL https://allmystuff.works/install.sh | sh</div>
+      <!-- The one-liner — tabs default to this machine's platform, every snippet
+           carries its own copy button. Same wiring as myownmesh.net. -->
+      <div id="oneliner" class="cmd">
+        <div class="head" style="padding: 0 14px 0 0; flex-wrap: wrap;">
+          <div role="tablist" aria-label="Pick your install method" style="display: flex;">
+            <button type="button" class="term-tab" data-os="unix" role="tab" aria-selected="true">macOS / Linux</button>
+            <button type="button" class="term-tab" data-os="windows" role="tab" aria-selected="false">Windows</button>
+            <button type="button" class="term-tab" data-os="source" role="tab" aria-selected="false">From source</button>
+          </div>
+          <span>picked for this machine</span>
         </div>
-        <div class="cmd">
-          <div class="head"><span>Windows — the one-liner</span><span>powershell</span></div>
+        <div class="snippet active" data-os="unix" role="tabpanel" aria-label="macOS / Linux install command">
+          <div class="body"><span class="p">$</span> curl -fsSL https://allmystuff.works/install.sh | sh</div>
+          <button type="button" class="copy-btn" data-copy="curl -fsSL https://allmystuff.works/install.sh | sh" aria-label="Copy install command">copy</button>
+        </div>
+        <div class="snippet" data-os="windows" role="tabpanel" aria-label="Windows install command">
           <div class="body"><span class="p">PS&gt;</span> irm https://allmystuff.works/install.ps1 | iex</div>
+          <button type="button" class="copy-btn" data-copy="irm https://allmystuff.works/install.ps1 | iex" aria-label="Copy install command">copy</button>
+        </div>
+        <div class="snippet" data-os="source" role="tabpanel" aria-label="Build from source">
+          <div class="body"><span class="p">$</span> git clone https://github.com/mrjeeves/AllMyStuff<br><span class="p">$</span> cd AllMyStuff<br><span class="p">$</span> cargo install --path crates/allmystuff-cli</div>
+          <button type="button" class="copy-btn" data-copy="git clone https://github.com/mrjeeves/AllMyStuff&#10;cd AllMyStuff&#10;cargo install --path crates/allmystuff-cli" aria-label="Copy build commands">copy</button>
         </div>
       </div>
       <p class="note" style="margin-top: 14px;">Piping the internet into a shell deserves suspicion — <a href="#script" style="color: var(--accent);">here's exactly what the script does</a>, and <a href="https://github.com/mrjeeves/AllMyStuff/blob/main/scripts/install.sh" style="color: var(--accent);">its source, maintained in the app repo</a>.</p>
@@ -198,7 +226,10 @@
         <p style="font-size: 15px; color: var(--dim); line-height: 1.6; margin-bottom: 16px;">Every portable archive has a <code style="font-family: var(--font-mono); font-size: 13px;">.sha256</code> sidecar in the release. Two commands, any platform:</p>
         <div class="cmd" style="margin-bottom: 10px;">
           <div class="head"><span>verify a download</span><span>sh</span></div>
-          <div class="body"><span class="p">$</span> curl -fsSLO https://github.com/mrjeeves/AllMyStuff/releases/latest/download/allmystuff-linux-x86_64.tar.gz.sha256<br><span class="p">$</span> sha256sum -c allmystuff-linux-x86_64.tar.gz.sha256</div>
+          <div class="snippet active">
+            <div class="body"><span class="p">$</span> curl -fsSLO https://github.com/mrjeeves/AllMyStuff/releases/latest/download/allmystuff-linux-x86_64.tar.gz.sha256<br><span class="p">$</span> sha256sum -c allmystuff-linux-x86_64.tar.gz.sha256</div>
+            <button type="button" class="copy-btn" data-copy="curl -fsSLO https://github.com/mrjeeves/AllMyStuff/releases/latest/download/allmystuff-linux-x86_64.tar.gz.sha256&#10;sha256sum -c allmystuff-linux-x86_64.tar.gz.sha256" aria-label="Copy verify commands">copy</button>
+          </div>
         </div>
         <p class="note">macOS: use `shasum -a 256 -c`. Windows: `Get-FileHash` and compare. The source for every build is <a href="https://github.com/mrjeeves/AllMyStuff" style="color: var(--accent);">on GitHub</a> — MIT, build it yourself if you'd rather.</p>
       </div>
@@ -287,6 +318,65 @@
     alt.hidden = false;
   }
   box.hidden = false;
+})();
+
+(function () {
+  "use strict";
+  // Install tabs + copy buttons — the same wiring myownmesh.net uses:
+  // tabs carry data-os and default to this machine's platform; every
+  // snippet's copy button carries its exact command in data-copy.
+  function wireInstallTabs() {
+    var tabs = document.querySelectorAll(".term-tab");
+    var snips = document.querySelectorAll(".snippet[data-os]");
+    if (!tabs.length) return;
+    function activate(os) {
+      tabs.forEach(function (t) {
+        t.setAttribute("aria-selected", t.dataset.os === os ? "true" : "false");
+      });
+      snips.forEach(function (s) { s.classList.toggle("active", s.dataset.os === os); });
+    }
+    tabs.forEach(function (t) {
+      t.addEventListener("click", function () { activate(t.dataset.os); });
+    });
+    var ua = (navigator.userAgentData && navigator.userAgentData.platform) || navigator.platform || navigator.userAgent || "";
+    activate(/win/i.test(ua) ? "windows" : "unix");
+  }
+  function wireCopyButtons() {
+    function fallback(text) {
+      var ta = document.createElement("textarea");
+      ta.value = text;
+      ta.style.cssText = "position:fixed;top:-9999px";
+      document.body.appendChild(ta);
+      ta.select();
+      var ok = false;
+      try { ok = document.execCommand("copy"); } catch (e) {}
+      ta.remove();
+      return ok;
+    }
+    document.querySelectorAll(".copy-btn").forEach(function (btn) {
+      btn.dataset.label = btn.textContent;
+      btn.addEventListener("click", function () {
+        var text = btn.dataset.copy || "";
+        if (!text) return;
+        var finish = function (ok) {
+          btn.textContent = ok ? "copied" : "press ⌘C";
+          btn.classList.add("copied");
+          clearTimeout(btn._copyTimer);
+          btn._copyTimer = setTimeout(function () {
+            btn.textContent = btn.dataset.label;
+            btn.classList.remove("copied");
+          }, 1500);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(function () { finish(true); }, function () { finish(fallback(text)); });
+        } else {
+          finish(fallback(text));
+        }
+      });
+    });
+  }
+  wireInstallTabs();
+  wireCopyButtons();
 })();
 
 (function () {
