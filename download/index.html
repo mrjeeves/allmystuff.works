@@ -33,6 +33,20 @@
   .cmd .body { padding: 15px 16px; font-family: var(--font-mono); font-size: 13px; color: var(--text); overflow-x: auto; white-space: nowrap; }
   .cmd .body .p { color: var(--faint); }
   .note { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); line-height: 1.7; }
+
+  /* ---- Install tabs + copy buttons (the myownmesh.net wiring) ---- */
+  #oneliner { margin-top: 30px; max-width: 980px; }
+  #for-you:not([hidden]) + #oneliner { margin-top: 16px; }
+  .term-tab { appearance: none; background: none; border: none; border-bottom: 2px solid transparent; cursor: pointer; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); padding: 11px 13px 9px; }
+  .term-tab:hover { color: var(--dim); }
+  .term-tab[aria-selected="true"] { color: var(--text); border-bottom-color: var(--accent); }
+  .term-tab[aria-selected="true"]:hover { color: var(--text); }
+  .snippet { display: none; position: relative; }
+  .snippet.active { display: block; }
+  .snippet .body { padding-right: 96px; }
+  .copy-btn { position: absolute; top: 50%; right: 10px; transform: translateY(-50%); appearance: none; background: var(--surface); border: 1px solid var(--border); border-radius: 3px; cursor: pointer; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim); padding: 5px 11px; transition: color var(--dur-fast) ease, border-color var(--dur-fast) ease; }
+  .copy-btn:hover { color: var(--text); border-color: var(--border-bright); }
+  .copy-btn.copied { color: var(--ok); border-color: var(--ok); }
 </style>
 </head>
 <body>
@@ -72,14 +86,54 @@
       <span class="eyebrow no-rule">Download · free forever · MIT licensed · no account required</span>
       <h1 style="font-family: var(--font-display); font-weight: 700; font-size: clamp(40px, 5.4vw, 76px); line-height: 1.02; letter-spacing: -0.01em; margin: 20px 0 18px; text-wrap: pretty;">Install. Join. Claim. Access your stuff.</h1>
       <p class="lede" style="max-width: 62ch;">Every download below is the full thing — every feature, every device, $0. The whole flow is <a href="#after" style="color: var(--accent);">four steps</a>, and they're at the bottom of this page.</p>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr)); gap: 16px; margin-top: 30px; max-width: 980px;">
-        <div class="cmd">
-          <div class="head"><span>Linux · macOS — the one-liner</span><span>sh</span></div>
-          <div class="body"><span class="p">$</span> curl -fsSL https://allmystuff.works/install.sh | sh</div>
+
+      <!-- For this machine — filled in by the platform sniff at the bottom of the
+           page; stays hidden on phones and anything it can't read confidently. -->
+      <div id="for-you" hidden style="margin-top: 30px; max-width: 980px;">
+        <div style="background: linear-gradient(180deg, var(--surface), var(--bg-2)); border: 1px solid var(--accent-line); border-radius: 8px; padding: 20px 24px; box-shadow: 0 14px 40px -12px oklch(0.64 0.255 350 / 0.2); display: flex; align-items: center; gap: 18px; flex-wrap: wrap;">
+          <svg viewBox="0 0 256 256" aria-hidden="true" style="width: 46px; height: 46px; flex-shrink: 0; filter: drop-shadow(0 8px 18px oklch(0.64 0.255 350 / 0.35));">
+            <rect x="8" y="8" width="240" height="240" rx="56" fill="var(--accent)"></rect>
+            <g stroke="#ffffff" stroke-width="13" fill="none" stroke-linecap="round" opacity="0.9">
+              <path d="M128 74 L77 165 M128 74 L181 160 M77 165 L181 160"></path>
+            </g>
+            <circle cx="128" cy="72" r="27" fill="#ffffff"></circle>
+            <circle cx="76" cy="166" r="22" fill="#ffffff"></circle>
+            <circle cx="182" cy="160" r="22" fill="#ffffff"></circle>
+          </svg>
+          <div style="min-width: 0; flex: 1;">
+            <div style="font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px;">for this machine · best guess, everything else is below</div>
+            <div id="fy-name" style="font-family: var(--font-display); font-size: 24px; font-weight: 600; line-height: 1.1;"></div>
+            <div id="fy-meta" style="font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); margin-top: 7px;"></div>
+          </div>
+          <div style="display: flex; gap: 14px; align-items: center; flex-wrap: wrap;">
+            <a class="btn btn-primary" id="fy-btn" href="https://github.com/mrjeeves/AllMyStuff/releases/latest">Download</a>
+            <a id="fy-alt" hidden href="https://github.com/mrjeeves/AllMyStuff/releases/latest" style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent);"></a>
+          </div>
         </div>
-        <div class="cmd">
-          <div class="head"><span>Windows — the one-liner</span><span>powershell</span></div>
+      </div>
+
+      <!-- The one-liner — tabs default to this machine's platform, every snippet
+           carries its own copy button. Same wiring as myownmesh.net. -->
+      <div id="oneliner" class="cmd">
+        <div class="head" style="padding: 0 14px 0 0; flex-wrap: wrap;">
+          <div role="tablist" aria-label="Pick your install method" style="display: flex;">
+            <button type="button" class="term-tab" data-os="unix" role="tab" aria-selected="true">macOS / Linux</button>
+            <button type="button" class="term-tab" data-os="windows" role="tab" aria-selected="false">Windows</button>
+            <button type="button" class="term-tab" data-os="source" role="tab" aria-selected="false">From source</button>
+          </div>
+          <span>picked for this machine</span>
+        </div>
+        <div class="snippet active" data-os="unix" role="tabpanel" aria-label="macOS / Linux install command">
+          <div class="body"><span class="p">$</span> curl -fsSL https://allmystuff.works/install.sh | sh</div>
+          <button type="button" class="copy-btn" data-copy="curl -fsSL https://allmystuff.works/install.sh | sh" aria-label="Copy install command">copy</button>
+        </div>
+        <div class="snippet" data-os="windows" role="tabpanel" aria-label="Windows install command">
           <div class="body"><span class="p">PS&gt;</span> irm https://allmystuff.works/install.ps1 | iex</div>
+          <button type="button" class="copy-btn" data-copy="irm https://allmystuff.works/install.ps1 | iex" aria-label="Copy install command">copy</button>
+        </div>
+        <div class="snippet" data-os="source" role="tabpanel" aria-label="Build from source">
+          <div class="body"><span class="p">$</span> git clone https://github.com/mrjeeves/AllMyStuff<br><span class="p">$</span> cd AllMyStuff<br><span class="p">$</span> cargo install --path crates/allmystuff-cli</div>
+          <button type="button" class="copy-btn" data-copy="git clone https://github.com/mrjeeves/AllMyStuff&#10;cd AllMyStuff&#10;cargo install --path crates/allmystuff-cli" aria-label="Copy build commands">copy</button>
         </div>
       </div>
       <p class="note" style="margin-top: 14px;">Piping the internet into a shell deserves suspicion — <a href="#script" style="color: var(--accent);">here's exactly what the script does</a>, and <a href="https://github.com/mrjeeves/AllMyStuff/blob/main/scripts/install.sh" style="color: var(--accent);">its source, maintained in the app repo</a>.</p>
@@ -172,7 +226,10 @@
         <p style="font-size: 15px; color: var(--dim); line-height: 1.6; margin-bottom: 16px;">Every portable archive has a <code style="font-family: var(--font-mono); font-size: 13px;">.sha256</code> sidecar in the release. Two commands, any platform:</p>
         <div class="cmd" style="margin-bottom: 10px;">
           <div class="head"><span>verify a download</span><span>sh</span></div>
-          <div class="body"><span class="p">$</span> curl -fsSLO https://github.com/mrjeeves/AllMyStuff/releases/latest/download/allmystuff-linux-x86_64.tar.gz.sha256<br><span class="p">$</span> sha256sum -c allmystuff-linux-x86_64.tar.gz.sha256</div>
+          <div class="snippet active">
+            <div class="body"><span class="p">$</span> curl -fsSLO https://github.com/mrjeeves/AllMyStuff/releases/latest/download/allmystuff-linux-x86_64.tar.gz.sha256<br><span class="p">$</span> sha256sum -c allmystuff-linux-x86_64.tar.gz.sha256</div>
+            <button type="button" class="copy-btn" data-copy="curl -fsSLO https://github.com/mrjeeves/AllMyStuff/releases/latest/download/allmystuff-linux-x86_64.tar.gz.sha256&#10;sha256sum -c allmystuff-linux-x86_64.tar.gz.sha256" aria-label="Copy verify commands">copy</button>
+          </div>
         </div>
         <p class="note">macOS: use `shasum -a 256 -c`. Windows: `Get-FileHash` and compare. The source for every build is <a href="https://github.com/mrjeeves/AllMyStuff" style="color: var(--accent);">on GitHub</a> — MIT, build it yourself if you'd rather.</p>
       </div>
@@ -228,6 +285,100 @@
 </div>
 
 <script>
+(function () {
+  "use strict";
+  // "For this machine" — a best guess from the user agent, never load-bearing.
+  // Phones, ChromeOS, and anything ambiguous keep the card hidden; the asset
+  // upgrader below turns the button into a direct download when it can.
+  var box = document.getElementById("for-you");
+  if (!box) return;
+  var ua = navigator.userAgent || "";
+  if (/Android|iPhone|iPad|iPod|Mobile|CrOS/i.test(ua)) return;
+  if (/Macintosh/i.test(ua) && navigator.maxTouchPoints > 1) return; // iPad in a trenchcoat
+  var pick = null;
+  if (/Windows/i.test(ua)) {
+    pick = { name: "Windows", meta: "installer · setup.exe · windows 10 / 11 · x64", btn: "Download for Windows", end: "-setup.exe" };
+  } else if (/Macintosh|Mac OS X/i.test(ua)) {
+    pick = { name: "macOS", meta: ".dmg · apple silicon · macos 11+", btn: "Download for macOS", end: "_aarch64.dmg",
+             alt: { text: "Intel Mac? The x64 .dmg →", end: "_x64.dmg" } };
+  } else if (/Linux|X11/i.test(ua)) {
+    var arm = /aarch64|arm64/i.test(ua);
+    pick = { name: "Linux", meta: "appimage · " + (arm ? "arm64" : "x86_64") + " — or the one-liner below grabs the right build", btn: "Download for Linux", end: arm ? "_aarch64.AppImage" : "_amd64.AppImage" };
+  }
+  if (!pick) return;
+  document.getElementById("fy-name").textContent = pick.name;
+  document.getElementById("fy-meta").textContent = pick.meta;
+  var btn = document.getElementById("fy-btn");
+  btn.textContent = pick.btn;
+  btn.setAttribute("data-asset-end", pick.end);
+  if (pick.alt) {
+    var alt = document.getElementById("fy-alt");
+    alt.textContent = pick.alt.text;
+    alt.setAttribute("data-asset-end", pick.alt.end);
+    alt.hidden = false;
+  }
+  box.hidden = false;
+})();
+
+(function () {
+  "use strict";
+  // Install tabs + copy buttons — the same wiring myownmesh.net uses:
+  // tabs carry data-os and default to this machine's platform; every
+  // snippet's copy button carries its exact command in data-copy.
+  function wireInstallTabs() {
+    var tabs = document.querySelectorAll(".term-tab");
+    var snips = document.querySelectorAll(".snippet[data-os]");
+    if (!tabs.length) return;
+    function activate(os) {
+      tabs.forEach(function (t) {
+        t.setAttribute("aria-selected", t.dataset.os === os ? "true" : "false");
+      });
+      snips.forEach(function (s) { s.classList.toggle("active", s.dataset.os === os); });
+    }
+    tabs.forEach(function (t) {
+      t.addEventListener("click", function () { activate(t.dataset.os); });
+    });
+    var ua = (navigator.userAgentData && navigator.userAgentData.platform) || navigator.platform || navigator.userAgent || "";
+    activate(/win/i.test(ua) ? "windows" : "unix");
+  }
+  function wireCopyButtons() {
+    function fallback(text) {
+      var ta = document.createElement("textarea");
+      ta.value = text;
+      ta.style.cssText = "position:fixed;top:-9999px";
+      document.body.appendChild(ta);
+      ta.select();
+      var ok = false;
+      try { ok = document.execCommand("copy"); } catch (e) {}
+      ta.remove();
+      return ok;
+    }
+    document.querySelectorAll(".copy-btn").forEach(function (btn) {
+      btn.dataset.label = btn.textContent;
+      btn.addEventListener("click", function () {
+        var text = btn.dataset.copy || "";
+        if (!text) return;
+        var finish = function (ok) {
+          btn.textContent = ok ? "copied" : "press ⌘C";
+          btn.classList.add("copied");
+          clearTimeout(btn._copyTimer);
+          btn._copyTimer = setTimeout(function () {
+            btn.textContent = btn.dataset.label;
+            btn.classList.remove("copied");
+          }, 1500);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(function () { finish(true); }, function () { finish(fallback(text)); });
+        } else {
+          finish(fallback(text));
+        }
+      });
+    });
+  }
+  wireInstallTabs();
+  wireCopyButtons();
+})();
+
 (function () {
   "use strict";
   // Progressive enhancement: resolve versioned asset links from the latest
