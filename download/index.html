@@ -82,7 +82,7 @@
           <div class="body"><span class="p">PS&gt;</span> irm https://allmystuff.works/install.ps1 | iex</div>
         </div>
       </div>
-      <p class="note" style="margin-top: 14px;">Piping the internet into a shell deserves suspicion — <a href="#script" style="color: var(--accent);">here's exactly what the script does</a>, and <a href="https://github.com/mrjeeves/allmystuff.works/blob/main/install.sh" style="color: var(--accent);">its source</a>.</p>
+      <p class="note" style="margin-top: 14px;">Piping the internet into a shell deserves suspicion — <a href="#script" style="color: var(--accent);">here's exactly what the script does</a>, and <a href="https://github.com/mrjeeves/AllMyStuff/blob/main/scripts/install.sh" style="color: var(--accent);">its source, maintained in the app repo</a>.</p>
     </div>
   </header>
 
@@ -147,7 +147,7 @@
           <div class="dl-row"><span>macOS <span class="meta">· arm / intel</span></span><span><a href="https://github.com/mrjeeves/AllMyStuff/releases/latest/download/allmystuff-macos-aarch64.tar.gz">arm</a> · <a href="https://github.com/mrjeeves/AllMyStuff/releases/latest/download/allmystuff-macos-x86_64.tar.gz">intel</a></span></div>
           <div class="dl-row"><span>Windows <span class="meta">· x64 zip</span></span><a href="https://github.com/mrjeeves/AllMyStuff/releases/latest/download/allmystuff-windows-x86_64.zip">Download</a></div>
         </div>
-        <p class="note" style="margin: 14px 0 0;">`curl -fsSL https://allmystuff.works/install.sh | sh -s -- --cli-only` installs just the CLI.</p>
+        <p class="note" style="margin: 14px 0 0;">`curl -fsSL https://allmystuff.works/install.sh | sh -s -- --no-gui` installs just the CLI — it skips the app and the mesh daemon.</p>
       </div>
     </div>
   </section>
@@ -159,12 +159,12 @@
         <span class="eyebrow">No surprises</span>
         <h2 class="display-m" style="margin: 14px 0 14px;">What the one-liner actually does.</h2>
         <ol style="display: grid; gap: 10px; font-size: 15px; color: var(--dim); line-height: 1.6; padding-left: 20px; margin: 0;">
-          <li>Detects your OS and CPU, and picks the matching build from the <a href="https://github.com/mrjeeves/AllMyStuff/releases/latest" style="color: var(--accent);">latest GitHub release</a> — nothing is hosted anywhere else.</li>
-          <li>Downloads it over HTTPS and <strong style="color: var(--text);">verifies the SHA-256 sidecar</strong> for every asset that publishes one (all portable archives do).</li>
-          <li>Linux: installs the AppImage to <code style="font-family: var(--font-mono); font-size: 13px;">~/.local/bin</code> and writes a desktop entry. macOS: unpacks the .app into <code style="font-family: var(--font-mono); font-size: 13px;">/Applications</code> (or <code style="font-family: var(--font-mono); font-size: 13px;">~/Applications</code>).</li>
-          <li>Installs the <code style="font-family: var(--font-mono); font-size: 13px;">allmystuff</code> CLI next to it and tells you if that directory isn't on your PATH.</li>
+          <li>Runs the <a href="https://github.com/mrjeeves/AllMyStuff/blob/main/scripts/install.sh" style="color: var(--accent);">canonical installer maintained in the app repo</a> — <code style="font-family: var(--font-mono); font-size: 13px;">allmystuff.works/install.sh</code> is just the short URL for it, so the site can't drift from what the app ships.</li>
+          <li>Detects your OS and CPU, then installs <strong style="color: var(--text);">both the <code style="font-family: var(--font-mono); font-size: 13px;">allmystuff</code> CLI and the desktop app</strong> from the <a href="https://github.com/mrjeeves/AllMyStuff/releases/latest" style="color: var(--accent);">latest GitHub release</a>, verifying every SHA-256 sidecar. No prebuilt for your platform? It builds from source with cargo.</li>
+          <li>Puts them on your PATH — <code style="font-family: var(--font-mono); font-size: 13px;">/usr/local/bin</code> when it's already writable (it never prompts for a password), else <code style="font-family: var(--font-mono); font-size: 13px;">~/.local/bin</code>. A bare <code style="font-family: var(--font-mono); font-size: 13px;">allmystuff</code> opens the app.</li>
+          <li>Makes sure the <code style="font-family: var(--font-mono); font-size: 13px;">myownmesh</code> daemon the live mesh runs on is in place — a recent one is used as-is, an old one updates itself, a missing one is installed and checksum-verified. <code style="font-family: var(--font-mono); font-size: 13px;">--no-mesh</code> leaves it alone; <code style="font-family: var(--font-mono); font-size: 13px;">--no-gui</code> skips the app on headless boxes.</li>
         </ol>
-        <p style="font-size: 15px; color: var(--dim); line-height: 1.6; margin: 16px 0 0;">No root, no telemetry, no account, nothing modified outside those directories. Uninstalling is deleting the files it printed.</p>
+        <p style="font-size: 15px; color: var(--dim); line-height: 1.6; margin: 16px 0 0;">No telemetry, no account. The portable app uses your system webview — for the full desktop integration (menu entry, icon, the daemon bundled inside the package) grab a .deb / .AppImage / .dmg / .msi above instead.</p>
       </div>
       <div>
         <span class="eyebrow">Verify anything</span>
