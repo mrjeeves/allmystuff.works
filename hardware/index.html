@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Access line — hardware that answers when the OS can't · allmystuff.works</title>
+<meta name="description" content="Small boxes that watch the video signal and press the buttons. A crashed, frozen, or unbootable machine stays on your graph — out of band, no apps installed on the PC. Pre-order, ships Summer 2026.">
+<meta name="theme-color" content="#070711">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="icon" sizes="48x48 32x32 16x16" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="The Access line — hardware that answers when the OS can't">
+<meta property="og:description" content="The witness that never goes dark: video in, fingers on the buttons, alive on standby power. Pre-order, ships Summer 2026.">
+<meta property="og:url" content="https://allmystuff.works/hardware/">
+<meta property="og:image" content="https://allmystuff.works/og.png">
+<link rel="stylesheet" href="../ds/cec/tokens/fonts.css">
+<link rel="stylesheet" href="../ds/cec/tokens/colors.css">
+<link rel="stylesheet" href="../ds/cec/tokens/typography.css">
+<link rel="stylesheet" href="../ds/cec/tokens/spacing.css">
+<link rel="stylesheet" href="../ds/cec/tokens/base.css">
+<link rel="stylesheet" href="../ds/cec/styles.css">
+<style>
+  body { margin: 0; background: oklch(0.135 0.022 285); }
+  @keyframes amsFlow { to { stroke-dashoffset: -30; } }
+  @keyframes amsBlink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+  @keyframes amsPulse { 0%, 100% { opacity: 0.55; } 50% { opacity: 1; } }
+  @keyframes amsScan { 0% { transform: translateY(-100%); } 100% { transform: translateY(100%); } }
+
+  /* ---- OS-down recovery demo ---- */
+  .demo-shell { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 18px; align-items: stretch; }
+  @media (max-width: 880px) { .demo-shell { grid-template-columns: 1fr; } }
+  .console { background: oklch(0.115 0.018 285); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; box-shadow: 0 30px 70px -40px rgb(0 0 0 / 0.85); display: flex; flex-direction: column; }
+  .console-bar { display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-bottom: 1px solid var(--border); }
+  .console-bar .lights { display: flex; gap: 6px; }
+  .console-bar .lights i { width: 8px; height: 8px; border-radius: 50%; display: block; opacity: 0.8; }
+  .console-bar .title { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .console-bar .corr { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); }
+  .console-body { padding: 14px 16px 16px; font-family: var(--font-mono); font-size: 12px; line-height: 1.5; min-height: 320px; display: flex; flex-direction: column; gap: 7px; }
+  .log-line { display: flex; gap: 10px; align-items: baseline; color: var(--dim); }
+  .log-line .t { color: var(--faint); font-size: 10.5px; min-width: 42px; text-align: right; flex-shrink: 0; }
+  .log-line .tag { font-size: 9.5px; letter-spacing: 0.08em; padding: 2px 7px; border-radius: 2px; background: var(--surface); color: var(--faint); min-width: 72px; text-align: center; flex-shrink: 0; }
+  .log-line.warn .tag { background: oklch(0.78 0.16 75 / 0.15); color: var(--warn); }
+  .log-line.crit .tag { background: var(--accent-soft); color: var(--accent); }
+  .log-line.ok .tag { background: oklch(0.80 0.17 150 / 0.15); color: var(--ok); }
+  .log-line b { color: var(--text); font-weight: 600; }
+  .cursor-blink { display: inline-block; width: 8px; height: 14px; background: var(--accent); animation: amsBlink 1.1s steps(1) infinite; }
+  .viewer { background: linear-gradient(180deg, var(--surface), var(--bg-2)); border: 1px solid var(--border); border-radius: 8px; padding: 14px; display: flex; flex-direction: column; gap: 12px; }
+  .viewer-head { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); }
+  .mini-screen { aspect-ratio: 16 / 9; border-radius: 4px; border: 1px solid var(--border); display: grid; place-items: center; text-align: center; background: linear-gradient(135deg, oklch(0.22 0.06 290), oklch(0.16 0.04 250) 55%, oklch(0.19 0.07 330)); font-family: var(--font-mono); position: relative; overflow: hidden; }
+  .mini-screen.bsod { background: oklch(0.45 0.16 255); color: white; }
+  .mini-screen.bsod .big { font-size: 34px; font-weight: 700; margin-bottom: 8px; font-family: var(--font-display); }
+  .mini-screen.bsod .stop { font-size: 9.5px; letter-spacing: 0.1em; }
+  .mini-screen.post { background: #000; color: #bbb; }
+  .mini-screen.nosig { background: #000; }
+  .mini-screen .nosig-txt { font-size: 11px; letter-spacing: 0.22em; color: var(--faint); animation: amsPulse 1.8s ease-in-out infinite; }
+  .state-row { display: flex; justify-content: space-between; gap: 10px; padding: 7px 2px; border-bottom: 1px solid var(--border); font-family: var(--font-mono); font-size: 10.5px; }
+  .state-row:last-child { border-bottom: none; }
+  .state-row .k { color: var(--faint); letter-spacing: 0.1em; text-transform: uppercase; }
+  .state-row .v { color: var(--text); }
+  .kicker-tag { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); }
+
+  /* ---- Devices + spec tables ---- */
+  .dev-chips { display: flex; gap: 7px; flex-wrap: wrap; }
+  .dev-chips span { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 9px; border: 1px solid var(--border); border-radius: 2px; color: var(--dim); }
+  .spec { border: 1px solid var(--border); border-radius: 6px; margin-top: 22px; overflow: hidden; }
+  .spec summary { cursor: pointer; list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 13px 16px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--dim); background: var(--surface); }
+  .spec summary::-webkit-details-marker { display: none; }
+  .spec summary::after { content: "+"; color: var(--accent); font-size: 14px; }
+  .spec[open] summary::after { content: "–"; }
+  .spec-row { display: grid; grid-template-columns: minmax(150px, 38%) 1fr; border-top: 1px solid var(--border); font-size: 13px; }
+  .spec-row.cols3 { grid-template-columns: minmax(150px, 38%) 1fr 1fr; }
+  .spec-row > div { padding: 9px 16px; }
+  .spec-row .k { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--faint); }
+  .spec-row .v { color: var(--dim); border-left: 1px solid var(--border); }
+  .spec-row .v.yes { color: var(--ok); }
+  .spec-row .v.none { color: var(--faint); }
+  .spec-row.head .v { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+  .spec-note { padding: 11px 16px; border-top: 1px solid var(--border); font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); }
+</style>
+</head>
+<body>
+<div style="min-height: 100vh; background: var(--bg); color: var(--text); font-family: var(--font-body); overflow-x: clip;">
+
+  <!-- ════════ NAV ════════ -->
+  <nav style="position: sticky; top: 0; z-index: 50; background: oklch(0.135 0.022 285 / 0.74); backdrop-filter: blur(14px) saturate(1.2); border-bottom: 1px solid var(--border);">
+    <div class="wrap" style="display: flex; align-items: center; justify-content: space-between; height: 66px; gap: 18px;">
+      <a href="../" style="display: flex; align-items: center; gap: 11px;">
+        <svg viewBox="0 0 256 256" aria-hidden="true" style="width: 30px; height: 30px; color: var(--accent);">
+          <g stroke="currentColor" stroke-width="13" fill="none" stroke-linecap="round">
+            <path d="M128 74 L77 165 M128 74 L181 160 M77 165 L181 160"></path>
+          </g>
+          <circle cx="128" cy="72" r="27" fill="currentColor"></circle>
+          <circle cx="76" cy="166" r="22" fill="currentColor"></circle>
+          <circle cx="182" cy="160" r="22" fill="currentColor"></circle>
+        </svg>
+        <span style="font-family: var(--font-display); font-weight: 700; font-size: 20px; letter-spacing: 0.01em;">allmystuff<span style="color: var(--dim); font-weight: 500;">.works</span></span>
+      </a>
+      <div style="display: flex; gap: 22px; align-items: center;">
+        <a href="../#software" style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim);">The software</a>
+        <a href="./" style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text); border-bottom: 2px solid var(--accent); padding-bottom: 2px;">The hardware</a>
+        <a href="../#service" style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim);">The service</a>
+        <a href="../download/" style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim);">Download</a>
+      </div>
+      <div style="display: flex; gap: 12px; align-items: center;">
+        <span class="chip"><span class="dot"></span>Pre-order open</span>
+        <a class="btn btn-primary btn-sm" href="https://criticalerrorcomputing.com">Pre-order</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ════════ HERO ════════ -->
+  <header style="position: relative; padding: clamp(52px, 7vw, 96px) 0 clamp(48px, 6vw, 84px); overflow: hidden;">
+    <div class="grid-bg"></div>
+    <div class="glow" style="width: 560px; height: 460px; left: -10%; top: -12%; background: var(--violet); opacity: 0.16;"></div>
+    <div class="glow" style="width: 460px; height: 400px; right: -8%; bottom: -22%; background: var(--accent); opacity: 0.10;"></div>
+    <div class="wrap" style="position: relative; z-index: 2; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(440px, 100%), 1fr)); gap: clamp(36px, 4.5vw, 64px); align-items: center;">
+      <div>
+        <span class="eyebrow no-rule">Part 02 · The hardware · The Access line · ships Summer 2026</span>
+        <h1 style="font-family: var(--font-display); font-weight: 700; font-size: clamp(40px, 5.4vw, 76px); line-height: 1.02; letter-spacing: -0.01em; margin: 20px 0 22px; text-wrap: pretty;">The witness that never goes dark.</h1>
+        <p class="lede" style="margin: 0 0 14px;">When the OS is dead, software can't save it. The Access line watches the video signal and presses the buttons — so a crashed, frozen, or unbootable machine is still on your graph.</p>
+        <p style="font-size: 16px; color: var(--faint); max-width: 54ch; line-height: 1.55; margin: 0 0 32px;">Out of band. Zero apps installed on the PC. Alive on standby power, reachable over your mesh like any other device you own.</p>
+        <div style="display: flex; gap: 14px; align-items: center; flex-wrap: wrap;">
+          <a class="btn btn-primary" href="https://criticalerrorcomputing.com">Pre-order at criticalerrorcomputing.com</a>
+          <a class="btn btn-ghost" href="#demo">Watch it save a machine <span aria-hidden="true">→</span></a>
+        </div>
+        <div style="margin-top: 34px; display: flex; gap: 32px; flex-wrap: wrap; padding-top: 24px; border-top: 1px solid var(--border);">
+          <div>
+            <div style="font-family: var(--font-display); font-size: 30px; font-weight: 600; line-height: 1;">0<small style="font-size: 16px; color: var(--dim);"> apps</small></div>
+            <div style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); margin-top: 7px;">Installed on the PC</div>
+          </div>
+          <div>
+            <div style="font-family: var(--font-display); font-size: 30px; font-weight: 600; line-height: 1;">4K<small style="font-size: 16px; color: var(--dim);">@45</small></div>
+            <div style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); margin-top: 7px;">Capture · 20–30 ms</div>
+          </div>
+          <div>
+            <div style="font-family: var(--font-display); font-size: 30px; font-weight: 600; line-height: 1;">$149<small style="font-size: 16px; color: var(--dim);">.99+</small></div>
+            <div style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); margin-top: 7px;">Once · no subscription</div>
+          </div>
+        </div>
+      </div>
+      <div style="display: grid; place-items: center;">
+        <img src="../assets/kvm-angled.png" alt="CEC Access Pro — desk unit with onboard screen" style="width: min(520px, 100%); height: auto; filter: drop-shadow(0 40px 80px rgb(0 0 0 / 0.6));">
+      </div>
+    </div>
+  </header>
+
+  <!-- ════════ DEMO ════════ -->
+  <section id="demo" class="section" style="background: var(--bg-2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+    <div class="wrap">
+      <div style="max-width: 840px; margin-bottom: clamp(36px, 4vw, 52px);">
+        <span class="eyebrow">The demo · simulated, but this is the real sequence</span>
+        <h2 class="display-l" style="margin: 16px 0 18px;">2 a.m. Blue screen. Nobody drives anywhere.</h2>
+        <p class="lede">The machine's own OS agent goes silent, the witness takes over on standby power, and a Concierge session — that you approve — reads the screen, cycles the power, and watches it come back. Press play.</p>
+      </div>
+      <div class="demo-shell">
+        <div class="console">
+          <div class="console-bar">
+            <div class="lights"><i style="background: var(--g-red);"></i><i style="background: var(--warn);"></i><i style="background: var(--ok);"></i></div>
+            <div class="title">concierge://session · OS-down recovery</div>
+            <div class="corr">witness AX-3F4L</div>
+          </div>
+          <div class="console-body" id="demo-log"></div>
+        </div>
+        <div class="viewer">
+          <div class="viewer-head"><span>Witness feed</span><span id="demo-host-dot" style="color: var(--ok);">● alive</span></div>
+          <div class="mini-screen" id="demo-screen"><div style="font-size: 11px; color: var(--ok); letter-spacing: 0.1em;">● DESKTOP · LIVE</div></div>
+          <div>
+            <div class="state-row"><span class="k">host state</span><span class="v" id="demo-host">alive</span></div>
+            <div class="state-row"><span class="k">link</span><span class="v" id="demo-link">host USB path</span></div>
+            <div class="state-row"><span class="k">screen-state</span><span class="v" id="demo-state">normal</span></div>
+            <div class="state-row"><span class="k">session action</span><span class="v" id="demo-action">idle</span></div>
+          </div>
+          <div class="kicker-tag" style="line-height: 1.6; opacity: 0.8;">The witness streams to <i>your</i> devices over the mesh, end-to-end encrypted. A Concierge only ever joins with your approval — logged, watchable, revocable.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ HOW IT WIRES ════════ -->
+  <section class="section">
+    <div class="wrap">
+      <div style="max-width: 840px; margin-bottom: clamp(36px, 4vw, 52px);">
+        <span class="eyebrow">How it wires</span>
+        <h2 class="display-l" style="margin: 16px 0 18px;">Eyes on the video. Fingers on the buttons.</h2>
+        <p class="lede">Four connections, all of them dumb on purpose. The PC can't tell the witness from a monitor and a keyboard — which is exactly why it works when nothing else does.</p>
+      </div>
+      <div style="background: linear-gradient(180deg, var(--surface), var(--bg-2)); border: 1px solid var(--border); border-radius: 8px; padding: clamp(20px, 3vw, 36px); overflow-x: auto;">
+        <svg viewBox="0 0 920 300" style="display: block; width: 100%; min-width: 680px; height: auto;" aria-label="Wiring diagram: the PC's HDMI and USB connect to the witness; the witness's ATX leads connect to the front-panel header; the witness reaches your mesh over Ethernet or Wi-Fi.">
+          <!-- PC -->
+          <rect x="30" y="60" width="220" height="180" rx="8" fill="oklch(0.205 0.034 285)" stroke="oklch(0.32 0.045 285)"></rect>
+          <text x="140" y="95" text-anchor="middle" fill="oklch(0.97 0.004 285)" font-family="Saira, sans-serif" font-size="19" font-weight="600">The patient</text>
+          <text x="140" y="118" text-anchor="middle" fill="oklch(0.55 0.025 285)" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="1">ANY PC · ANY OS · NO APPS</text>
+          <text x="140" y="160" text-anchor="middle" fill="oklch(0.74 0.02 285)" font-family="IBM Plex Mono, monospace" font-size="11">HDMI out · USB port</text>
+          <text x="140" y="182" text-anchor="middle" fill="oklch(0.74 0.02 285)" font-family="IBM Plex Mono, monospace" font-size="11">front-panel header</text>
+          <text x="140" y="222" text-anchor="middle" fill="oklch(0.55 0.025 285)" font-family="IBM Plex Mono, monospace" font-size="10" letter-spacing="1">EVEN WHEN IT'S DEAD</text>
+          <!-- Witness -->
+          <rect x="390" y="40" width="220" height="220" rx="8" fill="oklch(0.205 0.034 285)" stroke="oklch(0.64 0.255 350)"></rect>
+          <text x="500" y="78" text-anchor="middle" fill="oklch(0.97 0.004 285)" font-family="Saira, sans-serif" font-size="19" font-weight="600">The witness</text>
+          <text x="500" y="100" text-anchor="middle" fill="oklch(0.64 0.255 350)" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="1">ACCESS CUBE / INTERNAL / PRO</text>
+          <text x="500" y="140" text-anchor="middle" fill="oklch(0.74 0.02 285)" font-family="IBM Plex Mono, monospace" font-size="11">sees · 4K capture</text>
+          <text x="500" y="162" text-anchor="middle" fill="oklch(0.74 0.02 285)" font-family="IBM Plex Mono, monospace" font-size="11">types · emulated USB</text>
+          <text x="500" y="184" text-anchor="middle" fill="oklch(0.74 0.02 285)" font-family="IBM Plex Mono, monospace" font-size="11">presses · ATX power</text>
+          <text x="500" y="226" text-anchor="middle" fill="oklch(0.55 0.025 285)" font-family="IBM Plex Mono, monospace" font-size="10" letter-spacing="1">ALIVE ON STANDBY POWER</text>
+          <!-- Mesh -->
+          <rect x="730" y="85" width="160" height="130" rx="65" fill="none" stroke="oklch(0.62 0.20 292)" stroke-dasharray="4 6"></rect>
+          <g stroke="oklch(0.62 0.20 292)" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.9" transform="translate(778,118) scale(0.25)">
+            <path d="M128 74 L77 165 M128 74 L181 160 M77 165 L181 160"></path>
+          </g>
+          <g transform="translate(778,118) scale(0.25)" fill="oklch(0.62 0.20 292)">
+            <circle cx="128" cy="72" r="27"></circle><circle cx="76" cy="166" r="22"></circle><circle cx="182" cy="160" r="22"></circle>
+          </g>
+          <text x="810" y="192" text-anchor="middle" fill="oklch(0.74 0.02 285)" font-family="IBM Plex Mono, monospace" font-size="11">your mesh</text>
+          <!-- wires PC -> witness -->
+          <g font-family="IBM Plex Mono, monospace" font-size="10" letter-spacing="1">
+            <path d="M250 100 L390 100" stroke="oklch(0.75 0.15 195)" stroke-width="2.5" fill="none"></path>
+            <path d="M250 100 L390 100" stroke="oklch(0.75 0.15 195)" stroke-width="2.5" fill="none" stroke-dasharray="1 9" style="animation: amsFlow 1.1s linear infinite;"></path>
+            <text x="320" y="90" text-anchor="middle" fill="oklch(0.75 0.15 195)">HDMI →</text>
+            <path d="M390 150 L250 150" stroke="oklch(0.80 0.17 150)" stroke-width="2.5" fill="none"></path>
+            <path d="M390 150 L250 150" stroke="oklch(0.80 0.17 150)" stroke-width="2.5" fill="none" stroke-dasharray="1 9" style="animation: amsFlow 1.1s linear infinite;"></path>
+            <text x="320" y="140" text-anchor="middle" fill="oklch(0.80 0.17 150)">← USB HID</text>
+            <path d="M390 200 L250 200" stroke="oklch(0.74 0.17 58)" stroke-width="2.5" fill="none"></path>
+            <path d="M390 200 L250 200" stroke="oklch(0.74 0.17 58)" stroke-width="2.5" fill="none" stroke-dasharray="1 9" style="animation: amsFlow 1.4s linear infinite;"></path>
+            <text x="320" y="190" text-anchor="middle" fill="oklch(0.74 0.17 58)">← ATX PWR/RST</text>
+            <!-- witness -> mesh -->
+            <path d="M610 150 L730 150" stroke="oklch(0.64 0.255 350)" stroke-width="2.5" fill="none"></path>
+            <path d="M610 150 L730 150" stroke="oklch(0.64 0.255 350)" stroke-width="2.5" fill="none" stroke-dasharray="1 9" style="animation: amsFlow 1.1s linear infinite;"></path>
+            <text x="670" y="140" text-anchor="middle" fill="oklch(0.64 0.255 350)">ETH / WI-FI</text>
+            <text x="670" y="172" text-anchor="middle" fill="oklch(0.55 0.025 285)">E2E ENCRYPTED</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ THE LINE ════════ -->
+  <section id="line" class="section" style="background: var(--bg-2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+    <div class="wrap">
+      <div style="max-width: 840px; margin-bottom: clamp(44px, 5vw, 64px);">
+        <span class="eyebrow">The line · three ways in</span>
+        <h2 class="display-l" style="margin: 16px 0 18px;">Pick your witness.</h2>
+        <p class="lede">Same job at every price: keep the machine on your graph when its OS can't help. They differ in how sharp they see and where they live.</p>
+      </div>
+
+      <!-- AX-01 Cube -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr)); gap: clamp(28px, 4vw, 56px); align-items: center; margin-bottom: clamp(56px, 7vw, 88px);">
+        <div style="display: grid; place-items: center;">
+          <img src="../assets/access-device.png" alt="CEC Access Cube — palm-sized box with its own Ethernet" style="width: min(420px, 100%); height: auto; filter: drop-shadow(0 30px 60px rgb(0 0 0 / 0.55));">
+        </div>
+        <div>
+          <span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint);">[ AX-01 / entry ]</span>
+          <h3 class="display-m" style="margin: 14px 0 6px;">Access Cube</h3>
+          <div style="font-family: var(--font-display); font-size: 26px; font-weight: 700; margin-bottom: 14px;">$149.99<span style="font-size: 13px; font-weight: 500; color: var(--faint); font-family: var(--font-mono); letter-spacing: 0.1em; text-transform: uppercase;"> · once</span></div>
+          <p style="color: var(--dim); line-height: 1.6; max-width: 50ch; margin-bottom: 18px;">A palm-sized cube with its own network cable. Enough to remote in, see the screen, type, and power-cycle the machine. The budget way in — and it still does the whole job.</p>
+          <div class="dev-chips"><span>1080p @ 60 capture</span><span>Own Ethernet</span><span>ATX power board included</span><span>Fanless</span></div>
+          <details class="spec">
+            <summary>Full technical specification · Access Cube</summary>
+            <div class="spec-row"><div class="k">Computing unit</div><div class="v">LicheeRV Nano · SG2002 · RISC-V</div></div>
+            <div class="spec-row"><div class="k">Resolution</div><div class="v">1080p @ 60fps</div></div>
+            <div class="spec-row"><div class="k">Video encoding</div><div class="v">MJPEG · H.264 (in development)</div></div>
+            <div class="spec-row"><div class="k">Video latency</div><div class="v">90–230 ms</div></div>
+            <div class="spec-row"><div class="k">UEFI / BIOS access</div><div class="v yes">✓</div></div>
+            <div class="spec-row"><div class="k">Emulated USB keyboard &amp; mouse</div><div class="v yes">✓</div></div>
+            <div class="spec-row"><div class="k">Emulated USB storage</div><div class="v yes">✓</div></div>
+            <div class="spec-row"><div class="k">IPMI</div><div class="v yes">✓</div></div>
+            <div class="spec-row"><div class="k">Wake-on-LAN</div><div class="v yes">✓</div></div>
+            <div class="spec-row"><div class="k">WebSSH</div><div class="v yes">✓</div></div>
+            <div class="spec-row"><div class="k">Custom scripts</div><div class="v yes">✓</div></div>
+            <div class="spec-row"><div class="k">Ethernet</div><div class="v">10/100M</div></div>
+            <div class="spec-row"><div class="k">ATX power control</div><div class="v">USB-interface IO control board (included)</div></div>
+            <div class="spec-row"><div class="k">OLED display</div><div class="v">0.96″ 128×64 · white</div></div>
+            <div class="spec-row"><div class="k">Serial terminal</div><div class="v">2 channels</div></div>
+            <div class="spec-row"><div class="k">microSD card</div><div class="v">Included · ready to use</div></div>
+            <div class="spec-row"><div class="k">Expansion</div><div class="v">PoE</div></div>
+            <div class="spec-row"><div class="k">Power</div><div class="v">0.2A @ 5V · PC USB or auxiliary</div></div>
+            <div class="spec-row"><div class="k">Cooling</div><div class="v">Silent · fanless</div></div>
+            <div class="spec-row"><div class="k">Dimensions</div><div class="v">40 × 36 × 36 mm</div></div>
+          </details>
+        </div>
+      </div>
+
+      <!-- AX-02 Internal -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr)); gap: clamp(28px, 4vw, 56px); align-items: center; margin-bottom: clamp(56px, 7vw, 88px);">
+        <div>
+          <span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint);">[ AX-02 / builder ]</span>
+          <h3 class="display-m" style="margin: 14px 0 6px;">Access Internal</h3>
+          <div style="font-family: var(--font-display); font-size: 26px; font-weight: 700; margin-bottom: 14px;">$199.99<span style="font-size: 13px; font-weight: 500; color: var(--faint); font-family: var(--font-mono); letter-spacing: 0.1em; text-transform: uppercase;"> standard · $279.99 pro</span></div>
+          <p style="color: var(--dim); line-height: 1.6; max-width: 50ch; margin-bottom: 18px;">The same platform on a card that lives inside the case — no desk clutter, powered by the PSU's standby rail, wired straight to the front-panel header. Ships standard in every CEC build. The Pro card steps up to 4K capture, gigabit, and Wi-Fi 6.</p>
+          <div class="dev-chips"><span>Low-profile card</span><span>Up to 4K@45 (Pro)</span><span>Wi-Fi 6 + GbE (Pro)</span><span>Internal headers</span></div>
+          <details class="spec">
+            <summary>Full technical specification · Internal Std / Pro</summary>
+            <div class="spec-row cols3 head"><div class="k"></div><div class="v">Standard</div><div class="v">Pro</div></div>
+            <div class="spec-row cols3"><div class="k">Computing unit</div><div class="v">SG2002 · RISC-V</div><div class="v">AX630C · 2× A53 @ 1.2GHz</div></div>
+            <div class="spec-row cols3"><div class="k">Memory</div><div class="v">256MB DDR3</div><div class="v">1GB LPDDR4X</div></div>
+            <div class="spec-row cols3"><div class="k">Storage</div><div class="v">32GB microSD (included)</div><div class="v">32GB eMMC · 300MB/s</div></div>
+            <div class="spec-row cols3"><div class="k">Resolution</div><div class="v">1080p @ 60fps</div><div class="v">4K @ 45fps · 2K @ 95fps</div></div>
+            <div class="spec-row cols3"><div class="k">HDMI loop-out</div><div class="v none">—</div><div class="v">4K loop-out</div></div>
+            <div class="spec-row cols3"><div class="k">Video encoding</div><div class="v">MJPEG · H.264</div><div class="v">MJPG · H.264 · H.265</div></div>
+            <div class="spec-row cols3"><div class="k">Video latency</div><div class="v">90–230 ms</div><div class="v">20–30 ms</div></div>
+            <div class="spec-row cols3"><div class="k">Audio transmission</div><div class="v none">—</div><div class="v yes">✓</div></div>
+            <div class="spec-row cols3"><div class="k">UEFI / BIOS · USB HID · ISO</div><div class="v yes">✓</div><div class="v yes">✓</div></div>
+            <div class="spec-row cols3"><div class="k">IPMI · Wake-on-LAN</div><div class="v yes">✓</div><div class="v yes">✓</div></div>
+            <div class="spec-row cols3"><div class="k">WebSSH · custom scripts</div><div class="v yes">✓</div><div class="v yes">✓</div></div>
+            <div class="spec-row cols3"><div class="k">Ethernet</div><div class="v">10/100M</div><div class="v">1000M</div></div>
+            <div class="spec-row cols3"><div class="k">Wi-Fi</div><div class="v">Included</div><div class="v">Wi-Fi 6 · included</div></div>
+            <div class="spec-row cols3"><div class="k">PoE</div><div class="v">Included</div><div class="v">Included</div></div>
+            <div class="spec-row cols3"><div class="k">ATX power control</div><div class="v">Direct to 9-pin front-panel header</div><div class="v">Internal ATX + front-panel headers</div></div>
+            <div class="spec-row cols3"><div class="k">Display</div><div class="v">0.49″ 64×32 white OLED</div><div class="v">0.96″ 128×64 OLED</div></div>
+            <div class="spec-row cols3"><div class="k">Serial terminal</div><div class="v">2 channels</div><div class="v">2 channels</div></div>
+            <div class="spec-row cols3"><div class="k">Form factor</div><div class="v">Low-profile internal card</div><div class="v">ATX internal card</div></div>
+            <div class="spec-row cols3"><div class="k">Power</div><div class="v">0.2A @ 5V · multiple modes</div><div class="v">0.6A @ 5V · internal USB + headers</div></div>
+            <div class="spec-row cols3"><div class="k">Cooling</div><div class="v">Silent · fanless</div><div class="v">Silent · fanless</div></div>
+            <div class="spec-row cols3"><div class="k">Dimensions</div><div class="v">66 × 57 × 18 mm (no panel)</div><div class="v">ATX form (draft)</div></div>
+            <div class="spec-note">Pro dimensions and ATX variant are pre-production — final numbers at ship.</div>
+          </details>
+        </div>
+        <div style="display: grid; gap: 18px; place-items: center;">
+          <img src="../assets/internal-device.png" alt="CEC Access Internal — low-profile card" style="width: min(420px, 100%); height: auto; filter: drop-shadow(0 30px 60px rgb(0 0 0 / 0.55));">
+          <img src="../assets/internal-pro-device.png" alt="CEC Access Internal Pro — ATX internal card" style="width: min(360px, 88%); height: auto; filter: drop-shadow(0 30px 60px rgb(0 0 0 / 0.55));">
+        </div>
+      </div>
+
+      <!-- AX-03 Pro -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr)); gap: clamp(28px, 4vw, 56px); align-items: center;">
+        <div style="display: grid; place-items: center;">
+          <img src="../assets/kvm-frontback.png" alt="CEC Access Pro — front and back" style="width: min(460px, 100%); height: auto; filter: drop-shadow(0 30px 60px rgb(0 0 0 / 0.55));">
+        </div>
+        <div>
+          <span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent);">[ AX-03 / flagship · most popular ]</span>
+          <h3 class="display-m" style="margin: 14px 0 6px;">Access Pro</h3>
+          <div style="font-family: var(--font-display); font-size: 26px; font-weight: 700; margin-bottom: 14px;">$299.99<span style="font-size: 13px; font-weight: 500; color: var(--faint); font-family: var(--font-mono); letter-spacing: 0.1em; text-transform: uppercase;"> · once</span></div>
+          <p style="color: var(--dim); line-height: 1.6; max-width: 50ch; margin-bottom: 18px;">The desk unit. 4K capture at 20–30 ms — sharp enough to game on remotely — with its own screen telling you what it sees, gigabit plus Wi-Fi 6, and a 4K loop-out so your real monitor stays plugged in. Alive even when the PC isn't.</p>
+          <div class="dev-chips"><span>4K@45 · 2K@95</span><span>20–30 ms</span><span>Onboard 1.47″ LCD</span><span>4K loop-out</span><span>USB-C / PoE</span></div>
+          <details class="spec">
+            <summary>Full technical specification · Access Pro</summary>
+            <div class="spec-row"><div class="k">Main control</div><div class="v">AX630C · 2× A53 @ 1.2GHz</div></div>
+            <div class="spec-row"><div class="k">Memory · storage</div><div class="v">1GB LPDDR4X · 32GB eMMC @ 300MB/s</div></div>
+            <div class="spec-row"><div class="k">System</div><div class="v">CEC open-source firmware fork</div></div>
+            <div class="spec-row"><div class="k">Resolution</div><div class="v">4K @ 45fps · 2K @ 95fps</div></div>
+            <div class="spec-row"><div class="k">HDMI loop-out</div><div class="v">4K loop-out</div></div>
+            <div class="spec-row"><div class="k">Video encoding</div><div class="v">MJPG · H.264 · H.265</div></div>
+            <div class="spec-row"><div class="k">Audio transmission</div><div class="v yes">✓</div></div>
+            <div class="spec-row"><div class="k">UEFI / BIOS access</div><div class="v yes">✓</div></div>
+            <div class="spec-row"><div class="k">Emulated USB keyboard &amp; mouse · ISO</div><div class="v yes">✓</div></div>
+            <div class="spec-row"><div class="k">IPMI · Wake-on-LAN</div><div class="v yes">✓</div></div>
+            <div class="spec-row"><div class="k">WebSSH · custom scripts</div><div class="v yes">✓</div></div>
+            <div class="spec-row"><div class="k">Serial terminal</div><div class="v">2 channels</div></div>
+            <div class="spec-row"><div class="k">Ethernet</div><div class="v">1000M</div></div>
+            <div class="spec-row"><div class="k">Wi-Fi</div><div class="v">Wi-Fi 6 (optional)</div></div>
+            <div class="spec-row"><div class="k">microSD expansion</div><div class="v yes">✓</div></div>
+            <div class="spec-row"><div class="k">ATX power control</div><div class="v yes">✓</div></div>
+            <div class="spec-row"><div class="k">Display</div><div class="v">1.47″ 320×172 LCD · 0.96″ 128×64 OLED</div></div>
+            <div class="spec-row"><div class="k">Power</div><div class="v">0.6A @ 5V · USB-C / PoE</div></div>
+            <div class="spec-row"><div class="k">Dimensions</div><div class="v">65 × 65 × 28 mm</div></div>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ ON YOUR GRAPH ════════ -->
+  <section class="section">
+    <div class="wrap" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr)); gap: clamp(28px, 4vw, 56px); align-items: center;">
+      <div>
+        <span class="eyebrow">With the app</span>
+        <h2 class="display-l" style="margin: 16px 0 18px;">It's just another node on your graph.</h2>
+        <p class="lede" style="margin-bottom: 18px;">No second app, no vendor portal. A witness claims into your fleet like any laptop — its console opens in the same tab, its power button is a button in the drawer, and sharing it follows the same grants as everything else.</p>
+        <ul style="list-style: none; display: grid; gap: 9px; font-size: 15px; color: var(--dim); padding: 0; margin: 0;">
+          <li style="display: flex; gap: 10px;"><span style="color: var(--accent);">▸</span>Claim it with the same code-read ceremony as any device</li>
+          <li style="display: flex; gap: 10px;"><span style="color: var(--accent);">▸</span>Streams ride your mesh, end-to-end encrypted — relay only when needed</li>
+          <li style="display: flex; gap: 10px;"><span style="color: var(--accent);">▸</span>Works without us: open firmware fork, no account, no subscription</li>
+        </ul>
+        <div style="display: flex; gap: 14px; margin-top: 26px; flex-wrap: wrap;">
+          <a class="btn btn-ghost" href="../download/">Get the app — it's free <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+      <div style="display: grid; place-items: center;">
+        <div style="width: min(460px, 100%); background: linear-gradient(180deg, var(--surface), var(--bg-2)); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; box-shadow: 0 36px 80px -36px rgb(0 0 0 / 0.85);">
+          <div style="display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border-bottom: 1px solid var(--border);">
+            <span style="font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint);">node — access-pro</span>
+            <span class="chip" style="padding: 4px 9px; font-size: 10px;"><span class="dot"></span>standby · listening</span>
+          </div>
+          <div style="padding: 16px;">
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 14px;">
+              <svg viewBox="0 0 256 256" aria-hidden="true" style="width: 26px; height: 26px; color: var(--accent);"><g stroke="currentColor" stroke-width="13" fill="none" stroke-linecap="round"><path d="M128 74 L77 165 M128 74 L181 160 M77 165 L181 160"></path></g><circle cx="128" cy="72" r="27" fill="currentColor"></circle><circle cx="76" cy="166" r="22" fill="currentColor"></circle><circle cx="182" cy="160" r="22" fill="currentColor"></circle></svg>
+              <div>
+                <div style="font-weight: 600; font-size: 15px;">access-pro <span style="font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; padding: 2px 7px; border: 1px solid var(--border); color: var(--dim); border-radius: 2px; vertical-align: 2px;">hardware</span></div>
+                <div style="font-family: var(--font-mono); font-size: 10px; color: var(--faint);">watching: den-tower · HDMI + HID + ATX</div>
+              </div>
+            </div>
+            <div style="display: grid; gap: 8px;">
+              <div style="display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 11px; padding: 8px 10px; background: var(--bg); border: 1px solid var(--border); border-radius: 4px;"><span style="color: var(--faint);">host screen</span><span style="color: var(--ok);">live · 4K@45</span></div>
+              <div style="display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 11px; padding: 8px 10px; background: var(--bg); border: 1px solid var(--border); border-radius: 4px;"><span style="color: var(--faint);">host power</span><span style="color: var(--text);">on · 41 days</span></div>
+              <div style="display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 11px; padding: 8px 10px; background: var(--bg); border: 1px solid var(--border); border-radius: 4px;"><span style="color: var(--faint);">actions</span><span style="color: var(--accent);">console · power · boot ISO</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ TRUST ════════ -->
+  <section class="section" style="background: var(--bg-2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+    <div class="wrap">
+      <div style="max-width: 840px; margin-bottom: clamp(36px, 4vw, 52px);">
+        <span class="eyebrow">The fine print, in large print</span>
+        <h2 class="display-l" style="margin: 16px 0 18px;">A box that can press your power button should answer hard questions.</h2>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 20px;">
+        <div style="background: linear-gradient(180deg, var(--surface), var(--bg-2)); border: 1px solid var(--border); border-radius: 8px; padding: 24px 22px;">
+          <div style="font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px;">keys</div>
+          <p style="font-size: 14.5px; color: var(--dim); line-height: 1.6; margin: 0;">Connection keys are made and stored on the device, never on a CEC server. Nobody at CEC can connect on their own.</p>
+        </div>
+        <div style="background: linear-gradient(180deg, var(--surface), var(--bg-2)); border: 1px solid var(--border); border-radius: 8px; padding: 24px 22px;">
+          <div style="font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px;">streams</div>
+          <p style="font-size: 14.5px; color: var(--dim); line-height: 1.6; margin: 0;">Video travels directly between your devices, end-to-end encrypted. A relay, when needed, only passes data it can't decrypt.</p>
+        </div>
+        <div style="background: linear-gradient(180deg, var(--surface), var(--bg-2)); border: 1px solid var(--border); border-radius: 8px; padding: 24px 22px;">
+          <div style="font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px;">sessions</div>
+          <p style="font-size: 14.5px; color: var(--dim); line-height: 1.6; margin: 0;">Repair sessions start with your approval, every action is logged, and you can watch live or revoke at any moment.</p>
+        </div>
+        <div style="background: linear-gradient(180deg, var(--surface), var(--bg-2)); border: 1px solid var(--border); border-radius: 8px; padding: 24px 22px;">
+          <div style="font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px;">ownership</div>
+          <p style="font-size: 14.5px; color: var(--dim); line-height: 1.6; margin: 0;">Firmware and software are open source and self-hostable. No subscription is ever required to use your hardware.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ PRE-ORDER CTA ════════ -->
+  <section class="section">
+    <div class="wrap">
+      <div style="position: relative; background: linear-gradient(180deg, var(--surface), var(--bg-2)); border: 1px solid var(--accent-line); border-radius: 10px; padding: clamp(36px, 5vw, 64px); overflow: hidden; box-shadow: 0 40px 90px -40px rgb(0 0 0 / 0.8), 0 14px 40px -12px oklch(0.64 0.255 350 / 0.2);">
+        <div class="grid-bg" style="opacity: 0.8;"></div>
+        <div class="glow" style="width: 420px; height: 360px; right: -10%; top: -30%; background: var(--violet); opacity: 0.18;"></div>
+        <div style="position: relative; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap;">
+          <div style="max-width: 60ch;">
+            <span class="eyebrow">Pre-order · ships Summer 2026</span>
+            <h2 class="display-m" style="margin: 14px 0 10px;">Put a witness on the machine that scares you most.</h2>
+            <p style="color: var(--dim); line-height: 1.6; margin: 0;">Cube for the NAS in the closet, Internal for the rig you're building, Pro for the desk. Pre-orders ship through Critical Error Computing.</p>
+          </div>
+          <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+            <a class="btn btn-primary" href="https://criticalerrorcomputing.com">Pre-order at criticalerrorcomputing.com</a>
+            <a class="btn btn-ghost" href="mailto:hello@allmystuff.works">Questions? Email us</a>
+          </div>
+        </div>
+      </div>
+      <p style="margin-top: 22px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); text-align: center;">Out-of-band · works with the OS dead · no apps installed on the PC</p>
+    </div>
+  </section>
+
+  <!-- ════════ FOOTER ════════ -->
+  <footer style="border-top: 1px solid var(--border); padding: clamp(36px, 4vw, 52px) 0 32px;">
+    <div class="wrap" style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <img src="../assets/cec-logo.png" alt="Critical Error Computing" style="height: 26px; width: auto;">
+        <span style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);">A Critical Error Computing product · Humble, TX</span>
+      </div>
+      <div style="display: flex; gap: 18px; flex-wrap: wrap;">
+        <a href="../" style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim);">allmystuff.works</a>
+        <a href="../download/" style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim);">Download the app</a>
+        <a href="https://github.com/mrjeeves/AllMyStuff" style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim);">GitHub</a>
+      </div>
+      <span style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);">© 2026 allmystuff.works · MIT</span>
+    </div>
+  </footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  // OS-down recovery demo — a scripted replay of the real sequence.
+  var STEPS = [
+    { t: "00.0", cls: "",     tag: "OS-AGENT", m: "Host OS agent heartbeat <b>OK</b> · telemetry streaming", screen: "normal", host: "alive",        link: "host USB path",   state: "normal",    action: "monitoring" },
+    { t: "04.2", cls: "warn", tag: "OS-AGENT", m: "Heartbeat <b>lost</b> · no dump written · Kernel-Power 41", screen: "normal", host: "unresponsive", link: "host USB path", state: "—", action: "—" },
+    { t: "04.3", cls: "",     tag: "WITNESS",  m: "Switching to <b>out-of-band capture</b> · standby rail live", screen: "bsod", host: "unresponsive", link: "witness network", state: "capturing", action: "capture" },
+    { t: "05.1", cls: "crit", tag: "SCREEN",   m: "Screen-state classified on the box: <b>BSOD</b> · no cloud", screen: "bsod", host: "unresponsive", link: "witness network", state: "BSOD", action: "classify" },
+    { t: "05.4", cls: "crit", tag: "SCREEN",   m: "Stop code read → <b>CRITICAL_PROCESS_DIED</b> · 0x000000EF", screen: "bsod", host: "unresponsive", link: "witness network", state: "BSOD", action: "fault event" },
+    { t: "05.9", cls: "",     tag: "MESH",     m: "Alert on your phone: <b>den-tower is down</b> · witness has the screen", screen: "bsod", host: "unresponsive", link: "mesh · e2e", state: "BSOD", action: "notify owner" },
+    { t: "06.4", cls: "",     tag: "SUMMON",   m: "You approve a Concierge session · technician attached · <b>logged</b>", screen: "bsod", host: "unresponsive", link: "mesh · e2e · P2P", state: "BSOD", action: "session open" },
+    { t: "07.5", cls: "",     tag: "POWER",    m: "Front-panel header → <b>power-cycle</b> · watching POST", screen: "post", host: "rebooting", link: "mesh · e2e · P2P", state: "POST", action: "power-cycle" },
+    { t: "12.1", cls: "",     tag: "WITNESS",  m: "POST cleared · HDMI signal reacquired", screen: "nosig", host: "booting", link: "mesh · e2e · P2P", state: "no signal", action: "verify" },
+    { t: "14.0", cls: "ok",   tag: "VERIFY",   m: "OS agent heartbeat <b>restored</b> · fault resolved", screen: "normal", host: "alive", link: "host USB path", state: "normal", action: "verify ✓" },
+    { t: "14.2", cls: "ok",   tag: "SESSION",  m: "You watched the whole thing · log <b>signed &amp; saved</b> · session closed", screen: "normal", host: "alive", link: "host USB path", state: "normal", action: "signed off" }
+  ];
+  var SCREENS = {
+    normal: '<div style="font-size: 11px; color: var(--ok); letter-spacing: 0.1em;">● DESKTOP · LIVE</div>',
+    bsod:   '<div><div class="big">:(</div><div class="stop">CRITICAL_PROCESS_DIED</div></div>',
+    post:   '<div style="font-size: 10px; text-align: left; line-height: 1.7; padding: 0 14px;">CEC Access capture<br>POST … memory 32768M OK<br>Detecting drives …</div>',
+    nosig:  '<div class="nosig-txt">NO SIGNAL</div>'
+  };
+  var log = document.getElementById("demo-log");
+  var screen = document.getElementById("demo-screen");
+  var els = {
+    host: document.getElementById("demo-host"),
+    link: document.getElementById("demo-link"),
+    state: document.getElementById("demo-state"),
+    action: document.getElementById("demo-action"),
+    dot: document.getElementById("demo-host-dot")
+  };
+  var timer = null;
+
+  function line(t, tag, m, cls) {
+    var d = document.createElement("div");
+    d.className = "log-line" + (cls ? " " + cls : "");
+    d.innerHTML = '<span class="t">' + t + 's</span><span class="tag">' + tag + '</span><span class="m">' + m + "</span>";
+    return d;
+  }
+  function cursor() {
+    var d = document.createElement("div");
+    d.className = "log-line";
+    d.id = "demo-cursor";
+    d.innerHTML = '<span class="t"></span><span class="cursor-blink"></span>';
+    return d;
+  }
+  function controls(replay) {
+    var d = document.createElement("div");
+    d.style.cssText = "margin-top: 14px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap;";
+    var b = document.createElement("button");
+    b.className = replay ? "btn btn-ghost btn-sm" : "btn btn-primary btn-sm";
+    b.textContent = replay ? "↻ Replay sequence" : "▶ Run OS-down recovery";
+    b.addEventListener("click", play);
+    d.appendChild(b);
+    var s = document.createElement("span");
+    s.className = "kicker-tag";
+    s.textContent = replay ? "resolved in 14.2s · 0 site visits" : "simulated · 11-step sequence";
+    d.appendChild(s);
+    return d;
+  }
+  function apply(s) {
+    screen.className = "mini-screen" + (s.screen !== "normal" ? " " + s.screen : "");
+    screen.innerHTML = SCREENS[s.screen];
+    els.host.textContent = s.host;
+    els.link.textContent = s.link;
+    els.state.textContent = s.state;
+    els.action.textContent = s.action;
+    els.dot.textContent = "● " + s.host;
+    els.dot.style.color = s.host === "alive" ? "var(--ok)" : "var(--accent)";
+  }
+  function idle() {
+    log.innerHTML = "";
+    var a = line("--.-", "OS-AGENT", "Heartbeat <b>OK</b> · telemetry streaming · nothing to fix… yet");
+    var b = line("--.-", "WITNESS", "Armed · HDMI + HID + power header monitored");
+    a.style.opacity = b.style.opacity = "0.55";
+    log.appendChild(a); log.appendChild(b); log.appendChild(cursor());
+    log.appendChild(controls(false));
+  }
+  function play() {
+    if (timer) { clearTimeout(timer); timer = null; }
+    log.innerHTML = "";
+    log.appendChild(cursor());
+    apply(STEPS[0]);
+    var i = 0;
+    function next() {
+      var s = STEPS[i];
+      var c = document.getElementById("demo-cursor");
+      log.insertBefore(line(s.t, s.tag, s.m, s.cls), c);
+      apply(s);
+      log.parentNode.scrollTop = log.parentNode.scrollHeight;
+      i += 1;
+      if (i < STEPS.length) {
+        timer = setTimeout(next, i === 2 || i === 8 ? 1500 : 950);
+      } else {
+        timer = null;
+        if (c) c.remove();
+        log.appendChild(controls(true));
+      }
+    }
+    timer = setTimeout(next, 200);
+  }
+  idle();
+})();
+</script>
+</body>
+</html>
