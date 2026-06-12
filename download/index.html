@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Download — allmystuff.works</title>
+<meta name="description" content="Get AllMyStuff for Linux, macOS, or Windows. Free forever, MIT licensed, no account. One-line install or direct downloads with checksums.">
+<meta name="theme-color" content="#070711">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="icon" sizes="48x48 32x32 16x16" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Download AllMyStuff — free forever">
+<meta property="og:description" content="One app for every machine you own. Linux, macOS, Windows. No account, no card, MIT licensed.">
+<meta property="og:url" content="https://allmystuff.works/download/">
+<meta property="og:image" content="https://allmystuff.works/og.png">
+<link rel="stylesheet" href="../ds/cec/tokens/fonts.css">
+<link rel="stylesheet" href="../ds/cec/tokens/colors.css">
+<link rel="stylesheet" href="../ds/cec/tokens/typography.css">
+<link rel="stylesheet" href="../ds/cec/tokens/spacing.css">
+<link rel="stylesheet" href="../ds/cec/tokens/base.css">
+<link rel="stylesheet" href="../ds/cec/styles.css">
+<style>
+  body { margin: 0; background: oklch(0.135 0.022 285); }
+  .dl-card { background: linear-gradient(180deg, var(--surface), var(--bg-2)); border: 1px solid var(--border); border-radius: 8px; padding: 26px 24px; display: flex; flex-direction: column; gap: 16px; }
+  .dl-card h3 { font-family: var(--font-display); font-size: 24px; font-weight: 600; margin: 0; }
+  .dl-list { display: grid; gap: 8px; }
+  .dl-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 12px; background: var(--bg); border: 1px solid var(--border); border-radius: 4px; font-size: 14px; color: var(--dim); }
+  .dl-row a { color: var(--accent); font-weight: 600; white-space: nowrap; }
+  .dl-row .meta { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); }
+  .cmd { background: oklch(0.115 0.018 285); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+  .cmd .head { display: flex; align-items: center; justify-content: space-between; padding: 9px 14px; border-bottom: 1px solid var(--border); font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); }
+  .cmd .body { padding: 15px 16px; font-family: var(--font-mono); font-size: 13px; color: var(--text); overflow-x: auto; white-space: nowrap; }
+  .cmd .body .p { color: var(--faint); }
+  .note { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); line-height: 1.7; }
+</style>
+</head>
+<body>
+<div style="min-height: 100vh; background: var(--bg); color: var(--text); font-family: var(--font-body); overflow-x: clip;">
+
+  <!-- ════════ NAV ════════ -->
+  <nav style="position: sticky; top: 0; z-index: 50; background: oklch(0.135 0.022 285 / 0.74); backdrop-filter: blur(14px) saturate(1.2); border-bottom: 1px solid var(--border);">
+    <div class="wrap" style="display: flex; align-items: center; justify-content: space-between; height: 66px; gap: 18px;">
+      <a href="../" style="display: flex; align-items: center; gap: 11px;">
+        <svg viewBox="0 0 256 256" aria-hidden="true" style="width: 30px; height: 30px; color: var(--accent);">
+          <g stroke="currentColor" stroke-width="13" fill="none" stroke-linecap="round">
+            <path d="M128 74 L77 165 M128 74 L181 160 M77 165 L181 160"></path>
+          </g>
+          <circle cx="128" cy="72" r="27" fill="currentColor"></circle>
+          <circle cx="76" cy="166" r="22" fill="currentColor"></circle>
+          <circle cx="182" cy="160" r="22" fill="currentColor"></circle>
+        </svg>
+        <span style="font-family: var(--font-display); font-weight: 700; font-size: 20px; letter-spacing: 0.01em;">allmystuff<span style="color: var(--dim); font-weight: 500;">.works</span></span>
+      </a>
+      <div style="display: flex; gap: 22px; align-items: center;">
+        <a href="../#software" style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim);">The software</a>
+        <a href="../hardware/" style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim);">The hardware</a>
+        <a href="../#service" style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim);">The service</a>
+        <a href="./" style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text); border-bottom: 2px solid var(--accent); padding-bottom: 2px;">Download</a>
+      </div>
+      <div style="display: flex; gap: 12px; align-items: center;">
+        <span class="chip"><span class="dot"></span><span id="rel-version">latest release</span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ════════ HERO ════════ -->
+  <header style="position: relative; padding: clamp(48px, 6vw, 84px) 0 clamp(40px, 5vw, 64px); overflow: hidden;">
+    <div class="grid-bg"></div>
+    <div class="glow" style="width: 460px; height: 400px; right: -8%; top: -22%; background: var(--accent); opacity: 0.10;"></div>
+    <div class="wrap" style="position: relative; z-index: 2;">
+      <span class="eyebrow no-rule">Download · free forever · MIT licensed · no account</span>
+      <h1 style="font-family: var(--font-display); font-weight: 700; font-size: clamp(40px, 5.4vw, 76px); line-height: 1.02; letter-spacing: -0.01em; margin: 20px 0 18px; text-wrap: pretty;">Install. Wire your stuff. That's it.</h1>
+      <p class="lede" style="max-width: 62ch;">The mesh daemon ships inside the app, so there is no step two. Every download below is the full thing — every feature, every device, $0.</p>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr)); gap: 16px; margin-top: 30px; max-width: 980px;">
+        <div class="cmd">
+          <div class="head"><span>Linux · macOS — the one-liner</span><span>sh</span></div>
+          <div class="body"><span class="p">$</span> curl -fsSL https://allmystuff.works/install.sh | sh</div>
+        </div>
+        <div class="cmd">
+          <div class="head"><span>Windows — the one-liner</span><span>powershell</span></div>
+          <div class="body"><span class="p">PS&gt;</span> irm https://allmystuff.works/install.ps1 | iex</div>
+        </div>
+      </div>
+      <p class="note" style="margin-top: 14px;">Piping the internet into a shell deserves suspicion — <a href="#script" style="color: var(--accent);">here's exactly what the script does</a>, and <a href="https://github.com/mrjeeves/allmystuff.works/blob/main/install.sh" style="color: var(--accent);">its source</a>.</p>
+    </div>
+  </header>
+
+  <!-- ════════ PLATFORMS ════════ -->
+  <section class="section" style="padding-top: 0;">
+    <div class="wrap">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: 20px; align-items: stretch;">
+
+        <!-- Linux -->
+        <div class="dl-card" style="border-color: var(--accent-line); box-shadow: 0 14px 40px -12px oklch(0.64 0.255 350 / 0.2);">
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px;">
+            <h3>Linux</h3>
+            <span class="chip" style="padding: 4px 9px; font-size: 10px;"><span class="dot"></span>Reference platform</span>
+          </div>
+          <div class="dl-list">
+            <div class="dl-row"><span>AppImage <span class="meta">· x86_64</span></span><a data-asset-end="_amd64.AppImage" href="https://github.com/mrjeeves/AllMyStuff/releases/latest">Download</a></div>
+            <div class="dl-row"><span>AppImage <span class="meta">· arm64</span></span><a data-asset-end="_aarch64.AppImage" href="https://github.com/mrjeeves/AllMyStuff/releases/latest">Download</a></div>
+            <div class="dl-row"><span>.deb <span class="meta">· amd64 / arm64</span></span><span><a data-asset-end="_amd64.deb" href="https://github.com/mrjeeves/AllMyStuff/releases/latest">amd64</a> · <a data-asset-end="_arm64.deb" href="https://github.com/mrjeeves/AllMyStuff/releases/latest">arm64</a></span></div>
+            <div class="dl-row"><span>.rpm <span class="meta">· x86_64 / aarch64</span></span><span><a data-asset-end=".x86_64.rpm" href="https://github.com/mrjeeves/AllMyStuff/releases/latest">x86_64</a> · <a data-asset-end=".aarch64.rpm" href="https://github.com/mrjeeves/AllMyStuff/releases/latest">aarch64</a></span></div>
+          </div>
+          <p class="note" style="margin: 0;">Or just run the one-liner — it grabs the right build for your machine.</p>
+        </div>
+
+        <!-- macOS -->
+        <div class="dl-card">
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px;">
+            <h3>macOS</h3>
+            <span class="note">11+</span>
+          </div>
+          <div class="dl-list">
+            <div class="dl-row"><span>.dmg <span class="meta">· Apple silicon</span></span><a data-asset-end="_aarch64.dmg" href="https://github.com/mrjeeves/AllMyStuff/releases/latest">Download</a></div>
+            <div class="dl-row"><span>.dmg <span class="meta">· Intel</span></span><a data-asset-end="_x64.dmg" href="https://github.com/mrjeeves/AllMyStuff/releases/latest">Download</a></div>
+            <div class="dl-row"><span>.app bundle <span class="meta">· Apple silicon</span></span><a href="https://github.com/mrjeeves/AllMyStuff/releases/latest/download/AllMyStuff_aarch64.app.tar.gz">Download</a></div>
+            <div class="dl-row"><span>.app bundle <span class="meta">· Intel</span></span><a href="https://github.com/mrjeeves/AllMyStuff/releases/latest/download/AllMyStuff_x64.app.tar.gz">Download</a></div>
+          </div>
+          <p class="note" style="margin: 0;">Builds aren't notarized yet — first launch is right-click → Open. We'd rather ship you the app than rent a yearly stamp.</p>
+        </div>
+
+        <!-- Windows -->
+        <div class="dl-card">
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px;">
+            <h3>Windows</h3>
+            <span class="note">10 / 11 · x64</span>
+          </div>
+          <div class="dl-list">
+            <div class="dl-row"><span>Installer <span class="meta">· setup.exe</span></span><a data-asset-end="-setup.exe" href="https://github.com/mrjeeves/AllMyStuff/releases/latest">Download</a></div>
+            <div class="dl-row"><span>.msi <span class="meta">· for deployment</span></span><a data-asset-end="_en-US.msi" href="https://github.com/mrjeeves/AllMyStuff/releases/latest">Download</a></div>
+            <div class="dl-row"><span>Portable GUI <span class="meta">· zip</span></span><a href="https://github.com/mrjeeves/AllMyStuff/releases/latest/download/allmystuff-gui-windows-x86_64.zip">Download</a></div>
+          </div>
+          <p class="note" style="margin: 0;">The PowerShell one-liner downloads the installer and runs it.</p>
+        </div>
+      </div>
+
+      <!-- CLI -->
+      <div style="margin-top: 20px; background: linear-gradient(180deg, var(--surface), var(--bg-2)); border: 1px solid var(--border); border-radius: 8px; padding: 26px 24px;">
+        <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 14px; flex-wrap: wrap; margin-bottom: 14px;">
+          <h3 style="font-family: var(--font-display); font-size: 24px; font-weight: 600; margin: 0;">Headless? There's a CLI.</h3>
+          <span class="note">scan · capabilities · the same mesh — for servers and the NAS in the closet</span>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 8px;">
+          <div class="dl-row"><span>Linux <span class="meta">· x86_64 / aarch64</span></span><span><a href="https://github.com/mrjeeves/AllMyStuff/releases/latest/download/allmystuff-linux-x86_64.tar.gz">x86_64</a> · <a href="https://github.com/mrjeeves/AllMyStuff/releases/latest/download/allmystuff-linux-aarch64.tar.gz">aarch64</a></span></div>
+          <div class="dl-row"><span>macOS <span class="meta">· arm / intel</span></span><span><a href="https://github.com/mrjeeves/AllMyStuff/releases/latest/download/allmystuff-macos-aarch64.tar.gz">arm</a> · <a href="https://github.com/mrjeeves/AllMyStuff/releases/latest/download/allmystuff-macos-x86_64.tar.gz">intel</a></span></div>
+          <div class="dl-row"><span>Windows <span class="meta">· x64 zip</span></span><a href="https://github.com/mrjeeves/AllMyStuff/releases/latest/download/allmystuff-windows-x86_64.zip">Download</a></div>
+        </div>
+        <p class="note" style="margin: 14px 0 0;">`curl -fsSL https://allmystuff.works/install.sh | sh -s -- --cli-only` installs just the CLI.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ WHAT THE SCRIPT DOES ════════ -->
+  <section id="script" class="section" style="background: var(--bg-2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+    <div class="wrap" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr)); gap: clamp(28px, 4vw, 56px);">
+      <div>
+        <span class="eyebrow">No surprises</span>
+        <h2 class="display-m" style="margin: 14px 0 14px;">What the one-liner actually does.</h2>
+        <ol style="display: grid; gap: 10px; font-size: 15px; color: var(--dim); line-height: 1.6; padding-left: 20px; margin: 0;">
+          <li>Detects your OS and CPU, and picks the matching build from the <a href="https://github.com/mrjeeves/AllMyStuff/releases/latest" style="color: var(--accent);">latest GitHub release</a> — nothing is hosted anywhere else.</li>
+          <li>Downloads it over HTTPS and <strong style="color: var(--text);">verifies the SHA-256 sidecar</strong> for every asset that publishes one (all portable archives do).</li>
+          <li>Linux: installs the AppImage to <code style="font-family: var(--font-mono); font-size: 13px;">~/.local/bin</code> and writes a desktop entry. macOS: unpacks the .app into <code style="font-family: var(--font-mono); font-size: 13px;">/Applications</code> (or <code style="font-family: var(--font-mono); font-size: 13px;">~/Applications</code>).</li>
+          <li>Installs the <code style="font-family: var(--font-mono); font-size: 13px;">allmystuff</code> CLI next to it and tells you if that directory isn't on your PATH.</li>
+        </ol>
+        <p style="font-size: 15px; color: var(--dim); line-height: 1.6; margin: 16px 0 0;">No root, no telemetry, no account, nothing modified outside those directories. Uninstalling is deleting the files it printed.</p>
+      </div>
+      <div>
+        <span class="eyebrow">Verify anything</span>
+        <h2 class="display-m" style="margin: 14px 0 14px;">Checksums ship with every asset.</h2>
+        <p style="font-size: 15px; color: var(--dim); line-height: 1.6; margin-bottom: 16px;">Every portable archive has a <code style="font-family: var(--font-mono); font-size: 13px;">.sha256</code> sidecar in the release. Two commands, any platform:</p>
+        <div class="cmd" style="margin-bottom: 10px;">
+          <div class="head"><span>verify a download</span><span>sh</span></div>
+          <div class="body"><span class="p">$</span> curl -fsSLO https://github.com/mrjeeves/AllMyStuff/releases/latest/download/allmystuff-linux-x86_64.tar.gz.sha256<br><span class="p">$</span> sha256sum -c allmystuff-linux-x86_64.tar.gz.sha256</div>
+        </div>
+        <p class="note">macOS: use `shasum -a 256 -c`. Windows: `Get-FileHash` and compare. The source for every build is <a href="https://github.com/mrjeeves/AllMyStuff" style="color: var(--accent);">on GitHub</a> — MIT, build it yourself if you'd rather.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ AFTER ════════ -->
+  <section class="section">
+    <div class="wrap" style="max-width: min(880px, 92vw);">
+      <span class="eyebrow">After install</span>
+      <h2 class="display-m" style="margin: 14px 0 18px;">Three minutes to a working mesh.</h2>
+      <div style="display: grid; gap: 0; border-top: 1px solid var(--border);">
+        <div style="display: flex; gap: 16px; padding: 16px 4px; border-bottom: 1px solid var(--border); align-items: baseline;">
+          <span style="font-family: var(--font-mono); font-size: 11px; color: var(--accent); flex-shrink: 0;">01</span>
+          <p style="margin: 0; font-size: 15px; color: var(--dim); line-height: 1.6;">Open the app. It scans the machine it's on — screens, mics, cameras, disks, input — and puts it on your graph. No account step exists.</p>
+        </div>
+        <div style="display: flex; gap: 16px; padding: 16px 4px; border-bottom: 1px solid var(--border); align-items: baseline;">
+          <span style="font-family: var(--font-mono); font-size: 11px; color: var(--accent); flex-shrink: 0;">02</span>
+          <p style="margin: 0; font-size: 15px; color: var(--dim); line-height: 1.6;">Install it on the next device. Claim it into your fleet with the code both screens show you — read it aloud, tap, done.</p>
+        </div>
+        <div style="display: flex; gap: 16px; padding: 16px 4px; border-bottom: 1px solid var(--border); align-items: baseline;">
+          <span style="font-family: var(--font-mono); font-size: 11px; color: var(--accent); flex-shrink: 0;">03</span>
+          <p style="margin: 0; font-size: 15px; color: var(--dim); line-height: 1.6;">That's the mesh. Consoles, terminals, and files now work between them — at home or across the planet. Repeat for everything you own.</p>
+        </div>
+      </div>
+      <div style="display: flex; gap: 14px; margin-top: 26px; flex-wrap: wrap;">
+        <a class="btn btn-ghost" href="../#software">See what it does <span aria-hidden="true">→</span></a>
+        <a class="btn btn-ghost" href="../hardware/">Add a witness for the machines that die <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ FOOTER ════════ -->
+  <footer style="border-top: 1px solid var(--border); padding: clamp(36px, 4vw, 52px) 0 32px;">
+    <div class="wrap" style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <img src="../assets/cec-logo.png" alt="Critical Error Computing" style="height: 26px; width: auto;">
+        <span style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);">A Critical Error Computing product · Humble, TX</span>
+      </div>
+      <div style="display: flex; gap: 18px; flex-wrap: wrap;">
+        <a href="../" style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim);">allmystuff.works</a>
+        <a href="https://github.com/mrjeeves/AllMyStuff/releases" style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim);">All releases</a>
+        <a href="https://github.com/mrjeeves/AllMyStuff" style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim);">GitHub</a>
+      </div>
+      <span style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);">© 2026 allmystuff.works · MIT</span>
+    </div>
+  </footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  // Progressive enhancement: resolve versioned asset links from the latest
+  // release so the buttons download directly. If the API is unreachable,
+  // every link already points at the releases page.
+  fetch("https://api.github.com/repos/mrjeeves/AllMyStuff/releases/latest")
+    .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(function (rel) {
+      var v = document.getElementById("rel-version");
+      if (v && rel.tag_name) v.textContent = rel.tag_name + " · latest";
+      var links = document.querySelectorAll("a[data-asset-end]");
+      links.forEach(function (a) {
+        var end = a.getAttribute("data-asset-end");
+        var hit = (rel.assets || []).find(function (x) { return x.name.endsWith(end); });
+        if (hit) a.href = hit.browser_download_url;
+      });
+    })
+    .catch(function () { /* static fallbacks stand */ });
+})();
+</script>
+</body>
+</html>
