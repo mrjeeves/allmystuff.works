@@ -10,4 +10,4 @@ Static site, no build step.
 
 Notes:
 - `support.js` loads React 18 from unpkg at runtime (pinned + SRI), so visitors need to be online — which they are, it's a website.
-- An empty `.nojekyll` file is included so GitHub Pages serves the `_ds/` folder (Jekyll normally ignores `_`-prefixed paths).
+- The design-system files live under `ds/cec/` (no underscore-prefixed folders, so it deploys with or without Jekyll).
