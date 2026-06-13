@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Run the servers yourself — your own signaling, STUN & TURN · allmystuff.works</title>
+<meta name="description" content="The free, do-it-yourself Private Line. AllMyStuff already runs the MyOwnMesh daemon — point that same daemon at a box you keep online and your rooms, screens, files and audio ride plumbing only you own. Step by step.">
+<meta name="theme-color" content="#070711">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="icon" sizes="48x48 32x32 16x16" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Run the servers yourself — your own signaling, STUN & TURN">
+<meta property="og:description" content="Host the mesh's introduction layer yourself, free. The same daemon AllMyStuff already runs, on a box you own. Step by step.">
+<meta property="og:url" content="https://allmystuff.works/self-host/">
+<meta property="og:image" content="https://allmystuff.works/og.png">
+<link rel="stylesheet" href="../ds/cec/tokens/fonts.css">
+<link rel="stylesheet" href="../ds/cec/tokens/colors.css">
+<link rel="stylesheet" href="../ds/cec/tokens/typography.css">
+<link rel="stylesheet" href="../ds/cec/tokens/spacing.css">
+<link rel="stylesheet" href="../ds/cec/tokens/base.css">
+<link rel="stylesheet" href="../ds/cec/styles.css">
+<style>
+  body { margin: 0; background: oklch(0.135 0.022 285); }
+  @keyframes amsPulse { 0%, 100% { opacity: 0.55; } 50% { opacity: 1; } }
+
+  /* ---- On-this-page chips ---- */
+  .toc { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 26px; }
+  .toc a { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim); border: 1px solid var(--border); border-radius: 2px; padding: 7px 12px; }
+  .toc a:hover { color: var(--text); border-color: var(--border-bright); }
+
+  /* ---- Role matrix ---- */
+  .roles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 14px; }
+  .role { display: block; background: linear-gradient(180deg, var(--surface), var(--bg-2)); border: 1px solid var(--border); border-radius: 8px; padding: 18px 18px 16px; }
+  a.role { transition: border-color var(--dur-base) ease, transform var(--dur-base) ease; }
+  a.role:hover { border-color: var(--border-bright); transform: translateY(-2px); }
+  .role .top { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 8px; }
+  .role .nm { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.06em; color: var(--text); font-weight: 600; }
+  .role .port { font-family: var(--font-mono); font-size: 11px; color: var(--accent); }
+  .role .port.off { color: var(--faint); }
+  .role p { font-size: 13.5px; color: var(--dim); line-height: 1.5; margin: 0; }
+  .role .badge { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; padding: 2px 7px; border-radius: 2px; }
+  .role .badge.on { background: oklch(0.80 0.17 150 / 0.15); color: var(--ok); }
+  .role .badge.opt { background: var(--surface-2); color: var(--faint); }
+
+  /* ---- Steps ---- */
+  .step { display: grid; grid-template-columns: 40px 1fr; gap: 18px; }
+  .step + .step { margin-top: 30px; }
+  .step-n { font-family: var(--font-display); font-weight: 700; font-size: 20px; color: var(--accent); background: var(--accent-soft); border: 1px solid var(--accent-line); border-radius: 4px; width: 40px; height: 40px; display: grid; place-items: center; line-height: 1; }
+  .step-body h3 { font-family: var(--font-display); font-size: 24px; font-weight: 600; margin: 2px 0 10px; }
+  .step-body p { font-size: 15px; color: var(--dim); line-height: 1.6; margin: 0 0 12px; max-width: 68ch; }
+  .step-body ul { font-size: 15px; color: var(--dim); line-height: 1.6; margin: 0 0 12px; padding-left: 0; list-style: none; display: grid; gap: 8px; max-width: 68ch; }
+  .step-body ul li { display: flex; gap: 10px; }
+  .step-body ul li::before { content: "▸"; color: var(--accent); flex-shrink: 0; }
+  .step-body b, .step-body strong { color: var(--text); font-weight: 600; }
+
+  /* ---- Command / code blocks (from the download page) + copy ---- */
+  .cmd { background: oklch(0.115 0.018 285); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; margin: 4px 0 14px; position: relative; }
+  .cmd .head { display: flex; align-items: center; justify-content: space-between; padding: 9px 14px; border-bottom: 1px solid var(--border); font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); }
+  .cmd .body { padding: 14px 16px; font-family: var(--font-mono); font-size: 13px; color: var(--text); overflow-x: auto; white-space: pre; line-height: 1.7; }
+  .cmd .body.oneline { white-space: nowrap; }
+  .cmd .p { color: var(--faint); }
+  .cmd .c { color: oklch(0.62 0.03 285); }
+  .cmd .v { color: var(--accent); }
+  .cmd .ok { color: var(--ok); }
+  .cmd .dim { color: var(--faint); }
+  .copy-btn { position: absolute; top: 8px; right: 10px; appearance: none; background: var(--surface); border: 1px solid var(--border); border-radius: 3px; cursor: pointer; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim); padding: 5px 11px; transition: color var(--dur-fast) ease, border-color var(--dur-fast) ease; z-index: 2; }
+  .copy-btn:hover { color: var(--text); border-color: var(--border-bright); }
+  .copy-btn.copied { color: var(--ok); border-color: var(--ok); }
+
+  /* Install tabs (download-page wiring) */
+  .term-tab { appearance: none; background: none; border: none; border-bottom: 2px solid transparent; cursor: pointer; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); padding: 9px 13px 7px; }
+  .term-tab:hover { color: var(--dim); }
+  .term-tab[aria-selected="true"] { color: var(--text); border-bottom-color: var(--accent); }
+  .snippet { display: none; }
+  .snippet.active { display: block; }
+
+  /* ---- Callouts ---- */
+  .callout { border: 1px solid var(--border); border-left: 2px solid var(--accent-line); border-radius: 6px; background: var(--bg-2); padding: 14px 16px; margin: 14px 0; font-size: 14px; color: var(--dim); line-height: 1.6; max-width: 72ch; }
+  .callout.warn { border-left-color: var(--warn); }
+  .callout .lbl { display: block; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 5px; }
+  .callout.warn .lbl { color: var(--warn); }
+  .callout b { color: var(--text); }
+
+  /* ---- App-flow path pills ---- */
+  .path { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 12px; color: var(--text); background: var(--surface); border: 1px solid var(--border); border-radius: 4px; padding: 8px 12px; margin: 4px 0 12px; }
+  .path .sep { color: var(--accent); }
+
+  /* ---- Key/value reference ---- */
+  .kv { display: grid; grid-template-columns: 230px 1fr; gap: 0 24px; }
+  @media (max-width: 720px) { .kv { grid-template-columns: 1fr; } }
+  .kv dt { font-family: var(--font-mono); font-size: 12.5px; color: var(--accent); padding: 10px 0 2px; }
+  .kv dd { font-size: 14px; color: var(--dim); line-height: 1.5; margin: 0; padding: 10px 0 2px; border-top: 1px solid var(--border); }
+  @media (max-width: 720px) { .kv dd { border-top: none; padding-top: 0; } }
+
+  code { font-family: var(--font-mono); font-size: 0.88em; background: var(--surface); padding: 1px 5px; border-radius: 3px; }
+</style>
+</head>
+<body>
+<div style="min-height: 100vh; background: var(--bg); color: var(--text); font-family: var(--font-body); overflow-x: clip;">
+
+  <!-- ════════ NAV ════════ -->
+  <nav style="position: sticky; top: 0; z-index: 50; background: oklch(0.135 0.022 285 / 0.74); backdrop-filter: blur(14px) saturate(1.2); border-bottom: 1px solid var(--border);">
+    <div class="wrap" style="display: flex; align-items: center; justify-content: space-between; height: 66px; gap: 18px;">
+      <a href="../" style="display: flex; align-items: center; gap: 11px;">
+        <svg viewBox="0 0 256 256" aria-hidden="true" style="width: 30px; height: 30px; color: var(--accent);">
+          <g stroke="currentColor" stroke-width="13" fill="none" stroke-linecap="round">
+            <path d="M128 74 L77 165 M128 74 L181 160 M77 165 L181 160"></path>
+          </g>
+          <circle cx="128" cy="72" r="27" fill="currentColor"></circle>
+          <circle cx="76" cy="166" r="22" fill="currentColor"></circle>
+          <circle cx="182" cy="160" r="22" fill="currentColor"></circle>
+        </svg>
+        <span style="font-family: var(--font-display); font-weight: 700; font-size: 20px; letter-spacing: 0.01em;">allmystuff<span style="color: var(--dim); font-weight: 500;">.works</span></span>
+      </a>
+      <div style="display: flex; gap: 22px; align-items: center;">
+        <a href="../software/" style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim);">The software</a>
+        <a href="../hardware/" style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim);">The hardware</a>
+        <a href="../service/" style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim);">The service</a>
+        <a href="../faq/" style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim);">FAQ</a>
+      </div>
+      <div style="display: flex; gap: 12px; align-items: center;">
+        <span class="chip"><span class="dot"></span>$0 · MIT</span>
+        <a class="btn btn-primary btn-sm rep-cue" href="../download/">Get the app free</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ════════ HERO ════════ -->
+  <header style="position: relative; padding: clamp(52px, 7vw, 92px) 0 clamp(44px, 6vw, 76px); overflow: hidden;">
+    <div class="grid-bg"></div>
+    <div class="glow" style="width: 560px; height: 460px; left: -10%; top: -12%; background: var(--violet); opacity: 0.16;"></div>
+    <div class="glow" style="width: 440px; height: 380px; right: -8%; bottom: -22%; background: var(--accent); opacity: 0.10;"></div>
+    <div class="wrap" style="position: relative; z-index: 2; max-width: 880px;">
+      <span class="eyebrow no-rule">Self-hosting · the do-it-yourself Private Line · $0</span>
+      <h1 style="font-family: var(--font-display); font-weight: 700; font-size: clamp(40px, 5.4vw, 74px); line-height: 1.02; letter-spacing: -0.01em; margin: 20px 0 22px; text-wrap: pretty;">Run the introduction layer yourself.</h1>
+      <p class="lede" style="max-width: 64ch; margin: 0 0 14px;">AllMyStuff already runs a <b style="color:var(--text);font-weight:600;">MyOwnMesh</b> daemon for you — that's the open-source mesh your rooms, screens, files and audio ride on. Point that same daemon at a box you keep online, and the signaling, STUN and TURN that introduce your devices become <em style="color:var(--text);font-style:normal;">yours</em>.</p>
+      <p style="font-size: 16px; color: var(--faint); max-width: 60ch; line-height: 1.55; margin: 0 0 30px;">It's the <a href="../service/#private-line" style="color:var(--accent);">Private Line</a>, built by hand instead of rented — same job, $0, MIT-licensed. Here's the whole thing, step by step.</p>
+      <div style="display: flex; gap: 14px; align-items: center; flex-wrap: wrap;">
+        <a class="btn btn-primary" href="#steps">Start the walkthrough <span aria-hidden="true">↓</span></a>
+        <a class="btn btn-ghost" href="../service/#private-line">Rather we ran it? The Private Line →</a>
+      </div>
+      <nav class="toc" aria-label="On this page">
+        <a href="#what">What it is</a>
+        <a href="#steps">Host the servers</a>
+        <a href="#point">Point AllMyStuff at it</a>
+        <a href="#sealed">A sealed fleet</a>
+        <a href="#verify">Verify &amp; fix</a>
+        <a href="#reference">Reference</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ════════ WHAT IT IS ════════ -->
+  <section id="what" class="section" style="background: var(--bg-2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+    <div class="wrap">
+      <div style="max-width: 840px; margin-bottom: clamp(32px, 4vw, 46px);">
+        <span class="eyebrow">The shape of it · what "server mode" means</span>
+        <h2 class="display-l" style="margin: 16px 0 18px;">One daemon. A handful of roles.</h2>
+        <p class="lede">There's no separate "server" download. The MyOwnMesh daemon under AllMyStuff is <em style="color:var(--text);font-style:normal;">any combination</em> of a regular member and the infrastructure roles it hosts for everyone else. You turn roles on; it starts the listeners and advertises them so your other machines find them on their own. Roles are device-wide — one box can serve your whole fleet.</p>
+      </div>
+      <div class="roles">
+        <div class="role">
+          <div class="top"><span class="nm">node</span><span class="badge on">on by default</span></div>
+          <p>Be a normal member. Turn it <b>off</b> on a dedicated box so it hosts services and joins nothing — pure infrastructure.</p>
+        </div>
+        <div class="role">
+          <div class="top"><span class="nm">signaling</span><span class="port">:4848</span></div>
+          <p>Where two devices find each other — a self-hosted relay your fleet uses instead of the shared one. Safe to run publicly (built-in flood limits).</p>
+        </div>
+        <div class="role">
+          <div class="top"><span class="nm">stun</span><span class="port">:3478</span></div>
+          <p>Tells a device the address the world sees it on, so peers can punch a direct path. No auth, nothing stored.</p>
+        </div>
+        <div class="role">
+          <div class="top"><span class="nm">turn</span><span class="port">:3478</span></div>
+          <p>The fallback relay for devices behind hard NAT (phone hotspots, CGNAT). Answers STUN too, so it covers both on one port.</p>
+        </div>
+        <div class="role">
+          <div class="top"><span class="nm">relay</span><span class="badge opt">optional</span></div>
+          <p>Application-layer routing between your <em>approved</em> devices. Off by default; needs <code>node</code> on. Most fleets don't need it.</p>
+        </div>
+      </div>
+      <p style="margin-top: 20px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint);">For a typical home fleet, <b style="color:var(--text)">signaling + TURN on one box</b> is the whole job — TURN gives you STUN for free on the same port.</p>
+    </div>
+  </section>
+
+  <!-- ════════ HOST THE SERVERS ════════ -->
+  <section id="steps" class="section">
+    <div class="wrap">
+      <div style="max-width: 840px; margin-bottom: clamp(36px, 4.5vw, 52px);">
+        <span class="eyebrow">Part 1 of 2 · on a box you keep online</span>
+        <h2 class="display-l" style="margin: 16px 0 18px;">Host the servers.</h2>
+        <p class="lede">Pick a machine that's always on — a $5 VPS, a Pi in the closet, a spare mini-PC. It doesn't run AllMyStuff; it just runs the MyOwnMesh daemon. We'll take it to a public, TLS-secured signaling relay with STUN + TURN, running as a service that survives reboot.</p>
+      </div>
+
+      <!-- STEP 1 -->
+      <div class="step">
+        <div class="step-n">1</div>
+        <div class="step-body">
+          <h3>Put the daemon on the box</h3>
+          <p>The mesh under AllMyStuff is <a href="https://github.com/mrjeeves/MyOwnMesh" style="color:var(--accent)">MyOwnMesh</a> — free and MIT. On your server, install just the daemon (no desktop app needed to host):</p>
+          <div style="display:flex;gap:2px;border-bottom:1px solid var(--border);margin-bottom:0;">
+            <button type="button" class="term-tab" data-os="unix" role="tab" aria-selected="true">macOS / Linux</button>
+            <button type="button" class="term-tab" data-os="windows" role="tab" aria-selected="false">Windows</button>
+            <button type="button" class="term-tab" data-os="source" role="tab" aria-selected="false">From source</button>
+          </div>
+          <div class="snippet active" data-os="unix">
+            <div class="cmd"><div class="body oneline"><span class="c"># daemon only — no desktop GUI</span>
+<span class="p">$</span> curl -fsSL https://myownmesh.net/install.sh | sh -s -- --no-gui</div>
+            <button type="button" class="copy-btn" data-copy="curl -fsSL https://myownmesh.net/install.sh | sh -s -- --no-gui" aria-label="Copy install command">copy</button></div>
+          </div>
+          <div class="snippet" data-os="windows">
+            <div class="cmd"><div class="body oneline"><span class="c"># Windows (PowerShell) — daemon only</span>
+<span class="p">PS&gt;</span> iex "&amp; { $(irm https://myownmesh.net/install.ps1) } -NoGui"</div>
+            <button type="button" class="copy-btn" data-copy='iex "&amp; { $(irm https://myownmesh.net/install.ps1) } -NoGui"' aria-label="Copy install command">copy</button></div>
+          </div>
+          <div class="snippet" data-os="source">
+            <div class="cmd"><div class="body"><span class="c"># needs cargo — https://rustup.rs</span>
+<span class="p">$</span> git clone https://github.com/mrjeeves/MyOwnMesh
+<span class="p">$</span> cd MyOwnMesh
+<span class="p">$</span> cargo install --path crates/myownmesh</div>
+            <button type="button" class="copy-btn" data-copy="git clone https://github.com/mrjeeves/MyOwnMesh&#10;cd MyOwnMesh&#10;cargo install --path crates/myownmesh" aria-label="Copy build commands">copy</button></div>
+          </div>
+          <p>Run it once in the foreground to confirm it starts (we make it permanent in step 6):</p>
+          <div class="cmd"><div class="body oneline"><span class="p">$</span> myownmesh serve</div>
+          <button type="button" class="copy-btn" data-copy="myownmesh serve" aria-label="Copy command">copy</button></div>
+        </div>
+      </div>
+
+      <!-- STEP 2 -->
+      <div class="step">
+        <div class="step-n">2</div>
+        <div class="step-body">
+          <h3>Make it pure infrastructure</h3>
+          <p>A dedicated relay box shouldn't be a member of your fleet — it should just carry introductions. Turn <code>node</code> off so it hosts services and joins nothing:</p>
+          <div class="cmd"><div class="body oneline"><span class="c"># host services, join no networks</span>
+<span class="p">$</span> myownmesh ctl services disable node</div>
+          <button type="button" class="copy-btn" data-copy="myownmesh ctl services disable node" aria-label="Copy command">copy</button></div>
+          <p><code>ctl</code> talks to a running daemon over its local socket, so keep <code>myownmesh serve</code> running in another shell while you configure (or jump to step 6 and run it as a service first).</p>
+        </div>
+      </div>
+
+      <!-- STEP 3 -->
+      <div class="step">
+        <div class="step-n">3</div>
+        <div class="step-body">
+          <h3>Turn on signaling, STUN &amp; TURN</h3>
+          <p>The simple on/off is one command each. STUN comes free with TURN, so you usually only enable the two:</p>
+          <div class="cmd"><div class="body"><span class="p">$</span> myownmesh ctl services enable signaling
+<span class="p">$</span> myownmesh ctl services enable turn        <span class="c"># answers STUN on the same port</span>
+<span class="p">$</span> myownmesh ctl services status</div>
+          <button type="button" class="copy-btn" data-copy="myownmesh ctl services enable signaling&#10;myownmesh ctl services enable turn&#10;myownmesh ctl services status" aria-label="Copy commands">copy</button></div>
+          <p>TURN needs a couple of things the on/off toggle can't set — a login and the box's public IP. Open the config (<code>myownmesh config edit</code>) and fill in the <code>turn</code> block:</p>
+          <div class="cmd"><div class="head"><span>~/.myownmesh/config.json</span></div><div class="body"><span class="c">// only the bits you must set are shown</span>
+{
+  "services": {
+    "signaling": { "enabled": true, "bind": "0.0.0.0", "port": 4848 },
+    "turn": {
+      "enabled": true,
+      "bind": "0.0.0.0",
+      "port": 3478,
+      "public_ip": "<span class="v">203.0.113.7</span>",          <span class="c">// this box's routable IP</span>
+      "realm": "myownmesh",
+      "credentials": [
+        { "username": "<span class="v">alice</span>", "password": "<span class="v">use-a-real-secret</span>" }
+      ]
+    }
+  }
+}</div></div>
+          <div class="callout"><span class="lbl">Heads up</span><code>node</code> defaults on and signaling ships safe flood-limit defaults, so neither needs to appear by hand. After editing the file, restart the daemon — or re-apply live from the CLI / the desktop GUI's <b>Settings → Services</b>.</div>
+        </div>
+      </div>
+
+      <!-- STEP 4 -->
+      <div class="step">
+        <div class="step-n">4</div>
+        <div class="step-body">
+          <h3>Open the UDP ports — the step everyone misses</h3>
+          <p><code>:3478</code> is only TURN's <em>control</em> channel. Every relayed connection flows through a <em>separate</em> UDP port, drawn from the OS ephemeral range by default — so you open that whole range too. The <code>enable turn</code> command prints the exact list:</p>
+          <div class="cmd"><div class="body"><span class="p">$</span> myownmesh ctl services enable turn
+TURN is on. For NAT'd peers to actually relay, these UDP ports must be
+reachable — at the host firewall <span class="v">AND</span> your cloud security group:
+  • udp <span class="v">3478</span>  — STUN/TURN control
+  • udp <span class="dim">&lt;OS ephemeral range&gt;</span>  — relay allocations (one port per peer)
+    find your range:  sysctl net.ipv4.ip_local_port_range   (e.g. 32768 60999)
+  <span class="ok">$</span> sudo ufw allow 3478/udp
+  <span class="ok">$</span> sudo ufw allow 32768:60999/udp</div></div>
+          <div class="callout warn"><span class="lbl">Why nothing connects</span>A host firewall reading <code>inactive</code> does <b>not</b> mean your cloud provider lets the packets in — open the ports in the <b>security group too</b>. Forgetting the UDP range is exactly why clients show <code>0 srflx · 0 relay</code> candidates and fall back to nothing.</div>
+          <ul>
+            <li><b>No credential, no TURN.</b> It won't start without at least one username/password — it'll show <em>enabled, not running</em>.</li>
+            <li><b>No public IP on a wildcard bind, no TURN.</b> It can't guess its own routable address.</li>
+            <li><b>Smaller firewall rule?</b> Pin <code>relay_port_min</code>/<code>relay_port_max</code> (e.g. <code>49152</code>–<code>65535</code>) and open only that range.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- STEP 5 -->
+      <div class="step">
+        <div class="step-n">5</div>
+        <div class="step-body">
+          <h3>Give signaling a name and a padlock</h3>
+          <p>The relay speaks plain <code>ws://</code>. For your fleet to reach it from anywhere you want TLS on 443 (<code>wss://</code>, which also slips through restrictive networks). One command installs Caddy, writes the proxy, locks the relay to loopback, and starts it:</p>
+          <div class="cmd"><div class="body oneline"><span class="p">$</span> myownmesh install caddy relay.example.com</div>
+          <button type="button" class="copy-btn" data-copy="myownmesh install caddy relay.example.com" aria-label="Copy command">copy</button></div>
+          <div class="cmd"><div class="head"><span>go public over wss:// — one command</span></div><div class="body"><span class="p">$</span> myownmesh install caddy relay.example.com
+<span class="ok">✓</span> Caddy installed.
+<span class="ok">✓</span> Wrote reverse-proxy block to /etc/caddy/Caddyfile
+<span class="ok">✓</span> Caddy service is running with the new config.
+<span class="ok">✓</span> Relay enabled and bound to 127.0.0.1 (reachable only via Caddy).
+Done. Peers can now point at  <span class="v">wss://relay.example.com</span></div></div>
+          <p>Two things still have to be true for the certificate to come up:</p>
+          <ul>
+            <li><b>DNS</b> — an A/AAAA record for the hostname points at this box.</li>
+            <li><b>Firewall</b> — inbound TCP <b>80 and 443</b> open (Caddy needs 80 for the certificate challenge).</li>
+          </ul>
+          <div class="callout warn"><span class="lbl">Give it its own subdomain</span>Point your fleet at the <b>relay's</b> hostname — a box that runs the daemon. A static site can't host a WebSocket server, so <code>wss://</code> a marketing domain hits the website, not a relay. Use a dedicated name like <code>relay.example.com</code> that resolves to your server.</div>
+        </div>
+      </div>
+
+      <!-- STEP 6 -->
+      <div class="step">
+        <div class="step-n">6</div>
+        <div class="step-body">
+          <h3>Keep it running forever</h3>
+          <p>Register the daemon with the box's init system — systemd on Linux, launchd on macOS — so it comes back after a reboot:</p>
+          <div class="cmd"><div class="body"><span class="c"># per-user: no root, starts at login</span>
+<span class="p">$</span> myownmesh service install
+
+<span class="c"># or system-wide: root, starts at boot — best for a headless server</span>
+<span class="p">$</span> sudo myownmesh service --system install</div>
+          <button type="button" class="copy-btn" data-copy="myownmesh service install&#10;# or, system-wide:&#10;sudo myownmesh service --system install" aria-label="Copy commands">copy</button></div>
+          <p><code>service status</code> shows installed / enabled / running; <code>start</code>, <code>stop</code>, <code>restart</code>, <code>uninstall</code> do the rest. That's the box done — now point your devices at it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ POINT ALLMYSTUFF AT IT ════════ -->
+  <section id="point" class="section" style="background: var(--bg-2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+    <div class="wrap">
+      <div style="max-width: 840px; margin-bottom: clamp(32px, 4vw, 46px);">
+        <span class="eyebrow">Part 2 of 2 · in the app, on every machine</span>
+        <h2 class="display-l" style="margin: 16px 0 18px;">Point AllMyStuff at your servers.</h2>
+        <p class="lede">No config files on this side — it's a settings panel. In the desktop app, open <b style="color:var(--text)">Settings → Networks</b>, pick your network, and open its <b style="color:var(--text)">Servers</b> editor.</p>
+      </div>
+      <div class="path"><span>Settings</span><span class="sep">›</span><span>Networks</span><span class="sep">›</span><span>your network</span><span class="sep">›</span><span>Servers</span></div>
+      <p style="font-size:15px;color:var(--dim);line-height:1.6;max-width:68ch;margin:0 0 18px;">Replace the three lists with your own box, then <b style="color:var(--text)">Save &amp; reconnect</b>:</p>
+      <ul class="step-body" style="max-width:68ch;list-style:none;padding:0;display:grid;gap:8px;font-size:15px;color:var(--dim);line-height:1.6;">
+        <li style="display:flex;gap:10px;"><span style="color:var(--accent);flex-shrink:0;">▸</span><span><b style="color:var(--text)">Signaling relays</b> → <code>wss://relay.example.com</code> (no port — 443). This is the one that matters most: both ends of a network must share a signaling relay to find each other.</span></li>
+        <li style="display:flex;gap:10px;"><span style="color:var(--accent);flex-shrink:0;">▸</span><span><b style="color:var(--text)">STUN servers</b> → <code>stun:relay.example.com:3478</code>.</span></li>
+        <li style="display:flex;gap:10px;"><span style="color:var(--accent);flex-shrink:0;">▸</span><span><b style="color:var(--text)">TURN servers</b> → <code>turn:relay.example.com:3478</code>, with the <b style="color:var(--text)">username</b> and <b style="color:var(--text)">credential</b> you set in step 3.</span></li>
+      </ul>
+      <div class="callout"><span class="lbl">Do it on every machine</span>Each device in your fleet keeps its own server list. Set the same three on every machine that talks to the others — phone, laptop, the lot. The app's <b>Reset to MyOwnMesh defaults</b> button is always there if you want to fall back to the shared servers.</div>
+      <p style="margin-top: 8px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint);">Headless box with no app? Set the same three under each network's <code>signaling.servers</code> / <code>stun_servers</code> / <code>turn_servers</code> in its <code>config.json</code>.</p>
+    </div>
+  </section>
+
+  <!-- ════════ SEALED FLEET ════════ -->
+  <section id="sealed" class="section">
+    <div class="wrap">
+      <div style="max-width: 840px; margin-bottom: clamp(28px, 3.5vw, 42px);">
+        <span class="eyebrow">The payoff</span>
+        <h2 class="display-l" style="margin: 16px 0 18px;">A fleet that touches nothing you don't own.</h2>
+        <p class="lede">Point signaling, STUN and TURN all at your own box and turn off the public fallback, and your devices introduce themselves entirely on infrastructure you control — no shared servers, no third parties in the path.</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 16px;">
+        <div style="background: linear-gradient(180deg, var(--surface), var(--bg-2)); border: 1px solid var(--border); border-radius: 8px; padding: 22px;">
+          <div style="font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 9px;">your servers only</div>
+          <p style="font-size: 14px; color: var(--dim); line-height: 1.6; margin: 0;">Set the signaling list to your <code>wss://</code> host and clear the public fallback (<code>public_fallback: false</code> in config). STUN/TURN as explicit lists pointing only at your box.</p>
+        </div>
+        <div style="background: linear-gradient(180deg, var(--surface), var(--bg-2)); border: 1px solid var(--border); border-radius: 8px; padding: 22px;">
+          <div style="font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 9px;">trust is unchanged</div>
+          <p style="font-size: 14px; color: var(--dim); line-height: 1.6; margin: 0;">Who-is-who is proved with signatures over the encrypted channel, no matter who runs signaling. A relay only ever introduces devices — it never sees your screens, files or audio, and can't forge a device.</p>
+        </div>
+        <div style="background: linear-gradient(180deg, var(--surface), var(--bg-2)); border: 1px solid var(--border); border-radius: 8px; padding: 22px;">
+          <div style="font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 9px;">it degrades gracefully</div>
+          <p style="font-size: 14px; color: var(--dim); line-height: 1.6; margin: 0;">Your relay is an accelerator, not a single point of failure. If the box goes down and you've left the fallback on, devices drop back to the shared servers and keep working.</p>
+        </div>
+      </div>
+      <p style="margin-top: 22px; font-size: 15px; color: var(--faint); line-height: 1.6; max-width: 70ch;">Want this without keeping a server alive yourself? The <a href="../service/#private-line" style="color:var(--accent)">Private Line</a> is exactly this, run for you at 1&nbsp;Gbps, for $10/mo. Same network model — one is your time, one is your money.</p>
+    </div>
+  </section>
+
+  <!-- ════════ VERIFY ════════ -->
+  <section id="verify" class="section" style="background: var(--bg-2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+    <div class="wrap">
+      <div style="max-width: 840px; margin-bottom: clamp(28px, 3.5vw, 42px);">
+        <span class="eyebrow">Is it working?</span>
+        <h2 class="display-l" style="margin: 16px 0 18px;">Verify it, and fix the usual snags.</h2>
+        <p class="lede">On the server, <code>ctl services status</code> shows what's bound and — for signaling — whether devices are actually reaching you. That separates "nobody's connected yet" from "I'm broken."</p>
+      </div>
+      <div class="cmd"><div class="head"><span>myownmesh ctl services status</span></div><div class="body"><span class="p">$</span> myownmesh ctl services status
+{
+  "node":      { "enabled": <span class="v">false</span>, "joined": <span class="v">0</span> },
+  "signaling": { "enabled": <span class="v">true</span>, "running": <span class="ok">true</span>, "listen": "127.0.0.1:4848",
+                 "activity": { "connections": <span class="v">2</span>, "rooms": <span class="v">1</span>, "events_relayed": <span class="v">42</span> } },
+  "turn":      { "enabled": <span class="v">true</span>, "running": <span class="ok">true</span>, "listen": "0.0.0.0:3478" }
+}</div></div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 16px; margin-top: 22px;">
+        <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 20px;">
+          <h4 style="font-family: var(--font-display); font-size: 17px; margin: 0 0 8px;">Bound, but <code>connections: 0</code></h4>
+          <p style="font-size: 14px; color: var(--dim); line-height: 1.6; margin: 0;">The relay's fine — traffic isn't arriving. Check, in order: <b style="color:var(--text)">DNS</b> (does the name resolve here?), <b style="color:var(--text)">TLS/proxy</b> (run <code>npx wscat -c wss://relay.example.com</code> — expect a connect), then the <b style="color:var(--text)">firewall</b>.</p>
+        </div>
+        <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 20px;">
+          <h4 style="font-family: var(--font-display); font-size: 17px; margin: 0 0 8px;"><code>0 srflx · 0 relay</code> on clients</h4>
+          <p style="font-size: 14px; color: var(--dim); line-height: 1.6; margin: 0;">UDP isn't getting through. You opened 443 for the proxy but not TURN's control port <em>and its relay range</em> — at the host firewall <b style="color:var(--text)">and</b> the cloud security group. Re-run the step-4 checklist.</p>
+        </div>
+        <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 20px;">
+          <h4 style="font-family: var(--font-display); font-size: 17px; margin: 0 0 8px;">TURN: <em>enabled, not running</em></h4>
+          <p style="font-size: 14px; color: var(--dim); line-height: 1.6; margin: 0;">It needs a credential, and a <code>public_ip</code> on a wildcard bind. Set both in <code>config.json</code>, then re-apply or restart the daemon.</p>
+        </div>
+        <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 20px;">
+          <h4 style="font-family: var(--font-display); font-size: 17px; margin: 0 0 8px;">Devices still won't meet</h4>
+          <p style="font-size: 14px; color: var(--dim); line-height: 1.6; margin: 0;">The #1 cause is two machines on <b style="color:var(--text)">different signaling relays</b>. Make sure every device lists the <em>same</em> <code>wss://</code> host under Settings → Networks → Servers.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ REFERENCE ════════ -->
+  <section id="reference" class="section">
+    <div class="wrap">
+      <div style="max-width: 840px; margin-bottom: clamp(28px, 3.5vw, 40px);">
+        <span class="eyebrow">Reference</span>
+        <h2 class="display-l" style="margin: 16px 0 18px;">The knobs, in one place.</h2>
+      </div>
+      <dl class="kv">
+        <dt>signaling.port</dt><dd><code>4848</code>, plain <code>ws://</code>. Front it with Caddy for public <code>wss://</code>.</dd>
+        <dt>stun.port / turn.port</dt><dd><code>3478</code>. Don't run standalone STUN and TURN on the same port — TURN covers both.</dd>
+        <dt>turn.public_ip</dt><dd>Required on a wildcard bind. The routable address handed out for relayed connections.</dd>
+        <dt>turn.credentials</dt><dd>At least one <code>{ username, password }</code>. Mirror a pair into each device's TURN entry.</dd>
+        <dt>turn.relay_port_min / max</dt><dd><code>0</code> = the OS ephemeral range (open it all). Pin a window to shrink the firewall surface.</dd>
+        <dt>turn.max_bps_per_connection</dt><dd>Per-connection byte/sec cap, each direction. <code>0</code> = unlimited.</dd>
+        <dt>signaling.limits</dt><dd>Per-connection flood guards. Defaults: <code>50</code> events/s, <code>20</code> REQ/s, <code>64</code> subs, <code>16</code> filters/REQ, <code>65536</code> bytes, <code>64</code> conns/IP. <code>0</code> = no limit.</dd>
+        <dt>config &amp; state</dt><dd><code>~/.myownmesh/config.json</code>. Move the whole tree with <code>MYOWNMESH_HOME</code>.</dd>
+      </dl>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 14px; margin-top: 32px;">
+        <a class="role" href="https://github.com/mrjeeves/MyOwnMesh/blob/main/docs/SERVICES.md" style="color:inherit;">
+          <div class="top"><span class="nm" style="color:var(--accent)">SERVICES.md</span><span aria-hidden="true" style="color:var(--accent)">↗</span></div>
+          <p>The full operator guide — every field, the discovery model, running a public relay.</p>
+        </a>
+        <a class="role" href="https://github.com/mrjeeves/MyOwnMesh" style="color:inherit;">
+          <div class="top"><span class="nm" style="color:var(--accent)">MyOwnMesh</span><span aria-hidden="true" style="color:var(--accent)">↗</span></div>
+          <p>The mesh under AllMyStuff — pure-Rust, MIT, the daemon you're hosting.</p>
+        </a>
+        <a class="role" href="../service/#private-line" style="color:inherit;">
+          <div class="top"><span class="nm" style="color:var(--accent)">The Private Line</span><span aria-hidden="true" style="color:var(--accent)">→</span></div>
+          <p>The same thing run for you — $10/mo, 1 Gbps, cancel anytime.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ FOOTER ════════ -->
+  <footer style="border-top: 1px solid var(--border); padding: clamp(36px, 4vw, 52px) 0 32px;">
+    <div class="wrap" style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <img src="../assets/cec-logo.png" alt="Critical Error Computing" style="height: 26px; width: auto;">
+        <span style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);">A Critical Error Computing product · Humble, TX</span>
+      </div>
+      <div style="display: flex; gap: 18px; flex-wrap: wrap;">
+        <a href="../" style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim);">allmystuff.works</a>
+        <a href="../service/" style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim);">The service</a>
+        <a href="https://github.com/mrjeeves/MyOwnMesh" style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim);">MyOwnMesh</a>
+      </div>
+      <span style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);">© 2026 allmystuff.works · MIT</span>
+    </div>
+  </footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  // Install tabs + copy buttons — the same wiring the download page uses.
+  function wireTabs() {
+    var tabs = document.querySelectorAll(".term-tab");
+    var snips = document.querySelectorAll(".snippet[data-os]");
+    if (!tabs.length) return;
+    function activate(os) {
+      tabs.forEach(function (t) { t.setAttribute("aria-selected", t.dataset.os === os ? "true" : "false"); });
+      snips.forEach(function (s) { s.classList.toggle("active", s.dataset.os === os); });
+    }
+    tabs.forEach(function (t) { t.addEventListener("click", function () { activate(t.dataset.os); }); });
+    var ua = (navigator.userAgentData && navigator.userAgentData.platform) || navigator.platform || navigator.userAgent || "";
+    activate(/win/i.test(ua) ? "windows" : "unix");
+  }
+  function wireCopy() {
+    function fallback(text) {
+      var ta = document.createElement("textarea");
+      ta.value = text; ta.style.cssText = "position:fixed;top:-9999px";
+      document.body.appendChild(ta); ta.select();
+      var ok = false; try { ok = document.execCommand("copy"); } catch (e) {}
+      ta.remove(); return ok;
+    }
+    document.querySelectorAll(".copy-btn").forEach(function (btn) {
+      btn.dataset.label = btn.textContent;
+      btn.addEventListener("click", function () {
+        var text = btn.dataset.copy || ""; if (!text) return;
+        var finish = function (ok) {
+          btn.textContent = ok ? "copied" : "press ⌘C";
+          btn.classList.add("copied");
+          clearTimeout(btn._t);
+          btn._t = setTimeout(function () { btn.textContent = btn.dataset.label; btn.classList.remove("copied"); }, 1500);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(function () { finish(true); }, function () { finish(fallback(text)); });
+        } else { finish(fallback(text)); }
+      });
+    });
+  }
+  wireTabs();
+  wireCopy();
+})();
+</script>
+</body>
+</html>
