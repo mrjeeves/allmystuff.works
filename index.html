@@ -34,6 +34,22 @@
   @keyframes amsRing { 0% { box-shadow: 0 0 0 0 oklch(0.62 0.20 292 / 0.45); } 70% { box-shadow: 0 0 0 12px transparent; } 100% { box-shadow: 0 0 0 0 transparent; } }
   @keyframes amsScan { 0% { transform: translateY(-100%); } 100% { transform: translateY(100%); } }
   @keyframes amsFlow { to { stroke-dashoffset: -30; } }
+
+  /* ---- Install one-liner: OS tabs + per-snippet copy buttons (same wiring as the download page) ---- */
+  .cmd { background: oklch(0.115 0.018 285); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+  .cmd .head { display: flex; align-items: center; justify-content: space-between; padding: 9px 14px; border-bottom: 1px solid var(--border); font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); }
+  .cmd .body { padding: 15px 16px; font-family: var(--font-mono); font-size: 13px; color: var(--text); overflow-x: auto; white-space: nowrap; }
+  .cmd .body .p { color: var(--faint); }
+  .term-tab { appearance: none; background: none; border: none; border-bottom: 2px solid transparent; cursor: pointer; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); padding: 11px 13px 9px; }
+  .term-tab:hover { color: var(--dim); }
+  .term-tab[aria-selected="true"] { color: var(--text); border-bottom-color: var(--accent); }
+  .term-tab[aria-selected="true"]:hover { color: var(--text); }
+  .snippet { display: none; position: relative; }
+  .snippet.active { display: block; }
+  .snippet .body { padding-right: 96px; }
+  .copy-btn { position: absolute; top: 50%; right: 10px; transform: translateY(-50%); appearance: none; background: var(--surface); border: 1px solid var(--border); border-radius: 3px; cursor: pointer; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim); padding: 5px 11px; transition: color var(--dur-fast) ease, border-color var(--dur-fast) ease; }
+  .copy-btn:hover { color: var(--text); border-color: var(--border-bright); }
+  .copy-btn.copied { color: var(--ok); border-color: var(--ok); }
 </style>
 </helmet>
 <div style="min-height: 100vh; background: var(--bg); color: var(--text); font-family: var(--font-body); overflow-x: clip;">
@@ -60,7 +76,7 @@
         <a href="faq/" style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim);">FAQ</a>
       </div>
       <div style="display: flex; gap: 12px; align-items: center;">
-        <span class="chip"><span class="dot"></span>Open source</span>
+        <a class="chip" href="https://github.com/mrjeeves/AllMyStuff" title="View AllMyStuff on GitHub"><span class="dot"></span>{{ appVersion }}</a>
         <a class="btn btn-primary btn-sm" href="#download">Download free</a>
       </div>
     </div>
@@ -424,12 +440,27 @@
             </div>
           </div>
           <div>
-            <div style="background: oklch(0.115 0.018 285); border: 1px solid var(--border); border-radius: 6px; overflow: hidden;">
-              <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; border-bottom: 1px solid var(--border);">
-                <span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint);">or the one-liner</span>
-                <span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint);">sh</span>
+            <div class="cmd">
+              <div class="head" style="padding: 0 14px 0 0; flex-wrap: wrap;">
+                <div role="tablist" aria-label="Pick your install method" style="display: flex;">
+                  <button type="button" class="term-tab" data-os="unix" role="tab" aria-selected="true">macOS / Linux</button>
+                  <button type="button" class="term-tab" data-os="windows" role="tab" aria-selected="false">Windows</button>
+                  <button type="button" class="term-tab" data-os="source" role="tab" aria-selected="false">From source</button>
+                </div>
+                <span>picked for this machine</span>
               </div>
-              <div style="padding: 18px 16px; font-family: var(--font-mono); font-size: 13.5px; color: var(--text); overflow-x: auto; white-space: nowrap;"><span style="color: var(--faint);">$</span> curl -fsSL https://allmystuff.works/install.sh | sh</div>
+              <div class="snippet active" data-os="unix" role="tabpanel" aria-label="macOS / Linux install command">
+                <div class="body"><span class="p">$</span> curl -fsSL https://allmystuff.works/install.sh | sh</div>
+                <button type="button" class="copy-btn" data-copy="curl -fsSL https://allmystuff.works/install.sh | sh" aria-label="Copy install command">copy</button>
+              </div>
+              <div class="snippet" data-os="windows" role="tabpanel" aria-label="Windows install command">
+                <div class="body"><span class="p">PS&gt;</span> irm https://allmystuff.works/install.ps1 | iex</div>
+                <button type="button" class="copy-btn" data-copy="irm https://allmystuff.works/install.ps1 | iex" aria-label="Copy install command">copy</button>
+              </div>
+              <div class="snippet" data-os="source" role="tabpanel" aria-label="Build from source">
+                <div class="body"><span class="p">$</span> git clone https://github.com/mrjeeves/AllMyStuff<br><span class="p">$</span> cd AllMyStuff<br><span class="p">$</span> cargo install --path crates/allmystuff-cli</div>
+                <button type="button" class="copy-btn" data-copy="git clone https://github.com/mrjeeves/AllMyStuff&#10;cd AllMyStuff&#10;cargo install --path crates/allmystuff-cli" aria-label="Copy build commands">copy</button>
+              </div>
             </div>
             <div style="display: flex; gap: 18px; flex-wrap: wrap; margin-top: 16px;">
               <span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);">✓ free forever</span>
@@ -530,8 +561,10 @@
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
   componentDidMount() {
-    // Live version stamp in the hero, same source as the download page.
-    // The fallback in renderVals stands when the API is unreachable.
+    this.wireInstall();
+    // Live version stamp in the hero and the nav chip, same source as the
+    // download page. The fallback in renderVals stands when the API is
+    // unreachable.
     fetch("https://api.github.com/repos/mrjeeves/AllMyStuff/releases/latest")
       .then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); })
       .then((rel) => {
@@ -539,6 +572,57 @@ class Component extends DCLogic {
         this.setState({ appVersion: rel.tag_name[0] === "v" ? rel.tag_name : "v" + rel.tag_name });
       })
       .catch(() => {});
+  }
+  // Install one-liner: OS tabs + per-snippet copy buttons — the same wiring the
+  // download page uses. These snippet/tab/copy nodes carry no {{ }} bindings,
+  // so React keeps them across the version re-render and the listeners survive.
+  // Guarded so it only wires once.
+  wireInstall() {
+    if (this._installWired) return;
+    this._installWired = true;
+    const tabs = Array.from(document.querySelectorAll(".term-tab"));
+    const snips = Array.from(document.querySelectorAll(".snippet[data-os]"));
+    if (tabs.length) {
+      const activate = (os) => {
+        tabs.forEach((t) => t.setAttribute("aria-selected", t.dataset.os === os ? "true" : "false"));
+        snips.forEach((s) => s.classList.toggle("active", s.dataset.os === os));
+      };
+      tabs.forEach((t) => t.addEventListener("click", () => activate(t.dataset.os)));
+      const ua = (navigator.userAgentData && navigator.userAgentData.platform) || navigator.platform || navigator.userAgent || "";
+      activate(/win/i.test(ua) ? "windows" : "unix");
+    }
+    const fallback = (text) => {
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.style.cssText = "position:fixed;top:-9999px";
+      document.body.appendChild(ta);
+      ta.select();
+      let ok = false;
+      try { ok = document.execCommand("copy"); } catch (e) {}
+      ta.remove();
+      return ok;
+    };
+    document.querySelectorAll(".copy-btn").forEach((btn) => {
+      btn.dataset.label = btn.textContent;
+      btn.addEventListener("click", () => {
+        const text = btn.dataset.copy || "";
+        if (!text) return;
+        const finish = (ok) => {
+          btn.textContent = ok ? "copied" : "press ⌘C";
+          btn.classList.add("copied");
+          clearTimeout(btn._copyTimer);
+          btn._copyTimer = setTimeout(() => {
+            btn.textContent = btn.dataset.label;
+            btn.classList.remove("copied");
+          }, 1500);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(() => finish(true), () => finish(fallback(text)));
+        } else {
+          finish(fallback(text));
+        }
+      });
+    });
   }
   renderVals() {
     const ns = window.CriticalErrorComputingDesignSystem_0eecf1 || {};
