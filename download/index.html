@@ -202,7 +202,7 @@
           <div class="dl-row"><span>macOS <span class="meta">· arm / intel</span></span><span><a href="https://github.com/mrjeeves/AllMyStuff/releases/latest/download/allmystuff-macos-aarch64.tar.gz">arm</a> · <a href="https://github.com/mrjeeves/AllMyStuff/releases/latest/download/allmystuff-macos-x86_64.tar.gz">intel</a></span></div>
           <div class="dl-row"><span>Windows <span class="meta">· x64 zip</span></span><a href="https://github.com/mrjeeves/AllMyStuff/releases/latest/download/allmystuff-windows-x86_64.zip">Download</a></div>
         </div>
-        <p class="note" style="margin: 14px 0 0;">`curl -fsSL https://allmystuff.works/install.sh | sh -s -- --no-gui` installs just the CLI.</p>
+        <p class="note" style="margin: 14px 0 0;">`curl -fsSL https://allmystuff.works/install.sh | sh -s -- --no-gui` skips the desktop app — you still get the CLI, the headless node, and the mesh daemon: everything a server needs to join.</p>
       </div>
     </div>
   </section>
@@ -215,7 +215,7 @@
         <h2 class="display-m" style="margin: 14px 0 14px;">What the one-liner actually does.</h2>
         <ol style="display: grid; gap: 10px; font-size: 15px; color: var(--dim); line-height: 1.6; padding-left: 20px; margin: 0;">
           <li>Runs the <a href="https://github.com/mrjeeves/AllMyStuff/blob/main/scripts/install.sh" style="color: var(--accent);">canonical installer maintained in the app repo</a> — <code style="font-family: var(--font-mono); font-size: 13px;">allmystuff.works/install.sh</code> is just the short URL for it, so the site can't drift from what the app ships.</li>
-          <li>Detects your OS and CPU, then installs <strong style="color: var(--text);">both the <code style="font-family: var(--font-mono); font-size: 13px;">allmystuff</code> CLI and the desktop app</strong> from the <a href="https://github.com/mrjeeves/AllMyStuff/releases/latest" style="color: var(--accent);">latest GitHub release</a>, verifying every SHA-256 sidecar. No prebuilt for your platform? It builds from source with cargo.</li>
+          <li>Detects your OS and CPU, then installs <strong style="color: var(--text);">the <code style="font-family: var(--font-mono); font-size: 13px;">allmystuff</code> CLI, the desktop app, and the headless node (<code style="font-family: var(--font-mono); font-size: 13px;">allmystuff serve</code>)</strong> from the <a href="https://github.com/mrjeeves/AllMyStuff/releases/latest" style="color: var(--accent);">latest GitHub release</a>, verifying every SHA-256 sidecar. No prebuilt for your platform? It builds the CLI from source with cargo.</li>
           <li>Puts them on your PATH — <code style="font-family: var(--font-mono); font-size: 13px;">/usr/local/bin</code> when it's already writable (it never prompts for a password), else <code style="font-family: var(--font-mono); font-size: 13px;">~/.local/bin</code>. A bare <code style="font-family: var(--font-mono); font-size: 13px;">allmystuff</code> opens the app.</li>
           <li>Makes sure the <code style="font-family: var(--font-mono); font-size: 13px;">myownmesh</code> daemon the live mesh runs on is in place — a recent one is used as-is, an old one updates itself, a missing one is installed and checksum-verified. <code style="font-family: var(--font-mono); font-size: 13px;">--no-mesh</code> leaves it alone; <code style="font-family: var(--font-mono); font-size: 13px;">--no-gui</code> skips the app on headless boxes.</li>
         </ol>
