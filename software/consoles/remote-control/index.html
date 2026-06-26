@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Remote Control console — see it, drive it · allmystuff.works</title>
+<meta name="description" content="Every machine you own gets a console: its screens, cameras and audio in tabs. H.264 to 4K when the path is fast, a stubborn MJPEG floor when it isn't. Flip Control on and your keyboard and mouse become its keyboard and mouse.">
+<meta name="theme-color" content="#070711">
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<link rel="icon" sizes="48x48 32x32 16x16" href="../../../favicon.ico">
+<link rel="apple-touch-icon" href="../../../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Remote Control console — see it, drive it">
+<meta property="og:description" content="Screens, cameras and audio in tabs. H.264 to 4K, MJPEG floor, multi-monitor, owner-gated control. The real interface, demonstrated.">
+<meta property="og:url" content="https://allmystuff.works/software/consoles/remote-control/">
+<meta property="og:image" content="https://allmystuff.works/og.png">
+<link rel="stylesheet" href="../../../ds/cec/tokens/fonts.css">
+<link rel="stylesheet" href="../../../ds/cec/tokens/colors.css">
+<link rel="stylesheet" href="../../../ds/cec/tokens/typography.css">
+<link rel="stylesheet" href="../../../ds/cec/tokens/spacing.css">
+<link rel="stylesheet" href="../../../ds/cec/tokens/base.css">
+<link rel="stylesheet" href="../../../ds/cec/styles.css">
+<style>
+  /* ── Console-showcase shared atoms ─────────────────────────────────
+     Faithful renders of the app, drawn in the site's design tokens.
+     Media-kind hues mirror the app's palette (audio amber, video violet,
+     display magenta, input green, storage teal) so the chrome reads true. */
+  body { margin: 0; background: oklch(0.135 0.022 285); }
+  :root {
+    --m-audio: oklch(0.82 0.15 90);
+    --m-video: oklch(0.70 0.17 292);
+    --m-display: var(--accent);
+    --m-input: oklch(0.78 0.16 160);
+    --m-storage: oklch(0.75 0.15 195);
+  }
+  @keyframes amsPulse { 0%, 100% { opacity: 0.55; } 50% { opacity: 1; } }
+  @keyframes amsBlink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+  @keyframes amsScan { 0% { transform: translateY(-100%); } 100% { transform: translateY(100%); } }
+  @keyframes amsFlow { to { stroke-dashoffset: -30; } }
+
+  /* App-faithful window chrome */
+  .win { background: linear-gradient(180deg, var(--surface), var(--bg-2)); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; box-shadow: 0 40px 90px -40px rgb(0 0 0 / 0.85); }
+  .win-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 11px 15px; border-bottom: 1px solid var(--border); }
+  .who { display: flex; align-items: center; gap: 10px; min-width: 0; }
+  .who .ico { font-size: 21px; line-height: 1; }
+  .who .nm { font-weight: 600; font-size: 14px; color: var(--text); white-space: nowrap; }
+  .who .sub { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; color: var(--faint); display: flex; align-items: center; gap: 6px; }
+  .dot-on { width: 6px; height: 6px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 8px var(--ok); }
+  .winx { width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; background: var(--surface-2); color: var(--dim); font-size: 12px; flex-shrink: 0; }
+
+  /* tab strips */
+  .tabrow { display: flex; gap: 6px; padding: 8px 12px; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+  .tab { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.04em; padding: 6px 11px; border-radius: 999px; border: 1px solid var(--border); background: var(--bg); color: var(--dim); display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+  .tab.on { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+  /* toggles + pills (console footer) */
+  .ctl-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding: 10px 13px; border-top: 1px solid var(--border); }
+  .tgl { font-family: var(--font-body); font-size: 12.5px; font-weight: 600; padding: 6px 11px; border-radius: 999px; border: 1px solid var(--border); background: var(--bg); color: var(--dim); display: inline-flex; align-items: center; gap: 7px; }
+  .tgl .pip { width: 6px; height: 6px; border-radius: 50%; background: var(--faint); }
+  .tgl.on { background: oklch(0.80 0.17 150 / 0.15); border-color: var(--ok); color: oklch(0.88 0.09 150); }
+  .tgl.on .pip { background: var(--ok); box-shadow: 0 0 8px var(--ok); }
+  .qpill { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 9px; border: 1px solid var(--border); border-radius: 999px; color: var(--dim); }
+  .qpill.tuned { border-color: var(--accent-line); color: var(--accent); }
+  .stat { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.06em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 6px; padding: 4px 9px; border-radius: 999px; }
+  .stat.live { color: oklch(0.88 0.09 150); border: 1px solid oklch(0.80 0.17 150 / 0.5); }
+  .stat .ld { width: 6px; height: 6px; border-radius: 50%; background: var(--ok); animation: amsBlink 1.6s steps(1) infinite; }
+
+  /* state-gallery cards */
+  .states { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 16px; }
+  .scard { background: var(--bg-2); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; }
+  .scard-vis { padding: 16px; min-height: 116px; display: flex; flex-direction: column; justify-content: center; gap: 9px; background: linear-gradient(180deg, oklch(0.16 0.03 285), var(--bg-2)); }
+  .scard-cap { padding: 12px 16px 15px; border-top: 1px solid var(--border); }
+  .scard-cap h4 { font-family: var(--font-display); font-size: 17px; font-weight: 600; margin-bottom: 4px; }
+  .scard-cap p { font-size: 13px; color: var(--dim); line-height: 1.5; }
+
+  /* feature list bullets */
+  .flist { list-style: none; display: grid; gap: 9px; font-size: 15px; color: var(--dim); }
+  .flist li { display: flex; gap: 10px; }
+  .flist li::before { content: "▸"; color: var(--accent); }
+
+  /* console switcher */
+  .switch { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(170px, 100%), 1fr)); gap: 12px; }
+  .switch a { display: flex; flex-direction: column; gap: 6px; padding: 16px 18px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); transition: border-color var(--dur-base) ease, transform var(--dur-fast) ease; }
+  .switch a:hover { border-color: var(--border-bright); transform: var(--lift); }
+  .switch a.cur { border-color: var(--accent-line); background: linear-gradient(180deg, var(--surface-2), var(--surface)); }
+  .switch .sn { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); }
+  .switch .st { font-family: var(--font-display); font-size: 19px; font-weight: 600; }
+  .switch a.cur .st { color: var(--accent); }
+</style>
+</head>
+<body>
+<div style="min-height: 100vh; background: var(--bg); color: var(--text); font-family: var(--font-body); overflow-x: clip;">
+
+  <!-- ════════ NAV ════════ -->
+  <nav style="position: sticky; top: 0; z-index: 50; background: oklch(0.135 0.022 285 / 0.74); backdrop-filter: blur(14px) saturate(1.2); border-bottom: 1px solid var(--border);">
+    <div class="wrap" style="display: flex; align-items: center; justify-content: space-between; height: 66px; gap: 18px;">
+      <a href="../../../" style="display: flex; align-items: center; gap: 11px;">
+        <svg viewBox="0 0 256 256" aria-hidden="true" style="width: 30px; height: 30px; color: var(--accent);">
+          <g stroke="currentColor" stroke-width="13" fill="none" stroke-linecap="round">
+            <path d="M128 74 L77 165 M128 74 L181 160 M77 165 L181 160"></path>
+          </g>
+          <circle cx="128" cy="72" r="27" fill="currentColor"></circle>
+          <circle cx="76" cy="166" r="22" fill="currentColor"></circle>
+          <circle cx="182" cy="160" r="22" fill="currentColor"></circle>
+        </svg>
+        <span style="font-family: var(--font-display); font-weight: 700; font-size: 20px; letter-spacing: 0.01em;">allmystuff<span style="color: var(--dim); font-weight: 500;">.works</span></span>
+      </a>
+      <div style="display: flex; gap: 22px; align-items: center;">
+        <a href="../../../software/" style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text); border-bottom: 2px solid var(--accent); padding-bottom: 2px;">The software</a>
+        <a href="../../../hardware/" style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim);">The hardware</a>
+        <a href="../../../service/" style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim);">The service</a>
+        <a href="../../../layers/" style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim);">How it works</a>
+        <a href="../../../faq/" style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim);">FAQ</a>
+      </div>
+      <div style="display: flex; gap: 12px; align-items: center;">
+        <a class="chip" href="https://github.com/mrjeeves/AllMyStuff" title="View AllMyStuff on GitHub"><span class="dot"></span><span id="rel-version">v0.1.5</span></a>
+        <a class="btn btn-primary btn-sm" href="../../../download/">Download free</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ════════ HERO ════════ -->
+  <section class="section" style="padding-bottom: clamp(40px, 5vw, 56px); position: relative; overflow: hidden;">
+    <div class="grid-bg"></div>
+    <div class="glow" style="width: 520px; height: 420px; left: 62%; top: -10%; background: var(--accent); opacity: 0.12;"></div>
+    <div class="wrap" style="position: relative; z-index: 2;">
+      <div style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); margin-bottom: 22px;">
+        <a href="../../../software/" style="color: var(--faint);">The software</a>
+        <span style="color: var(--border-bright); margin: 0 8px;">/</span>
+        <a href="../" style="color: var(--faint);">Consoles</a>
+        <span style="color: var(--border-bright); margin: 0 8px;">/</span>
+        <span style="color: var(--accent);">Remote control</span>
+      </div>
+      <div style="max-width: 880px;">
+        <span class="eyebrow">Console 01 · Remote control</span>
+        <h1 class="display-xl" style="margin: 16px 0 20px;">You can always see it.<br>And take the wheel.</h1>
+        <p class="lede" style="max-width: 64ch;">Every machine you own gets a console — its screens, its cameras, its audio, in tabs. H.264 at native resolution up to 4K when the path is fast, a stubborn MJPEG floor when it isn't. Turn on Control and your keyboard and mouse are <em>its</em> keyboard and mouse.</p>
+      </div>
+      <div style="display: flex; gap: 9px; flex-wrap: wrap; margin-top: 26px;">
+        <span class="chip">H.264 → 4K</span>
+        <span class="chip">MJPEG floor</span>
+        <span class="chip">Multi-monitor tabs</span>
+        <span class="chip">Listen-only audio</span>
+        <span class="chip">Owner-gated control</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ THE CONSOLE, LIVE (primary mockup) ════════ -->
+  <section class="section" style="padding-top: 0;">
+    <div class="wrap">
+      <div class="win" style="max-width: 1000px; margin: 0 auto;">
+        <!-- header -->
+        <div class="win-bar">
+          <div class="who">
+            <span class="ico">🖥</span>
+            <div style="min-width: 0;">
+              <div class="nm">den-tower</div>
+              <div class="sub"><span class="dot-on"></span>online · remote console</div>
+            </div>
+          </div>
+          <span class="stat live" title="Live stream — frame size · rate"><span class="ld"></span>1920×1080 · 60 fps · H.264</span>
+        </div>
+        <!-- input tabs -->
+        <div class="tabrow">
+          <span class="tab on">🖥 Screen</span>
+          <span class="tab">🖥 Dell U2720Q <span style="color: var(--warn);" title="Default input">★</span></span>
+          <span class="tab">📷 FaceTime HD camera</span>
+          <span class="tab">📷 Puck wide camera <span style="color: var(--glitch-cyan);" title="In its own window">↗</span></span>
+        </div>
+        <!-- video stage -->
+        <div style="position: relative; aspect-ratio: 16 / 9; background: linear-gradient(135deg, oklch(0.22 0.06 290), oklch(0.16 0.04 250) 55%, oklch(0.19 0.07 330)); overflow: hidden; cursor: crosshair;">
+          <div style="position: absolute; inset: 0; background: repeating-linear-gradient(to bottom, transparent 0 3px, rgb(0 0 0 / 0.07) 3px 4px);"></div>
+          <div style="position: absolute; inset: -100% 0 auto 0; height: 100%; background: linear-gradient(to bottom, transparent, rgb(255 255 255 / 0.04), transparent); animation: amsScan 7s linear infinite;"></div>
+          <!-- a faux desktop window -->
+          <div style="position: absolute; left: 7%; top: 13%; width: 55%; background: oklch(0.17 0.025 285 / 0.92); border: 1px solid var(--border-bright); border-radius: 4px; box-shadow: 0 18px 40px -16px rgb(0 0 0 / 0.8);">
+            <div style="display: flex; align-items: center; gap: 7px; padding: 7px 11px; border-bottom: 1px solid var(--border);">
+              <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--g-red); opacity: 0.8;"></span>
+              <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--warn); opacity: 0.8;"></span>
+              <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--ok); opacity: 0.8;"></span>
+              <span style="font-family: var(--font-mono); font-size: 9.5px; color: var(--faint); margin-left: 6px;">blender — final_render.blend</span>
+            </div>
+            <div style="padding: 13px 13px 15px;">
+              <div style="font-family: var(--font-mono); font-size: 10px; color: var(--dim); margin-bottom: 8px;">Rendering frame 1184 / 1400 · sample 96</div>
+              <div style="height: 7px; background: var(--bg); border-radius: 2px; overflow: hidden;"><div style="width: 84%; height: 100%; background: linear-gradient(90deg, var(--violet), var(--accent));"></div></div>
+            </div>
+          </div>
+          <div style="position: absolute; right: 8%; bottom: 15%; width: 36%; background: oklch(0.12 0.02 285 / 0.94); border: 1px solid var(--border); border-radius: 4px; padding: 10px 12px;">
+            <div style="font-family: var(--font-mono); font-size: 10px; line-height: 1.8; color: var(--ok);">$ sensors | grep fan<br><span style="color: var(--dim);">fan1: &nbsp;612 RPM · ok</span></div>
+          </div>
+          <!-- forwarded cursor -->
+          <svg viewBox="0 0 24 24" style="position: absolute; left: 57%; top: 53%; width: 18px; height: 18px; filter: drop-shadow(0 2px 4px rgb(0 0 0 / 0.8));" aria-hidden="true"><path d="M5 3 L19 12 L12 13.5 L8.5 20 Z" fill="white" stroke="black" stroke-width="1"></path></svg>
+          <!-- fullscreen corner -->
+          <span style="position: absolute; right: 12px; bottom: 12px; width: 30px; height: 28px; border-radius: 4px; display: grid; place-items: center; background: rgb(0 0 0 / 0.55); border: 1px solid rgb(255 255 255 / 0.22); color: #fff; font-size: 15px;" title="Fullscreen">⛶</span>
+        </div>
+        <!-- controls footer -->
+        <div class="ctl-row">
+          <span class="tgl on" title="Play that machine's audio on this machine (listen-only — nothing is sent back)"><span class="pip"></span>🔊 Audio</span>
+          <span class="tgl on" title="Send this machine's keyboard &amp; mouse to the remote"><span class="pip"></span>⌨️ Control</span>
+          <span class="tgl" title="Share clipboard on paste"><span class="pip"></span>📋 Clipboard</span>
+          <span style="width: 1px; height: 22px; background: var(--border); margin: 0 2px;"></span>
+          <span class="tgl" title="Browse this machine's files over the mesh">🗂 Files</span>
+          <span class="tgl" title="Open a shell on this machine over the mesh">📟 Terminal</span>
+        </div>
+        <div class="ctl-row" style="border-top: 1px dashed var(--border); padding-top: 11px;">
+          <span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--faint); margin-right: 4px;">Quality</span>
+          <span class="qpill">Res · Auto</span>
+          <span class="qpill">FPS · 60</span>
+          <span class="qpill">Rate · 18 Mbps</span>
+          <span class="qpill tuned">Codec · H.264</span>
+          <span style="flex: 1;"></span>
+          <span class="stat" style="color: var(--m-video); border: 1px solid var(--violet-soft);"><span style="width:6px;height:6px;border-radius:50%;background:var(--m-video);"></span>Screen</span>
+          <span class="stat" style="color: var(--m-audio); border: 1px solid oklch(0.82 0.15 90 / 0.4);"><span style="width:6px;height:6px;border-radius:50%;background:var(--m-audio);"></span>Audio</span>
+          <span class="btn btn-sm" style="background: oklch(0.2 0.05 14); border: 1px solid oklch(0.38 0.11 14); color: oklch(0.82 0.1 14);">End session</span>
+        </div>
+      </div>
+      <p style="text-align: center; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); margin-top: 18px;">The real interface — control on, audio listening, render watched live</p>
+    </div>
+  </section>
+
+  <!-- ════════ FEATURES ════════ -->
+  <section class="section" style="background: var(--bg-2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+    <div class="wrap">
+      <div style="max-width: 820px; margin-bottom: clamp(40px, 5vw, 60px);">
+        <span class="eyebrow">What it does</span>
+        <h2 class="display-l" style="margin: 16px 0 16px;">A whole KVM, in a tab.</h2>
+        <p class="lede">One console per machine. Every screen, every camera, the audio, the keyboard and mouse — all of it, over the mesh, encrypted end to end.</p>
+      </div>
+
+      <!-- F1 multi-monitor -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr)); gap: clamp(28px, 4vw, 56px); align-items: center; margin-bottom: clamp(48px, 6vw, 80px);">
+        <div>
+          <span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint);">[ inputs ]</span>
+          <h3 class="display-m" style="margin: 14px 0 14px;">One tab per screen. Cameras too.</h3>
+          <p style="color: var(--dim); line-height: 1.6; max-width: 50ch; margin-bottom: 18px;">A three-monitor tower opens three tabs. Switch with a click; your mouse coordinates normalize to whichever screen you're on. The webcam and the conference puck's wide camera sit in the same strip — the default is starred, anything popped into its own window is flagged.</p>
+          <ul class="flist">
+            <li>Screens first, cameras after — the default capture is marked <span style="color: var(--warn);">★</span></li>
+            <li>Pop any input into its own OS window with <span class="mono">⧉</span></li>
+            <li>Older machines say so: "update it there and its cameras will stream here"</li>
+          </ul>
+        </div>
+        <div class="win">
+          <div class="win-bar"><div class="who"><span class="ico">🖥</span><div><div class="nm">desk-pc</div><div class="sub"><span class="dot-on"></span>online · remote console</div></div></div></div>
+          <div class="tabrow" style="border-bottom: none;">
+            <span class="tab on">🖥 Screen</span>
+            <span class="tab">🖥 Dell U2720Q <span style="color: var(--warn);">★</span></span>
+            <span class="tab">🖥 HDMI-2</span>
+            <span class="tab">📷 Blue Yeti cam</span>
+          </div>
+          <div style="padding: 14px 15px 16px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px;">
+            <div style="aspect-ratio: 16/10; border-radius: 4px; background: linear-gradient(135deg, oklch(0.24 0.07 330), oklch(0.16 0.04 280)); border: 1px solid var(--accent-line);"></div>
+            <div style="aspect-ratio: 16/10; border-radius: 4px; background: linear-gradient(135deg, oklch(0.2 0.05 250), oklch(0.15 0.03 280)); border: 1px solid var(--border);"></div>
+            <div style="aspect-ratio: 16/10; border-radius: 4px; background: linear-gradient(135deg, oklch(0.2 0.06 200), oklch(0.15 0.03 250)); border: 1px solid var(--border);"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- F2 control -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr)); gap: clamp(28px, 4vw, 56px); align-items: center; margin-bottom: clamp(48px, 6vw, 80px);">
+        <div class="win" style="order: 2;">
+          <div class="win-bar"><span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint);">control</span><span class="stat live"><span class="ld"></span>live · 23 ms</span></div>
+          <div style="padding: 22px 18px; display: grid; gap: 14px;">
+            <div class="ctl-row" style="border: none; padding: 0;">
+              <span class="tgl on"><span class="pip"></span>⌨️ Control</span>
+              <span class="tgl on"><span class="pip"></span>🔊 Audio</span>
+              <span class="tgl"><span class="pip"></span>📋 Clipboard</span>
+            </div>
+            <div style="font-family: var(--font-mono); font-size: 11px; color: var(--dim); line-height: 1.7; background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 12px 14px;">
+              <div style="color: var(--ok);">▸ keyboard &amp; mouse → den-tower</div>
+              <div style="color: var(--faint);">▸ cursor: crosshair · focus pinned</div>
+              <div style="color: var(--faint);">▸ Esc &amp; Ctrl+W go to the remote</div>
+            </div>
+          </div>
+        </div>
+        <div style="order: 1;">
+          <span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint);">[ control ]</span>
+          <h3 class="display-m" style="margin: 14px 0 14px;">Flip it on and you're driving.</h3>
+          <p style="color: var(--dim); line-height: 1.6; max-width: 50ch; margin-bottom: 18px;">With Control on, hovering the stage pins keyboard focus there — keys flow without a click, the cursor turns to a crosshair, and even Esc and Ctrl+W are forwarded. True KVM behaviour. Control only works over display tabs, never cameras.</p>
+          <ul class="flist">
+            <li>Only the recorded owner can type — auto-accept can never inject input</li>
+            <li>Smooth enough to play your tower from a thin laptop</li>
+            <li>Clipboard-on-paste sends this machine's clipboard so it lands on the remote</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- F3 quality -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr)); gap: clamp(28px, 4vw, 56px); align-items: center;">
+        <div>
+          <span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint);">[ quality ]</span>
+          <h3 class="display-m" style="margin: 14px 0 14px;">One knob: Speed ↔ Quality.</h3>
+          <p style="color: var(--dim); line-height: 1.6; max-width: 50ch; margin-bottom: 18px;">Drag the slider through five stops — Speed, Smooth, Balanced, Crisp, Quality — and resolution, frame rate and bitrate move together. Want the dials? Flip to detailed mode for per-axis pills, including codec: Auto, H.264, H.264 native-decode, or MJPEG. The live chip shows exactly what's arriving.</p>
+          <ul class="flist">
+            <li>Hardware H.264 → software → native RGBA, degrading gracefully</li>
+            <li>Live stats: <span class="mono">1920×1080 · 60 fps · H.264</span></li>
+            <li>When it stalls, it tells you why: <span class="mono">⚠ in 14/s · out 0/s · q 38 · sw</span></li>
+          </ul>
+        </div>
+        <div class="win">
+          <div class="win-bar"><span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint);">quality</span></div>
+          <div style="padding: 24px 22px 26px;">
+            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+              <span style="font-family: var(--font-mono); font-size: 11px; color: var(--faint);">Speed</span>
+              <div style="flex: 1; height: 4px; background: var(--border); border-radius: 999px; position: relative;">
+                <div style="position: absolute; left: 0; width: 52%; height: 100%; background: linear-gradient(90deg, var(--violet), var(--accent)); border-radius: 999px;"></div>
+                <div style="position: absolute; left: 52%; top: 50%; transform: translate(-50%,-50%); width: 16px; height: 16px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft);"></div>
+              </div>
+              <span style="font-family: var(--font-mono); font-size: 11px; color: var(--faint);">Quality</span>
+            </div>
+            <div style="text-align: center; font-family: var(--font-display); font-size: 22px; font-weight: 600; color: var(--text); margin-bottom: 20px;">Balanced</div>
+            <div style="display: flex; gap: 7px; flex-wrap: wrap; justify-content: center;">
+              <span class="qpill">Res · Auto</span>
+              <span class="qpill">FPS · 60</span>
+              <span class="qpill">Rate · 15 Mbps</span>
+              <span class="qpill tuned">Codec · H.264</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ STATES ════════ -->
+  <section class="section">
+    <div class="wrap">
+      <div style="max-width: 820px; margin-bottom: clamp(36px, 4vw, 52px);">
+        <span class="eyebrow">Every state it can be in</span>
+        <h2 class="display-l" style="margin: 16px 0 16px;">Honest about the wire.</h2>
+        <p class="lede">The console never pretends. Connecting, live, degraded, waiting on consent — each looks different, and tells you what to do next.</p>
+      </div>
+      <div class="states">
+        <div class="scard">
+          <div class="scard-vis">
+            <div style="font-size: 30px;">🖥</div>
+            <div style="font-weight: 600;">Screen</div>
+            <div style="font-size: 12.5px; color: var(--dim);">Connecting this machine's display…</div>
+          </div>
+          <div class="scard-cap"><h4>Connecting</h4><p>First frame pending. The input's icon and a plain status line stand in.</p></div>
+        </div>
+        <div class="scard">
+          <div class="scard-vis">
+            <span class="stat live" style="align-self: start;"><span class="ld"></span>1920×1080 · 60 fps · H.264</span>
+            <div style="height: 44px; border-radius: 4px; background: linear-gradient(135deg, oklch(0.24 0.07 330), oklch(0.16 0.04 280));"></div>
+          </div>
+          <div class="scard-cap"><h4>Live</h4><p>Frames flowing. Blinking dot, real resolution and rate, H.264.</p></div>
+        </div>
+        <div class="scard">
+          <div class="scard-vis">
+            <span class="tgl on" style="align-self: start;"><span class="pip"></span>⌨️ Control</span>
+            <div style="font-size: 12.5px; color: var(--dim);">cursor: crosshair · focus pinned · Esc → remote</div>
+          </div>
+          <div class="scard-cap"><h4>Control on</h4><p>Green pip lit, crosshair cursor, your keys land on the far side.</p></div>
+        </div>
+        <div class="scard">
+          <div class="scard-vis">
+            <span class="stat" style="align-self: start; color: var(--warn); border: 1px solid var(--warn);"><span style="width:6px;height:6px;border-radius:50%;background:var(--warn);"></span>1920×1080 · 28 fps · MJPEG</span>
+            <div style="font-family: var(--font-mono); font-size: 11px; color: var(--warn);">⚠ in 14/s · out 6/s · q 22 · sw</div>
+          </div>
+          <div class="scard-cap"><h4>Degraded → MJPEG</h4><p>H.264 decode fell back to the MJPEG floor; diagnostics show the queue.</p></div>
+        </div>
+        <div class="scard">
+          <div class="scard-vis">
+            <div style="font-size: 30px;">🖥</div>
+            <div style="font-size: 12.5px; color: var(--dim); line-height: 1.5;">Waiting for someone at the remote to approve screen sharing — a one-time consent dialog is open there.</div>
+          </div>
+          <div class="scard-cap"><h4>Waiting for consent</h4><p>The host reports its own state in plain words, right on the stage.</p></div>
+        </div>
+        <div class="scard">
+          <div class="scard-vis">
+            <div style="font-size: 30px;">🪟</div>
+            <div style="font-weight: 600;">Screen is in its own window</div>
+            <span class="btn btn-sm btn-ghost" style="align-self: start; border-color: var(--accent-line); color: var(--accent);">⤓ Return video here</span>
+          </div>
+          <div class="scard-cap"><h4>Popped out</h4><p>Streamed to its own OS window; one tap brings it home.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ CONSOLE SWITCHER ════════ -->
+  <section class="section" style="padding-top: 0;">
+    <div class="wrap">
+      <div style="border-top: 1px solid var(--border); padding-top: clamp(40px, 5vw, 56px);">
+        <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 22px;">
+          <h2 class="display-s">The other consoles</h2>
+          <a href="../" style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent);">All five →</a>
+        </div>
+        <div class="switch">
+          <a class="cur" href="../remote-control/"><span class="sn">01</span><span class="st">Remote control</span></a>
+          <a href="../terminal/"><span class="sn">02</span><span class="st">Terminal</span></a>
+          <a href="../files/"><span class="sn">03</span><span class="st">Files</span></a>
+          <a href="../sites/"><span class="sn">04</span><span class="st">Sites</span></a>
+          <a href="../rooms/"><span class="sn">05</span><span class="st">Rooms</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ DOWNLOAD CTA ════════ -->
+  <section class="section" style="padding-top: 0;">
+    <div class="wrap">
+      <div style="position: relative; background: linear-gradient(180deg, var(--surface), var(--bg-2)); border: 1px solid var(--accent-line); border-radius: 10px; padding: clamp(36px, 5vw, 64px); overflow: hidden; box-shadow: 0 40px 90px -40px rgb(0 0 0 / 0.8), 0 14px 40px -12px oklch(0.64 0.255 350 / 0.2);">
+        <div class="grid-bg" style="opacity: 0.8;"></div>
+        <div class="glow" style="width: 420px; height: 360px; right: -10%; top: -30%; background: var(--violet); opacity: 0.18;"></div>
+        <div style="position: relative; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr)); gap: clamp(32px, 4vw, 56px); align-items: center;">
+          <div>
+            <span class="eyebrow">Free forever</span>
+            <h2 class="display-l" style="margin: 16px 0 16px;">Every console, the moment you install.</h2>
+            <p class="lede" style="margin-bottom: 26px;">No trial, no tier, no account. Install the app, claim your machines, and the consoles are yours.</p>
+            <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+              <a class="btn btn-primary" href="../../../download/">Download for Linux</a>
+              <a class="btn btn-ghost" href="../../../download/">macOS</a>
+              <a class="btn btn-ghost" href="../../../download/">Windows</a>
+            </div>
+          </div>
+          <div>
+            <div style="background: oklch(0.115 0.018 285); border: 1px solid var(--border); border-radius: 6px; overflow: hidden;">
+              <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; border-bottom: 1px solid var(--border);">
+                <span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint);">or the one-liner</span>
+                <span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint);">sh</span>
+              </div>
+              <div style="padding: 18px 16px; font-family: var(--font-mono); font-size: 13.5px; color: var(--text); overflow-x: auto; white-space: nowrap;"><span style="color: var(--faint);">$</span> curl -fsSL https://allmystuff.works/install.sh | sh</div>
+            </div>
+            <div style="display: flex; gap: 18px; flex-wrap: wrap; margin-top: 16px;">
+              <span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);">✓ free forever</span>
+              <span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);">✓ mit licensed</span>
+              <span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);">✓ no account</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ FOOTER ════════ -->
+  <footer style="border-top: 1px solid var(--border); padding: clamp(40px, 5vw, 64px) 0 32px; position: relative; overflow: hidden;">
+    <div class="glow" style="width: 460px; height: 320px; left: -12%; bottom: -40%; background: var(--violet); opacity: 0.1;"></div>
+    <div class="wrap" style="position: relative;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 36px; margin-bottom: 40px;">
+        <div>
+          <div style="display: flex; align-items: center; gap: 11px; margin-bottom: 14px;">
+            <svg viewBox="0 0 256 256" aria-hidden="true" style="width: 26px; height: 26px; color: var(--accent);">
+              <g stroke="currentColor" stroke-width="13" fill="none" stroke-linecap="round">
+                <path d="M128 74 L77 165 M128 74 L181 160 M77 165 L181 160"></path>
+              </g>
+              <circle cx="128" cy="72" r="27" fill="currentColor"></circle>
+              <circle cx="76" cy="166" r="22" fill="currentColor"></circle>
+              <circle cx="182" cy="160" r="22" fill="currentColor"></circle>
+            </svg>
+            <span style="font-family: var(--font-display); font-weight: 700; font-size: 18px;">allmystuff<span style="color: var(--dim); font-weight: 500;">.works</span></span>
+          </div>
+          <p style="font-size: 14px; color: var(--faint); max-width: 32ch; line-height: 1.6;">Tech that works when you turn it on. Yours, with or without us.</p>
+        </div>
+        <div>
+          <h4 style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-bottom: 14px;">The consoles</h4>
+          <ul style="list-style: none; display: grid; gap: 9px; font-size: 14px; color: var(--dim);">
+            <li><a href="../remote-control/">Remote control</a></li>
+            <li><a href="../terminal/">Terminal</a></li>
+            <li><a href="../files/">Files</a></li>
+            <li><a href="../sites/">Sites</a></li>
+            <li><a href="../rooms/">Rooms</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-bottom: 14px;">The app</h4>
+          <ul style="list-style: none; display: grid; gap: 9px; font-size: 14px; color: var(--dim);">
+            <li><a href="../../../software/">The software</a></li>
+            <li><a href="../../../layers/">How it works</a></li>
+            <li><a href="../../../download/">Download</a></li>
+            <li><a href="../../../faq/">FAQ</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-bottom: 14px;">Open</h4>
+          <ul style="list-style: none; display: grid; gap: 9px; font-size: 14px; color: var(--dim);">
+            <li><a href="https://github.com/mrjeeves/AllMyStuff">github.com/mrjeeves/AllMyStuff</a></li>
+            <li><a href="https://github.com/mrjeeves/allmystuff.works">This site's source</a></li>
+            <li><a href="mailto:hello@allmystuff.works">Email us</a></li>
+          </ul>
+        </div>
+      </div>
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-top: 22px; border-top: 1px solid var(--border);">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <img src="../../../assets/cec-logo.png" alt="Critical Error Computing" style="height: 26px; width: auto;">
+          <span style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);">A Critical Error Computing product · Humble, TX</span>
+        </div>
+        <span style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);">© 2026 allmystuff.works · MIT</span>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  fetch("https://api.github.com/repos/mrjeeves/AllMyStuff/releases/latest")
+    .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(function (rel) {
+      var v = document.getElementById("rel-version");
+      if (v && rel.tag_name) v.textContent = rel.tag_name[0] === "v" ? rel.tag_name : "v" + rel.tag_name;
+    })
+    .catch(function () {});
+})();
+</script>
+</body>
+</html>
