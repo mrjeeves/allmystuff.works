@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The consoles — every machine, in a tab · allmystuff.works</title>
+<meta name="description" content="Five consoles, one app. Remote Control, Terminal, Files, Sites and Rooms — the real surfaces of AllMyStuff, each a faithful look at what installs. Free forever, peer-to-peer, encrypted end to end.">
+<meta name="theme-color" content="#070711">
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<link rel="icon" sizes="48x48 32x32 16x16" href="../../favicon.ico">
+<link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="The consoles — every machine, in a tab">
+<meta property="og:description" content="Remote Control, Terminal, Files, Sites and Rooms. The real surfaces of AllMyStuff, demonstrated.">
+<meta property="og:url" content="https://allmystuff.works/software/consoles/">
+<meta property="og:image" content="https://allmystuff.works/og.png">
+<link rel="stylesheet" href="../../ds/cec/tokens/fonts.css">
+<link rel="stylesheet" href="../../ds/cec/tokens/colors.css">
+<link rel="stylesheet" href="../../ds/cec/tokens/typography.css">
+<link rel="stylesheet" href="../../ds/cec/tokens/spacing.css">
+<link rel="stylesheet" href="../../ds/cec/tokens/base.css">
+<link rel="stylesheet" href="../../ds/cec/styles.css">
+<style>
+  body { margin: 0; background: oklch(0.135 0.022 285); }
+  @keyframes amsPulse { 0%, 100% { opacity: 0.55; } 50% { opacity: 1; } }
+  @keyframes amsBlink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+
+  .ccards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(330px, 100%), 1fr)); gap: 20px; }
+  .ccard { display: flex; flex-direction: column; background: linear-gradient(180deg, var(--surface), var(--bg-2)); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; transition: border-color var(--dur-base) ease, transform var(--dur-fast) ease, box-shadow var(--dur-base) ease; }
+  .ccard:hover { border-color: var(--accent-line); transform: var(--lift-card); box-shadow: 0 30px 70px -40px rgb(0 0 0 / 0.85); }
+  .ccard-vis { height: 168px; position: relative; overflow: hidden; border-bottom: 1px solid var(--border); background: linear-gradient(135deg, oklch(0.2 0.05 290), oklch(0.15 0.03 260)); }
+  .ccard-body { padding: 22px 24px 26px; display: flex; flex-direction: column; flex: 1; }
+  .ccard-num { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); }
+  .ccard h3 { font-family: var(--font-display); font-size: 27px; font-weight: 600; margin: 8px 0 8px; }
+  .ccard p { font-size: 14.5px; color: var(--dim); line-height: 1.6; margin-bottom: 18px; }
+  .ccard .go { margin-top: auto; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+  .mini { font-family: var(--font-mono); font-size: 10px; }
+  .mini-bar { position: absolute; top: 0; left: 0; right: 0; height: 28px; display: flex; align-items: center; gap: 7px; padding: 0 12px; border-bottom: 1px solid var(--border); background: oklch(0.135 0.022 285 / 0.5); }
+  .mini-bar .ld { width: 6px; height: 6px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 8px var(--ok); animation: amsPulse 1.8s ease-in-out infinite; }
+  .mini-bar span { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); }
+</style>
+</head>
+<body>
+<div style="min-height: 100vh; background: var(--bg); color: var(--text); font-family: var(--font-body); overflow-x: clip;">
+
+  <!-- ════════ NAV ════════ -->
+  <nav style="position: sticky; top: 0; z-index: 50; background: oklch(0.135 0.022 285 / 0.74); backdrop-filter: blur(14px) saturate(1.2); border-bottom: 1px solid var(--border);">
+    <div class="wrap" style="display: flex; align-items: center; justify-content: space-between; height: 66px; gap: 18px;">
+      <a href="../../" style="display: flex; align-items: center; gap: 11px;">
+        <svg viewBox="0 0 256 256" aria-hidden="true" style="width: 30px; height: 30px; color: var(--accent);">
+          <g stroke="currentColor" stroke-width="13" fill="none" stroke-linecap="round">
+            <path d="M128 74 L77 165 M128 74 L181 160 M77 165 L181 160"></path>
+          </g>
+          <circle cx="128" cy="72" r="27" fill="currentColor"></circle>
+          <circle cx="76" cy="166" r="22" fill="currentColor"></circle>
+          <circle cx="182" cy="160" r="22" fill="currentColor"></circle>
+        </svg>
+        <span style="font-family: var(--font-display); font-weight: 700; font-size: 20px; letter-spacing: 0.01em;">allmystuff<span style="color: var(--dim); font-weight: 500;">.works</span></span>
+      </a>
+      <div style="display: flex; gap: 22px; align-items: center;">
+        <a href="../../software/" style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text); border-bottom: 2px solid var(--accent); padding-bottom: 2px;">The software</a>
+        <a href="../../hardware/" style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim);">The hardware</a>
+        <a href="../../service/" style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim);">The service</a>
+        <a href="../../layers/" style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim);">How it works</a>
+        <a href="../../faq/" style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim);">FAQ</a>
+      </div>
+      <div style="display: flex; gap: 12px; align-items: center;">
+        <a class="chip" href="https://github.com/mrjeeves/AllMyStuff" title="View AllMyStuff on GitHub"><span class="dot"></span><span id="rel-version">v0.1.5</span></a>
+        <a class="btn btn-primary btn-sm" href="../../download/">Download free</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ════════ HERO ════════ -->
+  <section class="section" style="padding-bottom: clamp(40px, 5vw, 60px); position: relative; overflow: hidden;">
+    <div class="grid-bg"></div>
+    <div class="glow" style="width: 560px; height: 440px; left: 55%; top: -12%; background: var(--accent); opacity: 0.12;"></div>
+    <div class="wrap" style="position: relative; z-index: 2;">
+      <div style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); margin-bottom: 22px;">
+        <a href="../../software/" style="color: var(--faint);">The software</a>
+        <span style="color: var(--border-bright); margin: 0 8px;">/</span>
+        <span style="color: var(--accent);">Consoles</span>
+      </div>
+      <div style="max-width: 880px;">
+        <span class="eyebrow">Five consoles, one app</span>
+        <h1 class="display-xl" style="margin: 16px 0 20px;">Every machine you own, in a tab.</h1>
+        <p class="lede" style="max-width: 64ch;">Claim a machine and it gets consoles — the real, free surfaces you reach it through. See its screen and drive it. Open a shell. Browse its disk. Reach the services it hosts. Pull several into a call. Each one is a faithful look at what actually installs — no trial, no tier.</p>
+      </div>
+      <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px;">
+        <a class="btn btn-primary" href="../../download/">Download free</a>
+        <a class="btn btn-ghost" href="../../layers/">How it works <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ THE FIVE ════════ -->
+  <section class="section" style="padding-top: 0;">
+    <div class="wrap">
+      <div class="ccards">
+
+        <!-- 01 Remote control -->
+        <a class="ccard" href="remote-control/">
+          <div class="ccard-vis">
+            <div class="mini-bar"><span class="ld" style="animation: none;"></span><span>console — den-tower</span></div>
+            <div style="position: absolute; inset: 28px 0 0; display: grid; place-items: center;">
+              <div style="width: 70%; aspect-ratio: 16/9; border-radius: 4px; background: linear-gradient(135deg, oklch(0.26 0.08 330), oklch(0.16 0.04 270)); border: 1px solid var(--accent-line); box-shadow: 0 14px 30px -16px #000; position: relative;">
+                <svg viewBox="0 0 24 24" style="position:absolute; left:54%; top:48%; width:14px; height:14px;" aria-hidden="true"><path d="M5 3 L19 12 L12 13.5 L8.5 20 Z" fill="white" stroke="black" stroke-width="1"></path></svg>
+              </div>
+            </div>
+          </div>
+          <div class="ccard-body">
+            <span class="ccard-num">Console 01</span>
+            <h3>Remote control</h3>
+            <p>Its screens, cameras and audio in tabs. H.264 to 4K, MJPEG floor. Flip Control on and your keyboard and mouse are its keyboard and mouse.</p>
+            <span class="go">See it, drive it →</span>
+          </div>
+        </a>
+
+        <!-- 02 Terminal -->
+        <a class="ccard" href="terminal/">
+          <div class="ccard-vis" style="background: linear-gradient(135deg, oklch(0.17 0.03 285), oklch(0.13 0.02 280));">
+            <div class="mini-bar"><span class="ld"></span><span>terminal — desk-pc</span></div>
+            <div style="position: absolute; inset: 38px 18px 18px; font-family: var(--font-mono); font-size: 10.5px; line-height: 1.8;">
+              <div><span style="color: var(--ok);">nate@desk-pc</span><span style="color: var(--faint);">:~$</span> uptime</div>
+              <div style="color: var(--faint);">&nbsp;22:41 up 41 days · load 0.42</div>
+              <div><span style="color: var(--ok);">nate@desk-pc</span><span style="color: var(--faint);">:~$</span> <span style="display:inline-block; width:7px; height:13px; background: var(--accent); vertical-align: text-bottom; animation: amsBlink 1.1s steps(1) infinite;"></span></div>
+            </div>
+          </div>
+          <div class="ccard-body">
+            <span class="ccard-num">Console 02</span>
+            <h3>Terminal</h3>
+            <p>A real PTY on the far side — no sshd, no port forwarding. Tabs per machine, tmux-style shared sessions, flow control exactly like ssh.</p>
+            <span class="go">Open a shell →</span>
+          </div>
+        </a>
+
+        <!-- 03 Files -->
+        <a class="ccard" href="files/">
+          <div class="ccard-vis" style="background: linear-gradient(135deg, oklch(0.18 0.04 200), oklch(0.14 0.02 250));">
+            <div class="mini-bar"><span class="ld" style="background: var(--m-storage, oklch(0.75 0.15 195)); box-shadow: 0 0 8px oklch(0.75 0.15 195); animation:none;"></span><span>files — den-tower</span></div>
+            <div style="position: absolute; inset: 38px 18px 18px; font-family: var(--font-mono); font-size: 10.5px; display: grid; gap: 7px; align-content: start;">
+              <div style="display:flex; justify-content: space-between; color: var(--dim);"><span>📁 clips/</span><span style="color: var(--faint);">—</span></div>
+              <div style="display:flex; justify-content: space-between; color: var(--text); background: var(--accent-soft); padding: 3px 6px; border-radius: 3px;"><span>🎬 match.mp4</span><span style="color: var(--accent);">↓ 64%</span></div>
+              <div style="display:flex; justify-content: space-between; color: var(--dim);"><span>🗜 saves.tar</span><span style="color: var(--faint);">8.4 GB</span></div>
+            </div>
+          </div>
+          <div class="ccard-body">
+            <span class="ccard-num">Console 03</span>
+            <h3>Files</h3>
+            <p>Browse, preview, rename, fetch — for every machine you own. Downloads stream straight to disk, never through a server. Owner-gated.</p>
+            <span class="go">Browse the disk →</span>
+          </div>
+        </a>
+
+        <!-- 04 Sites -->
+        <a class="ccard" href="sites/">
+          <div class="ccard-vis" style="background: linear-gradient(135deg, oklch(0.2 0.05 300), oklch(0.14 0.02 270));">
+            <div class="mini-bar"><span class="ld" style="animation:none;"></span><span>sites — around your fleet</span></div>
+            <div style="position: absolute; inset: 38px 18px 18px; font-family: var(--font-mono); font-size: 10px; display: grid; gap: 6px; align-content: start;">
+              <div style="display:flex; align-items:center; gap:7px; background: var(--surface-2); border:1px solid var(--accent-line); border-radius:5px; padding:6px 8px;"><span>🌐</span><span style="color: var(--text);">Grafana</span><span style="color: var(--faint);">:3000</span><span style="margin-left:auto; color: var(--accent);">localhost:47000</span></div>
+              <div style="display:flex; align-items:center; gap:7px; background: var(--surface-2); border:1px solid var(--border); border-radius:5px; padding:6px 8px;"><span>🗄</span><span style="color: var(--text);">PostgreSQL</span><span style="color: var(--faint);">:5432</span></div>
+            </div>
+          </div>
+          <div class="ccard-body">
+            <span class="ccard-num">Console 04</span>
+            <h3>Sites</h3>
+            <p>The web apps and services your machines host, reachable from anywhere on your fleet. Map a port through the mesh proxy and open it locally — any TCP service, no forwarding.</p>
+            <span class="go">Reach its services →</span>
+          </div>
+        </a>
+
+        <!-- 05 Rooms -->
+        <a class="ccard" href="rooms/">
+          <div class="ccard-vis" style="background: linear-gradient(135deg, oklch(0.21 0.06 320), oklch(0.15 0.03 285));">
+            <div class="mini-bar"><span class="ld"></span><span>🪩 Casey's room</span></div>
+            <div style="position: absolute; inset: 38px 18px 18px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+              <div style="border-radius:4px; background: linear-gradient(135deg, oklch(0.24 0.07 300), oklch(0.16 0.03 270)); border: 1px solid var(--ok); position: relative;"><span style="position:absolute; left:5px; bottom:4px; font-size:8px; font-family: var(--font-mono); color:#fff;">🎙 Casey</span></div>
+              <div style="border-radius:4px; background: linear-gradient(135deg, oklch(0.2 0.05 250), oklch(0.15 0.03 280)); border: 1px solid var(--border); position: relative;"><span style="position:absolute; left:5px; bottom:4px; font-size:8px; font-family: var(--font-mono); color: var(--dim);">📷 Alex</span></div>
+            </div>
+          </div>
+          <div class="ccard-body">
+            <span class="ccard-num">Console 05</span>
+            <h3>Rooms</h3>
+            <p>Pull several machines into one call — screen, sound, camera, files, even shared control. Stream-only and scoped to the room: nothing stored, nothing left behind when you leave.</p>
+            <span class="go">Gather the fleet →</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ ONE MODEL ════════ -->
+  <section class="section" style="padding-top: 0;">
+    <div class="wrap">
+      <div style="background: var(--bg-2); border: 1px solid var(--border); border-radius: 10px; padding: clamp(32px, 4vw, 52px);">
+        <div style="max-width: 760px; margin-bottom: 28px;">
+          <span class="eyebrow">One model under all five</span>
+          <h2 class="display-m" style="margin: 14px 0 12px;">Same graph. Same rules. Same gate.</h2>
+          <p style="color: var(--dim); line-height: 1.6; max-width: 62ch;">Every console rides one mesh route between machines you own — encrypted end to end, peer to peer, no server in the middle. The owner/fleet gate is the same everywhere, and nothing is shareable by default. Nothing.</p>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 16px;">
+          <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 20px 22px;">
+            <div style="font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px;">Peer-to-peer</div>
+            <p style="font-size: 14px; color: var(--dim); line-height: 1.6;">Traffic runs directly between your machines. Reference relays only introduce — and every one is a setting you can point at your own box.</p>
+          </div>
+          <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 20px 22px;">
+            <div style="font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px;">Owner-gated</div>
+            <p style="font-size: 14px; color: var(--dim); line-height: 1.6;">Terminal, Files and control open only for machines you own or are in your fleet. A guest can't even ask.</p>
+          </div>
+          <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 20px 22px;">
+            <div style="font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px;">Free forever</div>
+            <p style="font-size: 14px; color: var(--dim); line-height: 1.6;">Every console, $0, MIT-licensed, no account required. What installs is the whole thing.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ FOOTER ════════ -->
+  <footer style="border-top: 1px solid var(--border); padding: clamp(40px, 5vw, 64px) 0 32px; position: relative; overflow: hidden;">
+    <div class="glow" style="width: 460px; height: 320px; left: -12%; bottom: -40%; background: var(--violet); opacity: 0.1;"></div>
+    <div class="wrap" style="position: relative;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 36px; margin-bottom: 40px;">
+        <div>
+          <div style="display: flex; align-items: center; gap: 11px; margin-bottom: 14px;">
+            <svg viewBox="0 0 256 256" aria-hidden="true" style="width: 26px; height: 26px; color: var(--accent);">
+              <g stroke="currentColor" stroke-width="13" fill="none" stroke-linecap="round">
+                <path d="M128 74 L77 165 M128 74 L181 160 M77 165 L181 160"></path>
+              </g>
+              <circle cx="128" cy="72" r="27" fill="currentColor"></circle>
+              <circle cx="76" cy="166" r="22" fill="currentColor"></circle>
+              <circle cx="182" cy="160" r="22" fill="currentColor"></circle>
+            </svg>
+            <span style="font-family: var(--font-display); font-weight: 700; font-size: 18px;">allmystuff<span style="color: var(--dim); font-weight: 500;">.works</span></span>
+          </div>
+          <p style="font-size: 14px; color: var(--faint); max-width: 32ch; line-height: 1.6;">Tech that works when you turn it on. Yours, with or without us.</p>
+        </div>
+        <div>
+          <h4 style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-bottom: 14px;">The consoles</h4>
+          <ul style="list-style: none; display: grid; gap: 9px; font-size: 14px; color: var(--dim);">
+            <li><a href="remote-control/">Remote control</a></li>
+            <li><a href="terminal/">Terminal</a></li>
+            <li><a href="files/">Files</a></li>
+            <li><a href="sites/">Sites</a></li>
+            <li><a href="rooms/">Rooms</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-bottom: 14px;">The app</h4>
+          <ul style="list-style: none; display: grid; gap: 9px; font-size: 14px; color: var(--dim);">
+            <li><a href="../../software/">The software</a></li>
+            <li><a href="../../layers/">How it works</a></li>
+            <li><a href="../../download/">Download</a></li>
+            <li><a href="../../faq/">FAQ</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-bottom: 14px;">Open</h4>
+          <ul style="list-style: none; display: grid; gap: 9px; font-size: 14px; color: var(--dim);">
+            <li><a href="https://github.com/mrjeeves/AllMyStuff">github.com/mrjeeves/AllMyStuff</a></li>
+            <li><a href="https://github.com/mrjeeves/allmystuff.works">This site's source</a></li>
+            <li><a href="mailto:hello@allmystuff.works">Email us</a></li>
+          </ul>
+        </div>
+      </div>
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-top: 22px; border-top: 1px solid var(--border);">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <img src="../../assets/cec-logo.png" alt="Critical Error Computing" style="height: 26px; width: auto;">
+          <span style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);">A Critical Error Computing product · Humble, TX</span>
+        </div>
+        <span style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);">© 2026 allmystuff.works · MIT</span>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  fetch("https://api.github.com/repos/mrjeeves/AllMyStuff/releases/latest")
+    .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(function (rel) {
+      var v = document.getElementById("rel-version");
+      if (v && rel.tag_name) v.textContent = rel.tag_name[0] === "v" ? rel.tag_name : "v" + rel.tag_name;
+    })
+    .catch(function () {});
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rooms console — gather the fleet · allmystuff.works</title>
+<meta name="description" content="Pull several machines into one call — screen, sound, camera, files, even shared keyboard and mouse. Peer-to-peer and stream-only: everything starts off, nothing is stored, and it all ends when you leave.">
+<meta name="theme-color" content="#070711">
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<link rel="icon" sizes="48x48 32x32 16x16" href="../../../favicon.ico">
+<link rel="apple-touch-icon" href="../../../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Rooms console — gather the fleet">
+<meta property="og:description" content="Peer-to-peer multi-party calls between your machines: screen, sound, camera, files and shared control. Stream-only, off by default, scoped to the room. The real interface, demonstrated.">
+<meta property="og:url" content="https://allmystuff.works/software/consoles/rooms/">
+<meta property="og:image" content="https://allmystuff.works/og.png">
+<link rel="stylesheet" href="../../../ds/cec/tokens/fonts.css">
+<link rel="stylesheet" href="../../../ds/cec/tokens/colors.css">
+<link rel="stylesheet" href="../../../ds/cec/tokens/typography.css">
+<link rel="stylesheet" href="../../../ds/cec/tokens/spacing.css">
+<link rel="stylesheet" href="../../../ds/cec/tokens/base.css">
+<link rel="stylesheet" href="../../../ds/cec/styles.css">
+<style>
+  /* ── Console-showcase shared atoms ─────────────────────────────────
+     Faithful renders of the app, drawn in the site's design tokens.
+     Media-kind hues mirror the app's palette (audio amber, video violet,
+     display magenta, input green, storage teal) so the chrome reads true. */
+  body { margin: 0; background: oklch(0.135 0.022 285); }
+  :root {
+    --m-audio: oklch(0.82 0.15 90);
+    --m-video: oklch(0.70 0.17 292);
+    --m-display: var(--accent);
+    --m-input: oklch(0.78 0.16 160);
+    --m-storage: oklch(0.75 0.15 195);
+  }
+  @keyframes amsPulse { 0%, 100% { opacity: 0.55; } 50% { opacity: 1; } }
+  @keyframes amsBlink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+  @keyframes amsScan { 0% { transform: translateY(-100%); } 100% { transform: translateY(100%); } }
+  @keyframes amsFlow { to { stroke-dashoffset: -30; } }
+
+  /* App-faithful window chrome */
+  .win { background: linear-gradient(180deg, var(--surface), var(--bg-2)); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; box-shadow: 0 40px 90px -40px rgb(0 0 0 / 0.85); }
+  .win-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 11px 15px; border-bottom: 1px solid var(--border); }
+  .who { display: flex; align-items: center; gap: 10px; min-width: 0; }
+  .who .ico { font-size: 21px; line-height: 1; }
+  .who .nm { font-weight: 600; font-size: 14px; color: var(--text); white-space: nowrap; }
+  .who .sub { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; color: var(--faint); display: flex; align-items: center; gap: 6px; }
+  .dot-on { width: 6px; height: 6px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 8px var(--ok); }
+  .winx { width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; background: var(--surface-2); color: var(--dim); font-size: 12px; flex-shrink: 0; }
+
+  /* tab strips */
+  .tabrow { display: flex; gap: 6px; padding: 8px 12px; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+  .tab { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.04em; padding: 6px 11px; border-radius: 999px; border: 1px solid var(--border); background: var(--bg); color: var(--dim); display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+  .tab.on { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+  /* toggles + pills (console footer) */
+  .ctl-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding: 10px 13px; border-top: 1px solid var(--border); }
+  .tgl { font-family: var(--font-body); font-size: 12.5px; font-weight: 600; padding: 6px 11px; border-radius: 999px; border: 1px solid var(--border); background: var(--bg); color: var(--dim); display: inline-flex; align-items: center; gap: 7px; }
+  .tgl .pip { width: 6px; height: 6px; border-radius: 50%; background: var(--faint); }
+  .tgl.on { background: oklch(0.80 0.17 150 / 0.15); border-color: var(--ok); color: oklch(0.88 0.09 150); }
+  .tgl.on .pip { background: var(--ok); box-shadow: 0 0 8px var(--ok); }
+  .qpill { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 9px; border: 1px solid var(--border); border-radius: 999px; color: var(--dim); }
+  .qpill.tuned { border-color: var(--accent-line); color: var(--accent); }
+  .stat { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.06em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 6px; padding: 4px 9px; border-radius: 999px; }
+  .stat.live { color: oklch(0.88 0.09 150); border: 1px solid oklch(0.80 0.17 150 / 0.5); }
+  .stat .ld { width: 6px; height: 6px; border-radius: 50%; background: var(--ok); animation: amsBlink 1.6s steps(1) infinite; }
+
+  /* state-gallery cards */
+  .states { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 16px; }
+  .scard { background: var(--bg-2); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; }
+  .scard-vis { padding: 16px; min-height: 116px; display: flex; flex-direction: column; justify-content: center; gap: 9px; background: linear-gradient(180deg, oklch(0.16 0.03 285), var(--bg-2)); }
+  .scard-cap { padding: 12px 16px 15px; border-top: 1px solid var(--border); }
+  .scard-cap h4 { font-family: var(--font-display); font-size: 17px; font-weight: 600; margin-bottom: 4px; }
+  .scard-cap p { font-size: 13px; color: var(--dim); line-height: 1.5; }
+
+  /* feature list bullets */
+  .flist { list-style: none; display: grid; gap: 9px; font-size: 15px; color: var(--dim); }
+  .flist li { display: flex; gap: 10px; }
+  .flist li::before { content: "▸"; color: var(--accent); }
+
+  /* console switcher */
+  .switch { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(170px, 100%), 1fr)); gap: 12px; }
+  .switch a { display: flex; flex-direction: column; gap: 6px; padding: 16px 18px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); transition: border-color var(--dur-base) ease, transform var(--dur-fast) ease; }
+  .switch a:hover { border-color: var(--border-bright); transform: var(--lift); }
+  .switch a.cur { border-color: var(--accent-line); background: linear-gradient(180deg, var(--surface-2), var(--surface)); }
+  .switch .sn { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); }
+  .switch .st { font-family: var(--font-display); font-size: 19px; font-weight: 600; }
+  .switch a.cur .st { color: var(--accent); }
+
+  /* ── Rooms-specific helpers — a faithful RoomPanel in the site tokens.
+     Disco/violet tints for the call surface; magenta stays primary. */
+  .pill { display: inline-flex; align-items: center; gap: 5px; font-family: var(--font-body); font-size: 10.5px; font-weight: 650; color: var(--dim); background: var(--surface-2); border: 1px solid var(--border); border-radius: 999px; padding: 3px 9px; white-space: nowrap; }
+  .pill.host { color: var(--accent); background: var(--accent-soft); border-color: oklch(0.64 0.255 350 / 0.35); }
+  .pill.timer { font-family: var(--font-mono); letter-spacing: 0.04em; color: var(--dim); }
+
+  /* the green "you are sharing" truth banner */
+  .share-banner { display: flex; align-items: center; justify-content: center; gap: 9px; padding: 7px 14px; font-size: 12.5px; font-weight: 650; color: oklch(0.88 0.09 150); background: oklch(0.80 0.17 150 / 0.12); border-bottom: 1px solid oklch(0.80 0.17 150 / 0.3); }
+  .share-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ok); animation: amsPulse 1.6s ease-out infinite; box-shadow: 0 0 8px var(--ok); }
+  .stop-share { border: none; background: oklch(0.55 0.22 22); color: #fff; font-weight: 700; font-size: 11.5px; border-radius: 999px; padding: 4px 12px; cursor: default; }
+
+  /* the call stage (disco/violet wash) */
+  .stage { background: radial-gradient(900px 320px at 50% -10%, oklch(0.62 0.2 292 / 0.16), transparent), oklch(0.115 0.02 285); }
+  .vtile { position: relative; border-radius: 7px; overflow: hidden; border: 1px solid var(--border-bright); background: #000; min-height: 0; }
+  .vtile.speaking { border-color: var(--ok); box-shadow: 0 0 0 1.5px var(--ok), 0 0 18px oklch(0.8 0.17 150 / 0.25); }
+  .vtile.dim { opacity: 0.6; }
+  .media-badge { position: absolute; left: 8px; bottom: 8px; display: inline-flex; align-items: center; gap: 6px; background: rgb(0 0 0 / 0.55); backdrop-filter: blur(4px); border-radius: 999px; padding: 3px 9px; font-size: 11px; font-weight: 600; color: var(--text); white-space: nowrap; }
+  .media-badge .machine { color: oklch(0.75 0.02 285); font-weight: 500; }
+  .drive-badge { position: absolute; right: 8px; top: 8px; display: inline-flex; align-items: center; gap: 5px; background: oklch(0.80 0.17 150 / 0.2); border: 1px solid oklch(0.80 0.17 150 / 0.5); color: oklch(0.88 0.09 150); border-radius: 999px; padding: 3px 9px; font-size: 10.5px; font-weight: 650; }
+  .send-chip { display: inline-flex; align-items: center; gap: 5px; font-size: 10.5px; font-weight: 650; color: oklch(0.88 0.09 150); background: rgb(0 0 0 / 0.5); border-radius: 999px; padding: 3px 8px; }
+  .avatar { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; font-weight: 800; font-size: 15px; color: var(--accent); background: var(--accent-soft); border: 1px solid oklch(0.64 0.255 350 / 0.3); }
+  .nameplate { position: absolute; left: 8px; bottom: 8px; display: inline-flex; align-items: center; gap: 6px; background: rgb(0 0 0 / 0.55); backdrop-filter: blur(4px); border-radius: 999px; padding: 3px 9px; font-size: 11px; white-space: nowrap; }
+  .nameplate .pwho { font-weight: 700; }
+  .nameplate .machine { color: oklch(0.75 0.02 285); font-weight: 500; }
+  .mic-live { filter: drop-shadow(0 0 4px oklch(0.8 0.17 150 / 0.9)); }
+  .mic-muted { position: relative; opacity: 0.6; }
+  .mic-muted::after { content: ""; position: absolute; left: 50%; top: 50%; width: 130%; height: 2px; background: oklch(0.55 0.22 22); border-radius: 2px; transform: translate(-50%, -50%) rotate(-45deg); }
+
+  /* the right-side People panel */
+  .side { width: 230px; flex-shrink: 0; border-left: 1px solid var(--border); display: flex; flex-direction: column; background: var(--bg-2); }
+  .side-head { display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; border-bottom: 1px solid var(--border); }
+  .side-head h4 { margin: 0; font-size: 12.5px; color: var(--dim); font-weight: 600; }
+  .knocks { border: 1px solid oklch(0.79 0.14 75 / 0.4); background: oklch(0.78 0.16 75 / 0.12); border-radius: 8px; padding: 9px; }
+  .knocks h5 { margin: 0 0 7px; font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--faint); font-weight: 600; }
+  .knock-row { display: flex; align-items: center; gap: 7px; }
+  .knock-row .kwho { flex: 1; min-width: 0; font-size: 12.5px; font-weight: 650; }
+  .kbtn { font-family: var(--font-body); font-size: 11px; font-weight: 650; border-radius: 999px; padding: 4px 11px; border: 1px solid var(--border); background: var(--surface); color: var(--dim); cursor: default; }
+  .kbtn.admit { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .roster { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+  .roster li { display: flex; align-items: center; gap: 7px; font-size: 12.5px; padding: 5px 5px; border-radius: 6px; color: var(--text); }
+  .roster li .rwho { font-weight: 650; }
+  .roster li .machine { color: var(--faint); font-weight: 500; }
+  .m-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--ok); flex-shrink: 0; }
+  .fine { margin: 0; font-size: 11px; color: var(--faint); line-height: 1.5; }
+  .fine b { color: var(--dim); }
+
+  /* the bottom control bar — call toggles */
+  .bar { border-top: 1px solid var(--border); padding: 9px 13px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; background: oklch(0.15 0.023 285); }
+  .ctl { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; min-width: 62px; border: 1px solid transparent; background: transparent; color: var(--text); border-radius: 8px; padding: 6px 9px 5px; }
+  .ctl .ci { position: relative; font-size: 17px; line-height: 1; }
+  .ctl .cl { font-size: 10px; font-weight: 650; color: var(--dim); white-space: nowrap; }
+  .ctl.on { border-color: oklch(0.8 0.17 150 / 0.45); background: oklch(0.80 0.17 150 / 0.12); }
+  .ctl.on .cl { color: oklch(0.88 0.09 150); }
+  .ctl.lit { border-color: var(--border-bright); background: var(--surface-2); }
+  .ctl .ci.slashed::after { content: ""; position: absolute; left: 50%; top: 50%; width: 135%; height: 2.5px; background: oklch(0.55 0.22 22); border-radius: 2px; transform: translate(-50%, -50%) rotate(-45deg); box-shadow: 0 0 0 1.5px oklch(0.15 0.023 285); }
+  .ctl-badge { position: absolute; top: 2px; right: 6px; background: var(--accent); color: #fff; font-size: 9px; font-weight: 700; border-radius: 999px; padding: 0 5px; line-height: 1.5; }
+  .ctl-badge.warn { background: var(--warn); color: var(--bg); }
+  .bar-sep { width: 1px; height: 26px; background: var(--border); margin: 0 2px; }
+  .leave { border: none; background: oklch(0.55 0.22 22); color: #fff; font-weight: 750; font-size: 13px; border-radius: 8px; padding: 8px 18px; cursor: default; }
+</style>
+</head>
+<body>
+<div style="min-height: 100vh; background: var(--bg); color: var(--text); font-family: var(--font-body); overflow-x: clip;">
+
+  <!-- ════════ NAV ════════ -->
+  <nav style="position: sticky; top: 0; z-index: 50; background: oklch(0.135 0.022 285 / 0.74); backdrop-filter: blur(14px) saturate(1.2); border-bottom: 1px solid var(--border);">
+    <div class="wrap" style="display: flex; align-items: center; justify-content: space-between; height: 66px; gap: 18px;">
+      <a href="../../../" style="display: flex; align-items: center; gap: 11px;">
+        <svg viewBox="0 0 256 256" aria-hidden="true" style="width: 30px; height: 30px; color: var(--accent);">
+          <g stroke="currentColor" stroke-width="13" fill="none" stroke-linecap="round">
+            <path d="M128 74 L77 165 M128 74 L181 160 M77 165 L181 160"></path>
+          </g>
+          <circle cx="128" cy="72" r="27" fill="currentColor"></circle>
+          <circle cx="76" cy="166" r="22" fill="currentColor"></circle>
+          <circle cx="182" cy="160" r="22" fill="currentColor"></circle>
+        </svg>
+        <span style="font-family: var(--font-display); font-weight: 700; font-size: 20px; letter-spacing: 0.01em;">allmystuff<span style="color: var(--dim); font-weight: 500;">.works</span></span>
+      </a>
+      <div style="display: flex; gap: 22px; align-items: center;">
+        <a href="../../../software/" style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text); border-bottom: 2px solid var(--accent); padding-bottom: 2px;">The software</a>
+        <a href="../../../hardware/" style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim);">The hardware</a>
+        <a href="../../../service/" style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim);">The service</a>
+        <a href="../../../layers/" style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim);">How it works</a>
+        <a href="../../../faq/" style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim);">FAQ</a>
+      </div>
+      <div style="display: flex; gap: 12px; align-items: center;">
+        <a class="chip" href="https://github.com/mrjeeves/AllMyStuff" title="View AllMyStuff on GitHub"><span class="dot"></span><span id="rel-version">v0.1.5</span></a>
+        <a class="btn btn-primary btn-sm" href="../../../download/">Download free</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ════════ HERO ════════ -->
+  <section class="section" style="padding-bottom: clamp(40px, 5vw, 56px); position: relative; overflow: hidden;">
+    <div class="grid-bg"></div>
+    <div class="glow" style="width: 520px; height: 420px; left: 62%; top: -10%; background: var(--violet); opacity: 0.16;"></div>
+    <div class="wrap" style="position: relative; z-index: 2;">
+      <div style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); margin-bottom: 22px;">
+        <a href="../../../software/" style="color: var(--faint);">The software</a>
+        <span style="color: var(--border-bright); margin: 0 8px;">/</span>
+        <a href="../" style="color: var(--faint);">Consoles</a>
+        <span style="color: var(--border-bright); margin: 0 8px;">/</span>
+        <span style="color: var(--accent);">Rooms</span>
+      </div>
+      <div style="max-width: 880px;">
+        <span class="eyebrow">Console 05 · Rooms</span>
+        <h1 class="display-xl" style="margin: 16px 0 20px;">Gather the fleet.<br>Nothing left behind.</h1>
+        <p class="lede" style="max-width: 64ch;">Pull several machines into one call — screen, sound, camera, files, even shared control. Stream-only and scoped to the room: nothing stored, all of it ends when you leave.</p>
+      </div>
+      <div style="display: flex; gap: 9px; flex-wrap: wrap; margin-top: 26px;">
+        <span class="chip">Stream-only</span>
+        <span class="chip">Off by default</span>
+        <span class="chip">Peer-to-peer</span>
+        <span class="chip">Scoped sharing</span>
+        <span class="chip">Share control</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ THE ROOM, LIVE (primary mockup) ════════ -->
+  <section class="section" style="padding-top: 0;">
+    <div class="wrap">
+      <div class="win" style="max-width: 1000px; margin: 0 auto;">
+        <!-- header -->
+        <div class="win-bar" style="flex-wrap: wrap;">
+          <div style="display: flex; align-items: center; gap: 9px; min-width: 0; flex-wrap: wrap;">
+            <span style="font-size: 18px; line-height: 1;">🪩</span>
+            <span style="font-weight: 750; font-size: 15px; white-space: nowrap;">Casey's room</span>
+            <span class="pill host" title="The room's identity, roster and name live with its host">🏠 you host</span>
+            <span class="pill" title="Invite-only: a pasted id knocks, and you admit each ask">🔒 invite-only</span>
+            <span class="pill timer" title="How long you've been in this call">0:05:32</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="btn btn-primary btn-sm" style="padding: 7px 13px; font-size: 12px;" title="Copy this room's id — paste it under Rooms → Join with an id">🔗 Copy invite</span>
+            <span class="winx" title="Fullscreen">⛶</span>
+          </div>
+        </div>
+        <!-- the "you are sharing" truth banner -->
+        <div class="share-banner">
+          <span class="share-dot" aria-hidden="true"></span>
+          You're sharing your screen with the room
+          <span class="stop-share">Stop share</span>
+        </div>
+        <!-- body: stage + people panel -->
+        <div style="display: flex; min-height: 0;">
+          <!-- stage -->
+          <div class="stage" style="flex: 1; min-width: 0; display: flex; flex-direction: column; padding: 13px; gap: 10px;">
+            <!-- the big screen-share tile -->
+            <div class="vtile" style="aspect-ratio: 16 / 9; background: linear-gradient(135deg, oklch(0.24 0.07 290), oklch(0.16 0.04 250) 55%, oklch(0.20 0.08 330));">
+              <div style="position: absolute; inset: 0; background: repeating-linear-gradient(to bottom, transparent 0 3px, rgb(0 0 0 / 0.07) 3px 4px);"></div>
+              <div style="position: absolute; inset: -100% 0 auto 0; height: 100%; background: linear-gradient(to bottom, transparent, rgb(255 255 255 / 0.04), transparent); animation: amsScan 7s linear infinite;"></div>
+              <!-- a faux desktop window on the shared screen -->
+              <div style="position: absolute; left: 8%; top: 16%; width: 52%; background: oklch(0.17 0.025 285 / 0.92); border: 1px solid var(--border-bright); border-radius: 4px; box-shadow: 0 18px 40px -16px rgb(0 0 0 / 0.8);">
+                <div style="display: flex; align-items: center; gap: 7px; padding: 7px 11px; border-bottom: 1px solid var(--border);">
+                  <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--g-red); opacity: 0.8;"></span>
+                  <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--warn); opacity: 0.8;"></span>
+                  <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--ok); opacity: 0.8;"></span>
+                  <span style="font-family: var(--font-mono); font-size: 9.5px; color: var(--faint); margin-left: 6px;">build · ship_v2.1.zip</span>
+                </div>
+                <div style="padding: 13px 13px 15px;">
+                  <div style="font-family: var(--font-mono); font-size: 10px; color: var(--dim); margin-bottom: 8px;">Packaging release · 41 / 50 files</div>
+                  <div style="height: 7px; background: var(--bg); border-radius: 2px; overflow: hidden;"><div style="width: 82%; height: 100%; background: linear-gradient(90deg, var(--violet), var(--accent));"></div></div>
+                </div>
+              </div>
+              <!-- forwarded cursor -->
+              <svg viewBox="0 0 24 24" style="position: absolute; left: 54%; top: 56%; width: 18px; height: 18px; filter: drop-shadow(0 2px 4px rgb(0 0 0 / 0.8));" aria-hidden="true"><path d="M5 3 L19 12 L12 13.5 L8.5 20 Z" fill="white" stroke="black" stroke-width="1"></path></svg>
+              <span class="media-badge">🖥 <b>Casey</b> <span class="machine">· Desk PC</span></span>
+              <span class="drive-badge">+ 🕹 you can drive</span>
+            </div>
+            <!-- filmstrip of participant tiles -->
+            <div style="display: flex; gap: 9px; flex-shrink: 0;">
+              <div class="vtile speaking" style="width: 150px; height: 86px; display: grid; place-items: center; background: oklch(0.165 0.024 285);">
+                <div class="avatar" style="width: 30px; height: 30px; font-size: 11px; margin-bottom: 16px;">CA</div>
+                <span class="nameplate"><span class="mic-live">🎙</span> <span class="pwho">Casey</span></span>
+              </div>
+              <div class="vtile" style="width: 150px; height: 86px; background: linear-gradient(135deg, oklch(0.22 0.06 292), oklch(0.16 0.04 280));">
+                <span class="nameplate">📷 <span class="pwho">Alex</span></span>
+              </div>
+              <div class="vtile dim" style="width: 150px; height: 86px; display: grid; place-items: center; background: oklch(0.165 0.024 285);">
+                <span style="font-family: var(--font-mono); font-size: 10px; color: var(--faint);">waiting for pixels…</span>
+              </div>
+            </div>
+          </div>
+          <!-- People panel (right) -->
+          <aside class="side">
+            <div class="side-head">
+              <h4>People · 3 in the call</h4>
+              <span style="color: var(--faint); font-size: 12px;">✕</span>
+            </div>
+            <div style="flex: 1; min-height: 0; overflow: hidden; padding: 12px; display: flex; flex-direction: column; gap: 12px;">
+              <div class="knocks">
+                <h5>Asking to join</h5>
+                <div class="knock-row">
+                  <span class="kwho">Jordan</span>
+                  <span class="kbtn admit">Admit</span>
+                  <span class="kbtn">Deny</span>
+                </div>
+              </div>
+              <ul class="roster">
+                <li><span class="m-dot"></span><span class="rwho">Casey</span> <span class="machine">· Desk PC</span> <span style="margin-left: auto;">🎙🖥</span></li>
+                <li><span class="m-dot"></span><span class="rwho">Alex</span> <span class="machine">· laptop</span> <span style="margin-left: auto;">📷</span></li>
+                <li><span class="m-dot"></span><span class="rwho">Conference puck</span> <span style="margin-left: auto;">🔊</span></li>
+              </ul>
+              <p class="fine">Sharing here is scoped to the room and stream-only — nothing is stored, it all ends when you leave, and nobody gains a standing permission.</p>
+            </div>
+          </aside>
+        </div>
+        <!-- control bar (everything starts off; some on, some off) -->
+        <div class="bar">
+          <span class="ctl on" title="Talk to the room — your microphone to the members' speakers"><span class="ci">🎙</span><span class="cl">Mute</span></span>
+          <span class="ctl" title="Send your camera to the room"><span class="ci slashed">📷</span><span class="cl">Camera</span></span>
+          <span class="bar-sep"></span>
+          <span class="ctl on" title="Sharing this machine's screen with the room"><span class="ci">🖥</span><span class="cl">Stop share</span></span>
+          <span class="ctl" title="Share what this machine is playing (its system audio) — NOT your microphone"><span class="ci">🔊</span><span class="cl">Share sound</span></span>
+          <span class="ctl on" title="Let members click and type on this machine (owner/fleet only)"><span class="ci">🕹</span><span class="cl">Share control</span></span>
+          <span class="ctl" title="Add files to the room's Shared Files"><span class="ci">🗂</span><span class="cl">Share files</span></span>
+          <span class="bar-sep"></span>
+          <span class="ctl" title="Room chat"><span class="ci">💬</span><span class="cl">Chat</span></span>
+          <span class="ctl" title="Shared Files — what's been shared into this call"><span class="ci">🗂</span><span class="cl">Files</span><span class="ctl-badge">2</span></span>
+          <span class="ctl lit" title="Who's here, invites, and asks to join"><span class="ci">👥</span><span class="cl">People</span><span class="ctl-badge warn">1</span></span>
+          <span style="flex: 1;"></span>
+          <span class="leave" title="Hang up — your shares stop and members see you go">Leave</span>
+        </div>
+      </div>
+      <p style="text-align: center; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); margin-top: 18px;">The real interface — a fleet call, screen + control shared, nothing recorded</p>
+    </div>
+  </section>
+
+  <!-- ════════ FEATURES ════════ -->
+  <section class="section" style="background: var(--bg-2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+    <div class="wrap">
+      <div style="max-width: 820px; margin-bottom: clamp(40px, 5vw, 60px);">
+        <span class="eyebrow">What it does</span>
+        <h2 class="display-l" style="margin: 16px 0 16px;">A call between machines.</h2>
+        <p class="lede">A room is a call where members can stream mic, camera, screen, system sound, keyboard &amp; mouse control, and files to everyone — peer-to-peer, scoped to the room, and gone when you leave.</p>
+      </div>
+
+      <!-- F1 off by default -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr)); gap: clamp(28px, 4vw, 56px); align-items: center; margin-bottom: clamp(48px, 6vw, 80px);">
+        <div>
+          <span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint);">[ safety ]</span>
+          <h3 class="display-m" style="margin: 14px 0 14px;">Off by default, stream-only.</h3>
+          <p style="color: var(--dim); line-height: 1.6; max-width: 50ch; margin-bottom: 18px;">Your mic, camera, screen and sound all start off — you choose what you broadcast, and nothing is ever recorded or stored. When you leave, your shares stop; the standing relationship doesn't change.</p>
+          <ul class="flist">
+            <li>Nothing recorded, ever</li>
+            <li>Sharing is scoped to the room — no standing permission is minted</li>
+            <li>Leave and it all ends</li>
+          </ul>
+        </div>
+        <div class="win">
+          <div class="win-bar"><div style="display: flex; align-items: center; gap: 9px;"><span style="font-size: 17px;">🪩</span><span style="font-weight: 700; font-size: 13px;">Casey's room</span></div><span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint);">muted</span></div>
+          <div class="stage" style="padding: 18px 16px; display: flex; flex-direction: column; gap: 14px;">
+            <p style="text-align: center; font-size: 12.5px; color: var(--faint); line-height: 1.55; margin: 0;">Nothing leaves this machine — mic, camera and screen stay off until you switch them on below.</p>
+          </div>
+          <div class="bar" style="justify-content: center;">
+            <span class="ctl" title="Talk to the room"><span class="ci slashed">🎙</span><span class="cl">Unmute</span></span>
+            <span class="ctl" title="Send your camera"><span class="ci slashed">📷</span><span class="cl">Camera</span></span>
+            <span class="bar-sep"></span>
+            <span class="ctl" title="Share this machine's screen"><span class="ci">🖥</span><span class="cl">Share screen</span></span>
+            <span class="ctl" title="Share system sound"><span class="ci">🔊</span><span class="cl">Share sound</span></span>
+            <span class="ctl" title="Share control"><span class="ci">🕹</span><span class="cl">Share control</span></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- F2 more than a video call -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr)); gap: clamp(28px, 4vw, 56px); align-items: center; margin-bottom: clamp(48px, 6vw, 80px);">
+        <div class="win" style="order: 2;">
+          <div class="win-bar"><span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint);">your tile</span><span class="stat live"><span class="ld"></span>sending</span></div>
+          <div class="stage" style="padding: 16px;">
+            <div class="vtile" style="aspect-ratio: 16 / 9; background: linear-gradient(135deg, oklch(0.24 0.07 290), oklch(0.17 0.04 320));">
+              <div style="position: absolute; top: 8px; left: 8px; right: 8px; display: flex; flex-wrap: wrap; gap: 6px;">
+                <span class="send-chip">🖥 sharing screen</span>
+                <span class="send-chip">🔊 sharing sound</span>
+                <span class="send-chip">🕹 control open</span>
+              </div>
+              <span class="drive-badge" style="left: 8px; right: auto; top: auto; bottom: 8px;">📋 you can drive</span>
+            </div>
+          </div>
+        </div>
+        <div style="order: 1;">
+          <span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint);">[ media ]</span>
+          <h3 class="display-m" style="margin: 14px 0 14px;">More than a video call.</h3>
+          <p style="color: var(--dim); line-height: 1.6; max-width: 50ch; margin-bottom: 18px;">Beyond camera and mic, share a screen (pick which monitor), share what the machine is playing (system sound), share keyboard &amp; mouse control (owner/fleet only), and drop files everyone can download straight from you.</p>
+          <ul class="flist">
+            <li>Pick which monitor to share</li>
+            <li>System audio, not your mic</li>
+            <li>Downloads come straight from the sharer, never through the host</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- F3 hosts and invites -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr)); gap: clamp(28px, 4vw, 56px); align-items: center;">
+        <div>
+          <span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint);">[ rooms ]</span>
+          <h3 class="display-m" style="margin: 14px 0 14px;">Hosts and invites.</h3>
+          <p style="color: var(--dim); line-height: 1.6; max-width: 50ch; margin-bottom: 18px;">The person who makes a room hosts it; its identity and roster live on their machine. Open rooms let anyone with the id walk in; invite-only rooms make them knock and you Admit. Copy the invite (room id) to pass it on.</p>
+          <ul class="flist">
+            <li>🔓 open vs 🔒 invite-only, toggle anytime</li>
+            <li>Knockers appear in People with Admit/Deny</li>
+            <li>Rooms list machines, shown as "who · machine"</li>
+          </ul>
+        </div>
+        <div class="win">
+          <div class="win-bar">
+            <span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint);">Rooms</span>
+            <div style="display: flex; gap: 6px;">
+              <span class="btn btn-ghost btn-sm" style="padding: 6px 11px; font-size: 11px;" title="Paste a room id someone gave you and ask to join">⌁ Join with an id</span>
+              <span class="btn btn-primary btn-sm" style="padding: 6px 11px; font-size: 11px;">+ New room</span>
+            </div>
+          </div>
+          <div style="padding: 14px 15px 16px; display: flex; flex-direction: column; gap: 10px;">
+            <div style="display: flex; align-items: center; gap: 10px; background: var(--surface-2); border-radius: 7px; padding: 11px 12px;">
+              <div style="flex: 1; min-width: 0;">
+                <div style="font-size: 13.5px; font-weight: 650; display: flex; align-items: center; gap: 7px;">🪩 Casey's room <span class="m-dot" title="You're in this room" style="box-shadow: 0 0 0 3px oklch(0.8 0.17 150 / 0.16);"></span></div>
+                <div style="font-size: 11px; color: var(--faint); margin-top: 3px;">hosted by you · Alex, Conference puck · 2 in now</div>
+              </div>
+              <span class="btn btn-primary btn-sm" style="padding: 5px 13px; font-size: 11.5px;">Open</span>
+              <span style="color: var(--faint); font-weight: 700; padding: 0 4px;" title="Room settings">⋯</span>
+            </div>
+            <p style="font-size: 12px; color: var(--faint); line-height: 1.5; margin: 0; padding: 0 2px;">No rooms yet. Make one to share your screen, sound or files with several machines at once.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ STATES ════════ -->
+  <section class="section">
+    <div class="wrap">
+      <div style="max-width: 820px; margin-bottom: clamp(36px, 4vw, 52px);">
+        <span class="eyebrow">Every state it can be in</span>
+        <h2 class="display-l" style="margin: 16px 0 16px;">A call, told honestly.</h2>
+        <p class="lede">From an empty list to a full stage with someone knocking — the room shows exactly who's here, what's flowing, and what to do next.</p>
+      </div>
+      <div class="states">
+        <!-- No rooms -->
+        <div class="scard">
+          <div class="scard-vis">
+            <div style="font-size: 30px;">🪩</div>
+            <div style="font-size: 12.5px; color: var(--dim); line-height: 1.5;">No rooms yet. Make one to share your screen, sound or files with several machines at once.</div>
+          </div>
+          <div class="scard-cap"><h4>No rooms</h4><p>The empty list nudges you to start one — the rooms you make, you host.</p></div>
+        </div>
+        <!-- In a call -->
+        <div class="scard">
+          <div class="scard-vis" style="flex-direction: row; gap: 9px;">
+            <div class="vtile speaking" style="flex: 1; aspect-ratio: 4/3; display: grid; place-items: center; background: oklch(0.165 0.024 285);"><div class="avatar" style="width: 28px; height: 28px; font-size: 10px;">CA</div></div>
+            <div class="vtile" style="flex: 1; aspect-ratio: 4/3; background: linear-gradient(135deg, oklch(0.22 0.06 292), oklch(0.16 0.04 280));"></div>
+          </div>
+          <div class="scard-cap"><h4>In a call</h4><p>A tile per person present — speaker glows green; nobody sharing yet shows the gallery.</p></div>
+        </div>
+        <!-- Sharing screen -->
+        <div class="scard">
+          <div class="scard-vis">
+            <span class="share-banner" style="border-radius: 6px; border: 1px solid oklch(0.80 0.17 150 / 0.3);"><span class="share-dot"></span>You're sharing your screen with the room</span>
+          </div>
+          <div class="scard-cap"><h4>Sharing screen</h4><p>The green truth bar stays up the whole time, with Stop share right there.</p></div>
+        </div>
+        <!-- Someone knocking -->
+        <div class="scard">
+          <div class="scard-vis">
+            <div class="knocks">
+              <h5>Asking to join</h5>
+              <div class="knock-row"><span class="kwho">Jordan</span><span class="kbtn admit">Admit</span><span class="kbtn">Deny</span></div>
+            </div>
+          </div>
+          <div class="scard-cap"><h4>Someone knocking</h4><p>An invite-only room makes them ask; the host admits or denies from People.</p></div>
+        </div>
+        <!-- Just you -->
+        <div class="scard">
+          <div class="scard-vis">
+            <div style="font-size: 30px;">🪩</div>
+            <div style="font-size: 12.5px; color: var(--dim); line-height: 1.5;">It's just you so far: invite a machine from <b style="color: var(--text);">People</b>, or copy the invite.</div>
+          </div>
+          <div class="scard-cap"><h4>Just you</h4><p>The stage note tells you how to bring a machine in before anything's flowing.</p></div>
+        </div>
+        <!-- Control shared -->
+        <div class="scard">
+          <div class="scard-vis">
+            <div class="vtile" style="aspect-ratio: 16/9; background: linear-gradient(135deg, oklch(0.24 0.07 290), oklch(0.17 0.04 320));">
+              <span class="media-badge">🖥 <b>Casey</b> <span class="machine">· Desk PC</span></span>
+              <span class="drive-badge">+ 🕹 you can drive</span>
+            </div>
+          </div>
+          <div class="scard-cap"><h4>Control shared</h4><p>The sharer opened control — your keyboard and mouse drive their machine.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ CONSOLE SWITCHER ════════ -->
+  <section class="section" style="padding-top: 0;">
+    <div class="wrap">
+      <div style="border-top: 1px solid var(--border); padding-top: clamp(40px, 5vw, 56px);">
+        <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 22px;">
+          <h2 class="display-s">The other consoles</h2>
+          <a href="../" style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent);">All five →</a>
+        </div>
+        <div class="switch">
+          <a href="../remote-control/"><span class="sn">01</span><span class="st">Remote control</span></a>
+          <a href="../terminal/"><span class="sn">02</span><span class="st">Terminal</span></a>
+          <a href="../files/"><span class="sn">03</span><span class="st">Files</span></a>
+          <a href="../sites/"><span class="sn">04</span><span class="st">Sites</span></a>
+          <a class="cur" href="../rooms/"><span class="sn">05</span><span class="st">Rooms</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ DOWNLOAD CTA ════════ -->
+  <section class="section" style="padding-top: 0;">
+    <div class="wrap">
+      <div style="position: relative; background: linear-gradient(180deg, var(--surface), var(--bg-2)); border: 1px solid var(--accent-line); border-radius: 10px; padding: clamp(36px, 5vw, 64px); overflow: hidden; box-shadow: 0 40px 90px -40px rgb(0 0 0 / 0.8), 0 14px 40px -12px oklch(0.64 0.255 350 / 0.2);">
+        <div class="grid-bg" style="opacity: 0.8;"></div>
+        <div class="glow" style="width: 420px; height: 360px; right: -10%; top: -30%; background: var(--violet); opacity: 0.18;"></div>
+        <div style="position: relative; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr)); gap: clamp(32px, 4vw, 56px); align-items: center;">
+          <div>
+            <span class="eyebrow">Free forever</span>
+            <h2 class="display-l" style="margin: 16px 0 16px;">Every console, the moment you install.</h2>
+            <p class="lede" style="margin-bottom: 26px;">No trial, no tier, no account. Install the app, claim your machines, and the consoles are yours.</p>
+            <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+              <a class="btn btn-primary" href="../../../download/">Download for Linux</a>
+              <a class="btn btn-ghost" href="../../../download/">macOS</a>
+              <a class="btn btn-ghost" href="../../../download/">Windows</a>
+            </div>
+          </div>
+          <div>
+            <div style="background: oklch(0.115 0.018 285); border: 1px solid var(--border); border-radius: 6px; overflow: hidden;">
+              <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; border-bottom: 1px solid var(--border);">
+                <span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint);">or the one-liner</span>
+                <span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint);">sh</span>
+              </div>
+              <div style="padding: 18px 16px; font-family: var(--font-mono); font-size: 13.5px; color: var(--text); overflow-x: auto; white-space: nowrap;"><span style="color: var(--faint);">$</span> curl -fsSL https://allmystuff.works/install.sh | sh</div>
+            </div>
+            <div style="display: flex; gap: 18px; flex-wrap: wrap; margin-top: 16px;">
+              <span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);">✓ free forever</span>
+              <span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);">✓ mit licensed</span>
+              <span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);">✓ no account</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ FOOTER ════════ -->
+  <footer style="border-top: 1px solid var(--border); padding: clamp(40px, 5vw, 64px) 0 32px; position: relative; overflow: hidden;">
+    <div class="glow" style="width: 460px; height: 320px; left: -12%; bottom: -40%; background: var(--violet); opacity: 0.1;"></div>
+    <div class="wrap" style="position: relative;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 36px; margin-bottom: 40px;">
+        <div>
+          <div style="display: flex; align-items: center; gap: 11px; margin-bottom: 14px;">
+            <svg viewBox="0 0 256 256" aria-hidden="true" style="width: 26px; height: 26px; color: var(--accent);">
+              <g stroke="currentColor" stroke-width="13" fill="none" stroke-linecap="round">
+                <path d="M128 74 L77 165 M128 74 L181 160 M77 165 L181 160"></path>
+              </g>
+              <circle cx="128" cy="72" r="27" fill="currentColor"></circle>
+              <circle cx="76" cy="166" r="22" fill="currentColor"></circle>
+              <circle cx="182" cy="160" r="22" fill="currentColor"></circle>
+            </svg>
+            <span style="font-family: var(--font-display); font-weight: 700; font-size: 18px;">allmystuff<span style="color: var(--dim); font-weight: 500;">.works</span></span>
+          </div>
+          <p style="font-size: 14px; color: var(--faint); max-width: 32ch; line-height: 1.6;">Tech that works when you turn it on. Yours, with or without us.</p>
+        </div>
+        <div>
+          <h4 style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-bottom: 14px;">The consoles</h4>
+          <ul style="list-style: none; display: grid; gap: 9px; font-size: 14px; color: var(--dim);">
+            <li><a href="../remote-control/">Remote control</a></li>
+            <li><a href="../terminal/">Terminal</a></li>
+            <li><a href="../files/">Files</a></li>
+            <li><a href="../sites/">Sites</a></li>
+            <li><a href="../rooms/">Rooms</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-bottom: 14px;">The app</h4>
+          <ul style="list-style: none; display: grid; gap: 9px; font-size: 14px; color: var(--dim);">
+            <li><a href="../../../software/">The software</a></li>
+            <li><a href="../../../layers/">How it works</a></li>
+            <li><a href="../../../download/">Download</a></li>
+            <li><a href="../../../faq/">FAQ</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-bottom: 14px;">Open</h4>
+          <ul style="list-style: none; display: grid; gap: 9px; font-size: 14px; color: var(--dim);">
+            <li><a href="https://github.com/mrjeeves/AllMyStuff">github.com/mrjeeves/AllMyStuff</a></li>
+            <li><a href="https://github.com/mrjeeves/allmystuff.works">This site's source</a></li>
+            <li><a href="mailto:hello@allmystuff.works">Email us</a></li>
+          </ul>
+        </div>
+      </div>
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-top: 22px; border-top: 1px solid var(--border);">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <img src="../../../assets/cec-logo.png" alt="Critical Error Computing" style="height: 26px; width: auto;">
+          <span style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);">A Critical Error Computing product · Humble, TX</span>
+        </div>
+        <span style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);">© 2026 allmystuff.works · MIT</span>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  fetch("https://api.github.com/repos/mrjeeves/AllMyStuff/releases/latest")
+    .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(function (rel) {
+      var v = document.getElementById("rel-version");
+      if (v && rel.tag_name) v.textContent = rel.tag_name[0] === "v" ? rel.tag_name : "v" + rel.tag_name;
+    })
+    .catch(function () {});
+})();
+</script>
+</body>
+</html>

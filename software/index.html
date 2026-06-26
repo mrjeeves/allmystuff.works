@@ -254,6 +254,47 @@
     </div>
   </section>
 
+  <!-- ════════ THE FIVE CONSOLES ════════ -->
+  <section class="section" style="background: var(--bg-2); border-bottom: 1px solid var(--border);">
+    <div class="wrap">
+      <div style="display: flex; align-items: end; justify-content: space-between; gap: 20px; flex-wrap: wrap; max-width: 920px; margin-bottom: clamp(32px, 4vw, 48px);">
+        <div>
+          <span class="eyebrow">Go deeper — one page each</span>
+          <h2 class="display-l" style="margin: 16px 0 16px;">Every machine, in a tab.</h2>
+          <p class="lede">Claim a machine and it gets consoles — the real, free surfaces you reach it through. Each has a page of its own, showing the interface and every state it can be in.</p>
+        </div>
+        <a class="btn btn-ghost" href="consoles/">Tour the consoles <span aria-hidden="true">→</span></a>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(170px, 100%), 1fr)); gap: 14px;">
+        <a href="consoles/remote-control/" style="display: flex; flex-direction: column; gap: 8px; padding: 20px 20px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); transition: border-color var(--dur-base) ease, transform var(--dur-fast) ease;" onmouseover="this.style.borderColor='var(--accent-line)';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='none'">
+          <span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint);">01</span>
+          <span style="font-family: var(--font-display); font-size: 21px; font-weight: 600;">Remote control</span>
+          <span style="font-size: 13px; color: var(--dim); line-height: 1.5;">See its screens & cameras, take the wheel.</span>
+        </a>
+        <a href="consoles/terminal/" style="display: flex; flex-direction: column; gap: 8px; padding: 20px 20px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); transition: border-color var(--dur-base) ease, transform var(--dur-fast) ease;" onmouseover="this.style.borderColor='var(--accent-line)';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='none'">
+          <span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint);">02</span>
+          <span style="font-family: var(--font-display); font-size: 21px; font-weight: 600;">Terminal</span>
+          <span style="font-size: 13px; color: var(--dim); line-height: 1.5;">A real shell. No sshd, no forwarding.</span>
+        </a>
+        <a href="consoles/files/" style="display: flex; flex-direction: column; gap: 8px; padding: 20px 20px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); transition: border-color var(--dur-base) ease, transform var(--dur-fast) ease;" onmouseover="this.style.borderColor='var(--accent-line)';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='none'">
+          <span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint);">03</span>
+          <span style="font-family: var(--font-display); font-size: 21px; font-weight: 600;">Files</span>
+          <span style="font-size: 13px; color: var(--dim); line-height: 1.5;">Browse & fetch, straight to disk.</span>
+        </a>
+        <a href="consoles/sites/" style="display: flex; flex-direction: column; gap: 8px; padding: 20px 20px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); transition: border-color var(--dur-base) ease, transform var(--dur-fast) ease;" onmouseover="this.style.borderColor='var(--accent-line)';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='none'">
+          <span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint);">04</span>
+          <span style="font-family: var(--font-display); font-size: 21px; font-weight: 600;">Sites</span>
+          <span style="font-size: 13px; color: var(--dim); line-height: 1.5;">The services your machines host.</span>
+        </a>
+        <a href="consoles/rooms/" style="display: flex; flex-direction: column; gap: 8px; padding: 20px 20px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); transition: border-color var(--dur-base) ease, transform var(--dur-fast) ease;" onmouseover="this.style.borderColor='var(--accent-line)';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='none'">
+          <span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint);">05</span>
+          <span style="font-family: var(--font-display); font-size: 21px; font-weight: 600;">Rooms</span>
+          <span style="font-size: 13px; color: var(--dim); line-height: 1.5;">Pull the fleet into one call.</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- ════════ THE MAIN SCREEN ════════ -->
   <section class="section" style="overflow: hidden;">
     <div class="glow" style="width: 560px; height: 460px; left: 50%; top: 46%; transform: translate(-50%, -50%); background: var(--violet); opacity: 0.13;"></div>

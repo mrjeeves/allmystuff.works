@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sites console — the services your machines host · allmystuff.works</title>
+<meta name="description" content="Reach the web apps and TCP services running on any fleet machine from anywhere. Map a remote port through the mesh proxy and open it locally — no port forwarding, any TCP service: HTTP, SSH, databases, gRPC, WebSockets. Expose your own ports under a name.">
+<meta name="theme-color" content="#070711">
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<link rel="icon" sizes="48x48 32x32 16x16" href="../../../favicon.ico">
+<link rel="apple-touch-icon" href="../../../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Sites console — the services your machines host">
+<meta property="og:description" content="Map a remote service through the mesh proxy and open it locally — no forwarding, any TCP service. HTTP, SSH, Postgres, gRPC, WebSockets. The real interface, demonstrated.">
+<meta property="og:url" content="https://allmystuff.works/software/consoles/sites/">
+<meta property="og:image" content="https://allmystuff.works/og.png">
+<link rel="stylesheet" href="../../../ds/cec/tokens/fonts.css">
+<link rel="stylesheet" href="../../../ds/cec/tokens/colors.css">
+<link rel="stylesheet" href="../../../ds/cec/tokens/typography.css">
+<link rel="stylesheet" href="../../../ds/cec/tokens/spacing.css">
+<link rel="stylesheet" href="../../../ds/cec/tokens/base.css">
+<link rel="stylesheet" href="../../../ds/cec/styles.css">
+<style>
+  /* ── Console-showcase shared atoms ─────────────────────────────────
+     Faithful renders of the app, drawn in the site's design tokens.
+     Media-kind hues mirror the app's palette (audio amber, video violet,
+     display magenta, input green, storage teal) so the chrome reads true. */
+  body { margin: 0; background: oklch(0.135 0.022 285); }
+  :root {
+    --m-audio: oklch(0.82 0.15 90);
+    --m-video: oklch(0.70 0.17 292);
+    --m-display: var(--accent);
+    --m-input: oklch(0.78 0.16 160);
+    --m-storage: oklch(0.75 0.15 195);
+  }
+  @keyframes amsPulse { 0%, 100% { opacity: 0.55; } 50% { opacity: 1; } }
+  @keyframes amsBlink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+  @keyframes amsScan { 0% { transform: translateY(-100%); } 100% { transform: translateY(100%); } }
+  @keyframes amsFlow { to { stroke-dashoffset: -30; } }
+
+  /* App-faithful window chrome */
+  .win { background: linear-gradient(180deg, var(--surface), var(--bg-2)); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; box-shadow: 0 40px 90px -40px rgb(0 0 0 / 0.85); }
+  .win-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 11px 15px; border-bottom: 1px solid var(--border); }
+  .who { display: flex; align-items: center; gap: 10px; min-width: 0; }
+  .who .ico { font-size: 21px; line-height: 1; }
+  .who .nm { font-weight: 600; font-size: 14px; color: var(--text); white-space: nowrap; }
+  .who .sub { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; color: var(--faint); display: flex; align-items: center; gap: 6px; }
+  .dot-on { width: 6px; height: 6px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 8px var(--ok); }
+  .winx { width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; background: var(--surface-2); color: var(--dim); font-size: 12px; flex-shrink: 0; }
+
+  /* tab strips */
+  .tabrow { display: flex; gap: 6px; padding: 8px 12px; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+  .tab { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.04em; padding: 6px 11px; border-radius: 999px; border: 1px solid var(--border); background: var(--bg); color: var(--dim); display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+  .tab.on { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+  /* toggles + pills (console footer) */
+  .ctl-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding: 10px 13px; border-top: 1px solid var(--border); }
+  .tgl { font-family: var(--font-body); font-size: 12.5px; font-weight: 600; padding: 6px 11px; border-radius: 999px; border: 1px solid var(--border); background: var(--bg); color: var(--dim); display: inline-flex; align-items: center; gap: 7px; }
+  .tgl .pip { width: 6px; height: 6px; border-radius: 50%; background: var(--faint); }
+  .tgl.on { background: oklch(0.80 0.17 150 / 0.15); border-color: var(--ok); color: oklch(0.88 0.09 150); }
+  .tgl.on .pip { background: var(--ok); box-shadow: 0 0 8px var(--ok); }
+  .qpill { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 9px; border: 1px solid var(--border); border-radius: 999px; color: var(--dim); }
+  .qpill.tuned { border-color: var(--accent-line); color: var(--accent); }
+  .stat { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.06em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 6px; padding: 4px 9px; border-radius: 999px; }
+  .stat.live { color: oklch(0.88 0.09 150); border: 1px solid oklch(0.80 0.17 150 / 0.5); }
+  .stat .ld { width: 6px; height: 6px; border-radius: 50%; background: var(--ok); animation: amsBlink 1.6s steps(1) infinite; }
+
+  /* state-gallery cards */
+  .states { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 16px; }
+  .scard { background: var(--bg-2); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; }
+  .scard-vis { padding: 16px; min-height: 116px; display: flex; flex-direction: column; justify-content: center; gap: 9px; background: linear-gradient(180deg, oklch(0.16 0.03 285), var(--bg-2)); }
+  .scard-cap { padding: 12px 16px 15px; border-top: 1px solid var(--border); }
+  .scard-cap h4 { font-family: var(--font-display); font-size: 17px; font-weight: 600; margin-bottom: 4px; }
+  .scard-cap p { font-size: 13px; color: var(--dim); line-height: 1.5; }
+
+  /* feature list bullets */
+  .flist { list-style: none; display: grid; gap: 9px; font-size: 15px; color: var(--dim); }
+  .flist li { display: flex; gap: 10px; }
+  .flist li::before { content: "▸"; color: var(--accent); }
+
+  /* console switcher */
+  .switch { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(170px, 100%), 1fr)); gap: 12px; }
+  .switch a { display: flex; flex-direction: column; gap: 6px; padding: 16px 18px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); transition: border-color var(--dur-base) ease, transform var(--dur-fast) ease; }
+  .switch a:hover { border-color: var(--border-bright); transform: var(--lift); }
+  .switch a.cur { border-color: var(--accent-line); background: linear-gradient(180deg, var(--surface-2), var(--surface)); }
+  .switch .sn { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); }
+  .switch .st { font-family: var(--font-display); font-size: 19px; font-weight: 600; }
+  .switch a.cur .st { color: var(--accent); }
+
+  /* ── Sites-specific helpers ────────────────────────────────────────
+     The Sites tab is a list of service rows grouped by machine, plus a
+     collapsible "Your ports" panel. These mirror SitesTab.svelte's
+     .row / .machine-head / .tag / .name-in / .count atoms in site tokens. */
+  .sec-head { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); padding: 13px 15px 7px; }
+  .mhead { display: flex; align-items: center; gap: 8px; font-size: 12.5px; font-weight: 600; color: var(--dim); padding: 9px 15px 6px; }
+  .mdot { width: 7px; height: 7px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 7px var(--ok); flex-shrink: 0; }
+  .mdot.off { background: var(--line-strong); box-shadow: none; }
+  .srows { display: flex; flex-direction: column; gap: 7px; padding: 0 15px; }
+  .srow { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 10px; background: var(--surface-2); border-radius: 6px; padding: 9px 9px 9px 12px; }
+  .srow.lit { box-shadow: inset 0 0 0 1px var(--accent-line); }
+  .s-ico { font-size: 17px; line-height: 1; flex-shrink: 0; }
+  .s-main { flex: 1 1 9rem; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+  .s-name { font-size: 13.5px; font-weight: 600; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .s-port { color: var(--faint); font-weight: 500; margin-left: 4px; font-family: var(--font-mono); font-size: 11.5px; }
+  .s-sub { font-size: 11px; color: var(--faint); display: flex; align-items: center; gap: 6px; }
+  .s-sub.mapped { color: var(--accent); font-family: var(--font-mono); letter-spacing: 0.02em; }
+  .s-tag { background: var(--surface); border: 1px solid var(--border); border-radius: 999px; padding: 1px 7px; font-size: 9.5px; font-weight: 700; letter-spacing: 0.03em; color: var(--faint); }
+  .s-acts { display: flex; align-items: center; gap: 7px; flex-shrink: 0; }
+  .s-x { color: var(--faint); }
+  .name-in { flex: 1 1 8rem; min-width: 7rem; border: 1px solid var(--line-strong); border-radius: 6px; padding: 5px 9px; font-size: 12.5px; font-family: var(--font-body); background: var(--bg); color: var(--text); }
+  .btn-copied { color: var(--ok) !important; border-color: oklch(0.80 0.17 150 / 0.5) !important; background: oklch(0.80 0.17 150 / 0.14) !important; }
+  .ports-head { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--dim); background: transparent; border: none; cursor: pointer; padding: 0; }
+  .ports-chev { display: inline-block; transition: transform var(--dur-fast) ease; }
+  .ports-chev.open { transform: rotate(90deg); }
+  .count-badge { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.04em; text-transform: none; background: var(--accent-soft); color: var(--accent); border-radius: 999px; padding: 1px 8px; }
+</style>
+</head>
+<body>
+<div style="min-height: 100vh; background: var(--bg); color: var(--text); font-family: var(--font-body); overflow-x: clip;">
+
+  <!-- ════════ NAV ════════ -->
+  <nav style="position: sticky; top: 0; z-index: 50; background: oklch(0.135 0.022 285 / 0.74); backdrop-filter: blur(14px) saturate(1.2); border-bottom: 1px solid var(--border);">
+    <div class="wrap" style="display: flex; align-items: center; justify-content: space-between; height: 66px; gap: 18px;">
+      <a href="../../../" style="display: flex; align-items: center; gap: 11px;">
+        <svg viewBox="0 0 256 256" aria-hidden="true" style="width: 30px; height: 30px; color: var(--accent);">
+          <g stroke="currentColor" stroke-width="13" fill="none" stroke-linecap="round">
+            <path d="M128 74 L77 165 M128 74 L181 160 M77 165 L181 160"></path>
+          </g>
+          <circle cx="128" cy="72" r="27" fill="currentColor"></circle>
+          <circle cx="76" cy="166" r="22" fill="currentColor"></circle>
+          <circle cx="182" cy="160" r="22" fill="currentColor"></circle>
+        </svg>
+        <span style="font-family: var(--font-display); font-weight: 700; font-size: 20px; letter-spacing: 0.01em;">allmystuff<span style="color: var(--dim); font-weight: 500;">.works</span></span>
+      </a>
+      <div style="display: flex; gap: 22px; align-items: center;">
+        <a href="../../../software/" style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text); border-bottom: 2px solid var(--accent); padding-bottom: 2px;">The software</a>
+        <a href="../../../hardware/" style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim);">The hardware</a>
+        <a href="../../../service/" style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim);">The service</a>
+        <a href="../../../layers/" style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim);">How it works</a>
+        <a href="../../../faq/" style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim);">FAQ</a>
+      </div>
+      <div style="display: flex; gap: 12px; align-items: center;">
+        <a class="chip" href="https://github.com/mrjeeves/AllMyStuff" title="View AllMyStuff on GitHub"><span class="dot"></span><span id="rel-version">v0.1.5</span></a>
+        <a class="btn btn-primary btn-sm" href="../../../download/">Download free</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ════════ HERO ════════ -->
+  <section class="section" style="padding-bottom: clamp(40px, 5vw, 56px); position: relative; overflow: hidden;">
+    <div class="grid-bg"></div>
+    <div class="glow" style="width: 520px; height: 420px; left: 62%; top: -10%; background: var(--accent); opacity: 0.12;"></div>
+    <div class="wrap" style="position: relative; z-index: 2;">
+      <div style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); margin-bottom: 22px;">
+        <a href="../../../software/" style="color: var(--faint);">The software</a>
+        <span style="color: var(--border-bright); margin: 0 8px;">/</span>
+        <a href="../" style="color: var(--faint);">Consoles</a>
+        <span style="color: var(--border-bright); margin: 0 8px;">/</span>
+        <span style="color: var(--accent);">Sites</span>
+      </div>
+      <div style="max-width: 880px;">
+        <span class="eyebrow">Console 04 · Sites</span>
+        <h1 class="display-xl" style="margin: 16px 0 20px;">The services your<br>machines host.</h1>
+        <p class="lede" style="max-width: 64ch;">Reach the web apps and services running on any fleet machine — from anywhere. Map a port through the mesh proxy and open it locally: no port forwarding, no public exposure, <em>any</em> TCP service. A dashboard, an SSH host, a Postgres, a dev server — all one click away.</p>
+      </div>
+      <div style="display: flex; gap: 9px; flex-wrap: wrap; margin-top: 26px;">
+        <span class="chip">Any TCP service</span>
+        <span class="chip">One-click map</span>
+        <span class="chip">No port forwarding</span>
+        <span class="chip">Fleet-scoped</span>
+        <span class="chip">Mesh proxy</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ THE CONSOLE, LIVE (primary mockup) ════════ -->
+  <section class="section" style="padding-top: 0;">
+    <div class="wrap">
+      <div class="win" style="max-width: 1000px; margin: 0 auto;">
+        <!-- header -->
+        <div class="win-bar">
+          <div class="who">
+            <span class="ico">🌐</span>
+            <div style="min-width: 0;">
+              <div class="nm" style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim);">sites — around your fleet</div>
+            </div>
+          </div>
+          <span class="stat live" title="Connected to the mesh"><span class="ld"></span>online</span>
+        </div>
+
+        <!-- around your fleet -->
+        <div class="sec-head">Around your fleet</div>
+
+        <!-- Desk PC -->
+        <div class="mhead"><span class="mdot"></span>Desk PC</div>
+        <div class="srows">
+          <!-- mapped: Grafana -->
+          <div class="srow lit">
+            <span class="s-ico">🌐</span>
+            <span class="s-main">
+              <span class="s-name">Grafana<span class="s-port">:3000</span></span>
+              <span class="s-sub mapped" title="Reachable locally at this address">localhost:47000</span>
+            </span>
+            <div class="s-acts">
+              <span class="btn btn-primary btn-sm" title="Open in your browser">Open</span>
+              <span class="btn btn-ghost btn-sm" title="Copy its local address">Copy</span>
+              <span class="btn btn-ghost btn-sm s-x" title="Unmap — stop proxying it here" aria-label="Unmap">✕</span>
+            </div>
+          </div>
+          <!-- unmapped: PostgreSQL -->
+          <div class="srow">
+            <span class="s-ico">🗄</span>
+            <span class="s-main">
+              <span class="s-name">PostgreSQL<span class="s-port">:5432</span></span>
+              <span class="s-sub"><span class="s-tag">local-only</span></span>
+            </span>
+            <div class="s-acts">
+              <span class="btn btn-primary btn-sm" title="Map this site to a local port through the mesh proxy">Map</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Living-room TV -->
+        <div class="mhead"><span class="mdot"></span>Living-room TV</div>
+        <div class="srows">
+          <div class="srow">
+            <span class="s-ico">🌐</span>
+            <span class="s-main">
+              <span class="s-name">HTTP<span class="s-port">:8096</span></span>
+            </span>
+            <div class="s-acts">
+              <span class="btn btn-primary btn-sm" title="Map this site to a local port through the mesh proxy">Map</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- your ports (expanded) -->
+        <div style="border-top: 1px dashed var(--border); margin-top: 14px; padding: 13px 15px 7px;">
+          <button class="ports-head" aria-expanded="true">
+            <span class="ports-chev open" aria-hidden="true">▸</span>
+            Your ports
+            <span class="count-badge">1 exposed</span>
+          </button>
+        </div>
+        <div class="srows" style="padding-bottom: 15px;">
+          <!-- exposed: My Project — Dev -->
+          <div class="srow lit">
+            <span class="s-ico">🌐</span>
+            <span class="s-main">
+              <span class="s-name">HTTP<span class="s-port">:5173</span></span>
+              <span class="s-sub"><span class="s-tag">local-only</span> vite</span>
+            </span>
+            <div class="s-acts">
+              <input class="name-in" value="My Project — Dev" title="Name your fleet sees this site under" aria-label="Name your fleet sees this site under">
+              <span class="btn btn-ghost btn-sm" title="Stop advertising this service">Stop</span>
+            </div>
+          </div>
+          <!-- HTTP :8000 -->
+          <div class="srow">
+            <span class="s-ico">🌐</span>
+            <span class="s-main">
+              <span class="s-name">HTTP<span class="s-port">:8000</span></span>
+              <span class="s-sub"><span class="s-tag">local-only</span> python</span>
+            </span>
+            <div class="s-acts">
+              <input class="name-in" placeholder="HTTP" title="Name your fleet sees this site under" aria-label="Name your fleet sees this site under">
+              <span class="btn btn-primary btn-sm" title="Advertise this service to your fleet under this name">Expose</span>
+            </div>
+          </div>
+          <!-- SSH :22 -->
+          <div class="srow">
+            <span class="s-ico">🔑</span>
+            <span class="s-main">
+              <span class="s-name">SSH<span class="s-port">:22</span></span>
+              <span class="s-sub">sshd</span>
+            </span>
+            <div class="s-acts">
+              <input class="name-in" placeholder="SSH" title="Name your fleet sees this site under" aria-label="Name your fleet sees this site under">
+              <span class="btn btn-primary btn-sm" title="Advertise this service to your fleet under this name">Expose</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p style="text-align: center; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); margin-top: 18px;">The real interface — a remote Grafana mapped to localhost:47000</p>
+    </div>
+  </section>
+
+  <!-- ════════ FEATURES ════════ -->
+  <section class="section" style="background: var(--bg-2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+    <div class="wrap">
+      <div style="max-width: 820px; margin-bottom: clamp(40px, 5vw, 60px);">
+        <span class="eyebrow">What it does</span>
+        <h2 class="display-l" style="margin: 16px 0 16px;">A reverse proxy, in a tab.</h2>
+        <p class="lede">Every service your fleet hosts, made reachable — mapped to a local port through the mesh, with nothing forwarded and nothing public. Then your own ports, exposed under names only your fleet can see.</p>
+      </div>
+
+      <!-- F1 map -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr)); gap: clamp(28px, 4vw, 56px); align-items: center; margin-bottom: clamp(48px, 6vw, 80px);">
+        <div>
+          <span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint);">[ map ]</span>
+          <h3 class="display-m" style="margin: 14px 0 14px;">Map a port, open it local.</h3>
+          <p style="color: var(--dim); line-height: 1.6; max-width: 50ch; margin-bottom: 18px;">One click maps any remote service to a local port through the mesh proxy. Web services get an Open button straight to your browser; a bare TCP service gives you a copyable <span class="mono">localhost:</span> address to point your own client at. The local address is monospace and one tap away.</p>
+          <ul class="flist">
+            <li>The local address is monospace and one-tap copyable</li>
+            <li>Copy flashes <span style="color: var(--ok);">✓ Copied</span> right on the row — no toast</li>
+            <li>Web-aware — Open only appears for HTTP/HTTPS</li>
+          </ul>
+        </div>
+        <div class="win">
+          <div class="win-bar"><span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint);">mapped · desk pc</span><span class="stat live"><span class="ld"></span>tunnel up</span></div>
+          <div class="srows" style="padding: 16px 15px;">
+            <div class="srow lit">
+              <span class="s-ico">🌐</span>
+              <span class="s-main">
+                <span class="s-name">Grafana<span class="s-port">:3000</span></span>
+                <span class="s-sub mapped">localhost:47000</span>
+              </span>
+              <div class="s-acts">
+                <span class="btn btn-primary btn-sm" title="Open in your browser">Open</span>
+                <span class="btn btn-ghost btn-sm btn-copied" title="Copy its local address">✓ Copied</span>
+                <span class="btn btn-ghost btn-sm s-x" title="Unmap — stop proxying it here" aria-label="Unmap">✕</span>
+              </div>
+            </div>
+            <div class="srow">
+              <span class="s-ico">🗄</span>
+              <span class="s-main">
+                <span class="s-name">PostgreSQL<span class="s-port">:5432</span></span>
+                <span class="s-sub mapped">localhost:47001</span>
+              </span>
+              <div class="s-acts">
+                <span class="btn btn-ghost btn-sm" title="Copy its local address">Copy</span>
+                <span class="btn btn-ghost btn-sm s-x" title="Unmap — stop proxying it here" aria-label="Unmap">✕</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- F2 any tcp -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr)); gap: clamp(28px, 4vw, 56px); align-items: center; margin-bottom: clamp(48px, 6vw, 80px);">
+        <div class="win" style="order: 2;">
+          <div class="win-bar"><span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint);">any tcp · l4 tunnel</span></div>
+          <div class="srows" style="padding: 16px 15px;">
+            <div class="srow">
+              <span class="s-ico">🌐</span>
+              <span class="s-main"><span class="s-name">Web app<span class="s-port">:8080</span></span><span class="s-sub">http</span></span>
+            </div>
+            <div class="srow">
+              <span class="s-ico">🔑</span>
+              <span class="s-main"><span class="s-name">SSH<span class="s-port">:22</span></span><span class="s-sub">ssh</span></span>
+            </div>
+            <div class="srow">
+              <span class="s-ico">🗄</span>
+              <span class="s-main"><span class="s-name">PostgreSQL<span class="s-port">:5432</span></span><span class="s-sub"><span class="s-tag">local-only</span></span></span>
+            </div>
+            <div class="srow">
+              <span class="s-ico">🔌</span>
+              <span class="s-main"><span class="s-name">gRPC<span class="s-port">:50051</span></span><span class="s-sub">bare tcp</span></span>
+            </div>
+          </div>
+        </div>
+        <div style="order: 1;">
+          <span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint);">[ any tcp ]</span>
+          <h3 class="display-m" style="margin: 14px 0 14px;">Any TCP, transparently.</h3>
+          <p style="color: var(--dim); line-height: 1.6; max-width: 50ch; margin-bottom: 18px;">HTTP, SSH, Postgres, Redis, gRPC, WebSockets — the proxy tunnels at layer 4 and never parses your protocol. A connection the client upgrades to a WebSocket keeps flowing both ways for its whole life, exactly as it would direct. The proxy just carries the bytes.</p>
+          <ul class="flist">
+            <li>No protocol-specific config — it's a raw byte tunnel</li>
+            <li>Databases and SSH tunnel just like web apps</li>
+            <li>Loopback services are flagged <span class="s-tag" style="display:inline;">local-only</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- F3 your ports -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr)); gap: clamp(28px, 4vw, 56px); align-items: center;">
+        <div>
+          <span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint);">[ your ports ]</span>
+          <h3 class="display-m" style="margin: 14px 0 14px;">Your ports, your names.</h3>
+          <p style="color: var(--dim); line-height: 1.6; max-width: 50ch; margin-bottom: 18px;">The collapsible "Your ports" list shows exactly what this machine is listening on. Expose advertises a service to your fleet under a name you choose — HTTP services suggest the page <span class="mono">&lt;title&gt;</span>. Nothing leaves this machine until you say so.</p>
+          <ul class="flist">
+            <li>Nothing is exposed until you say so</li>
+            <li>Name it whatever your fleet should see</li>
+            <li>Stop pulls it back instantly — fleet-scoped: only your own and managed devices appear</li>
+          </ul>
+        </div>
+        <div class="win">
+          <div class="win-bar"><span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint);">your ports</span><span class="count-badge">1 exposed</span></div>
+          <div class="srows" style="padding: 16px 15px;">
+            <div class="srow lit">
+              <span class="s-ico">🌐</span>
+              <span class="s-main"><span class="s-name">HTTP<span class="s-port">:5173</span></span><span class="s-sub"><span class="s-tag">local-only</span> vite</span></span>
+              <div class="s-acts">
+                <input class="name-in" value="My Project — Dev" title="Name your fleet sees this site under" aria-label="Name your fleet sees this site under">
+                <span class="btn btn-ghost btn-sm" title="Stop advertising this service">Stop</span>
+              </div>
+            </div>
+            <div class="srow">
+              <span class="s-ico">🔑</span>
+              <span class="s-main"><span class="s-name">SSH<span class="s-port">:22</span></span><span class="s-sub">sshd</span></span>
+              <div class="s-acts">
+                <input class="name-in" placeholder="SSH" title="Name your fleet sees this site under" aria-label="Name your fleet sees this site under">
+                <span class="btn btn-primary btn-sm" title="Advertise this service to your fleet under this name">Expose</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ STATES ════════ -->
+  <section class="section">
+    <div class="wrap">
+      <div style="max-width: 820px; margin-bottom: clamp(36px, 4vw, 52px);">
+        <span class="eyebrow">Every state it can be in</span>
+        <h2 class="display-l" style="margin: 16px 0 16px;">Honest about the wire.</h2>
+        <p class="lede">Mapped, unmapped, just-copied, exposed — and the two empties. Each row tells you exactly what it is and what you can do with it next.</p>
+      </div>
+      <div class="states">
+        <!-- Mapped -->
+        <div class="scard">
+          <div class="scard-vis">
+            <div class="srow lit" style="margin: 0;">
+              <span class="s-ico">🌐</span>
+              <span class="s-main"><span class="s-name">Grafana<span class="s-port">:3000</span></span><span class="s-sub mapped">localhost:47000</span></span>
+              <div class="s-acts">
+                <span class="btn btn-primary btn-sm" title="Open in your browser">Open</span>
+                <span class="btn btn-ghost btn-sm" title="Copy its local address">Copy</span>
+                <span class="btn btn-ghost btn-sm s-x" title="Unmap — stop proxying it here">✕</span>
+              </div>
+            </div>
+          </div>
+          <div class="scard-cap"><h4>Mapped</h4><p>Lit row, a local address, and Open / Copy / ✕. The tunnel's live.</p></div>
+        </div>
+        <!-- Unmapped -->
+        <div class="scard">
+          <div class="scard-vis">
+            <div class="srow" style="margin: 0;">
+              <span class="s-ico">🗄</span>
+              <span class="s-main"><span class="s-name">PostgreSQL<span class="s-port">:5432</span></span><span class="s-sub"><span class="s-tag">local-only</span></span></span>
+              <div class="s-acts"><span class="btn btn-primary btn-sm" title="Map this site to a local port through the mesh proxy">Map</span></div>
+            </div>
+          </div>
+          <div class="scard-cap"><h4>Unmapped</h4><p>Not yet proxied here — a "local-only" tag and a single Map.</p></div>
+        </div>
+        <!-- Copied -->
+        <div class="scard">
+          <div class="scard-vis">
+            <div class="srow lit" style="margin: 0;">
+              <span class="s-ico">🌐</span>
+              <span class="s-main"><span class="s-name">Grafana<span class="s-port">:3000</span></span><span class="s-sub mapped">localhost:47000</span></span>
+              <div class="s-acts">
+                <span class="btn btn-primary btn-sm" title="Open in your browser">Open</span>
+                <span class="btn btn-ghost btn-sm btn-copied" title="Copy its local address">✓ Copied</span>
+              </div>
+            </div>
+          </div>
+          <div class="scard-cap"><h4>Copied</h4><p>Copy flashes green to "✓ Copied" for a beat, then settles back.</p></div>
+        </div>
+        <!-- Exposed -->
+        <div class="scard">
+          <div class="scard-vis">
+            <span class="count-badge" style="align-self: start;">1 exposed</span>
+            <div class="srow lit" style="margin: 0;">
+              <span class="s-ico">🌐</span>
+              <span class="s-main"><span class="s-name">HTTP<span class="s-port">:5173</span></span></span>
+              <div class="s-acts">
+                <input class="name-in" value="My Project — Dev" style="flex: 1 1 6rem; min-width: 5rem;" aria-label="Name your fleet sees this site under">
+                <span class="btn btn-ghost btn-sm" title="Stop advertising this service">Stop</span>
+              </div>
+            </div>
+          </div>
+          <div class="scard-cap"><h4>Exposed</h4><p>A Your-ports row, named and lit, with Stop and the "1 exposed" badge.</p></div>
+        </div>
+        <!-- Empty fleet -->
+        <div class="scard">
+          <div class="scard-vis">
+            <div style="font-size: 30px;">🌐</div>
+            <div style="font-size: 12.5px; color: var(--dim); line-height: 1.5;">No sites from your other machines yet. Expose a service below, or on one of your other machines, to reach it here.</div>
+          </div>
+          <div class="scard-cap"><h4>Empty fleet</h4><p>Nothing exposed anywhere yet — the message tells you both ways to fix it.</p></div>
+        </div>
+        <!-- No listening services -->
+        <div class="scard">
+          <div class="scard-vis">
+            <div style="font-size: 30px;">🔌</div>
+            <div style="font-size: 12.5px; color: var(--dim); line-height: 1.5;">No listening services found — start a local server and it'll appear here to expose.</div>
+          </div>
+          <div class="scard-cap"><h4>No listening services</h4><p>This machine isn't listening on anything. Start a server and it shows up.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ CONSOLE SWITCHER ════════ -->
+  <section class="section" style="padding-top: 0;">
+    <div class="wrap">
+      <div style="border-top: 1px solid var(--border); padding-top: clamp(40px, 5vw, 56px);">
+        <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 22px;">
+          <h2 class="display-s">The other consoles</h2>
+          <a href="../" style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent);">All five →</a>
+        </div>
+        <div class="switch">
+          <a href="../remote-control/"><span class="sn">01</span><span class="st">Remote control</span></a>
+          <a href="../terminal/"><span class="sn">02</span><span class="st">Terminal</span></a>
+          <a href="../files/"><span class="sn">03</span><span class="st">Files</span></a>
+          <a class="cur" href="../sites/"><span class="sn">04</span><span class="st">Sites</span></a>
+          <a href="../rooms/"><span class="sn">05</span><span class="st">Rooms</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ DOWNLOAD CTA ════════ -->
+  <section class="section" style="padding-top: 0;">
+    <div class="wrap">
+      <div style="position: relative; background: linear-gradient(180deg, var(--surface), var(--bg-2)); border: 1px solid var(--accent-line); border-radius: 10px; padding: clamp(36px, 5vw, 64px); overflow: hidden; box-shadow: 0 40px 90px -40px rgb(0 0 0 / 0.8), 0 14px 40px -12px oklch(0.64 0.255 350 / 0.2);">
+        <div class="grid-bg" style="opacity: 0.8;"></div>
+        <div class="glow" style="width: 420px; height: 360px; right: -10%; top: -30%; background: var(--violet); opacity: 0.18;"></div>
+        <div style="position: relative; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr)); gap: clamp(32px, 4vw, 56px); align-items: center;">
+          <div>
+            <span class="eyebrow">Free forever</span>
+            <h2 class="display-l" style="margin: 16px 0 16px;">Every console, the moment you install.</h2>
+            <p class="lede" style="margin-bottom: 26px;">No trial, no tier, no account. Install the app, claim your machines, and the consoles are yours.</p>
+            <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+              <a class="btn btn-primary" href="../../../download/">Download for Linux</a>
+              <a class="btn btn-ghost" href="../../../download/">macOS</a>
+              <a class="btn btn-ghost" href="../../../download/">Windows</a>
+            </div>
+          </div>
+          <div>
+            <div style="background: oklch(0.115 0.018 285); border: 1px solid var(--border); border-radius: 6px; overflow: hidden;">
+              <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; border-bottom: 1px solid var(--border);">
+                <span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint);">or the one-liner</span>
+                <span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint);">sh</span>
+              </div>
+              <div style="padding: 18px 16px; font-family: var(--font-mono); font-size: 13.5px; color: var(--text); overflow-x: auto; white-space: nowrap;"><span style="color: var(--faint);">$</span> curl -fsSL https://allmystuff.works/install.sh | sh</div>
+            </div>
+            <div style="display: flex; gap: 18px; flex-wrap: wrap; margin-top: 16px;">
+              <span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);">✓ free forever</span>
+              <span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);">✓ mit licensed</span>
+              <span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);">✓ no account</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ FOOTER ════════ -->
+  <footer style="border-top: 1px solid var(--border); padding: clamp(40px, 5vw, 64px) 0 32px; position: relative; overflow: hidden;">
+    <div class="glow" style="width: 460px; height: 320px; left: -12%; bottom: -40%; background: var(--violet); opacity: 0.1;"></div>
+    <div class="wrap" style="position: relative;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 36px; margin-bottom: 40px;">
+        <div>
+          <div style="display: flex; align-items: center; gap: 11px; margin-bottom: 14px;">
+            <svg viewBox="0 0 256 256" aria-hidden="true" style="width: 26px; height: 26px; color: var(--accent);">
+              <g stroke="currentColor" stroke-width="13" fill="none" stroke-linecap="round">
+                <path d="M128 74 L77 165 M128 74 L181 160 M77 165 L181 160"></path>
+              </g>
+              <circle cx="128" cy="72" r="27" fill="currentColor"></circle>
+              <circle cx="76" cy="166" r="22" fill="currentColor"></circle>
+              <circle cx="182" cy="160" r="22" fill="currentColor"></circle>
+            </svg>
+            <span style="font-family: var(--font-display); font-weight: 700; font-size: 18px;">allmystuff<span style="color: var(--dim); font-weight: 500;">.works</span></span>
+          </div>
+          <p style="font-size: 14px; color: var(--faint); max-width: 32ch; line-height: 1.6;">Tech that works when you turn it on. Yours, with or without us.</p>
+        </div>
+        <div>
+          <h4 style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-bottom: 14px;">The consoles</h4>
+          <ul style="list-style: none; display: grid; gap: 9px; font-size: 14px; color: var(--dim);">
+            <li><a href="../remote-control/">Remote control</a></li>
+            <li><a href="../terminal/">Terminal</a></li>
+            <li><a href="../files/">Files</a></li>
+            <li><a href="../sites/">Sites</a></li>
+            <li><a href="../rooms/">Rooms</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-bottom: 14px;">The app</h4>
+          <ul style="list-style: none; display: grid; gap: 9px; font-size: 14px; color: var(--dim);">
+            <li><a href="../../../software/">The software</a></li>
+            <li><a href="../../../layers/">How it works</a></li>
+            <li><a href="../../../download/">Download</a></li>
+            <li><a href="../../../faq/">FAQ</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-bottom: 14px;">Open</h4>
+          <ul style="list-style: none; display: grid; gap: 9px; font-size: 14px; color: var(--dim);">
+            <li><a href="https://github.com/mrjeeves/AllMyStuff">github.com/mrjeeves/AllMyStuff</a></li>
+            <li><a href="https://github.com/mrjeeves/allmystuff.works">This site's source</a></li>
+            <li><a href="mailto:hello@allmystuff.works">Email us</a></li>
+          </ul>
+        </div>
+      </div>
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-top: 22px; border-top: 1px solid var(--border);">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <img src="../../../assets/cec-logo.png" alt="Critical Error Computing" style="height: 26px; width: auto;">
+          <span style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);">A Critical Error Computing product · Humble, TX</span>
+        </div>
+        <span style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);">© 2026 allmystuff.works · MIT</span>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  fetch("https://api.github.com/repos/mrjeeves/AllMyStuff/releases/latest")
+    .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(function (rel) {
+      var v = document.getElementById("rel-version");
+      if (v && rel.tag_name) v.textContent = rel.tag_name[0] === "v" ? rel.tag_name : "v" + rel.tag_name;
+    })
+    .catch(function () {});
+})();
+</script>
+</body>
+</html>
