@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>allmystuff.works — All my stuff. Works.</title>
-<meta name="description" content="Three pillars: powerful free software, affordable hardware, excellent support staff. One app turns the gear you already own into one quiet system — free, open source, encrypted end to end.">
+<meta name="description" content="One free app turns the gear you already own into one quiet system — see any screen, open any shell, reach any file, peer-to-peer and encrypted end to end. Open source and complete; add hardware or a human only if you ever need to.">
 <meta name="theme-color" content="#070711">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="icon" sizes="48x48 32x32 16x16" href="favicon.ico">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="allmystuff.works — All my stuff. Works.">
-<meta property="og:description" content="Powerful free software. Affordable hardware. Excellent support staff. One app turns the gear you already own into one quiet system.">
+<meta property="og:description" content="One free app turns the gear you already own into one quiet system — peer-to-peer, encrypted end to end, open source, and complete. Optional hardware and human help if you ever want them.">
 <meta property="og:url" content="https://allmystuff.works/">
 <meta property="og:image" content="https://allmystuff.works/og.png">
 <script src="./support.js"></script>
@@ -231,61 +231,75 @@
     </div>
   </header>
 
-  <!-- ════════ THE THREE PILLARS ════════ -->
-  <section id="pillars" data-screen-label="The three pillars" class="section">
+  <!-- ════════ WHAT THIS IS — one free app, plus optional add-ons ════════ -->
+  <section id="overview" data-screen-label="What this is" class="section">
     <div class="grid-bg"></div>
     <div class="wrap" style="position: relative;">
       <div style="max-width: 880px; margin-bottom: clamp(40px, 5vw, 56px);">
-        <span class="eyebrow">What this is · the three pillars</span>
-        <h2 class="display-l" style="margin: 16px 0 18px;">Powerful free software.<br>Affordable hardware.<br>Excellent support staff.</h2>
-        <p class="lede">Three pillars, each with a page that proves it. Only two cost money, the free one isn't bait (it's complete), and a real human answers when you press the button.</p>
+        <span class="eyebrow">What this is</span>
+        <h2 class="display-l" style="margin: 16px 0 18px;">One free app is the whole product.<br>The rest is optional.</h2>
+        <p class="lede">The software is the product: free, open source, and complete the day you install it — yours, with or without us. Everything else is optional, each piece for one specific day — a machine that won't boot, a job you'd rather hand off, a network you want wholly your own. Add them if you need them; the app never needs them to work.</p>
       </div>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 20px; align-items: stretch;">
-        <a href="software/" style="background: linear-gradient(180deg, var(--surface), var(--bg-2)); border: 1px solid var(--accent-line); border-radius: 8px; padding: 28px 26px; display: flex; flex-direction: column;">
-          <div style="display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-bottom: 18px;"><span>pillar 01</span><span>free forever</span></div>
-          <h3 class="display-s" style="margin-bottom: 6px;">The software.</h3>
-          <div style="font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px;">$0 · open source · every feature</div>
-          <p style="font-size: 15px; color: var(--dim); line-height: 1.6; margin-bottom: 18px;">One app on everything you own: consoles, shells, files, sharing — peer-to-peer, encrypted end to end. It runs on your hardware, so it costs us almost nothing, and we don't bill for it.</p>
-          <ul style="list-style: none; display: grid; gap: 8px; font-size: 14px; color: var(--dim); margin-bottom: 22px;">
-            <li style="display: flex; gap: 10px;"><span style="color: var(--accent);">▸</span>Complete on day one — not a trial, not a tier</li>
-            <li style="display: flex; gap: 10px;"><span style="color: var(--accent);">▸</span>No account or card required — not even at install</li>
-            <li style="display: flex; gap: 10px;"><span style="color: var(--accent);">▸</span>MIT licensed, self-hostable end to end</li>
-          </ul>
-          <span class="btn btn-ghost btn-sm" style="margin-top: auto; align-self: start;">Explore the software <span aria-hidden="true">→</span></span>
+
+      <!-- the core — the software -->
+      <a href="software/" style="position: relative; display: block; background: linear-gradient(180deg, var(--surface), var(--bg-2)); border: 1px solid var(--accent-line); border-radius: 10px; padding: clamp(26px, 3.4vw, 40px); box-shadow: 0 26px 64px -34px oklch(0.64 0.255 350 / 0.4);">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: clamp(24px, 3vw, 44px); align-items: center;">
+          <div>
+            <div style="display: inline-flex; align-items: center; gap: 9px; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px;"><span style="width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 10px var(--accent);"></span>The core · this is AllMyStuff</div>
+            <h3 class="display-s" style="margin-bottom: 8px;">The software.</h3>
+            <div style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px;">$0 · forever · open source · every feature</div>
+            <p style="font-size: 15.5px; color: var(--dim); line-height: 1.65; margin-bottom: 22px; max-width: 54ch;">One app on everything you own: consoles, shells, files, sharing — peer-to-peer, encrypted end to end. It runs on your hardware, so it costs us almost nothing, and we don't bill for it. Install it and you're done — everything below is something you can add, not something you need.</p>
+            <span class="btn btn-ghost btn-sm">Explore the software <span aria-hidden="true">→</span></span>
+          </div>
+          <div style="background: oklch(0.135 0.022 285 / 0.55); border: 1px solid var(--border); border-radius: 8px; padding: clamp(18px, 2.2vw, 24px);">
+            <div style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); margin-bottom: 14px;">why we can give it away</div>
+            <ul style="list-style: none; display: grid; gap: 12px; font-size: 14.5px; color: var(--dim);">
+              <li style="display: flex; gap: 10px;"><span style="color: var(--accent);">▸</span>Complete on day one — not a trial, not a tier</li>
+              <li style="display: flex; gap: 10px;"><span style="color: var(--accent);">▸</span>No account or card — not even at install</li>
+              <li style="display: flex; gap: 10px;"><span style="color: var(--accent);">▸</span>MIT licensed, self-hostable end to end</li>
+              <li style="display: flex; gap: 10px;"><span style="color: var(--accent);">▸</span>Runs on your hardware — your data never reaches us</li>
+            </ul>
+          </div>
+        </div>
+      </a>
+
+      <!-- the optional add-ons -->
+      <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin: clamp(28px, 3.6vw, 44px) 0 16px;">
+        <span style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint);">Optional · only if you need it</span>
+        <span style="flex: 1; height: 1px; background: var(--border); min-width: 30px;"></span>
+        <span style="font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);">skip or cancel any of it — the app keeps working</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(258px, 100%), 1fr)); gap: 16px; align-items: stretch;">
+        <a href="hardware/" style="background: linear-gradient(180deg, var(--surface), var(--bg-2)); border: 1px solid var(--violet-soft); border-radius: 8px; padding: 24px 22px; display: flex; flex-direction: column;">
+          <div style="display: flex; justify-content: space-between; gap: 10px; font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); margin-bottom: 14px;"><span>optional · hardware</span><span style="color: var(--violet);">when a box won't boot</span></div>
+          <h3 style="font-family: var(--font-display); font-size: 22px; font-weight: 600; line-height: 1.1; margin-bottom: 6px;">The Access line</h3>
+          <div style="font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--violet); margin-bottom: 12px;">from $149.99 · pay once</div>
+          <p style="font-size: 14px; color: var(--dim); line-height: 1.6; margin-bottom: 18px;">Software can't reach a machine that won't boot. A small witness watches the video signal and presses the buttons, so a crashed or dead box stays on your graph.</p>
+          <span class="btn btn-ghost btn-sm" style="margin-top: auto; align-self: start;">The hardware <span aria-hidden="true">→</span></span>
         </a>
-        <a href="hardware/" style="background: linear-gradient(180deg, var(--surface), var(--bg-2)); border: 1px solid var(--violet-soft); border-radius: 8px; padding: 28px 26px; display: flex; flex-direction: column;">
-          <div style="display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-bottom: 18px;"><span>pillar 02</span><span>when machines die</span></div>
-          <h3 class="display-s" style="margin-bottom: 6px;">The hardware.</h3>
-          <div style="font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--violet); margin-bottom: 12px;">from $149.99 · once · ships summer 2026</div>
-          <p style="font-size: 15px; color: var(--dim); line-height: 1.6; margin-bottom: 18px;">Software can't reach a machine that won't boot. The Access line watches the video signal and presses the buttons, so a crashed, frozen, or dead box is still on your graph.</p>
-          <ul style="list-style: none; display: grid; gap: 8px; font-size: 14px; color: var(--dim); margin-bottom: 22px;">
-            <li style="display: flex; gap: 10px;"><span style="color: var(--violet);">▸</span>Out of band — zero apps installed on the PC</li>
-            <li style="display: flex; gap: 10px;"><span style="color: var(--violet);">▸</span>Three witnesses: $149.99 / $199.99+ / $299.99</li>
-            <li style="display: flex; gap: 10px;"><span style="color: var(--violet);">▸</span>Pay once. No subscription, ever.</li>
-          </ul>
-          <span class="btn btn-ghost btn-sm" style="margin-top: auto; align-self: start;">Explore the hardware <span aria-hidden="true">→</span></span>
+        <a href="service/" style="background: linear-gradient(180deg, var(--surface), var(--bg-2)); border: 1px solid var(--accent-line); border-radius: 8px; padding: 24px 22px; display: flex; flex-direction: column;">
+          <div style="display: flex; justify-content: space-between; gap: 10px; font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); margin-bottom: 14px;"><span>optional · a human</span><span style="color: var(--accent);">when you'd rather not</span></div>
+          <h3 style="font-family: var(--font-display); font-size: 22px; font-weight: 600; line-height: 1.1; margin-bottom: 6px;">Concierge</h3>
+          <div style="font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px;">real technicians · from $25</div>
+          <p style="font-size: 14px; color: var(--dim); line-height: 1.6; margin-bottom: 18px;">Press Summon and a CEC technician picks up. The session starts with your yes, every action is logged, and you can watch live or pull the plug at any moment.</p>
+          <span class="btn btn-ghost btn-sm" style="margin-top: auto; align-self: start;">The service <span aria-hidden="true">→</span></span>
         </a>
-        <a href="service/" style="background: linear-gradient(180deg, var(--surface), var(--bg-2)); border: 1px solid var(--border); border-radius: 8px; padding: 28px 26px; display: flex; flex-direction: column;">
-          <div style="display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-bottom: 18px;"><span>pillar 03</span><span>only if you want it</span></div>
-          <h3 class="display-s" style="margin-bottom: 6px;">The service.</h3>
-          <div style="font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px;">humans from $25 · network $10 / mo</div>
-          <p style="font-size: 15px; color: var(--dim); line-height: 1.6; margin-bottom: 18px;">A real CEC technician one tap away when you'd rather not do it yourself. And a Private Line — relay servers of your own — when you want the network to be yours too.</p>
-          <ul style="list-style: none; display: grid; gap: 8px; font-size: 14px; color: var(--dim); margin-bottom: 22px;">
-            <li style="display: flex; gap: 10px;"><span style="color: var(--accent);">▸</span>Sessions start with your yes — logged, revocable</li>
-            <li style="display: flex; gap: 10px;"><span style="color: var(--accent);">▸</span>Two services, four products, none required</li>
-            <li style="display: flex; gap: 10px;"><span style="color: var(--accent);">▸</span>Cancel anything; the free app keeps working</li>
-          </ul>
-          <span class="btn btn-ghost btn-sm" style="margin-top: auto; align-self: start;">Explore the service <span aria-hidden="true">→</span></span>
+        <a href="service/" style="background: linear-gradient(180deg, var(--surface), var(--bg-2)); border: 1px solid var(--border); border-radius: 8px; padding: 24px 22px; display: flex; flex-direction: column;">
+          <div style="display: flex; justify-content: space-between; gap: 10px; font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); margin-bottom: 14px;"><span>optional · the network</span><span style="color: var(--accent);">make it wholly yours</span></div>
+          <h3 style="font-family: var(--font-display); font-size: 22px; font-weight: 600; line-height: 1.1; margin-bottom: 6px;">Private Line</h3>
+          <div style="font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px;">$10 / month · cancel anytime</div>
+          <p style="font-size: 14px; color: var(--dim); line-height: 1.6; margin-bottom: 18px;">By default your mesh meets at a shared public venue. The Private Line gives you relay servers of your own — signaling, STUN, and TURN serving your devices and no one else's.</p>
+          <span class="btn btn-ghost btn-sm" style="margin-top: auto; align-self: start;">The service <span aria-hidden="true">→</span></span>
         </a>
       </div>
     </div>
   </section>
 
-  <!-- ════════ PILLAR 01 — THE SOFTWARE (teaser) ════════ -->
+  <!-- ════════ THE SOFTWARE — the free core (teaser) ════════ -->
   <section id="software" data-screen-label="The software" class="section" style="background: var(--bg-2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
     <div class="wrap" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr)); gap: clamp(28px, 4vw, 56px); align-items: center;">
       <div>
-        <span class="eyebrow">Pillar 01 · The software · $0 forever</span>
+        <span class="eyebrow">The software · the free core · $0 forever</span>
         <h2 class="display-l" style="margin: 16px 0 18px;">Free, and missing nothing.</h2>
         <p class="lede" style="margin-bottom: 22px;">We have subscriptions, accounts, a cloud — and the app requires none of them, not even at install. Every feature, on the hardware you already paid for. Four promises, demonstrated panel by panel on its page:</p>
         <ul style="list-style: none; display: grid; gap: 12px; font-size: 15px; color: var(--dim); margin-bottom: 28px;">
@@ -342,11 +356,11 @@
     </div>
   </section>
 
-  <!-- ════════ PILLAR 02 — THE HARDWARE (teaser) ════════ -->
+  <!-- ════════ THE HARDWARE — optional add-on (teaser) ════════ -->
   <section id="hardware" data-screen-label="The hardware" class="section">
     <div class="wrap">
       <div style="max-width: 860px; margin-bottom: clamp(40px, 5vw, 56px);">
-        <span class="eyebrow">Pillar 02 · The hardware · pre-order · ships Summer 2026</span>
+        <span class="eyebrow">The hardware · optional add-on · ships Summer 2026</span>
         <h2 class="display-l" style="margin: 16px 0 18px;">When the OS is <x-import component-from-global-scope="CriticalErrorComputingDesignSystem_0eecf1.GlitchText" alt="d3ad" accent="{{ true }}" hint-size="96px,1em">dead</x-import>, software can't save it. Hardware can.</h2>
         <p class="lede">The app reaches everything that's alive. The Access line is for everything else — small boxes that watch the video signal and press the buttons, so a crashed, frozen, or unbootable machine is still on your graph. Affordable on purpose: pay once, no subscription, ever.</p>
       </div>
@@ -363,11 +377,11 @@
     </div>
   </section>
 
-  <!-- ════════ PILLAR 03 — THE SERVICE (teaser) ════════ -->
+  <!-- ════════ THE SERVICE — optional (teaser) ════════ -->
   <section id="service" data-screen-label="The service" class="section" style="background: var(--bg-2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
     <div class="wrap">
       <div style="max-width: 840px; margin-bottom: clamp(40px, 5vw, 56px);">
-        <span class="eyebrow">Pillar 03 · The service · two services · four products</span>
+        <span class="eyebrow">The service · optional · two services · four products</span>
         <h2 class="display-l" style="margin: 16px 0 18px;">A human on call. A network of your own.<br>Strictly optional.</h2>
         <p class="lede">The app never needs either one. Concierge is excellent support staff one tap away — same humans at every price, three ways to pay. The Private Line makes the network itself yours. That's four products, and zero of them are required.</p>
       </div>
@@ -477,7 +491,7 @@
   <section id="faq" data-screen-label="FAQ" class="section" style="padding-top: 0;">
     <div class="wrap" style="max-width: min(880px, 92vw);">
       <div style="margin-bottom: 32px;">
-        <span class="eyebrow">FAQ · one per pillar</span>
+        <span class="eyebrow">FAQ · the short list</span>
         <h2 class="display-l" style="margin-top: 16px;">Reasonable questions.</h2>
       </div>
       <div style="display: grid; gap: 0; border-top: 1px solid var(--border);">
@@ -521,11 +535,11 @@
           <p style="font-size: 14px; color: var(--faint); max-width: 32ch; line-height: 1.6;">Tech that works when you turn it on. Yours, with or without us.</p>
         </div>
         <div>
-          <h4 style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-bottom: 14px;">The pillars</h4>
+          <h4 style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-bottom: 14px;">Explore</h4>
           <ul style="list-style: none; display: grid; gap: 9px; font-size: 14px; color: var(--dim);">
-            <li><a href="software/">01 · The software</a></li>
-            <li><a href="hardware/">02 · The hardware</a></li>
-            <li><a href="service/">03 · The service</a></li>
+            <li><a href="software/">The software</a></li>
+            <li><a href="hardware/">The hardware</a></li>
+            <li><a href="service/">The service</a></li>
             <li><a href="faq/">FAQ</a></li>
             <li><a href="download/">Download</a></li>
           </ul>
