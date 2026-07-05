@@ -62,7 +62,7 @@
         <a href="./" style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text); border-bottom: 2px solid var(--accent); padding-bottom: 2px;">FAQ</a>
       </div>
       <div style="display: flex; gap: 12px; align-items: center;">
-        <a class="chip" href="https://github.com/mrjeeves/AllMyStuff" title="View AllMyStuff on GitHub"><span class="dot"></span><span id="rel-version">v0.1.5</span></a>
+        <a class="chip" href="https://github.com/mrjeeves/AllMyStuff" title="View AllMyStuff on GitHub"><span class="dot"></span><span id="rel-version">v0.2.18</span></a>
         <a class="btn btn-primary btn-sm" href="../download/">Download free</a>
       </div>
     </div>
@@ -103,7 +103,11 @@
         </details>
         <details>
           <summary>What happens if my internet goes out?</summary>
-          <p>Your devices are on your local network, so they keep talking to each other — consoles, terminals, files, all of it. You lose reach from outside the house and you lose Summon, and both come back the moment the internet does.</p>
+          <p>Your devices are on your local network, so they keep talking to each other — consoles, terminals, files, all of it. Discovery stays local too: peers on the same LAN find each other over mDNS, no server involved, so you can even claim a new device with the internet down. You lose reach from outside the house and you lose Summon, and both come back the moment the internet does.</p>
+        </details>
+        <details>
+          <summary>How does a new device get claimed?</summary>
+          <p>It announces itself over mDNS on a claim channel that never leaves your LAN — no IPs to type, no cloud round-trip, and it works before the device even has the right time. It appears in your app's claim sheet, you tap Claim, and it joins your fleet. Claiming over the internet is off by default; if you turn it on for a device, it uses a rotating, hard-to-guess code instead of an open door. <a href="../layers/">The same-room shortcut, explained →</a></p>
         </details>
         <details>
           <summary>Am I locked in?</summary>
@@ -123,7 +127,7 @@
         </details>
         <details>
           <summary>Do the Access boxes work without the app?</summary>
-          <p>Yes. Each one runs CEC's open-source firmware fork and stands on its own as an out-of-band console. The app is what puts it on the same graph as everything else you own — but no subscription, account, or cloud is ever required to use hardware you bought.</p>
+          <p>Yes. Each one runs AllMyKVM — CEC's open firmware fork — and stands on its own as an out-of-band console. The app is what puts it on the same graph as everything else you own — but no subscription, account, or cloud is ever required to use hardware you bought.</p>
         </details>
       </div>
 
@@ -199,6 +203,7 @@
           <h4 style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-bottom: 14px;">Open</h4>
           <ul style="list-style: none; display: grid; gap: 9px; font-size: 14px; color: var(--dim);">
             <li><a href="https://github.com/mrjeeves/AllMyStuff">github.com/mrjeeves/AllMyStuff</a></li>
+            <li><a href="https://myownmesh.net">Built on MyOwnMesh</a></li>
             <li><a href="https://github.com/mrjeeves/allmystuff.works">This site's source</a></li>
             <li><a href="mailto:hello@allmystuff.works">Email us</a></li>
           </ul>

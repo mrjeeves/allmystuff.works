@@ -34,6 +34,11 @@
   @keyframes amsRing { 0% { box-shadow: 0 0 0 0 oklch(0.62 0.20 292 / 0.45); } 70% { box-shadow: 0 0 0 12px transparent; } 100% { box-shadow: 0 0 0 0 transparent; } }
   @keyframes amsScan { 0% { transform: translateY(-100%); } 100% { transform: translateY(100%); } }
   @keyframes amsFlow { to { stroke-dashoffset: -30; } }
+  @keyframes amsPing { 0% { width: 12px; height: 12px; opacity: 0.9; } 70% { opacity: 0.14; } 100% { width: 230px; height: 230px; opacity: 0; } }
+  @keyframes amsClaimHalo { 0% { box-shadow: 0 0 0 0 oklch(0.64 0.255 350 / 0.4), 0 18px 40px -20px rgb(0 0 0 / 0.7); } 70% { box-shadow: 0 0 0 7px oklch(0.64 0.255 350 / 0), 0 18px 40px -20px rgb(0 0 0 / 0.7); } 100% { box-shadow: 0 0 0 0 oklch(0.64 0.255 350 / 0), 0 18px 40px -20px rgb(0 0 0 / 0.7); } }
+  @media (prefers-reduced-motion: reduce) { [style*="amsPing"], [style*="amsRing"], [style*="amsFlow"], [style*="amsPulse"], [style*="amsScan"] { animation: none !important; } }
+  /* The graph mock is drawn on a fixed 580px canvas; scale it down whole on phones. */
+  @media (max-width: 700px) { #graph-mock { width: 580px !important; zoom: 0.58; } }
 
   /* ---- Install one-liner: OS tabs + per-snippet copy buttons (same wiring as the download page) ---- */
   .cmd { background: oklch(0.115 0.018 285); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
@@ -117,114 +122,164 @@
 
       <!-- The graph — hero mockup, faithful to the app's radial graph view -->
       <div style="display: grid; place-items: center;">
-        <div style="position: relative; width: min(580px, 100%); height: 590px; background: linear-gradient(180deg, var(--surface), var(--bg-2)); border: 1px solid var(--border); border-radius: 8px; box-shadow: 0 40px 90px -40px rgb(0 0 0 / 0.8); overflow: hidden;">
+        <div id="graph-mock" style="position: relative; width: min(580px, 100%); height: 590px; background: linear-gradient(180deg, var(--surface), var(--bg-2)); border: 1px solid var(--border); border-radius: 8px; box-shadow: 0 40px 90px -40px rgb(0 0 0 / 0.8); overflow: hidden;">
           <!-- window chrome -->
           <div style="position: absolute; top: 0; left: 0; right: 0; height: 44px; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; border-bottom: 1px solid var(--border); z-index: 3;">
             <span style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint);">allmystuff — your stuff, as a graph</span>
             <span class="chip" style="padding: 4px 9px; font-size: 10px;"><span class="dot"></span>Mesh · online</span>
           </div>
-          <!-- canvas -->
+          <!-- canvas — a faithful mini-replica of the app's graph view -->
           <div style="position: absolute; top: 44px; bottom: 38px; left: 0; right: 0;">
             <div style="position: absolute; inset: 0; background-image: radial-gradient(oklch(0.62 0.20 292 / 0.16) 1.5px, transparent 1.5px); background-size: 26px 26px; pointer-events: none;"></div>
-            <!-- wires: one per route, colored by media, dotted flow on top -->
+            <!-- wires: media-colored routes + the KVM tether -->
             <svg viewBox="0 0 580 508" style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none;" aria-hidden="true">
-              <path d="M 290 78 Q 326 164 290 250" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linecap="round" opacity="0.45"></path>
-              <path d="M 290 78 Q 326 164 290 250" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 14" opacity="0.9" style="animation: amsFlow 1.1s linear infinite;"></path>
-              <path d="M 290 424 Q 254 337 290 250" fill="none" stroke="var(--g-mem)" stroke-width="3" stroke-linecap="round" opacity="0.45"></path>
-              <path d="M 290 424 Q 254 337 290 250" fill="none" stroke="var(--g-mem)" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 14" opacity="0.9" style="animation: amsFlow 1.1s linear infinite;"></path>
+              <!-- audio route: My MacBook -> Desk PC speakers (audio = amber) -->
+              <path d="M 292 218 C 262 180, 218 146, 192 126" fill="none" stroke="var(--warn)" stroke-width="3" stroke-linecap="round" opacity="0.4"></path>
+              <path d="M 292 218 C 262 180, 218 146, 192 126" fill="none" stroke="var(--warn)" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 14" opacity="0.9" style="animation: amsFlow 1.1s linear infinite;"></path>
+              <!-- display route: Desk PC screen -> Living-room TV (display = magenta) -->
+              <path d="M 138 126 C 124 156, 114 178, 108 206" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linecap="round" opacity="0.45"></path>
+              <path d="M 138 126 C 124 156, 114 178, 108 206" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 14" opacity="0.9" style="animation: amsFlow 1.1s linear infinite;"></path>
+              <!-- the KVM tether: hdmi + usb + atx into the Desk PC -->
+              <path d="M 247 85 L 358 85" fill="none" stroke="var(--border-bright)" stroke-width="2" stroke-dasharray="5 6" opacity="0.9"></path>
             </svg>
-            <!-- node: den-tower (ring, yours) -->
-            <div style="position: absolute; left: 290px; top: 78px; transform: translate(-50%, -50%); width: 190px; background: var(--surface-2); border: 1px solid var(--border-bright); border-radius: 6px; padding: 9px 10px; display: grid; gap: 7px; box-shadow: 0 18px 40px -20px rgb(0 0 0 / 0.7);">
+            <!-- route labels, colored by media kind -->
+            <div style="position: absolute; left: 300px; top: 168px; background: var(--bg); border: 1px solid oklch(0.78 0.16 75 / 0.45); border-radius: 2px; padding: 4px 9px; font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--warn); box-shadow: 0 10px 30px -10px rgb(0 0 0 / 0.7); z-index: 2;">audio &middot; opus</div>
+            <div style="position: absolute; left: 34px; top: 152px; background: var(--bg); border: 1px solid var(--accent-line); border-radius: 2px; padding: 4px 9px; font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); box-shadow: 0 10px 30px -10px rgb(0 0 0 / 0.7); z-index: 2;">display &middot; h264 &middot; 23 ms</div>
+            <div style="position: absolute; left: 302px; top: 52px; transform: translateX(-50%); font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); z-index: 2;">hdmi &middot; usb &middot; atx</div>
+
+            <!-- node: Desk PC (fleet, wired into the KVM) -->
+            <div style="position: absolute; left: 150px; top: 85px; transform: translate(-50%, -50%); width: 192px; background: var(--surface-2); border: 1px solid var(--border-bright); border-radius: 8px; padding: 9px 10px; display: grid; gap: 7px; box-shadow: 0 18px 40px -20px rgb(0 0 0 / 0.7);">
               <div style="display: flex; align-items: center; gap: 8px;">
-                <span style="font-size: 19px; line-height: 1;">🖥</span>
+                <span style="font-size: 19px; line-height: 1;">&#129706;</span>
                 <div style="min-width: 0; flex: 1;">
-                  <div style="font-weight: 600; font-size: 13.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">den-tower</div>
-                  <div style="font-family: var(--font-mono); font-size: 9.5px; color: var(--faint); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Ryzen 9 7950X</div>
+                  <div style="font-weight: 600; font-size: 13.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Desk PC</div>
+                  <div style="font-family: var(--font-mono); font-size: 9.5px; color: var(--faint); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Ryzen 7 7700</div>
                 </div>
                 <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 3px oklch(0.80 0.17 150 / 0.16); flex-shrink: 0;"></span>
               </div>
               <div style="display: flex; flex-wrap: wrap; gap: 4px;">
-                <span style="font-family: var(--font-mono); font-size: 8.5px; letter-spacing: 0.06em; text-transform: uppercase; padding: 2px 6px; border-radius: 2px; white-space: nowrap; line-height: 1.4; background: oklch(0.80 0.17 150 / 0.14); color: var(--ok);">yours</span>
-                <span style="font-family: var(--font-mono); font-size: 8.5px; letter-spacing: 0.06em; text-transform: uppercase; padding: 2px 6px; border-radius: 2px; white-space: nowrap; line-height: 1.4; background: var(--accent-soft); color: var(--accent);">🔗 fleet</span>
-                <span style="font-family: var(--font-mono); font-size: 8.5px; letter-spacing: 0.06em; text-transform: uppercase; padding: 2px 6px; border-radius: 2px; white-space: nowrap; line-height: 1.4; background: var(--surface); color: var(--dim);">23 things</span>
-                <span style="font-family: var(--font-mono); font-size: 8.5px; letter-spacing: 0.06em; text-transform: uppercase; padding: 2px 6px; border-radius: 2px; white-space: nowrap; line-height: 1.4; background: var(--surface); color: var(--dim);">64 GB</span>
+                <span style="font-family: var(--font-mono); font-size: 8.5px; letter-spacing: 0.04em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; white-space: nowrap; line-height: 1.4; background: oklch(0.80 0.17 150 / 0.16); color: oklch(0.84 0.16 152);">&#128279; fleet</span>
+                <span style="font-family: var(--font-mono); font-size: 8.5px; letter-spacing: 0.04em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; white-space: nowrap; line-height: 1.4; background: var(--surface); color: var(--dim);">11 things</span>
+                <span style="font-family: var(--font-mono); font-size: 8.5px; letter-spacing: 0.04em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; white-space: nowrap; line-height: 1.4; background: var(--surface); color: var(--dim);">32 GB</span>
+              </div>
+              <div style="display: flex; gap: 4px; align-items: center;">
+                <span style="display: grid; place-items: center; width: 22px; height: 20px; border: 1px solid var(--border); border-radius: 4px; color: var(--dim);"><svg viewBox="0 0 24 24" style="width: 12px; height: 12px;" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2"></rect><path d="M8 20h8M12 17v3"></path></svg></span>
+                <span style="display: grid; place-items: center; width: 22px; height: 20px; border: 1px solid var(--border); border-radius: 4px; color: var(--dim);"><svg viewBox="0 0 24 24" style="width: 12px; height: 12px;" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.5A1.5 1.5 0 0 1 4.5 5h4l2 2.2H19a1.5 1.5 0 0 1 1.5 1.5V18a1.5 1.5 0 0 1-1.5 1.5H4.5A1.5 1.5 0 0 1 3 18Z"></path></svg></span>
+                <span style="display: grid; place-items: center; width: 22px; height: 20px; border: 1px solid var(--border); border-radius: 4px; color: var(--dim);"><svg viewBox="0 0 24 24" style="width: 12px; height: 12px;" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="15" rx="2"></rect><path d="M7 9.5l3 2.5-3 2.5M12.5 15h4"></path></svg></span>
+                <span style="width: 1px; height: 14px; background: var(--border); margin: 0 2px;"></span>
+                <span title="Power via its KVM" style="display: grid; place-items: center; width: 22px; height: 20px; border: 1px solid var(--accent-line); border-radius: 4px; color: var(--accent);"><svg viewBox="0 0 24 24" style="width: 12px; height: 12px;" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v8"></path><path d="M6.6 6.6a8 8 0 1 0 10.8 0"></path></svg></span>
+                <span title="Reset via its KVM" style="display: grid; place-items: center; width: 22px; height: 20px; border: 1px solid var(--accent-line); border-radius: 4px; color: var(--accent);"><svg viewBox="0 0 24 24" style="width: 12px; height: 12px;" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="3 5 3 10 8 10"></polyline><path d="M4.6 14a8 8 0 1 0 1.6-7.4L3 10"></path></svg></span>
+                <span style="margin-left: auto; font-family: var(--font-mono); font-size: 8px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); white-space: nowrap;">via kvm</span>
               </div>
             </div>
-            <!-- route label -->
-            <div style="position: absolute; left: 330px; top: 152px; background: var(--bg); border: 1px solid var(--accent-line); border-radius: 2px; padding: 4px 9px; font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); box-shadow: 0 10px 30px -10px rgb(0 0 0 / 0.7); z-index: 2;">display · h264 · 23 ms</div>
-            <!-- node: kestrel (center, this device) -->
-            <div style="position: absolute; left: 290px; top: 250px; transform: translate(-50%, -50%); width: 192px; background: var(--surface-2); border: 1px solid var(--accent); border-radius: 6px; padding: 9px 10px; display: grid; gap: 7px; box-shadow: 0 0 0 3px var(--accent-soft), 0 18px 40px -20px rgb(0 0 0 / 0.7); z-index: 2;">
+
+            <!-- node: KVM-Desk PC (the appliance, attached) -->
+            <div style="position: absolute; left: 455px; top: 85px; transform: translate(-50%, -50%); width: 186px; background: var(--surface-2); border: 1px solid var(--border-bright); border-radius: 8px; padding: 9px 10px; display: grid; gap: 7px; box-shadow: 0 18px 40px -20px rgb(0 0 0 / 0.7);">
               <div style="display: flex; align-items: center; gap: 8px;">
-                <span style="font-size: 19px; line-height: 1;">💻</span>
+                <span style="font-size: 19px; line-height: 1;">&#128421;</span>
                 <div style="min-width: 0; flex: 1;">
-                  <div style="font-weight: 600; font-size: 13.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">kestrel</div>
-                  <div style="font-family: var(--font-mono); font-size: 9.5px; color: var(--faint); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Apple M2 Pro</div>
+                  <div style="font-weight: 600; font-size: 13.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">KVM-Desk PC</div>
+                  <div style="font-family: var(--font-mono); font-size: 9.5px; color: var(--faint); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">AllMyKVM &middot; SG2002</div>
                 </div>
                 <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 3px oklch(0.80 0.17 150 / 0.16); flex-shrink: 0;"></span>
               </div>
               <div style="display: flex; flex-wrap: wrap; gap: 4px;">
-                <span style="font-family: var(--font-mono); font-size: 8.5px; letter-spacing: 0.06em; text-transform: uppercase; padding: 2px 6px; border-radius: 2px; white-space: nowrap; line-height: 1.4; background: var(--accent-soft); color: var(--accent);">this device</span>
-                <span style="font-family: var(--font-mono); font-size: 8.5px; letter-spacing: 0.06em; text-transform: uppercase; padding: 2px 6px; border-radius: 2px; white-space: nowrap; line-height: 1.4; background: var(--accent-soft); color: var(--accent);">🔗 fleet</span>
-                <span style="font-family: var(--font-mono); font-size: 8.5px; letter-spacing: 0.06em; text-transform: uppercase; padding: 2px 6px; border-radius: 2px; white-space: nowrap; line-height: 1.4; background: var(--surface); color: var(--dim);">14 things</span>
-                <span style="font-family: var(--font-mono); font-size: 8.5px; letter-spacing: 0.06em; text-transform: uppercase; padding: 2px 6px; border-radius: 2px; white-space: nowrap; line-height: 1.4; background: var(--violet-soft); color: var(--violet);">home</span>
+                <span style="font-family: var(--font-mono); font-size: 8.5px; letter-spacing: 0.04em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; white-space: nowrap; line-height: 1.4; background: oklch(0.80 0.17 150 / 0.16); color: oklch(0.84 0.16 152);">&#128279; fleet</span>
+                <span style="font-family: var(--font-mono); font-size: 8.5px; letter-spacing: 0.04em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; white-space: nowrap; line-height: 1.4; background: var(--surface); color: var(--dim);">2 things</span>
+                <span style="font-family: var(--font-mono); font-size: 8.5px; letter-spacing: 0.04em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; white-space: nowrap; line-height: 1.4; background: var(--surface); color: var(--dim);">256 MB</span>
+              </div>
+              <div style="display: flex; gap: 4px; align-items: center;">
+                <span title="Open KVM" style="display: grid; place-items: center; width: 22px; height: 20px; border: 1px solid var(--accent-line); border-radius: 4px; color: var(--accent);"><svg viewBox="0 0 24 24" style="width: 12px; height: 12px;" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="11" rx="2"></rect><rect x="5" y="18" width="14" height="3" rx="1"></rect></svg></span>
+                <span title="Reboot this KVM" style="display: grid; place-items: center; width: 22px; height: 20px; border: 1px solid var(--border); border-radius: 4px; color: var(--dim);"><svg viewBox="0 0 24 24" style="width: 12px; height: 12px;" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3-6.2"></path><polyline points="17 3 17 6.5 20.5 6.5"></polyline><path d="M12 8.5v4"></path></svg></span>
+                <span title="Attach to a machine" style="display: grid; place-items: center; width: 22px; height: 20px; border: 1px solid var(--border); border-radius: 4px; color: var(--dim);"><svg viewBox="0 0 24 24" style="width: 12px; height: 12px;" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13.5a4 4 0 0 0 6 .5l2.5-2.5a4 4 0 0 0-5.7-5.7L11.5 7"></path><path d="M14 10.5a4 4 0 0 0-6-.5L5.5 12.5a4 4 0 0 0 5.7 5.7L12.5 17"></path></svg></span>
+                <span style="margin-left: auto; font-family: var(--font-mono); font-size: 8px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); white-space: nowrap;">out-of-band</span>
               </div>
             </div>
-            <!-- node: nas-01 (ring, yours) -->
-            <div style="position: absolute; left: 290px; top: 424px; transform: translate(-50%, -50%); width: 188px; background: var(--surface-2); border: 1px solid var(--border-bright); border-radius: 6px; padding: 9px 10px; display: grid; gap: 7px; box-shadow: 0 18px 40px -20px rgb(0 0 0 / 0.7);">
+
+            <!-- node: Living-room TV -->
+            <div style="position: absolute; left: 105px; top: 253px; transform: translate(-50%, -50%); width: 178px; background: var(--surface-2); border: 1px solid var(--border-bright); border-radius: 8px; padding: 9px 10px; display: grid; gap: 7px; box-shadow: 0 18px 40px -20px rgb(0 0 0 / 0.7);">
               <div style="display: flex; align-items: center; gap: 8px;">
-                <span style="font-size: 19px; line-height: 1;">🖥</span>
+                <span style="font-size: 19px; line-height: 1;">&#128250;</span>
                 <div style="min-width: 0; flex: 1;">
-                  <div style="font-weight: 600; font-size: 13.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">nas-01</div>
-                  <div style="font-family: var(--font-mono); font-size: 9.5px; color: var(--faint); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Intel N5105</div>
+                  <div style="font-weight: 600; font-size: 13.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Living-room TV</div>
+                  <div style="font-family: var(--font-mono); font-size: 9.5px; color: var(--faint); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Amlogic S905</div>
                 </div>
                 <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 3px oklch(0.80 0.17 150 / 0.16); flex-shrink: 0;"></span>
               </div>
               <div style="display: flex; flex-wrap: wrap; gap: 4px;">
-                <span style="font-family: var(--font-mono); font-size: 8.5px; letter-spacing: 0.06em; text-transform: uppercase; padding: 2px 6px; border-radius: 2px; white-space: nowrap; line-height: 1.4; background: oklch(0.80 0.17 150 / 0.14); color: var(--ok);">yours</span>
-                <span style="font-family: var(--font-mono); font-size: 8.5px; letter-spacing: 0.06em; text-transform: uppercase; padding: 2px 6px; border-radius: 2px; white-space: nowrap; line-height: 1.4; background: var(--accent-soft); color: var(--accent);">🔗 fleet</span>
-                <span style="font-family: var(--font-mono); font-size: 8.5px; letter-spacing: 0.06em; text-transform: uppercase; padding: 2px 6px; border-radius: 2px; white-space: nowrap; line-height: 1.4; background: var(--surface); color: var(--dim);">12 TB</span>
+                <span style="font-family: var(--font-mono); font-size: 8.5px; letter-spacing: 0.04em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; white-space: nowrap; line-height: 1.4; background: oklch(0.80 0.17 150 / 0.16); color: oklch(0.84 0.16 152);">&#128279; fleet</span>
+                <span style="font-family: var(--font-mono); font-size: 8.5px; letter-spacing: 0.04em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; white-space: nowrap; line-height: 1.4; background: var(--surface); color: var(--dim);">5 things</span>
+                <span style="font-family: var(--font-mono); font-size: 8.5px; letter-spacing: 0.04em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; white-space: nowrap; line-height: 1.4; background: var(--surface); color: var(--dim);">4 GB</span>
               </div>
             </div>
-            <!-- node: alex (ring, guest) -->
-            <div style="position: absolute; left: 100px; top: 250px; transform: translate(-50%, -50%); width: 180px; background: var(--surface-2); border: 1px solid oklch(0.74 0.085 72 / 0.55); border-radius: 6px; padding: 9px 10px; display: grid; gap: 7px; box-shadow: 0 18px 40px -20px rgb(0 0 0 / 0.7);">
+
+            <!-- node: My MacBook (this device) -->
+            <div style="position: absolute; left: 292px; top: 258px; transform: translate(-50%, -50%); width: 186px; background: var(--surface-2); border: 1px solid var(--accent); border-radius: 8px; padding: 9px 10px; display: grid; gap: 7px; box-shadow: 0 0 0 3px var(--accent-soft), 0 18px 40px -20px rgb(0 0 0 / 0.7); z-index: 2;">
+              <span style="position: absolute; top: -9px; left: 10px; font-family: var(--font-mono); font-size: 8px; letter-spacing: 0.1em; text-transform: uppercase; background: var(--accent); color: #fff; padding: 2px 8px; border-radius: 999px;">This device</span>
               <div style="display: flex; align-items: center; gap: 8px;">
-                <span style="font-size: 19px; line-height: 1;">🧑</span>
+                <span style="font-size: 19px; line-height: 1;">&#128187;</span>
                 <div style="min-width: 0; flex: 1;">
-                  <div style="font-weight: 600; font-size: 13.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">alex-macbook</div>
+                  <div style="font-weight: 600; font-size: 13.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">My MacBook</div>
+                  <div style="font-family: var(--font-mono); font-size: 9.5px; color: var(--faint); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Apple M2</div>
+                </div>
+                <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 3px oklch(0.80 0.17 150 / 0.16); flex-shrink: 0;"></span>
+              </div>
+              <div style="display: flex; flex-wrap: wrap; gap: 4px;">
+                <span style="font-family: var(--font-mono); font-size: 8.5px; letter-spacing: 0.04em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; white-space: nowrap; line-height: 1.4; background: oklch(0.80 0.17 150 / 0.16); color: oklch(0.84 0.16 152);">&#11088; owner</span>
+                <span style="font-family: var(--font-mono); font-size: 8.5px; letter-spacing: 0.04em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; white-space: nowrap; line-height: 1.4; background: var(--surface); color: var(--dim);">13 things</span>
+                <span style="font-family: var(--font-mono); font-size: 8.5px; letter-spacing: 0.04em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; white-space: nowrap; line-height: 1.4; background: var(--surface); color: var(--dim);">16 GB</span>
+              </div>
+            </div>
+
+            <!-- node: Alex's laptop (shared -> violet edge) -->
+            <div style="position: absolute; left: 120px; top: 420px; transform: translate(-50%, -50%); width: 180px; background: var(--surface-2); border: 1px solid oklch(0.68 0.18 292 / 0.55); border-radius: 8px; padding: 9px 10px; display: grid; gap: 7px; box-shadow: 0 18px 40px -20px rgb(0 0 0 / 0.7);">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 19px; line-height: 1;">&#129489;</span>
+                <div style="min-width: 0; flex: 1;">
+                  <div style="font-weight: 600; font-size: 13.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Alex's laptop</div>
                   <div style="font-family: var(--font-mono); font-size: 9.5px; color: var(--faint); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">shared with Alex</div>
                 </div>
                 <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 3px oklch(0.80 0.17 150 / 0.16); flex-shrink: 0;"></span>
               </div>
               <div style="display: flex; flex-wrap: wrap; gap: 4px;">
-                <span style="font-family: var(--font-mono); font-size: 8.5px; letter-spacing: 0.06em; text-transform: uppercase; padding: 2px 6px; border-radius: 2px; white-space: nowrap; line-height: 1.4; background: oklch(0.74 0.085 72 / 0.16); color: var(--bronze);">guest</span>
-                <span style="font-family: var(--font-mono); font-size: 8.5px; letter-spacing: 0.06em; text-transform: uppercase; padding: 2px 6px; border-radius: 2px; white-space: nowrap; line-height: 1.4; background: var(--surface); color: var(--dim);">may receive screen</span>
+                <span style="font-family: var(--font-mono); font-size: 8.5px; letter-spacing: 0.04em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; white-space: nowrap; line-height: 1.4; background: var(--violet-soft); color: var(--violet);">guest</span>
+                <span style="font-family: var(--font-mono); font-size: 8.5px; letter-spacing: 0.04em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; white-space: nowrap;
               </div>
             </div>
-            <!-- node: printer (ring, on the mesh but not running the app) -->
-            <div style="position: absolute; left: 482px; top: 250px; transform: translate(-50%, -50%); width: 172px; background: repeating-linear-gradient(135deg, var(--surface-2), var(--surface-2) 7px, var(--surface) 7px, var(--surface) 14px); border: 1px dotted var(--border-bright); border-radius: 6px; padding: 9px 10px; display: grid; gap: 7px; opacity: 0.72;">
+
+            <!-- node: NanoKVM-Pro, fresh on the LAN (claimable: accent halo + drawer) -->
+            <div style="position: absolute; left: 468px; top: 352px; transform: translate(-50%, -50%); width: 186px; background: var(--surface-2); border: 1px solid var(--accent); border-radius: 8px; padding: 9px 10px; display: grid; gap: 7px; animation: amsClaimHalo 1.9s ease-out infinite; z-index: 2;">
               <div style="display: flex; align-items: center; gap: 8px;">
-                <span style="font-size: 19px; line-height: 1; filter: grayscale(1); opacity: 0.8;">📡</span>
+                <span style="font-size: 19px; line-height: 1;">&#128421;</span>
                 <div style="min-width: 0; flex: 1;">
-                  <div style="font-weight: 600; font-size: 13.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">hp-laserjet</div>
-                  <div style="font-family: var(--font-mono); font-size: 9.5px; color: var(--faint); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">on the mesh</div>
+                  <div style="font-weight: 600; font-size: 13.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">AllMyKVM Pro</div>
+                  <div style="font-family: var(--font-mono); font-size: 9.5px; color: var(--faint); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">found via mdns &middot; AX630C</div>
                 </div>
-                <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--border-bright); flex-shrink: 0;"></span>
+                <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 3px oklch(0.80 0.17 150 / 0.16); flex-shrink: 0;"></span>
               </div>
               <div style="display: flex; flex-wrap: wrap; gap: 4px;">
-                <span style="font-family: var(--font-mono); font-size: 8.5px; letter-spacing: 0.06em; text-transform: uppercase; padding: 2px 6px; border-radius: 2px; white-space: nowrap; line-height: 1.4; border: 1px dotted var(--border-bright); color: var(--faint);">not on allmystuff</span>
+                <span style="font-family: var(--font-mono); font-size: 8.5px; letter-spacing: 0.04em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; white-space: nowrap; line-height: 1.4; background: var(--accent-soft); color: var(--accent); border: 1px solid var(--accent); font-weight: 700;">&#65291; claim</span>
+                <span style="font-family: var(--font-mono); font-size: 8.5px; letter-spacing: 0.04em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; white-space: nowrap; line-height: 1.4; background: var(--surface); color: var(--dim);">2 things</span>
+                <span style="font-family: var(--font-mono); font-size: 8.5px; letter-spacing: 0.04em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; white-space: nowrap; line-height: 1.4; background: var(--surface); color: var(--dim);">1 GB</span>
+              </div>
+              <!-- the claim drawer, dropped out under the card -->
+              <div style="position: absolute; top: calc(100% - 1px); left: 14px; right: 14px; border: 1.5px solid var(--accent); border-top: none; border-radius: 0 0 5px 5px; padding: 6px 8px; background: var(--surface); color: var(--accent); font-size: 11.5px; font-weight: 650; text-align: center; box-shadow: 0 8px 16px rgb(0 0 0 / 0.35);">
+                <span style="position: absolute; top: -8px; left: 50%; transform: translateX(-50%); width: 2px; height: 8px; background: var(--accent);"></span>
+                &#65291; Claim this device
               </div>
             </div>
+
             <!-- zoombar -->
             <div style="position: absolute; right: 12px; bottom: 12px; display: flex; gap: 2px; background: var(--surface); border: 1px solid var(--border); border-radius: 4px; padding: 3px; box-shadow: 0 10px 30px -12px rgb(0 0 0 / 0.6);">
-              <span style="width: 26px; height: 22px; display: grid; place-items: center; color: var(--dim); font-size: 14px;">−</span>
+              <span style="width: 26px; height: 22px; display: grid; place-items: center; color: var(--dim); font-size: 14px;">&minus;</span>
               <span style="width: 42px; height: 22px; display: grid; place-items: center; color: var(--faint); font-family: var(--font-mono); font-size: 10px;">100%</span>
               <span style="width: 26px; height: 22px; display: grid; place-items: center; color: var(--dim); font-size: 14px;">+</span>
             </div>
           </div>
           <!-- panel footer -->
           <div style="position: absolute; left: 0; right: 0; bottom: 0; height: 38px; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; border-top: 1px solid var(--border); background: oklch(0.135 0.022 285 / 0.6); backdrop-filter: blur(8px); z-index: 3;">
-            <span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);">2 routes active</span>
-            <span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);">5 devices · 1 guest · 1 on the mesh</span>
+            <span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);">2 routes &middot; 1 kvm attached</span>
+            <span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);">6 devices · 1 guest · 1 claimable</span>
           </div>
         </div>
       </div>
@@ -351,6 +406,97 @@
             <span style="font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 9px; border: 1px solid var(--accent-line); border-radius: 2px; color: var(--accent);">codec · h264</span>
           </div>
           <span style="font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint);">control on · audio listening</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ CLAIMING — LAN-first, zero config ════════ -->
+  <section id="claiming" data-screen-label="Claiming" class="section">
+    <div class="grid-bg"></div>
+    <div class="wrap" style="position: relative;">
+      <div style="max-width: 860px; margin-bottom: clamp(36px, 4.5vw, 52px);">
+        <span class="eyebrow">New · LAN-first claiming · built on MyOwnMesh</span>
+        <h2 class="display-l" style="margin: 16px 0 18px;">Plug it in.<br>Your app already sees it.</h2>
+        <p class="lede">New devices announce themselves on your LAN — and only your LAN. Claiming is three beats: no typing an IP, no cloud round-trip, no account.</p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 16px;">
+        <!-- beat 01: it calls out -->
+        <div style="background: linear-gradient(180deg, var(--surface), var(--bg-2)); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; display: flex; flex-direction: column;">
+          <div style="position: relative; height: 170px; background: oklch(0.115 0.018 285); border-bottom: 1px solid var(--border); overflow: hidden;">
+            <div style="position: absolute; inset: 0; background-image: radial-gradient(oklch(0.62 0.20 292 / 0.14) 1.5px, transparent 1.5px); background-size: 24px 24px;"></div>
+            <span style="position: absolute; left: 50%; top: 46%; transform: translate(-50%, -50%); width: 12px; height: 12px; border-radius: 50%; border: 1.5px solid var(--accent); animation: amsPing 3s ease-out infinite;"></span>
+            <span style="position: absolute; left: 50%; top: 46%; transform: translate(-50%, -50%); width: 12px; height: 12px; border-radius: 50%; border: 1.5px solid var(--accent); animation: amsPing 3s ease-out infinite 1.5s;"></span>
+            <div style="position: absolute; left: 50%; top: 46%; transform: translate(-50%, -50%); width: 74px; height: 58px; background: var(--surface-2); border: 1px solid var(--border-bright); border-radius: 8px; display: grid; place-items: center; box-shadow: 0 16px 36px -16px rgb(0 0 0 / 0.8);">
+              <svg viewBox="0 0 24 24" style="width: 26px; height: 26px; color: var(--accent);" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><rect x="4" y="7" width="16" height="10" rx="2"></rect><path d="M8 12h.01M12 12h.01M16 12h.01"></path></svg>
+            </div>
+            <span style="position: absolute; left: 50%; bottom: 12px; transform: translateX(-50%); font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); white-space: nowrap;">calling out · lan only</span>
+          </div>
+          <div style="padding: 20px 22px 22px; display: flex; flex-direction: column; gap: 8px; flex: 1;">
+            <span style="font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint);">01 · power it on</span>
+            <h3 style="font-family: var(--font-display); font-size: 21px; font-weight: 600; line-height: 1.15;">It calls out — quietly.</h3>
+            <p style="font-size: 14px; color: var(--dim); line-height: 1.6; margin: 0;">A fresh device announces itself over mDNS on a claim channel that never leaves your network. It works before the box even knows what time it is.</p>
+            <span style="margin-top: auto; font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); padding-top: 10px;">allmystuff-local-claim-v1 · mdns-only · clock-free</span>
+          </div>
+        </div>
+
+        <!-- beat 02: it appears -->
+        <div style="background: linear-gradient(180deg, var(--surface), var(--bg-2)); border: 1px solid var(--accent-line); border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 14px 40px -16px oklch(0.64 0.255 350 / 0.22);">
+          <div style="position: relative; height: 170px; background: oklch(0.115 0.018 285); border-bottom: 1px solid var(--border); overflow: hidden;">
+            <div style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: min(280px, 88%); background: var(--surface-2); border: 1px solid var(--border-bright); border-radius: 6px; box-shadow: 0 18px 44px -18px rgb(0 0 0 / 0.85);">
+              <div style="display: flex; align-items: center; justify-content: space-between; padding: 8px 11px; border-bottom: 1px solid var(--border);">
+                <span style="font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint);">claim a device</span>
+                <span style="width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px var(--accent); animation: amsPulse 1.8s ease-in-out infinite;"></span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 9px; padding: 10px 11px;">
+                <svg viewBox="0 0 24 24" style="width: 18px; height: 18px; color: var(--accent); flex-shrink: 0;" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><rect x="4" y="7" width="16" height="10" rx="2"></rect><path d="M8 12h.01M12 12h.01M16 12h.01"></path></svg>
+                <div style="min-width: 0; flex: 1;">
+                  <div style="font-weight: 600; font-size: 12.5px; line-height: 1.3;">AllMyKVM · kvm-3f41</div>
+                  <div style="font-family: var(--font-mono); font-size: 9px; color: var(--faint);">found on your LAN · just now</div>
+                </div>
+                <span style="font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.1em; text-transform: uppercase; color: #fff; background: var(--accent); border-radius: 3px; padding: 5px 10px;">Claim</span>
+              </div>
+            </div>
+          </div>
+          <div style="padding: 20px 22px 22px; display: flex; flex-direction: column; gap: 8px; flex: 1;">
+            <span style="font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent);">02 · open the app</span>
+            <h3 style="font-family: var(--font-display); font-size: 21px; font-weight: 600; line-height: 1.15;">It's already in the sheet.</h3>
+            <p style="font-size: 14px; color: var(--dim); line-height: 1.6; margin: 0;">Any of your devices on the same LAN shows the newcomer instantly. Nothing to type, nothing touches the internet — discovery is the mesh's own mDNS.</p>
+            <span style="margin-top: auto; font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); padding-top: 10px;">no cloud round-trip · no ip addresses</span>
+          </div>
+        </div>
+
+        <!-- beat 03: confirm -->
+        <div style="background: linear-gradient(180deg, var(--surface), var(--bg-2)); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; display: flex; flex-direction: column;">
+          <div style="position: relative; height: 170px; background: oklch(0.115 0.018 285); border-bottom: 1px solid var(--border); overflow: hidden; display: grid; place-items: center;">
+            <div style="text-align: center;">
+              <div style="display: inline-flex; align-items: center; gap: 8px; background: var(--surface-2); border: 1px solid var(--border-bright); border-radius: 6px; padding: 9px 12px; margin-bottom: 12px;">
+                <svg viewBox="0 0 24 24" style="width: 18px; height: 18px; color: var(--accent);" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><rect x="4" y="7" width="16" height="10" rx="2"></rect><path d="M8 12h.01M12 12h.01M16 12h.01"></path></svg>
+                <span style="font-weight: 600; font-size: 13px;">kvm-3f41</span>
+              </div>
+              <div style="display: flex; gap: 5px; justify-content: center; flex-wrap: wrap; margin-bottom: 12px;">
+                <span style="font-family: var(--font-mono); font-size: 8.5px; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; background: oklch(0.80 0.17 150 / 0.14); color: oklch(0.84 0.16 152);">yours</span>
+                <span style="font-family: var(--font-mono); font-size: 8.5px; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; background: oklch(0.80 0.17 150 / 0.14); color: oklch(0.84 0.16 152);">&#128279; fleet</span>
+                <span style="font-family: var(--font-mono); font-size: 8.5px; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent);">kvm</span>
+              </div>
+              <span style="display: inline-flex; align-items: center; gap: 7px; font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ok);"><span style="width: 6px; height: 6px; border-radius: 50%; background: var(--ok);"></span>re-advertised as yours</span>
+            </div>
+          </div>
+          <div style="padding: 20px 22px 22px; display: flex; flex-direction: column; gap: 8px; flex: 1;">
+            <span style="font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint);">03 · one tap</span>
+            <h3 style="font-family: var(--font-display); font-size: 21px; font-weight: 600; line-height: 1.15;">Tap Claim. It's yours.</h3>
+            <p style="font-size: 14px; color: var(--dim); line-height: 1.6; margin: 0;">The device re-advertises as yours and joins your fleet — keys minted on the device, never on a server. It's a node on your graph from here on.</p>
+            <span style="margin-top: auto; font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); padding-top: 10px;">public claims · off by default</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-top: 28px; padding-top: 22px; border-top: 1px solid var(--border);">
+        <p style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); margin: 0;">Discovery is mDNS on your LAN · public claiming stays off unless you turn it on — then it's a rotating, hard-to-guess code</p>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+          <a class="btn btn-ghost btn-sm" href="layers/">How it connects <span aria-hidden="true">→</span></a>
+          <a class="btn btn-primary btn-sm" href="hardware/">The hardware it ships in <span aria-hidden="true">→</span></a>
         </div>
       </div>
     </div>
@@ -556,6 +702,7 @@
           <h4 style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-bottom: 14px;">Open</h4>
           <ul style="list-style: none; display: grid; gap: 9px; font-size: 14px; color: var(--dim);">
             <li><a href="https://github.com/mrjeeves/AllMyStuff">github.com/mrjeeves/AllMyStuff</a></li>
+            <li><a href="https://myownmesh.net">Built on MyOwnMesh</a></li>
             <li><a href="https://github.com/mrjeeves/allmystuff.works">This site's source</a></li>
             <li><a href="mailto:hello@allmystuff.works">Email us</a></li>
           </ul>
@@ -648,7 +795,7 @@ class Component extends DCLogic {
     ];
     return {
       hardwareCards: FleetCard ? cards.map((c) => React.createElement(FleetCard, c)) : null,
-      appVersion: this.state.appVersion || "v0.1.5",
+      appVersion: this.state.appVersion || "v0.2.18",
     };
   }
 }
