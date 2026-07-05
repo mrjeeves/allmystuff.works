@@ -26,6 +26,8 @@
   @keyframes amsBlink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
   @keyframes amsPulse { 0%, 100% { opacity: 0.55; } 50% { opacity: 1; } }
   @keyframes amsScan { 0% { transform: translateY(-100%); } 100% { transform: translateY(100%); } }
+  @keyframes amsPing { 0% { width: 12px; height: 12px; opacity: 0.9; } 70% { opacity: 0.14; } 100% { width: 230px; height: 230px; opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { [style*="amsPing"], [style*="amsPulse"], [style*="amsFlow"] { animation: none !important; } }
 
   /* ---- OS-down recovery demo ---- */
   .demo-shell { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 18px; align-items: stretch; }
@@ -126,7 +128,7 @@
         <a href="../faq/" style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim);">FAQ</a>
       </div>
       <div style="display: flex; gap: 12px; align-items: center;">
-        <a class="chip" href="https://github.com/mrjeeves/AllMyStuff" title="View AllMyStuff on GitHub"><span class="dot"></span><span id="rel-version">v0.1.5</span></a>
+        <a class="chip" href="https://github.com/mrjeeves/AllMyStuff" title="View AllMyStuff on GitHub"><span class="dot"></span><span id="rel-version">v0.2.18</span></a>
         <a class="btn btn-primary btn-sm" href="../download/">Download free</a>
       </div>
     </div>
@@ -395,7 +397,7 @@
             <summary>Full technical specification · Access Pro</summary>
             <div class="spec-row"><div class="k">Main control</div><div class="v">AX630C · 2× A53 @ 1.2GHz</div></div>
             <div class="spec-row"><div class="k">Memory · storage</div><div class="v">1GB LPDDR4X · 32GB eMMC @ 300MB/s</div></div>
-            <div class="spec-row"><div class="k">System</div><div class="v">CEC open-source firmware fork</div></div>
+            <div class="spec-row"><div class="k">System</div><div class="v">AllMyKVM — CEC's open firmware fork</div></div>
             <div class="spec-row"><div class="k">Resolution</div><div class="v">4K @ 45fps · 2K @ 95fps</div></div>
             <div class="spec-row"><div class="k">HDMI loop-out</div><div class="v">4K loop-out</div></div>
             <div class="spec-row"><div class="k">Video encoding</div><div class="v">MJPG · H.264 · H.265</div></div>
@@ -426,9 +428,10 @@
         <h2 class="display-l" style="margin: 16px 0 18px;">It's just another node on your graph.</h2>
         <p class="lede" style="margin-bottom: 18px;">No second app, no vendor portal. A witness claims into your fleet like any laptop — its console opens in the same tab, its power button is a button in the drawer, and sharing it follows the same grants as everything else.</p>
         <ul style="list-style: none; display: grid; gap: 9px; font-size: 15px; color: var(--dim); padding: 0; margin: 0;">
-          <li style="display: flex; gap: 10px;"><span style="color: var(--accent);">▸</span>Claim it with the same code-read ceremony as any device</li>
+          <li style="display: flex; gap: 10px;"><span style="color: var(--accent);">▸</span>Claim it with the same one-tap adoption as any device</li>
           <li style="display: flex; gap: 10px;"><span style="color: var(--accent);">▸</span>Streams ride your mesh, end-to-end encrypted — relay only when needed</li>
-          <li style="display: flex; gap: 10px;"><span style="color: var(--accent);">▸</span>Works without us: open firmware fork, no account, no subscription</li>
+          <li style="display: flex; gap: 10px;"><span style="color: var(--accent);">▸</span>No second login — approved mesh peers open its console directly, no port forwarding, no exposed web page</li>
+          <li style="display: flex; gap: 10px;"><span style="color: var(--accent);">▸</span>Works without us: AllMyKVM, CEC's open firmware fork — no account, no subscription</li>
         </ul>
         <div style="display: flex; gap: 14px; margin-top: 26px; flex-wrap: wrap;">
           <a class="btn btn-ghost" href="../download/">Get the app — it's free <span aria-hidden="true">→</span></a>
@@ -451,11 +454,83 @@
             <div style="display: grid; gap: 8px;">
               <div style="display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 11px; padding: 8px 10px; background: var(--bg); border: 1px solid var(--border); border-radius: 4px;"><span style="color: var(--faint);">host screen</span><span style="color: var(--ok);">live · 4K@45</span></div>
               <div style="display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 11px; padding: 8px 10px; background: var(--bg); border: 1px solid var(--border); border-radius: 4px;"><span style="color: var(--faint);">host power</span><span style="color: var(--text);">on · 41 days</span></div>
-              <div style="display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 11px; padding: 8px 10px; background: var(--bg); border: 1px solid var(--border); border-radius: 4px;"><span style="color: var(--faint);">actions</span><span style="color: var(--accent);">console · power · boot ISO</span></div>
+              <div style="display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 11px; padding: 8px 10px; background: var(--bg); border: 1px solid var(--border); border-radius: 4px;"><span style="color: var(--faint);">actions</span><span style="color: var(--accent);">open kvm · power · reset · attach</span></div>
             </div>
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ════════ PLUG & CLAIM ════════ -->
+  <section class="section" style="padding-top: 0;">
+    <div class="wrap">
+      <div style="max-width: 860px; margin-bottom: clamp(36px, 4vw, 52px);">
+        <span class="eyebrow">New · plug &amp; claim · mdns on your lan</span>
+        <h2 class="display-l" style="margin: 16px 0 18px;">Out of the box, it's already calling you.</h2>
+        <p class="lede">A fresh witness announces itself on your LAN — before it knows the time, before it's touched the internet. Your app hears it, you tap Claim, and it's wearing your name.</p>
+      </div>
+
+      <div style="background: linear-gradient(180deg, var(--surface), var(--bg-2)); border: 1px solid var(--border); border-radius: 8px; padding: clamp(22px, 3vw, 34px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(230px, 100%), 1fr)); gap: clamp(16px, 2.5vw, 28px); align-items: stretch;">
+        <!-- stage 1: it announces -->
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <div style="position: relative; height: 148px; background: oklch(0.115 0.018 285); border: 1px solid var(--border); border-radius: 6px; overflow: hidden;">
+            <span style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 12px; height: 12px; border-radius: 50%; border: 1.5px solid var(--accent); animation: amsPing 3s ease-out infinite;"></span>
+            <span style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 12px; height: 12px; border-radius: 50%; border: 1.5px solid var(--accent); animation: amsPing 3s ease-out infinite 1.5s;"></span>
+            <div style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 66px; height: 52px; background: var(--surface-2); border: 1px solid var(--border-bright); border-radius: 7px; display: grid; place-items: center;">
+              <svg viewBox="0 0 24 24" style="width: 24px; height: 24px; color: var(--accent);" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><rect x="4" y="7" width="16" height="10" rx="2"></rect><path d="M8 12h.01M12 12h.01M16 12h.01"></path></svg>
+            </div>
+          </div>
+          <div>
+            <div style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); margin-bottom: 6px;">01 · on power</div>
+            <p style="font-size: 14px; color: var(--dim); line-height: 1.55; margin: 0;">It calls out over mDNS on a claim channel that never leaves your network. Clock-free — it works before NTP.</p>
+          </div>
+        </div>
+        <!-- stage 2: it appears in the app -->
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <div style="position: relative; height: 148px; background: oklch(0.115 0.018 285); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; display: grid; place-items: center;">
+            <div style="width: min(230px, 90%); background: var(--surface-2); border: 1px solid var(--border-bright); border-radius: 6px; box-shadow: 0 16px 38px -18px rgb(0 0 0 / 0.85);">
+              <div style="display: flex; align-items: center; justify-content: space-between; padding: 7px 10px; border-bottom: 1px solid var(--border);">
+                <span style="font-family: var(--font-mono); font-size: 8.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint);">claim a device</span>
+                <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px var(--accent); animation: amsPulse 1.8s ease-in-out infinite;"></span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 8px; padding: 9px 10px;">
+                <div style="min-width: 0; flex: 1;">
+                  <div style="font-weight: 600; font-size: 11.5px; line-height: 1.3;">AllMyKVM · kvm-3f41</div>
+                  <div style="font-family: var(--font-mono); font-size: 8.5px; color: var(--faint);">found on your LAN · just now</div>
+                </div>
+                <span style="font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: #fff; background: var(--accent); border-radius: 3px; padding: 4px 9px;">Claim</span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); margin-bottom: 6px;">02 · in the app</div>
+            <p style="font-size: 14px; color: var(--dim); line-height: 1.55; margin: 0;">Every device of yours on that LAN shows the newcomer instantly. No IPs typed, no cloud round-trip.</p>
+          </div>
+        </div>
+        <!-- stage 3: it's yours -->
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <div style="position: relative; height: 148px; background: oklch(0.115 0.018 285); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; display: grid; place-items: center;">
+            <div style="text-align: center;">
+              <div style="display: inline-flex; align-items: center; gap: 8px; background: var(--surface-2); border: 1px solid var(--border-bright); border-radius: 6px; padding: 9px 12px; margin-bottom: 10px;">
+                <svg viewBox="0 0 256 256" aria-hidden="true" style="width: 20px; height: 20px; color: var(--accent);"><g stroke="currentColor" stroke-width="13" fill="none" stroke-linecap="round"><path d="M128 74 L77 165 M128 74 L181 160 M77 165 L181 160"></path></g><circle cx="128" cy="72" r="27" fill="currentColor"></circle><circle cx="76" cy="166" r="22" fill="currentColor"></circle><circle cx="182" cy="160" r="22" fill="currentColor"></circle></svg>
+                <span style="font-weight: 600; font-size: 13px;">KVM-den</span>
+              </div>
+              <div style="display: flex; gap: 5px; justify-content: center; flex-wrap: wrap;">
+                <span style="font-family: var(--font-mono); font-size: 8.5px; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 7px; border-radius: 2px; background: oklch(0.80 0.17 150 / 0.14); color: var(--ok);">yours</span>
+                <span style="font-family: var(--font-mono); font-size: 8.5px; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 7px; border-radius: 2px; background: var(--accent-soft); color: var(--accent);">kvm</span>
+                <span style="font-family: var(--font-mono); font-size: 8.5px; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 7px; border-radius: 2px; background: oklch(0.80 0.17 150 / 0.16); color: oklch(0.84 0.16 152);">🔗 fleet</span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); margin-bottom: 6px;">03 · claimed</div>
+            <p style="font-size: 14px; color: var(--dim); line-height: 1.55; margin: 0;">It appears in your claim sheet — tap Claim, done. Attach it to a machine and it renames itself to match.</p>
+          </div>
+        </div>
+      </div>
+
+      <p style="margin-top: 18px; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); text-align: center;">allmystuff-local-claim-v1 · clock-free · public claims off by default · mesh transport by <a href="https://myownmesh.net" style="color: var(--dim);">MyOwnMesh</a></p>
     </div>
   </section>
 
@@ -550,6 +625,7 @@
           <h4 style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-bottom: 14px;">Open</h4>
           <ul style="list-style: none; display: grid; gap: 9px; font-size: 14px; color: var(--dim);">
             <li><a href="https://github.com/mrjeeves/AllMyStuff">github.com/mrjeeves/AllMyStuff</a></li>
+            <li><a href="https://myownmesh.net">Built on MyOwnMesh</a></li>
             <li><a href="https://github.com/mrjeeves/allmystuff.works">This site's source</a></li>
             <li><a href="mailto:hello@allmystuff.works">Email us</a></li>
           </ul>
