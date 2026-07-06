@@ -8,6 +8,11 @@ Static site, no build step.
 2. Repo → Settings → Pages → Source: **Deploy from a branch**, branch `main`, folder `/ (root)`.
 3. Done. The site works from any subpath (all asset paths are relative).
 
+Every push to `main` (including a PR merge) triggers the automatic
+"pages build and deployment" run. If a deploy dies with GitHub's
+transient "Deployment failed, try again later", re-run it from the
+Actions tab — or merge any commit to `main` to kick a fresh one.
+
 ## Layout
 
 The site is organized around one free app and its optional add-ons — the
