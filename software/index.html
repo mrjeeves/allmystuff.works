@@ -59,6 +59,22 @@
     </div>
   </nav>
 
+  <!-- ════════ CONSOLES SUBNAV — always visible on the software section ════════ -->
+  <nav aria-label="Console pages" style="position: sticky; top: 66px; z-index: 40; background: oklch(0.15 0.024 285 / 0.85); backdrop-filter: blur(12px) saturate(1.2); border-bottom: 1px solid var(--border);">
+    <div class="wrap" style="display: flex; align-items: stretch; height: 46px; overflow-x: auto; scrollbar-width: none;">
+      <div style="display: flex; align-items: stretch; gap: 2px; margin: 0 auto;">
+      <span style="display: inline-flex; align-items: center; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-right: 10px; flex-shrink: 0;">the consoles</span>
+      <a href="./" aria-current="page" style="display: inline-flex; align-items: center; height: 100%; box-sizing: border-box; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; padding: 0 12px; border-bottom: 2px solid transparent; white-space: nowrap; flex-shrink: 0; color: var(--text); border-bottom-color: var(--accent);">Overview</a>
+      <a href="consoles/remote-control/" style="display: inline-flex; align-items: center; height: 100%; box-sizing: border-box; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; padding: 0 12px; border-bottom: 2px solid transparent; white-space: nowrap; flex-shrink: 0; color: var(--dim);">Remote control</a>
+      <a href="consoles/terminal/" style="display: inline-flex; align-items: center; height: 100%; box-sizing: border-box; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; padding: 0 12px; border-bottom: 2px solid transparent; white-space: nowrap; flex-shrink: 0; color: var(--dim);">Terminal</a>
+      <a href="consoles/files/" style="display: inline-flex; align-items: center; height: 100%; box-sizing: border-box; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; padding: 0 12px; border-bottom: 2px solid transparent; white-space: nowrap; flex-shrink: 0; color: var(--dim);">Files</a>
+      <a href="consoles/sites/" style="display: inline-flex; align-items: center; height: 100%; box-sizing: border-box; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; padding: 0 12px; border-bottom: 2px solid transparent; white-space: nowrap; flex-shrink: 0; color: var(--dim);">Sites</a>
+      <a href="consoles/rooms/" style="display: inline-flex; align-items: center; height: 100%; box-sizing: border-box; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; padding: 0 12px; border-bottom: 2px solid transparent; white-space: nowrap; flex-shrink: 0; color: var(--dim);">Rooms</a>
+      </div>
+    </div>
+  </nav>
+
+
   <!-- ════════ THE FOUR SCENES ════════ -->
   <section id="see" class="section" style="background: var(--bg-2); border-bottom: 1px solid var(--border);">
     <div class="wrap">
@@ -269,7 +285,6 @@
           <h2 class="display-l" style="margin: 16px 0 16px;">Every machine, in a tab.</h2>
           <p class="lede">Claim a machine and it gets consoles — the real, free surfaces you reach it through. Each has a page of its own, showing the interface and every state it can be in.</p>
         </div>
-        <a class="btn btn-ghost" href="consoles/">Tour the consoles <span aria-hidden="true">→</span></a>
       </div>
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(170px, 100%), 1fr)); gap: 14px;">
         <a href="consoles/remote-control/" style="display: flex; flex-direction: column; gap: 8px; padding: 20px 20px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); transition: border-color var(--dur-base) ease, transform var(--dur-fast) ease;" onmouseover="this.style.borderColor='var(--accent-line)';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='none'">
@@ -297,6 +312,29 @@
           <span style="font-family: var(--font-display); font-size: 21px; font-weight: 600;">Rooms</span>
           <span style="font-size: 13px; color: var(--dim); line-height: 1.5;">Pull the fleet into one call.</span>
         </a>
+      </div>
+      <div style="margin-top: clamp(28px, 3.5vw, 44px);">
+        <div style="background: var(--bg-2); border: 1px solid var(--border); border-radius: 10px; padding: clamp(32px, 4vw, 52px);">
+        <div style="max-width: 760px; margin-bottom: 28px;">
+          <span class="eyebrow">One model under all five</span>
+          <h2 class="display-m" style="margin: 14px 0 12px;">Same graph. Same rules. Same gate.</h2>
+          <p style="color: var(--dim); line-height: 1.6; max-width: 62ch;">Every console rides one mesh route between machines you own — encrypted end to end, peer to peer, no server in the middle. The owner/fleet gate is the same everywhere, and nothing is shareable by default. Nothing.</p>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 16px;">
+          <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 20px 22px;">
+            <div style="font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px;">Peer-to-peer</div>
+            <p style="font-size: 14px; color: var(--dim); line-height: 1.6;">Traffic runs directly between your machines. Reference relays only introduce — and every one is a setting you can point at your own box.</p>
+          </div>
+          <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 20px 22px;">
+            <div style="font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px;">Owner-gated</div>
+            <p style="font-size: 14px; color: var(--dim); line-height: 1.6;">Terminal, Files and control open only for machines you own or are in your fleet. A guest can't even ask.</p>
+          </div>
+          <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 20px 22px;">
+            <div style="font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px;">Free forever</div>
+            <p style="font-size: 14px; color: var(--dim); line-height: 1.6;">Every console, $0, MIT-licensed, no account required. What installs is the whole thing.</p>
+          </div>
+        </div>
+      </div>
       </div>
     </div>
   </section>
@@ -557,6 +595,13 @@
       if (v && rel.tag_name) v.textContent = rel.tag_name[0] === "v" ? rel.tag_name : "v" + rel.tag_name;
     })
     .catch(function () {});
+})();
+</script>
+<script>
+(function () {
+  var bar = document.querySelector('nav[aria-label="Console pages"] .wrap');
+  var on = bar && bar.querySelector('[aria-current="page"]');
+  if (bar && on) bar.scrollLeft = Math.max(0, on.offsetLeft - 90);
 })();
 </script>
 </body>
