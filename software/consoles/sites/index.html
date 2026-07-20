@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sites console — the services your machines host · allmystuff.works</title>
-<meta name="description" content="Reach the web apps and TCP services running on any fleet machine from anywhere. Map a remote port through the mesh proxy and open it locally — no port forwarding, any TCP service: HTTP, SSH, databases, gRPC, WebSockets. Expose your own ports under a name.">
+<title>Sites console · the services your machines host · allmystuff.works</title>
+<meta name="description" content="Reach the web apps and TCP services running on any fleet machine from anywhere. Map a remote port through the mesh proxy and open it locally: no port forwarding, any TCP service (HTTP, SSH, databases, gRPC, WebSockets). Expose your own ports under a name.">
 <meta name="theme-color" content="#070711">
 <link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
 <link rel="icon" sizes="48x48 32x32 16x16" href="../../../favicon.ico">
 <link rel="apple-touch-icon" href="../../../apple-touch-icon.png">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Sites console — the services your machines host">
-<meta property="og:description" content="Map a remote service through the mesh proxy and open it locally — no forwarding, any TCP service. HTTP, SSH, Postgres, gRPC, WebSockets. The real interface, demonstrated.">
+<meta property="og:title" content="Sites console · the services your machines host">
+<meta property="og:description" content="Map a remote service through the mesh proxy and open it locally: no forwarding, any TCP service. HTTP, SSH, Postgres, gRPC, WebSockets. The real interface, demonstrated.">
 <meta property="og:url" content="https://allmystuff.works/software/consoles/sites/">
 <meta property="og:image" content="https://allmystuff.works/og.png">
 <link rel="stylesheet" href="../../../ds/cec/tokens/fonts.css">
@@ -146,7 +146,7 @@
     </div>
   </nav>
 
-  <!-- ════════ CONSOLES SUBNAV — always visible on the console pages ════════ -->
+  <!-- ════════ CONSOLES SUBNAV · always visible on the console pages ════════ -->
   <nav aria-label="Console pages" style="position: sticky; top: 66px; z-index: 40; background: oklch(0.15 0.024 285 / 0.85); backdrop-filter: blur(12px) saturate(1.2); border-bottom: 1px solid var(--border);">
     <div class="wrap" style="display: flex; align-items: stretch; height: 46px; overflow-x: auto; scrollbar-width: none;">
       <div style="display: flex; align-items: stretch; gap: 2px; margin: 0 auto;">
@@ -175,7 +175,7 @@
       <div style="max-width: 880px;">
         <span class="eyebrow">Console 04 · Sites</span>
         <h1 class="display-xl" style="margin: 16px 0 20px;">The services your<br>machines host.</h1>
-        <p class="lede" style="max-width: 64ch;">Reach the web apps and services running on any fleet machine — from anywhere. Map a port through the mesh proxy and open it locally: no port forwarding, no public exposure, <em>any</em> TCP service. A dashboard, an SSH host, a Postgres, a dev server — all one click away.</p>
+        <p class="lede" style="max-width: 64ch;">Reach the web apps and services running on any fleet machine, from anywhere. Map a port through the mesh proxy and open it locally: no port forwarding, no public exposure, <em>any</em> TCP service. A dashboard, an SSH host, a Postgres, a dev server: all one click away.</p>
       </div>
       <div style="display: flex; gap: 9px; flex-wrap: wrap; margin-top: 26px;">
         <span class="chip">Any TCP service</span>
@@ -196,7 +196,7 @@
           <div class="who">
             <span class="ico">🌐</span>
             <div style="min-width: 0;">
-              <div class="nm" style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim);">sites — around your fleet</div>
+              <div class="nm" style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim);">sites · around your fleet</div>
             </div>
           </div>
           <span class="stat live" title="Connected to the mesh"><span class="ld"></span>online</span>
@@ -218,7 +218,7 @@
             <div class="s-acts">
               <span class="btn btn-primary btn-sm" title="Open in your browser">Open</span>
               <span class="btn btn-ghost btn-sm" title="Copy its local address">Copy</span>
-              <span class="btn btn-ghost btn-sm s-x" title="Unmap — stop proxying it here" aria-label="Unmap">✕</span>
+              <span class="btn btn-ghost btn-sm s-x" title="Unmap · stop proxying it here" aria-label="Unmap">✕</span>
             </div>
           </div>
           <!-- unmapped: PostgreSQL -->
@@ -257,7 +257,7 @@
           </button>
         </div>
         <div class="srows" style="padding-bottom: 15px;">
-          <!-- exposed: My Project — Dev -->
+          <!-- exposed: My Project (Dev) -->
           <div class="srow lit">
             <span class="s-ico">🌐</span>
             <span class="s-main">
@@ -265,7 +265,7 @@
               <span class="s-sub"><span class="s-tag">local-only</span> vite</span>
             </span>
             <div class="s-acts">
-              <input class="name-in" value="My Project — Dev" title="Name your fleet sees this site under" aria-label="Name your fleet sees this site under">
+              <input class="name-in" value="My Project (Dev)" title="Name your fleet sees this site under" aria-label="Name your fleet sees this site under">
               <span class="btn btn-ghost btn-sm" title="Stop advertising this service">Stop</span>
             </div>
           </div>
@@ -295,7 +295,7 @@
           </div>
         </div>
       </div>
-      <p style="text-align: center; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); margin-top: 18px;">The real interface — a remote Grafana mapped to localhost:47000</p>
+      <p style="text-align: center; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); margin-top: 18px;">The real interface · a remote Grafana mapped to localhost:47000</p>
     </div>
   </section>
 
@@ -305,7 +305,7 @@
       <div style="max-width: 820px; margin-bottom: clamp(40px, 5vw, 60px);">
         <span class="eyebrow">What it does</span>
         <h2 class="display-l" style="margin: 16px 0 16px;">A reverse proxy, in a tab.</h2>
-        <p class="lede">Every service your fleet hosts, made reachable — mapped to a local port through the mesh, with nothing forwarded and nothing public. Then your own ports, exposed under names only your fleet can see.</p>
+        <p class="lede">Every service your fleet hosts, made reachable: mapped to a local port through the mesh, with nothing forwarded and nothing public. Then your own ports, exposed under names only your fleet can see.</p>
       </div>
 
       <!-- F1 map -->
@@ -316,8 +316,8 @@
           <p style="color: var(--dim); line-height: 1.6; max-width: 50ch; margin-bottom: 18px;">One click maps any remote service to a local port through the mesh proxy. Web services get an Open button straight to your browser; a bare TCP service gives you a copyable <span class="mono">localhost:</span> address to point your own client at. The local address is monospace and one tap away.</p>
           <ul class="flist">
             <li>The local address is monospace and one-tap copyable</li>
-            <li>Copy flashes <span style="color: var(--ok);">✓ Copied</span> right on the row — no toast</li>
-            <li>Web-aware — Open only appears for HTTP/HTTPS</li>
+            <li>Copy flashes <span style="color: var(--ok);">✓ Copied</span> right on the row, no toast</li>
+            <li>Web-aware: Open only appears for HTTP/HTTPS</li>
           </ul>
         </div>
         <div class="win">
@@ -332,7 +332,7 @@
               <div class="s-acts">
                 <span class="btn btn-primary btn-sm" title="Open in your browser">Open</span>
                 <span class="btn btn-ghost btn-sm btn-copied" title="Copy its local address">✓ Copied</span>
-                <span class="btn btn-ghost btn-sm s-x" title="Unmap — stop proxying it here" aria-label="Unmap">✕</span>
+                <span class="btn btn-ghost btn-sm s-x" title="Unmap · stop proxying it here" aria-label="Unmap">✕</span>
               </div>
             </div>
             <div class="srow">
@@ -343,7 +343,7 @@
               </span>
               <div class="s-acts">
                 <span class="btn btn-ghost btn-sm" title="Copy its local address">Copy</span>
-                <span class="btn btn-ghost btn-sm s-x" title="Unmap — stop proxying it here" aria-label="Unmap">✕</span>
+                <span class="btn btn-ghost btn-sm s-x" title="Unmap · stop proxying it here" aria-label="Unmap">✕</span>
               </div>
             </div>
           </div>
@@ -376,9 +376,9 @@
         <div style="order: 1;">
           <span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint);">[ any tcp ]</span>
           <h3 class="display-m" style="margin: 14px 0 14px;">Any TCP, transparently.</h3>
-          <p style="color: var(--dim); line-height: 1.6; max-width: 50ch; margin-bottom: 18px;">HTTP, SSH, Postgres, Redis, gRPC, WebSockets — the proxy tunnels at layer 4 and never parses your protocol. A connection the client upgrades to a WebSocket keeps flowing both ways for its whole life, exactly as it would direct. The proxy just carries the bytes.</p>
+          <p style="color: var(--dim); line-height: 1.6; max-width: 50ch; margin-bottom: 18px;">HTTP, SSH, Postgres, Redis, gRPC, WebSockets: the proxy tunnels at layer 4 and never parses your protocol. A connection the client upgrades to a WebSocket keeps flowing both ways for its whole life, exactly as it would direct. The proxy just carries the bytes.</p>
           <ul class="flist">
-            <li>No protocol-specific config — it's a raw byte tunnel</li>
+            <li>No protocol-specific config; it's a raw byte tunnel</li>
             <li>Databases and SSH tunnel just like web apps</li>
             <li>Loopback services are flagged <span class="s-tag" style="display:inline;">local-only</span></li>
           </ul>
@@ -390,11 +390,11 @@
         <div>
           <span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint);">[ your ports ]</span>
           <h3 class="display-m" style="margin: 14px 0 14px;">Your ports, your names.</h3>
-          <p style="color: var(--dim); line-height: 1.6; max-width: 50ch; margin-bottom: 18px;">The collapsible "Your ports" list shows exactly what this machine is listening on. Expose advertises a service to your fleet under a name you choose — HTTP services suggest the page <span class="mono">&lt;title&gt;</span>. Nothing leaves this machine until you say so.</p>
+          <p style="color: var(--dim); line-height: 1.6; max-width: 50ch; margin-bottom: 18px;">The collapsible "Your ports" list shows exactly what this machine is listening on. Expose advertises a service to your fleet under a name you choose; HTTP services suggest the page <span class="mono">&lt;title&gt;</span>. Nothing leaves this machine until you say so.</p>
           <ul class="flist">
             <li>Nothing is exposed until you say so</li>
             <li>Name it whatever your fleet should see</li>
-            <li>Stop pulls it back instantly — fleet-scoped: only your own and managed devices appear</li>
+            <li>Stop pulls it back instantly · fleet-scoped: only your own and managed devices appear</li>
           </ul>
         </div>
         <div class="win">
@@ -404,7 +404,7 @@
               <span class="s-ico">🌐</span>
               <span class="s-main"><span class="s-name">HTTP<span class="s-port">:5173</span></span><span class="s-sub"><span class="s-tag">local-only</span> vite</span></span>
               <div class="s-acts">
-                <input class="name-in" value="My Project — Dev" title="Name your fleet sees this site under" aria-label="Name your fleet sees this site under">
+                <input class="name-in" value="My Project (Dev)" title="Name your fleet sees this site under" aria-label="Name your fleet sees this site under">
                 <span class="btn btn-ghost btn-sm" title="Stop advertising this service">Stop</span>
               </div>
             </div>
@@ -428,7 +428,7 @@
       <div style="max-width: 820px; margin-bottom: clamp(36px, 4vw, 52px);">
         <span class="eyebrow">Every state it can be in</span>
         <h2 class="display-l" style="margin: 16px 0 16px;">Honest about the wire.</h2>
-        <p class="lede">Mapped, unmapped, just-copied, exposed — and the two empties. Each row tells you exactly what it is and what you can do with it next.</p>
+        <p class="lede">Mapped, unmapped, just-copied, exposed, and the two empties. Each row tells you exactly what it is and what you can do with it next.</p>
       </div>
       <div class="states">
         <!-- Mapped -->
@@ -440,7 +440,7 @@
               <div class="s-acts">
                 <span class="btn btn-primary btn-sm" title="Open in your browser">Open</span>
                 <span class="btn btn-ghost btn-sm" title="Copy its local address">Copy</span>
-                <span class="btn btn-ghost btn-sm s-x" title="Unmap — stop proxying it here">✕</span>
+                <span class="btn btn-ghost btn-sm s-x" title="Unmap · stop proxying it here">✕</span>
               </div>
             </div>
           </div>
@@ -455,7 +455,7 @@
               <div class="s-acts"><span class="btn btn-primary btn-sm" title="Map this site to a local port through the mesh proxy">Map</span></div>
             </div>
           </div>
-          <div class="scard-cap"><h4>Unmapped</h4><p>Not yet proxied here — a "local-only" tag and a single Map.</p></div>
+          <div class="scard-cap"><h4>Unmapped</h4><p>Not yet proxied here: a "local-only" tag and a single Map.</p></div>
         </div>
         <!-- Copied -->
         <div class="scard">
@@ -479,7 +479,7 @@
               <span class="s-ico">🌐</span>
               <span class="s-main"><span class="s-name">HTTP<span class="s-port">:5173</span></span></span>
               <div class="s-acts">
-                <input class="name-in" value="My Project — Dev" style="flex: 1 1 6rem; min-width: 5rem;" aria-label="Name your fleet sees this site under">
+                <input class="name-in" value="My Project (Dev)" style="flex: 1 1 6rem; min-width: 5rem;" aria-label="Name your fleet sees this site under">
                 <span class="btn btn-ghost btn-sm" title="Stop advertising this service">Stop</span>
               </div>
             </div>
@@ -492,13 +492,13 @@
             <div style="font-size: 30px;">🌐</div>
             <div style="font-size: 12.5px; color: var(--dim); line-height: 1.5;">No sites from your other machines yet. Expose a service below, or on one of your other machines, to reach it here.</div>
           </div>
-          <div class="scard-cap"><h4>Empty fleet</h4><p>Nothing exposed anywhere yet — the message tells you both ways to fix it.</p></div>
+          <div class="scard-cap"><h4>Empty fleet</h4><p>Nothing exposed anywhere yet; the message tells you both ways to fix it.</p></div>
         </div>
         <!-- No listening services -->
         <div class="scard">
           <div class="scard-vis">
             <div style="font-size: 30px;">🔌</div>
-            <div style="font-size: 12.5px; color: var(--dim); line-height: 1.5;">No listening services found — start a local server and it'll appear here to expose.</div>
+            <div style="font-size: 12.5px; color: var(--dim); line-height: 1.5;">No listening services found; start a local server and it'll appear here to expose.</div>
           </div>
           <div class="scard-cap"><h4>No listening services</h4><p>This machine isn't listening on anything. Start a server and it shows up.</p></div>
         </div>

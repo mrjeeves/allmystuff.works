@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>FAQ — reasonable questions · allmystuff.works</title>
+<title>FAQ · reasonable questions · allmystuff.works</title>
 <meta name="description" content="Every reasonable question about allmystuff.works, answered plainly: how the app stays free, what the hardware is for, what the Private Line buys you, where to find a real human, and whether you're locked in. (No.)">
 <meta name="theme-color" content="#070711">
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <link rel="icon" sizes="48x48 32x32 16x16" href="../favicon.ico">
 <link rel="apple-touch-icon" href="../apple-touch-icon.png">
 <meta property="og:type" content="website">
-<meta property="og:title" content="FAQ — reasonable questions">
+<meta property="og:title" content="FAQ · reasonable questions">
 <meta property="og:description" content="How is the whole app free? Why hardware? What can a technician see? Am I locked in? Plain answers, grouped by topic.">
 <meta property="og:url" content="https://allmystuff.works/faq/">
 <meta property="og:image" content="https://allmystuff.works/og.png">
@@ -75,7 +75,7 @@
     <div class="wrap" style="position: relative; z-index: 2; max-width: min(880px, 92vw);">
       <span class="eyebrow no-rule">FAQ · answered plainly, grouped by topic</span>
       <h1 style="font-family: var(--font-display); font-weight: 700; font-size: clamp(40px, 5.4vw, 76px); line-height: 1.02; letter-spacing: -0.01em; margin: 20px 0 18px; text-wrap: pretty;">Reasonable questions.</h1>
-      <p class="lede">Everything people actually ask about the software, the hardware, and the service. Something missing? <a href="https://www.criticalerrorcomputing.com/pages/contact" style="color: var(--accent);">Contact us</a> — a human reads it.</p>
+      <p class="lede">Everything people actually ask about the software, the hardware, and the service. Something missing? <a href="https://www.criticalerrorcomputing.com/pages/contact" style="color: var(--accent);">Contact us</a>; a human reads it.</p>
     </div>
   </header>
 
@@ -91,23 +91,23 @@
       <div class="qa">
         <details>
           <summary>How is the whole app free?</summary>
-          <p>Because it runs on your hardware, not ours. We sell hardware — the Access line, and CEC's custom builds — and, soon, one service: the Private Line, a managed server of your own. The app, the mesh, and the always-on 1 Mbps relay cost us almost nothing per user, so we don't bill for them.</p>
+          <p>Because it runs on your hardware, not ours. We sell hardware (the Access line, and CEC's custom builds) and, soon, one service: the Private Line, a managed server of your own. The app, the mesh, and the always-on 1 Mbps relay cost us almost nothing per user, so we don't bill for them.</p>
         </details>
         <details>
           <summary>Is this a VPN? A Tailscale?</summary>
-          <p>Same itch, different animal. A VPN answers "how do my machines reach each other?" by building a network — a subnet with IPs, ports, and rules to manage. This mesh answers it with routes: your devices carry capabilities (a screen, a shell, a folder), and the graph connects exactly the pairs you've granted, for exactly as long as a route is live. The Private Line runs that introduction layer on servers of your own — VPN-grade exclusivity, on a mesh that was already private by design. <a href="../layers/">See how the layers fit together →</a></p>
+          <p>Same itch, different animal. A VPN answers "how do my machines reach each other?" by building a network: a subnet with IPs, ports, and rules to manage. This mesh answers it with routes: your devices carry capabilities (a screen, a shell, a folder), and the graph connects exactly the pairs you've granted, for exactly as long as a route is live. The Private Line runs that introduction layer on servers of your own: VPN-grade exclusivity, on a mesh that was already private by design. <a href="../layers/">See how the layers fit together →</a></p>
         </details>
         <details>
           <summary>How private is "private"?</summary>
-          <p>Streams travel directly between your devices, encrypted end to end — keys live on your machines, not on a server. When a relay has to carry traffic, it passes data it can't decrypt. Even a <a href="https://support.cec.direct">CEC Support</a> session starts with you approving the technician by name, shows only what you approved, and ends the moment you say so.</p>
+          <p>Streams travel directly between your devices, encrypted end to end; keys live on your machines, not on a server. When a relay has to carry traffic, it passes data it can't decrypt. Even a <a href="https://support.cec.direct">CEC Support</a> session starts with you approving the technician by name, shows only what you approved, and ends the moment you say so.</p>
         </details>
         <details>
           <summary>What happens if my internet goes out?</summary>
-          <p>Your devices are on your local network, so they keep talking to each other — consoles, terminals, files, all of it. Discovery stays local too: peers on the same LAN find each other over mDNS, no server involved, so you can even claim a new device with the internet down. You lose reach from outside the house, and it comes back the moment the internet does.</p>
+          <p>Your devices are on your local network, so they keep talking to each other: consoles, terminals, files, all of it. Discovery stays local too: peers on the same LAN find each other over mDNS, no server involved, so you can even claim a new device with the internet down. You lose reach from outside the house, and it comes back the moment the internet does.</p>
         </details>
         <details>
           <summary>How does a new device get claimed?</summary>
-          <p>It announces itself over mDNS on a claim channel that never leaves your LAN — no IPs to type, no cloud round-trip, and it works before the device even has the right time. It appears in your app's claim sheet, you tap Claim, and it joins your fleet. Claiming over the internet is off by default; if you turn it on for a device, it uses a rotating, hard-to-guess code instead of an open door. <a href="../layers/">The same-room shortcut, explained →</a></p>
+          <p>It announces itself over mDNS on a claim channel that never leaves your LAN: no IPs to type, no cloud round-trip, and it works before the device even has the right time. It appears in your app's claim sheet, you tap Claim, and it joins your fleet. Claiming over the internet is off by default; if you turn it on for a device, it uses a rotating, hard-to-guess code instead of an open door. <a href="../layers/">The same-room shortcut, explained →</a></p>
         </details>
         <details>
           <summary>Am I locked in?</summary>
@@ -123,11 +123,11 @@
       <div class="qa">
         <details>
           <summary>Why would I need the hardware if the software is free?</summary>
-          <p>The software needs a live OS to run on. The Access line is for the days there isn't one — crashed, frozen, stuck in BIOS, or refusing to boot. A witness watches the machine's video signal and presses its buttons, so it stays on your graph with its OS gone. <a href="../hardware/">Watch it save a machine.</a></p>
+          <p>The software needs a live OS to run on. The Access line is for the days there isn't one: crashed, frozen, stuck in BIOS, or refusing to boot. A witness watches the machine's video signal and presses its buttons, so it stays on your graph with its OS gone. <a href="../hardware/">Watch it save a machine.</a></p>
         </details>
         <details>
           <summary>Do the Access boxes work without the app?</summary>
-          <p>Yes. Each one runs AllMyKVM — CEC's open firmware fork — and stands on its own as an out-of-band console. The app is what puts it on the same graph as everything else you own — but no subscription, account, or cloud is ever required to use hardware you bought.</p>
+          <p>Yes. Each one runs AllMyKVM, CEC's open firmware fork, and stands on its own as an out-of-band console. The app is what puts it on the same graph as everything else you own, but no subscription, account, or cloud is ever required to use hardware you bought.</p>
         </details>
       </div>
 
@@ -139,19 +139,19 @@
       <div class="qa">
         <details>
           <summary>What exactly is the Private Line?</summary>
-          <p><b>Coming soon</b> — a managed VPS we set up end to end, sold as a subscription. It arrives already named with its own subdomain, like <b>unicorn.panda.cec.direct</b> (TLS handled, renewing itself), your own signaling, STUN, and TURN at 1 Gbps with unlimited bandwidth serving your devices and nobody else's — and it activates as an AllMyStuff node, claimed into your fleet like any device. $10 a month, cancel anytime, and the free shared venue is always there underneath. <a href="../service/#private-line">See what you get</a> — or <a href="https://www.criticalerrorcomputing.com/pages/contact">get in line</a>.</p>
+          <p><b>Coming soon:</b> a managed VPS we set up end to end, sold as a subscription. It arrives already named with its own subdomain, like <b>unicorn.panda.cec.direct</b> (TLS handled, renewing itself), plus your own signaling, STUN, and TURN at 1 Gbps with unlimited bandwidth serving your devices and nobody else's. It activates as an AllMyStuff node, claimed into your fleet like any device. $10 a month, cancel anytime, and the free shared venue is always there underneath. <a href="../service/#private-line">See what you get</a>, or <a href="https://www.criticalerrorcomputing.com/pages/contact">get in line</a>.</p>
         </details>
         <details>
           <summary>What would I actually do with one?</summary>
-          <p>Whatever wants a box that's always on with a real domain in front of it. Host Pangolin or NetBird behind its cec.direct subdomain, park a site on it, keep files on it, open a shell on it from your phone — it's a node in your fleet, so you reach it like anything else you own. The mesh part (your own venue) just comes pre-wired.</p>
+          <p>Whatever wants a box that's always on with a real domain in front of it. Host Pangolin or NetBird behind its cec.direct subdomain, park a site on it, keep files on it, open a shell on it from your phone. It's a node in your fleet, so you reach it like anything else you own. The mesh part (your own venue) just comes pre-wired.</p>
         </details>
         <details>
           <summary>Can I run those servers myself instead?</summary>
-          <p>Yes — that's the Private Line's free, do-it-yourself twin. AllMyStuff already runs the open-source MyOwnMesh daemon under the hood; put that same daemon on a box you keep online, switch on its signaling / STUN / TURN roles, and point the app's <b>Settings → Networks → Servers</b> at it. Your introductions then run on hardware only you own. We wrote the whole thing down, step by step. <a href="../self-host/">Self-host it free →</a></p>
+          <p>Yes, always. That's the Private Line's free, do-it-yourself twin. AllMyStuff already runs the open-source MyOwnMesh daemon under the hood; put that same daemon on a box you keep online, switch on its signaling / STUN / TURN roles, and point the app's <b>Settings → Networks → Servers</b> at it. Your introductions then run on hardware only you own. We wrote the whole thing down, step by step. <a href="../self-host/">Self-host it free →</a></p>
         </details>
         <details>
-          <summary>Where did the help service go?</summary>
-          <p>To its own front door: <a href="https://support.cec.direct">support.cec.direct</a>. Remote help from a real CEC technician is a free app there — press <b>Ask for help</b>, approve your technician by name, watch everything, end it anytime. It runs on the same AllMyStuff engine underneath, so nothing about the trust model changes.</p>
+          <summary>What if I'd rather a human just fixed it?</summary>
+          <p>That's CEC Support, at <a href="https://support.cec.direct">support.cec.direct</a>. The app is free and asking is free: press <b>Ask for help</b>, approve your technician by name, watch everything, end it anytime. The work itself is priced by the job, or covered by your warranty. It runs on the same AllMyStuff engine underneath, so nothing about the trust model changes.</p>
         </details>
       </div>
 
@@ -227,7 +227,7 @@
 <script>
 (function () {
   "use strict";
-  // Live version stamp in the header chip — same source as the download page.
+  // Live version stamp in the header chip; same source as the download page.
   // The static fallback stands when the API is unreachable.
   fetch("https://api.github.com/repos/mrjeeves/AllMyStuff/releases/latest")
     .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
