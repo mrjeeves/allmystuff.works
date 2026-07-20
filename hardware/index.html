@@ -176,13 +176,13 @@
       <div style="max-width: 840px; margin-bottom: clamp(36px, 4vw, 52px);">
         <span class="eyebrow">The demo · simulated, but this is the real sequence</span>
         <h2 class="display-l" style="margin: 16px 0 18px;">2 a.m. Blue screen. Nobody drives anywhere.</h2>
-        <p class="lede">The machine's own OS agent goes silent, the witness takes over on standby power, and a <a href="../service/#concierge" style="color: var(--accent);">Concierge session</a> — that you approve — reads the screen, cycles the power, and watches it come back. Press play.</p>
+        <p class="lede">The machine's own OS agent goes silent, the witness takes over on standby power, and a <a href="https://support.cec.direct" style="color: var(--accent);">CEC Support session</a> — that you approve — reads the screen, cycles the power, and watches it come back. Press play.</p>
       </div>
       <div class="demo-shell">
         <div class="console">
           <div class="console-bar">
             <div class="lights"><i style="background: var(--g-red);"></i><i style="background: var(--warn);"></i><i style="background: var(--ok);"></i></div>
-            <div class="title">concierge://session · OS-down recovery</div>
+            <div class="title">support://session · OS-down recovery</div>
             <div class="corr">witness AX-3F4L</div>
           </div>
           <div class="console-body" id="demo-log"></div>
@@ -196,7 +196,7 @@
             <div class="state-row"><span class="k">screen-state</span><span class="v" id="demo-state">normal</span></div>
             <div class="state-row"><span class="k">session action</span><span class="v" id="demo-action">idle</span></div>
           </div>
-          <div class="kicker-tag" style="line-height: 1.6; opacity: 0.8;">The witness streams to <i>your</i> devices over the mesh, end-to-end encrypted. A Concierge only ever joins with your approval — logged, watchable, revocable.</div>
+          <div class="kicker-tag" style="line-height: 1.6; opacity: 0.8;">The witness streams to <i>your</i> devices over the mesh, end-to-end encrypted. A technician only ever joins with your approval — logged, watchable, revocable.</div>
         </div>
       </div>
     </div>
@@ -656,7 +656,7 @@
     { t: "05.1", cls: "crit", tag: "SCREEN",   m: "Screen-state classified on the box: <b>BSOD</b> · no cloud", screen: "bsod", host: "unresponsive", link: "witness network", state: "BSOD", action: "classify" },
     { t: "05.4", cls: "crit", tag: "SCREEN",   m: "Stop code read → <b>CRITICAL_PROCESS_DIED</b> · 0x000000EF", screen: "bsod", host: "unresponsive", link: "witness network", state: "BSOD", action: "fault event" },
     { t: "05.9", cls: "",     tag: "MESH",     m: "Alert on your phone: <b>den-tower is down</b> · witness has the screen", screen: "bsod", host: "unresponsive", link: "mesh · e2e", state: "BSOD", action: "notify owner" },
-    { t: "06.4", cls: "",     tag: "SUMMON",   m: "You approve a Concierge session · technician attached · <b>logged</b>", screen: "bsod", host: "unresponsive", link: "mesh · e2e · P2P", state: "BSOD", action: "session open" },
+    { t: "06.4", cls: "",     tag: "HELP",     m: "You approve a support session · technician attached · <b>logged</b>", screen: "bsod", host: "unresponsive", link: "mesh · e2e · P2P", state: "BSOD", action: "session open" },
     { t: "07.5", cls: "",     tag: "POWER",    m: "Front-panel header → <b>power-cycle</b> · watching POST", screen: "post", host: "rebooting", link: "mesh · e2e · P2P", state: "POST", action: "power-cycle" },
     { t: "12.1", cls: "",     tag: "WITNESS",  m: "POST cleared · HDMI signal reacquired", screen: "nosig", host: "booting", link: "mesh · e2e · P2P", state: "no signal", action: "verify" },
     { t: "14.0", cls: "ok",   tag: "VERIFY",   m: "OS agent heartbeat <b>restored</b> · fault resolved", screen: "normal", host: "alive", link: "host USB path", state: "normal", action: "verify ✓" },

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>FAQ — reasonable questions · allmystuff.works</title>
-<meta name="description" content="Every reasonable question about allmystuff.works, answered plainly: how the app stays free, what the hardware is for, what a Concierge technician can see, what the Private Line buys you, and whether you're locked in. (No.)">
+<meta name="description" content="Every reasonable question about allmystuff.works, answered plainly: how the app stays free, what the hardware is for, what the Private Line buys you, where to find a real human, and whether you're locked in. (No.)">
 <meta name="theme-color" content="#070711">
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <link rel="icon" sizes="48x48 32x32 16x16" href="../favicon.ico">
@@ -91,7 +91,7 @@
       <div class="qa">
         <details>
           <summary>How is the whole app free?</summary>
-          <p>Because it runs on your hardware, not ours. We sell hardware — the Access line, and CEC's custom builds — and two services: a real technician's time by the minute, and a Private Line for people who want relay servers of their own. The app, the mesh, and the always-on 1 Mbps relay cost us almost nothing per user, so we don't bill for them.</p>
+          <p>Because it runs on your hardware, not ours. We sell hardware — the Access line, and CEC's custom builds — and one service: the Private Line, a managed server of your own. The app, the mesh, and the always-on 1 Mbps relay cost us almost nothing per user, so we don't bill for them.</p>
         </details>
         <details>
           <summary>Is this a VPN? A Tailscale?</summary>
@@ -99,11 +99,11 @@
         </details>
         <details>
           <summary>How private is "private"?</summary>
-          <p>Streams travel directly between your devices, encrypted end to end — keys live on your machines, not on a server. When a relay has to carry traffic, it passes data it can't decrypt. A Concierge session starts with your approval, shows only what you approved, and we can see <em>that</em> a session happened (for billing), not what was on it.</p>
+          <p>Streams travel directly between your devices, encrypted end to end — keys live on your machines, not on a server. When a relay has to carry traffic, it passes data it can't decrypt. Even a <a href="https://support.cec.direct">CEC Support</a> session starts with you approving the technician by name, shows only what you approved, and ends the moment you say so.</p>
         </details>
         <details>
           <summary>What happens if my internet goes out?</summary>
-          <p>Your devices are on your local network, so they keep talking to each other — consoles, terminals, files, all of it. Discovery stays local too: peers on the same LAN find each other over mDNS, no server involved, so you can even claim a new device with the internet down. You lose reach from outside the house and you lose Summon, and both come back the moment the internet does.</p>
+          <p>Your devices are on your local network, so they keep talking to each other — consoles, terminals, files, all of it. Discovery stays local too: peers on the same LAN find each other over mDNS, no server involved, so you can even claim a new device with the internet down. You lose reach from outside the house, and it comes back the moment the internet does.</p>
         </details>
         <details>
           <summary>How does a new device get claimed?</summary>
@@ -138,16 +138,20 @@
       </div>
       <div class="qa">
         <details>
-          <summary>What can a Concierge technician actually see and do?</summary>
-          <p>Only what you approve, only while you allow it. A session starts with your explicit yes, shows just what you approved, is logged end to end, and you can watch live or pull the plug mid-session. $25 per 15 minutes, $20 with a plan — by invitation while we grow the team. <a href="../service/#concierge">The three ways to pay.</a></p>
+          <summary>What exactly is the Private Line?</summary>
+          <p>A managed VPS we keep racked and ready, sold as a subscription. It arrives with a name at <b>cec.direct</b> (TLS handled, renewing itself), your own signaling, STUN, and TURN at 1 Gbps with unlimited bandwidth serving your devices and nobody else's — and it activates as an AllMyStuff node, claimed into your fleet like any device. $10 a month, cancel anytime, and the free shared venue is always there underneath. <a href="../service/#private-line">See what you get.</a></p>
         </details>
         <details>
-          <summary>What exactly is the Private Line?</summary>
-          <p>Normally your mesh calls out at a shared, public venue, with a free 1 Mbps relay when a direct path is blocked. The Private Line is a <b>venue of your own</b>: your own signaling, STUN, and TURN at 1 Gbps with unlimited bandwidth, serving your devices and nobody else's — like calling them home instead of meeting in public. $10 a month, cancel anytime, and the free shared venue is always there underneath. <a href="../service/#private-line">Compare it to the free layer.</a></p>
+          <summary>What would I actually do with one?</summary>
+          <p>Whatever wants a box that's always on with a real domain in front of it. Host Pangolin or NetBird behind <b>yourname.cec.direct</b>, park a site on it, keep files on it, open a shell on it from your phone — it's a node in your fleet, so you reach it like anything else you own. The mesh part (your own venue) just comes pre-wired.</p>
         </details>
         <details>
           <summary>Can I run those servers myself instead?</summary>
           <p>Yes — that's the Private Line's free, do-it-yourself twin. AllMyStuff already runs the open-source MyOwnMesh daemon under the hood; put that same daemon on a box you keep online, switch on its signaling / STUN / TURN roles, and point the app's <b>Settings → Networks → Servers</b> at it. Your introductions then run on hardware only you own. We wrote the whole thing down, step by step. <a href="../self-host/">Self-host it free →</a></p>
+        </details>
+        <details>
+          <summary>Where did the help service go?</summary>
+          <p>To its own front door: <a href="https://support.cec.direct">support.cec.direct</a>. Remote help from a real CEC technician is a free app there — press <b>Ask for help</b>, approve your technician by name, watch everything, end it anytime. It runs on the same AllMyStuff engine underneath, so nothing about the trust model changes.</p>
         </details>
       </div>
 
