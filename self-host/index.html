@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Run the servers yourself — your own signaling, STUN & TURN · allmystuff.works</title>
-<meta name="description" content="The free, do-it-yourself Private Line. AllMyStuff already runs the MyOwnMesh daemon — point that same daemon at a box you keep online and your rooms, screens, files and audio ride plumbing only you own. Step by step.">
+<title>Run the servers yourself: your own signaling, STUN & TURN · allmystuff.works</title>
+<meta name="description" content="The free, do-it-yourself Private Line. AllMyStuff already runs the MyOwnMesh daemon. Point that same daemon at a box you keep online and your rooms, screens, files and audio ride plumbing only you own. Step by step.">
 <meta name="theme-color" content="#070711">
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <link rel="icon" sizes="48x48 32x32 16x16" href="../favicon.ico">
 <link rel="apple-touch-icon" href="../apple-touch-icon.png">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Run the servers yourself — your own signaling, STUN & TURN">
+<meta property="og:title" content="Run the servers yourself: your own signaling, STUN & TURN">
 <meta property="og:description" content="Host the mesh's introduction layer yourself, free. The same daemon AllMyStuff already runs, on a box you own. Step by step.">
 <meta property="og:url" content="https://allmystuff.works/self-host/">
 <meta property="og:image" content="https://allmystuff.works/og.png">
@@ -135,8 +135,8 @@
     <div class="wrap" style="position: relative; z-index: 2; max-width: 880px;">
       <span class="eyebrow no-rule">Self-hosting · the do-it-yourself Private Line · $0</span>
       <h1 style="font-family: var(--font-display); font-weight: 700; font-size: clamp(40px, 5.4vw, 74px); line-height: 1.02; letter-spacing: -0.01em; margin: 20px 0 22px; text-wrap: pretty;">Run the introduction layer yourself.</h1>
-      <p class="lede" style="max-width: 64ch; margin: 0 0 14px;">AllMyStuff already runs a <b style="color:var(--text);font-weight:600;">MyOwnMesh</b> daemon for you — that's the open-source mesh your rooms, screens, files and audio ride on. Point that same daemon at a box you keep online, and the signaling, STUN and TURN that introduce your devices become <em style="color:var(--text);font-style:normal;">yours</em>.</p>
-      <p style="font-size: 16px; color: var(--faint); max-width: 60ch; line-height: 1.55; margin: 0 0 30px;">It's the <a href="../service/#private-line" style="color:var(--accent);">Private Line</a> — a venue of your own — built by hand instead of rented: same job, $0, MIT-licensed. Here's the whole thing, step by step.</p>
+      <p class="lede" style="max-width: 64ch; margin: 0 0 14px;">AllMyStuff already runs a <b style="color:var(--text);font-weight:600;">MyOwnMesh</b> daemon for you; that's the open-source mesh your rooms, screens, files and audio ride on. Point that same daemon at a box you keep online, and the signaling, STUN and TURN that introduce your devices become <em style="color:var(--text);font-style:normal;">yours</em>.</p>
+      <p style="font-size: 16px; color: var(--faint); max-width: 60ch; line-height: 1.55; margin: 0 0 30px;">It's the <a href="../service/#private-line" style="color:var(--accent);">Private Line</a>, a venue of your own, built by hand instead of rented: same job, $0, MIT-licensed. Here's the whole thing, step by step.</p>
       <div style="display: flex; gap: 14px; align-items: center; flex-wrap: wrap;">
         <a class="btn btn-primary" href="#steps">Start the walkthrough <span aria-hidden="true">↓</span></a>
         <a class="btn btn-ghost" href="../service/#private-line">Rather we ran it? The Private Line →</a>
@@ -158,16 +158,16 @@
       <div style="max-width: 840px; margin-bottom: clamp(32px, 4vw, 46px);">
         <span class="eyebrow">The shape of it · what "server mode" means</span>
         <h2 class="display-l" style="margin: 16px 0 18px;">One daemon. A handful of roles.</h2>
-        <p class="lede">There's no separate "server" download. The MyOwnMesh daemon under AllMyStuff is <em style="color:var(--text);font-style:normal;">any combination</em> of a regular member and the infrastructure roles it hosts for everyone else. You turn roles on; it starts the listeners and advertises them so your other machines find them on their own. Roles are device-wide — one box can serve your whole fleet.</p>
+        <p class="lede">There's no separate "server" download. The MyOwnMesh daemon under AllMyStuff is <em style="color:var(--text);font-style:normal;">any combination</em> of a regular member and the infrastructure roles it hosts for everyone else. You turn roles on; it starts the listeners and advertises them so your other machines find them on their own. Roles are device-wide; one box can serve your whole fleet.</p>
       </div>
       <div class="roles">
         <div class="role">
           <div class="top"><span class="nm">node</span><span class="badge on">on by default</span></div>
-          <p>Be a normal member. Turn it <b>off</b> on a dedicated box so it hosts services and joins nothing — pure infrastructure.</p>
+          <p>Be a normal member. Turn it <b>off</b> on a dedicated box so it hosts services and joins nothing: pure infrastructure.</p>
         </div>
         <div class="role">
           <div class="top"><span class="nm">signaling</span><span class="port">:4848</span></div>
-          <p>Where two devices find each other — a self-hosted relay your fleet uses instead of the shared one. Safe to run publicly (built-in flood limits).</p>
+          <p>Where two devices find each other: a self-hosted relay your fleet uses instead of the shared one. Safe to run publicly (built-in flood limits).</p>
         </div>
         <div class="role">
           <div class="top"><span class="nm">stun</span><span class="port">:3478</span></div>
@@ -182,7 +182,7 @@
           <p>Application-layer routing between your <em>approved</em> devices. Off by default; needs <code>node</code> on. Most fleets don't need it.</p>
         </div>
       </div>
-      <p style="margin-top: 20px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint);">For a typical home fleet, <b style="color:var(--text)">signaling + TURN on one box</b> is the whole job — TURN gives you STUN for free on the same port.</p>
+      <p style="margin-top: 20px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint);">For a typical home fleet, <b style="color:var(--text)">signaling + TURN on one box</b> is the whole job; TURN gives you STUN for free on the same port.</p>
     </div>
   </section>
 
@@ -192,7 +192,7 @@
       <div style="max-width: 840px; margin-bottom: clamp(36px, 4.5vw, 52px);">
         <span class="eyebrow">Part 1 of 2 · on a box you keep online</span>
         <h2 class="display-l" style="margin: 16px 0 18px;">Host the servers.</h2>
-        <p class="lede">Pick a machine that's always on — a $5 VPS, a Pi in the closet, a spare mini-PC. It doesn't run AllMyStuff; it just runs the MyOwnMesh daemon. We'll take it to a public, TLS-secured signaling relay with STUN + TURN, running as a service that survives reboot.</p>
+        <p class="lede">Pick a machine that's always on: a $5 VPS, a Pi in the closet, a spare mini-PC. It doesn't run AllMyStuff; it just runs the MyOwnMesh daemon. We'll take it to a public, TLS-secured signaling relay with STUN + TURN, running as a service that survives reboot.</p>
       </div>
 
       <!-- STEP 1 -->
@@ -200,24 +200,24 @@
         <div class="step-n">1</div>
         <div class="step-body">
           <h3>Put the daemon on the box</h3>
-          <p>The mesh under AllMyStuff is <a href="https://github.com/mrjeeves/MyOwnMesh" style="color:var(--accent)">MyOwnMesh</a> — free and MIT. On your server, install just the daemon (no desktop app needed to host):</p>
+          <p>The mesh under AllMyStuff is <a href="https://github.com/mrjeeves/MyOwnMesh" style="color:var(--accent)">MyOwnMesh</a>, free and MIT. On your server, install just the daemon (no desktop app needed to host):</p>
           <div style="display:flex;gap:2px;border-bottom:1px solid var(--border);margin-bottom:0;">
             <button type="button" class="term-tab" data-os="unix" role="tab" aria-selected="true">macOS / Linux</button>
             <button type="button" class="term-tab" data-os="windows" role="tab" aria-selected="false">Windows</button>
             <button type="button" class="term-tab" data-os="source" role="tab" aria-selected="false">From source</button>
           </div>
           <div class="snippet active" data-os="unix">
-            <div class="cmd"><div class="body oneline"><span class="c"># daemon only — no desktop GUI</span>
+            <div class="cmd"><div class="body oneline"><span class="c"># daemon only, no desktop GUI</span>
 <span class="p">$</span> curl -fsSL https://myownmesh.net/install.sh | sh -s -- --no-gui</div>
             <button type="button" class="copy-btn" data-copy="curl -fsSL https://myownmesh.net/install.sh | sh -s -- --no-gui" aria-label="Copy install command">copy</button></div>
           </div>
           <div class="snippet" data-os="windows">
-            <div class="cmd"><div class="body oneline"><span class="c"># Windows (PowerShell) — daemon only</span>
+            <div class="cmd"><div class="body oneline"><span class="c"># Windows (PowerShell), daemon only</span>
 <span class="p">PS&gt;</span> iex "&amp; { $(irm https://myownmesh.net/install.ps1) } -NoGui"</div>
             <button type="button" class="copy-btn" data-copy='iex "&amp; { $(irm https://myownmesh.net/install.ps1) } -NoGui"' aria-label="Copy install command">copy</button></div>
           </div>
           <div class="snippet" data-os="source">
-            <div class="cmd"><div class="body"><span class="c"># needs cargo — https://rustup.rs</span>
+            <div class="cmd"><div class="body"><span class="c"># needs cargo: https://rustup.rs</span>
 <span class="p">$</span> git clone https://github.com/mrjeeves/MyOwnMesh
 <span class="p">$</span> cd MyOwnMesh
 <span class="p">$</span> cargo install --path crates/myownmesh</div>
@@ -234,7 +234,7 @@
         <div class="step-n">2</div>
         <div class="step-body">
           <h3>Make it pure infrastructure</h3>
-          <p>A dedicated relay box shouldn't be a member of your fleet — it should just carry introductions. Turn <code>node</code> off so it hosts services and joins nothing:</p>
+          <p>A dedicated relay box shouldn't be a member of your fleet; it should just carry introductions. Turn <code>node</code> off so it hosts services and joins nothing:</p>
           <div class="cmd"><div class="body oneline"><span class="c"># host services, join no networks</span>
 <span class="p">$</span> myownmesh ctl services disable node</div>
           <button type="button" class="copy-btn" data-copy="myownmesh ctl services disable node" aria-label="Copy command">copy</button></div>
@@ -252,7 +252,7 @@
 <span class="p">$</span> myownmesh ctl services enable turn        <span class="c"># answers STUN on the same port</span>
 <span class="p">$</span> myownmesh ctl services status</div>
           <button type="button" class="copy-btn" data-copy="myownmesh ctl services enable signaling&#10;myownmesh ctl services enable turn&#10;myownmesh ctl services status" aria-label="Copy commands">copy</button></div>
-          <p>TURN needs a couple of things the on/off toggle can't set — a login and the box's public IP. Open the config (<code>myownmesh config edit</code>) and fill in the <code>turn</code> block:</p>
+          <p>TURN needs a couple of things the on/off toggle can't set: a login and the box's public IP. Open the config (<code>myownmesh config edit</code>) and fill in the <code>turn</code> block:</p>
           <div class="cmd"><div class="head"><span>~/.myownmesh/config.json</span></div><div class="body"><span class="c">// only the bits you must set are shown</span>
 {
   "services": {
@@ -269,7 +269,7 @@
     }
   }
 }</div></div>
-          <div class="callout"><span class="lbl">Heads up</span><code>node</code> defaults on and signaling ships safe flood-limit defaults, so neither needs to appear by hand. After editing the file, restart the daemon — or re-apply live from the CLI / the desktop GUI's <b>Settings → Services</b>.</div>
+          <div class="callout"><span class="lbl">Heads up</span><code>node</code> defaults on and signaling ships safe flood-limit defaults, so neither needs to appear by hand. After editing the file, restart the daemon, or re-apply live from the CLI / the desktop GUI's <b>Settings → Services</b>.</div>
         </div>
       </div>
 
@@ -277,19 +277,19 @@
       <div class="step">
         <div class="step-n">4</div>
         <div class="step-body">
-          <h3>Open the UDP ports — the step everyone misses</h3>
-          <p><code>:3478</code> is only TURN's <em>control</em> channel. Every relayed connection flows through a <em>separate</em> UDP port, drawn from the OS ephemeral range by default — so you open that whole range too. The <code>enable turn</code> command prints the exact list:</p>
+          <h3>Open the UDP ports: the step everyone misses</h3>
+          <p><code>:3478</code> is only TURN's <em>control</em> channel. Every relayed connection flows through a <em>separate</em> UDP port, drawn from the OS ephemeral range by default, so you open that whole range too. The <code>enable turn</code> command prints the exact list:</p>
           <div class="cmd"><div class="body"><span class="p">$</span> myownmesh ctl services enable turn
 TURN is on. For NAT'd peers to actually relay, these UDP ports must be
-reachable — at the host firewall <span class="v">AND</span> your cloud security group:
-  • udp <span class="v">3478</span>  — STUN/TURN control
-  • udp <span class="dim">&lt;OS ephemeral range&gt;</span>  — relay allocations (one port per peer)
+reachable at the host firewall <span class="v">AND</span> your cloud security group:
+  • udp <span class="v">3478</span>  · STUN/TURN control
+  • udp <span class="dim">&lt;OS ephemeral range&gt;</span>  · relay allocations (one port per peer)
     find your range:  sysctl net.ipv4.ip_local_port_range   (e.g. 32768 60999)
   <span class="ok">$</span> sudo ufw allow 3478/udp
   <span class="ok">$</span> sudo ufw allow 32768:60999/udp</div></div>
-          <div class="callout warn"><span class="lbl">Why nothing connects</span>A host firewall reading <code>inactive</code> does <b>not</b> mean your cloud provider lets the packets in — open the ports in the <b>security group too</b>. Forgetting the UDP range is exactly why clients show <code>0 srflx · 0 relay</code> candidates and fall back to nothing.</div>
+          <div class="callout warn"><span class="lbl">Why nothing connects</span>A host firewall reading <code>inactive</code> does <b>not</b> mean your cloud provider lets the packets in; open the ports in the <b>security group too</b>. Forgetting the UDP range is exactly why clients show <code>0 srflx · 0 relay</code> candidates and fall back to nothing.</div>
           <ul>
-            <li><b>No credential, no TURN.</b> It won't start without at least one username/password — it'll show <em>enabled, not running</em>.</li>
+            <li><b>No credential, no TURN.</b> It won't start without at least one username/password; it'll show <em>enabled, not running</em>.</li>
             <li><b>No public IP on a wildcard bind, no TURN.</b> It can't guess its own routable address.</li>
             <li><b>Smaller firewall rule?</b> Pin <code>relay_port_min</code>/<code>relay_port_max</code> (e.g. <code>49152</code>–<code>65535</code>) and open only that range.</li>
           </ul>
@@ -304,7 +304,7 @@ reachable — at the host firewall <span class="v">AND</span> your cloud securit
           <p>The relay speaks plain <code>ws://</code>. For your fleet to reach it from anywhere you want TLS on 443 (<code>wss://</code>, which also slips through restrictive networks). One command installs Caddy, writes the proxy, locks the relay to loopback, and starts it:</p>
           <div class="cmd"><div class="body oneline"><span class="p">$</span> myownmesh install caddy relay.example.com</div>
           <button type="button" class="copy-btn" data-copy="myownmesh install caddy relay.example.com" aria-label="Copy command">copy</button></div>
-          <div class="cmd"><div class="head"><span>go public over wss:// — one command</span></div><div class="body"><span class="p">$</span> myownmesh install caddy relay.example.com
+          <div class="cmd"><div class="head"><span>go public over wss:// · one command</span></div><div class="body"><span class="p">$</span> myownmesh install caddy relay.example.com
 <span class="ok">✓</span> Caddy installed.
 <span class="ok">✓</span> Wrote reverse-proxy block to /etc/caddy/Caddyfile
 <span class="ok">✓</span> Caddy service is running with the new config.
@@ -312,10 +312,10 @@ reachable — at the host firewall <span class="v">AND</span> your cloud securit
 Done. Peers can now point at  <span class="v">wss://relay.example.com</span></div></div>
           <p>Two things still have to be true for the certificate to come up:</p>
           <ul>
-            <li><b>DNS</b> — an A/AAAA record for the hostname points at this box.</li>
-            <li><b>Firewall</b> — inbound TCP <b>80 and 443</b> open (Caddy needs 80 for the certificate challenge).</li>
+            <li><b>DNS</b>: an A/AAAA record for the hostname points at this box.</li>
+            <li><b>Firewall</b>: inbound TCP <b>80 and 443</b> open (Caddy needs 80 for the certificate challenge).</li>
           </ul>
-          <div class="callout warn"><span class="lbl">Give it its own subdomain</span>Point your fleet at the <b>relay's</b> hostname — a box that runs the daemon. A static site can't host a WebSocket server, so <code>wss://</code> a marketing domain hits the website, not a relay. Use a dedicated name like <code>relay.example.com</code> that resolves to your server.</div>
+          <div class="callout warn"><span class="lbl">Give it its own subdomain</span>Point your fleet at the <b>relay's</b> hostname, a box that runs the daemon. A static site can't host a WebSocket server, so <code>wss://</code> a marketing domain hits the website, not a relay. Use a dedicated name like <code>relay.example.com</code> that resolves to your server.</div>
         </div>
       </div>
 
@@ -324,14 +324,14 @@ Done. Peers can now point at  <span class="v">wss://relay.example.com</span></di
         <div class="step-n">6</div>
         <div class="step-body">
           <h3>Keep it running forever</h3>
-          <p>Register the daemon with the box's init system — systemd on Linux, launchd on macOS — so it comes back after a reboot:</p>
+          <p>Register the daemon with the box's init system (systemd on Linux, launchd on macOS) so it comes back after a reboot:</p>
           <div class="cmd"><div class="body"><span class="c"># per-user: no root, starts at login</span>
 <span class="p">$</span> myownmesh service install
 
-<span class="c"># or system-wide: root, starts at boot — best for a headless server</span>
+<span class="c"># or system-wide: root, starts at boot, best for a headless server</span>
 <span class="p">$</span> sudo myownmesh service --system install</div>
           <button type="button" class="copy-btn" data-copy="myownmesh service install&#10;# or, system-wide:&#10;sudo myownmesh service --system install" aria-label="Copy commands">copy</button></div>
-          <p><code>service status</code> shows installed / enabled / running; <code>start</code>, <code>stop</code>, <code>restart</code>, <code>uninstall</code> do the rest. That's the box done — now point your devices at it.</p>
+          <p><code>service status</code> shows installed / enabled / running; <code>start</code>, <code>stop</code>, <code>restart</code>, <code>uninstall</code> do the rest. That's the box done. Now point your devices at it.</p>
         </div>
       </div>
     </div>
@@ -343,16 +343,16 @@ Done. Peers can now point at  <span class="v">wss://relay.example.com</span></di
       <div style="max-width: 840px; margin-bottom: clamp(32px, 4vw, 46px);">
         <span class="eyebrow">Part 2 of 2 · in the app, on every machine</span>
         <h2 class="display-l" style="margin: 16px 0 18px;">Point AllMyStuff at your servers.</h2>
-        <p class="lede">No config files on this side — it's a settings panel. In the desktop app, open <b style="color:var(--text)">Settings → Networks</b>, pick your network, and open its <b style="color:var(--text)">Servers</b> editor.</p>
+        <p class="lede">No config files on this side; it's a settings panel. In the desktop app, open <b style="color:var(--text)">Settings → Networks</b>, pick your network, and open its <b style="color:var(--text)">Servers</b> editor.</p>
       </div>
       <div class="path"><span>Settings</span><span class="sep">›</span><span>Networks</span><span class="sep">›</span><span>your network</span><span class="sep">›</span><span>Servers</span></div>
       <p style="font-size:15px;color:var(--dim);line-height:1.6;max-width:68ch;margin:0 0 18px;">Replace the three lists with your own box, then <b style="color:var(--text)">Save &amp; reconnect</b>:</p>
       <ul class="step-body" style="max-width:68ch;list-style:none;padding:0;display:grid;gap:8px;font-size:15px;color:var(--dim);line-height:1.6;">
-        <li style="display:flex;gap:10px;"><span style="color:var(--accent);flex-shrink:0;">▸</span><span><b style="color:var(--text)">Signaling relays</b> → <code>wss://relay.example.com</code> (no port — 443). This is the one that matters most: both ends of a network must share a signaling relay to find each other.</span></li>
+        <li style="display:flex;gap:10px;"><span style="color:var(--accent);flex-shrink:0;">▸</span><span><b style="color:var(--text)">Signaling relays</b> → <code>wss://relay.example.com</code> (no port: 443). This is the one that matters most: both ends of a network must share a signaling relay to find each other.</span></li>
         <li style="display:flex;gap:10px;"><span style="color:var(--accent);flex-shrink:0;">▸</span><span><b style="color:var(--text)">STUN servers</b> → <code>stun:relay.example.com:3478</code>.</span></li>
         <li style="display:flex;gap:10px;"><span style="color:var(--accent);flex-shrink:0;">▸</span><span><b style="color:var(--text)">TURN servers</b> → <code>turn:relay.example.com:3478</code>, with the <b style="color:var(--text)">username</b> and <b style="color:var(--text)">credential</b> you set in step 3.</span></li>
       </ul>
-      <div class="callout"><span class="lbl">Do it on every machine</span>Each device in your fleet keeps its own server list. Set the same three on every machine that talks to the others — phone, laptop, the lot. The app's <b>Reset to MyOwnMesh defaults</b> button is always there if you want to fall back to the shared servers.</div>
+      <div class="callout"><span class="lbl">Do it on every machine</span>Each device in your fleet keeps its own server list. Set the same three on every machine that talks to the others: phone, laptop, the lot. The app's <b>Reset to MyOwnMesh defaults</b> button is always there if you want to fall back to the shared servers.</div>
       <p style="margin-top: 8px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint);">Headless box with no app? Set the same three under each network's <code>signaling.servers</code> / <code>stun_servers</code> / <code>turn_servers</code> in its <code>config.json</code>.</p>
     </div>
   </section>
@@ -363,7 +363,7 @@ Done. Peers can now point at  <span class="v">wss://relay.example.com</span></di
       <div style="max-width: 840px; margin-bottom: clamp(28px, 3.5vw, 42px);">
         <span class="eyebrow">The payoff</span>
         <h2 class="display-l" style="margin: 16px 0 18px;">A fleet that touches nothing you don't own.</h2>
-        <p class="lede">Point signaling, STUN and TURN all at your own box and turn off the public fallback, and your devices introduce themselves entirely on infrastructure you control — no shared servers, no third parties in the path.</p>
+        <p class="lede">Point signaling, STUN and TURN all at your own box and turn off the public fallback, and your devices introduce themselves entirely on infrastructure you control: no shared servers, no third parties in the path.</p>
       </div>
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 16px;">
         <div style="background: linear-gradient(180deg, var(--surface), var(--bg-2)); border: 1px solid var(--border); border-radius: 8px; padding: 22px;">
@@ -372,14 +372,14 @@ Done. Peers can now point at  <span class="v">wss://relay.example.com</span></di
         </div>
         <div style="background: linear-gradient(180deg, var(--surface), var(--bg-2)); border: 1px solid var(--border); border-radius: 8px; padding: 22px;">
           <div style="font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 9px;">trust is unchanged</div>
-          <p style="font-size: 14px; color: var(--dim); line-height: 1.6; margin: 0;">Who-is-who is proved with signatures over the encrypted channel, no matter who runs signaling. A relay only ever introduces devices — it never sees your screens, files or audio, and can't forge a device.</p>
+          <p style="font-size: 14px; color: var(--dim); line-height: 1.6; margin: 0;">Who-is-who is proved with signatures over the encrypted channel, no matter who runs signaling. A relay only ever introduces devices; it never sees your screens, files or audio, and can't forge a device.</p>
         </div>
         <div style="background: linear-gradient(180deg, var(--surface), var(--bg-2)); border: 1px solid var(--border); border-radius: 8px; padding: 22px;">
           <div style="font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 9px;">it degrades gracefully</div>
           <p style="font-size: 14px; color: var(--dim); line-height: 1.6; margin: 0;">Your relay is an accelerator, not a single point of failure. If the box goes down and you've left the fallback on, devices drop back to the shared servers and keep working.</p>
         </div>
       </div>
-      <p style="margin-top: 22px; font-size: 15px; color: var(--faint); line-height: 1.6; max-width: 70ch;">Want this without keeping a server alive yourself? The <a href="../service/#private-line" style="color:var(--accent)">Private Line</a> is exactly this run for you at 1&nbsp;Gbps — plus its own cec.direct subdomain and a claimed node in your fleet — coming soon at $10/mo. Same network model — one is your time, one is your money.</p>
+      <p style="margin-top: 22px; font-size: 15px; color: var(--faint); line-height: 1.6; max-width: 70ch;">Want this without keeping a server alive yourself? The <a href="../service/#private-line" style="color:var(--accent)">Private Line</a> is exactly this run for you at 1&nbsp;Gbps, plus its own cec.direct subdomain and a claimed node in your fleet. Coming soon at $10/mo. Same network model; one is your time, one is your money.</p>
     </div>
   </section>
 
@@ -389,7 +389,7 @@ Done. Peers can now point at  <span class="v">wss://relay.example.com</span></di
       <div style="max-width: 840px; margin-bottom: clamp(28px, 3.5vw, 42px);">
         <span class="eyebrow">Is it working?</span>
         <h2 class="display-l" style="margin: 16px 0 18px;">Verify it, and fix the usual snags.</h2>
-        <p class="lede">On the server, <code>ctl services status</code> shows what's bound and — for signaling — whether devices are actually reaching you. That separates "nobody's connected yet" from "I'm broken."</p>
+        <p class="lede">On the server, <code>ctl services status</code> shows what's bound and, for signaling, whether devices are actually reaching you. That separates "nobody's connected yet" from "I'm broken."</p>
       </div>
       <div class="cmd"><div class="head"><span>myownmesh ctl services status</span></div><div class="body"><span class="p">$</span> myownmesh ctl services status
 {
@@ -401,11 +401,11 @@ Done. Peers can now point at  <span class="v">wss://relay.example.com</span></di
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 16px; margin-top: 22px;">
         <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 20px;">
           <h4 style="font-family: var(--font-display); font-size: 17px; margin: 0 0 8px;">Bound, but <code>connections: 0</code></h4>
-          <p style="font-size: 14px; color: var(--dim); line-height: 1.6; margin: 0;">The relay's fine — traffic isn't arriving. Check, in order: <b style="color:var(--text)">DNS</b> (does the name resolve here?), <b style="color:var(--text)">TLS/proxy</b> (run <code>npx wscat -c wss://relay.example.com</code> — expect a connect), then the <b style="color:var(--text)">firewall</b>.</p>
+          <p style="font-size: 14px; color: var(--dim); line-height: 1.6; margin: 0;">The relay's fine; traffic isn't arriving. Check, in order: <b style="color:var(--text)">DNS</b> (does the name resolve here?), <b style="color:var(--text)">TLS/proxy</b> (run <code>npx wscat -c wss://relay.example.com</code> and expect a connect), then the <b style="color:var(--text)">firewall</b>.</p>
         </div>
         <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 20px;">
           <h4 style="font-family: var(--font-display); font-size: 17px; margin: 0 0 8px;"><code>0 srflx · 0 relay</code> on clients</h4>
-          <p style="font-size: 14px; color: var(--dim); line-height: 1.6; margin: 0;">UDP isn't getting through. You opened 443 for the proxy but not TURN's control port <em>and its relay range</em> — at the host firewall <b style="color:var(--text)">and</b> the cloud security group. Re-run the step-4 checklist.</p>
+          <p style="font-size: 14px; color: var(--dim); line-height: 1.6; margin: 0;">UDP isn't getting through. You opened 443 for the proxy but not TURN's control port <em>and its relay range</em>, at the host firewall <b style="color:var(--text)">and</b> the cloud security group. Re-run the step-4 checklist.</p>
         </div>
         <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 20px;">
           <h4 style="font-family: var(--font-display); font-size: 17px; margin: 0 0 8px;">TURN: <em>enabled, not running</em></h4>
@@ -428,7 +428,7 @@ Done. Peers can now point at  <span class="v">wss://relay.example.com</span></di
       </div>
       <dl class="kv">
         <dt>signaling.port</dt><dd><code>4848</code>, plain <code>ws://</code>. Front it with Caddy for public <code>wss://</code>.</dd>
-        <dt>stun.port / turn.port</dt><dd><code>3478</code>. Don't run standalone STUN and TURN on the same port — TURN covers both.</dd>
+        <dt>stun.port / turn.port</dt><dd><code>3478</code>. Don't run standalone STUN and TURN on the same port; TURN covers both.</dd>
         <dt>turn.public_ip</dt><dd>Required on a wildcard bind. The routable address handed out for relayed connections.</dd>
         <dt>turn.credentials</dt><dd>At least one <code>{ username, password }</code>. Mirror a pair into each device's TURN entry.</dd>
         <dt>turn.relay_port_min / max</dt><dd><code>0</code> = the OS ephemeral range (open it all). Pin a window to shrink the firewall surface.</dd>
@@ -440,15 +440,15 @@ Done. Peers can now point at  <span class="v">wss://relay.example.com</span></di
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 14px; margin-top: 32px;">
         <a class="role" href="https://github.com/mrjeeves/MyOwnMesh/blob/main/docs/SERVICES.md" style="color:inherit;">
           <div class="top"><span class="nm" style="color:var(--accent)">SERVICES.md</span><span aria-hidden="true" style="color:var(--accent)">↗</span></div>
-          <p>The full operator guide — every field, the discovery model, running a public relay.</p>
+          <p>The full operator guide: every field, the discovery model, running a public relay.</p>
         </a>
         <a class="role" href="https://github.com/mrjeeves/MyOwnMesh" style="color:inherit;">
           <div class="top"><span class="nm" style="color:var(--accent)">MyOwnMesh</span><span aria-hidden="true" style="color:var(--accent)">↗</span></div>
-          <p>The mesh under AllMyStuff — pure-Rust, MIT, the daemon you're hosting.</p>
+          <p>The mesh under AllMyStuff: pure-Rust, MIT, the daemon you're hosting.</p>
         </a>
         <a class="role" href="../service/#private-line" style="color:inherit;">
           <div class="top"><span class="nm" style="color:var(--accent)">The Private Line</span><span aria-hidden="true" style="color:var(--accent)">→</span></div>
-          <p>The same thing run for you — its own cec.direct subdomain, a claimed node in your fleet. Coming soon, $10/mo.</p>
+          <p>The same thing run for you: its own cec.direct subdomain, a claimed node in your fleet. Coming soon, $10/mo.</p>
         </a>
       </div>
     </div>
@@ -514,7 +514,7 @@ Done. Peers can now point at  <span class="v">wss://relay.example.com</span></di
 <script>
 (function () {
   "use strict";
-  // Install tabs + copy buttons — the same wiring the download page uses.
+  // Install tabs + copy buttons, the same wiring the download page uses.
   function wireTabs() {
     var tabs = document.querySelectorAll(".term-tab");
     var snips = document.querySelectorAll(".snippet[data-os]");
@@ -559,7 +559,7 @@ Done. Peers can now point at  <span class="v">wss://relay.example.com</span></di
 <script>
 (function () {
   "use strict";
-  // Live version stamp in the header chip — same source as the download page.
+  // Live version stamp in the header chip; same source as the download page.
   // The static fallback stands when the API is unreachable.
   fetch("https://api.github.com/repos/mrjeeves/AllMyStuff/releases/latest")
     .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })

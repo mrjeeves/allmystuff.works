@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Terminal console — a real shell, anywhere · allmystuff.works</title>
-<meta name="description" content="Open a tab and the far side spawns your actual shell in a real PTY — no sshd, no port forwarding, no cloud in the middle. Flow control end to end like ssh, tmux-style sharing, owner-gated by the network.">
+<title>Terminal console · a real shell, anywhere · allmystuff.works</title>
+<meta name="description" content="Open a tab and the far side spawns your actual shell in a real PTY: no sshd, no port forwarding, no cloud in the middle. Flow control end to end like ssh, tmux-style sharing, owner-gated by the network.">
 <meta name="theme-color" content="#070711">
 <link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
 <link rel="icon" sizes="48x48 32x32 16x16" href="../../../favicon.ico">
 <link rel="apple-touch-icon" href="../../../apple-touch-icon.png">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Terminal console — a real shell, anywhere">
+<meta property="og:title" content="Terminal console · a real shell, anywhere">
 <meta property="og:description" content="A real PTY on the far side, no sshd to configure. Flow control like ssh, tmux-style shared sessions, 10,000-line scrollback, owner-gated. The real interface, demonstrated.">
 <meta property="og:url" content="https://allmystuff.works/software/consoles/terminal/">
 <meta property="og:image" content="https://allmystuff.works/og.png">
@@ -130,7 +130,7 @@
     </div>
   </nav>
 
-  <!-- ════════ CONSOLES SUBNAV — always visible on the console pages ════════ -->
+  <!-- ════════ CONSOLES SUBNAV · always visible on the console pages ════════ -->
   <nav aria-label="Console pages" style="position: sticky; top: 66px; z-index: 40; background: oklch(0.15 0.024 285 / 0.85); backdrop-filter: blur(12px) saturate(1.2); border-bottom: 1px solid var(--border);">
     <div class="wrap" style="display: flex; align-items: stretch; height: 46px; overflow-x: auto; scrollbar-width: none;">
       <div style="display: flex; align-items: stretch; gap: 2px; margin: 0 auto;">
@@ -159,7 +159,7 @@
       <div style="max-width: 880px;">
         <span class="eyebrow">Console 02 · Terminal</span>
         <h1 class="display-xl" style="margin: 16px 0 20px;">You can always act.<br>A real shell, anywhere.</h1>
-        <p class="lede" style="max-width: 64ch;">Open a tab and the far side spawns your <em>actual</em> shell in a real PTY — no daemon to configure, no port to forward, no cloud in the middle. Bytes flow over the mesh with end-to-end flow control, exactly like ssh. Pop a tab into its own window, or join a shell someone else already has open, tmux-style.</p>
+        <p class="lede" style="max-width: 64ch;">Open a tab and the far side spawns your <em>actual</em> shell in a real PTY: no daemon to configure, no port to forward, no cloud in the middle. Bytes flow over the mesh with end-to-end flow control, exactly like ssh. Pop a tab into its own window, or join a shell someone else already has open, tmux-style.</p>
       </div>
       <div style="display: flex; gap: 9px; flex-wrap: wrap; margin-top: 26px;">
         <span class="chip">Real PTY</span>
@@ -190,7 +190,7 @@
         <div class="tabrow">
           <span class="tab on"><span style="width:6px;height:6px;border-radius:50%;background:#fff;"></span>Shell 1</span>
           <span class="tab"><span style="width:6px;height:6px;border-radius:50%;background:var(--ok);"></span>Shell 2 <span style="color: var(--faint);">✕</span></span>
-          <span class="tab" title="Shared session — 3 viewers attached"><span style="width:6px;height:6px;border-radius:50%;background:var(--ok);"></span>↳ a3f9c2 <span class="shared-pill" title="Shared session — 3 viewers attached">👥 3</span> <span style="color: var(--faint);">✕</span></span>
+          <span class="tab" title="Shared session · 3 viewers attached"><span style="width:6px;height:6px;border-radius:50%;background:var(--ok);"></span>↳ a3f9c2 <span class="shared-pill" title="Shared session · 3 viewers attached">👥 3</span> <span style="color: var(--faint);">✕</span></span>
           <span class="tab-new" title="New shell (Ctrl+Shift+T)">＋</span>
           <span style="flex: 1;"></span>
           <span class="attach-pill" title="Join a shell already open on desk-pc (shared, tmux-style)">👥 Other Terminals <span class="cnt">2</span></span>
@@ -208,7 +208,7 @@
           <div><span class="pr-user">nate@desk-pc</span><span class="pr-host">:~$</span> <span class="term-cursor"></span></div>
         </div>
       </div>
-      <p style="text-align: center; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); margin-top: 18px;">The real interface — a real PTY on the far side, shared tmux-style</p>
+      <p style="text-align: center; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); margin-top: 18px;">The real interface · a real PTY on the far side, shared tmux-style</p>
     </div>
   </section>
 
@@ -218,7 +218,7 @@
       <div style="max-width: 820px; margin-bottom: clamp(40px, 5vw, 60px);">
         <span class="eyebrow">What it does</span>
         <h2 class="display-l" style="margin: 16px 0 16px;">ssh, without the ssh part.</h2>
-        <p class="lede">A genuine shell on every machine you own — spawned in a real PTY on the far side, drawn by xterm.js on yours, the mesh in between. No sshd to stand up, no keys to copy, no ports left open.</p>
+        <p class="lede">A genuine shell on every machine you own: spawned in a real PTY on the far side, drawn by xterm.js on yours, the mesh in between. No sshd to stand up, no keys to copy, no ports left open.</p>
       </div>
 
       <!-- F1 real PTY -->
@@ -226,7 +226,7 @@
         <div>
           <span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint);">[ a real shell ]</span>
           <h3 class="display-m" style="margin: 14px 0 14px;">Real PTY, no sshd.</h3>
-          <p style="color: var(--dim); line-height: 1.6; max-width: 50ch; margin-bottom: 18px;">Open a tab and the far side spawns your actual shell in a real PTY — no daemon to configure, no port forwarding, no cloud in the middle. Keystrokes go to the far PTY; its bytes come straight back. Job control, colours, full-screen TUIs — all of it works because it's the real thing.</p>
+          <p style="color: var(--dim); line-height: 1.6; max-width: 50ch; margin-bottom: 18px;">Open a tab and the far side spawns your actual shell in a real PTY: no daemon to configure, no port forwarding, no cloud in the middle. Keystrokes go to the far PTY; its bytes come straight back. Job control, colours, full-screen TUIs, all of it works because it's the real thing.</p>
           <ul class="flist">
             <li>Flow control end to end, exactly like ssh</li>
             <li>Windows machines get ConPTY so wrapping comes out right</li>
@@ -265,7 +265,7 @@
         <div style="order: 1;">
           <span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint);">[ shared ]</span>
           <h3 class="display-m" style="margin: 14px 0 14px;">Shared, tmux-style.</h3>
-          <p style="color: var(--dim); line-height: 1.6; max-width: 50ch; margin-bottom: 18px;">Multiple windows can join the same shell — same scrollback, same keyboard. The host reconciles the shared PTY to the smallest attached window so the shell wraps identically for everyone. Join from another window, or from a fleet member's machine.</p>
+          <p style="color: var(--dim); line-height: 1.6; max-width: 50ch; margin-bottom: 18px;">Multiple windows can join the same shell: same scrollback, same keyboard. The host reconciles the shared PTY to the smallest attached window so the shell wraps identically for everyone. Join from another window, or from a fleet member's machine.</p>
           <ul class="flist">
             <li>The tab's badge shows the live viewer count: <span class="shared-pill">👥 3</span></li>
             <li>Pop a tab into its own window and the shell carries straight on</li>
@@ -279,9 +279,9 @@
         <div>
           <span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint);">[ gated ]</span>
           <h3 class="display-m" style="margin: 14px 0 14px;">Owner-gated by the network.</h3>
-          <p style="color: var(--dim); line-height: 1.6; max-width: 50ch; margin-bottom: 18px;">A terminal opens only for a machine you own or one in your fleet. The gate is enforced at the network level, not in the UI — there's no button to disable, no race to win. A machine that isn't yours simply won't accept the offer.</p>
+          <p style="color: var(--dim); line-height: 1.6; max-width: 50ch; margin-bottom: 18px;">A terminal opens only for a machine you own or one in your fleet. The gate is enforced at the network level, not in the UI; there's no button to disable, no race to win. A machine that isn't yours simply won't accept the offer.</p>
           <ul class="flist">
-            <li>A guest can't even ask — the offer is refused on the wire</li>
+            <li>A guest can't even ask; the offer is refused on the wire</li>
             <li>Not yours yet? Claim it from the graph first</li>
             <li>The same gate as Files and Control: owner or fleet, end of story</li>
           </ul>
@@ -304,7 +304,7 @@
       <div style="max-width: 820px; margin-bottom: clamp(36px, 4vw, 52px);">
         <span class="eyebrow">Every state it can be in</span>
         <h2 class="display-l" style="margin: 16px 0 16px;">Honest about the session.</h2>
-        <p class="lede">A tab drives its own status off the route's live state — connecting, live, shared, exited, refused. Each looks different, and tells you exactly what to do next.</p>
+        <p class="lede">A tab drives its own status off the route's live state: connecting, live, shared, exited, refused. Each looks different, and tells you exactly what to do next.</p>
       </div>
       <div class="states">
         <!-- Connecting -->
@@ -328,8 +328,8 @@
         <!-- Shared session -->
         <div class="scard">
           <div class="scard-vis">
-            <span class="tab on" style="align-self: start;"><span style="width:6px;height:6px;border-radius:50%;background:#fff;"></span>↳ a3f9c2 <span class="shared-pill" title="Shared session — 3 viewers attached">👥 3</span></span>
-            <div style="font-size: 12.5px; color: var(--dim);">Same shell, same scrollback, same keyboard — three viewers attached.</div>
+            <span class="tab on" style="align-self: start;"><span style="width:6px;height:6px;border-radius:50%;background:#fff;"></span>↳ a3f9c2 <span class="shared-pill" title="Shared session · 3 viewers attached">👥 3</span></span>
+            <div style="font-size: 12.5px; color: var(--dim);">Same shell, same scrollback, same keyboard, three viewers attached.</div>
           </div>
           <div class="scard-cap"><h4>Shared session</h4><p>Joined tmux-style; the badge shows the live viewer count.</p></div>
         </div>
@@ -350,7 +350,7 @@
             <span class="stat" style="align-self: start; color: oklch(0.78 0.14 14); border: 1px solid oklch(0.7 0.19 14 / 0.5);"><span style="width:6px;height:6px;border-radius:50%;background:oklch(0.7 0.19 14);"></span>Refused</span>
             <div style="font-family: var(--font-mono); font-size: 12.5px; color: oklch(0.78 0.14 14);">Refused: permission denied</div>
           </div>
-          <div class="scard-cap"><h4>Refused</h4><p>The far side declined the offer — owner-gated, on the wire, before any shell.</p></div>
+          <div class="scard-cap"><h4>Refused</h4><p>The far side declined the offer: owner-gated, on the wire, before any shell.</p></div>
         </div>
         <!-- Other Terminals -->
         <div class="scard">
@@ -359,7 +359,7 @@
             <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; font-family: var(--font-mono); font-size: 11.5px; color: var(--text);"><span>build · cargo watch</span><span style="color: var(--faint);"><span style="color: oklch(0.84 0.09 240);">👥 2</span> · 3m</span></div>
             <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; font-family: var(--font-mono); font-size: 11.5px; color: var(--text);"><span>logs · journalctl</span><span style="color: var(--faint);"><span style="color: oklch(0.84 0.09 240);">👥 2</span> · 2h</span></div>
           </div>
-          <div class="scard-cap"><h4>Other Terminals</h4><p>The picker lists shells already open here or on a fleet member — one click to join.</p></div>
+          <div class="scard-cap"><h4>Other Terminals</h4><p>The picker lists shells already open here or on a fleet member; one click to join.</p></div>
         </div>
       </div>
     </div>
