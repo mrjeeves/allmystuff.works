@@ -222,7 +222,7 @@
           <!-- KVM -->
           <rect x="390" y="40" width="220" height="220" rx="8" fill="oklch(0.205 0.034 285)" stroke="oklch(0.64 0.255 350)"></rect>
           <text x="500" y="78" text-anchor="middle" fill="oklch(0.97 0.004 285)" font-family="Saira, sans-serif" font-size="19" font-weight="600">The KVM</text>
-          <text x="500" y="100" text-anchor="middle" fill="oklch(0.64 0.255 350)" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="1">ACCESS CUBE / INTERNAL / PRO</text>
+          <text x="500" y="100" text-anchor="middle" fill="oklch(0.64 0.255 350)" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="1">ACCESS GO / INTERNAL / PRO</text>
           <text x="500" y="140" text-anchor="middle" fill="oklch(0.74 0.02 285)" font-family="IBM Plex Mono, monospace" font-size="11">sees · 4K capture</text>
           <text x="500" y="162" text-anchor="middle" fill="oklch(0.74 0.02 285)" font-family="IBM Plex Mono, monospace" font-size="11">types · emulated USB</text>
           <text x="500" y="184" text-anchor="middle" fill="oklch(0.74 0.02 285)" font-family="IBM Plex Mono, monospace" font-size="11">presses · ATX power</text>
@@ -291,7 +291,7 @@
           </div>
         </div>
       </div>
-      <p class="kicker-tag" style="display: block; text-align: center; margin-top: 16px; opacity: 0.8;">standard capture: access cube + internal wifi std · pro capture: internal wifi pro + access pro wifi</p>
+      <p class="kicker-tag" style="display: block; text-align: center; margin-top: 16px; opacity: 0.8;">external: access go · internal: internal wifi std / pro · desk: access pro wifi</p>
     </div>
   </section>
 
@@ -304,42 +304,20 @@
         <p class="lede">Same job at every price: keep the machine on your graph when its OS can't help. They differ in how sharp they see and where they live.</p>
       </div>
 
-      <!-- AX-01 Cube -->
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr)); gap: clamp(28px, 4vw, 56px); align-items: center; margin-bottom: clamp(56px, 7vw, 88px);">
+      <!-- Access GO -->
+      <div id="access-go" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr)); gap: clamp(28px, 4vw, 56px); align-items: center; margin-bottom: clamp(56px, 7vw, 88px);">
         <div style="display: grid; place-items: center;">
-          <img src="../assets/access-device.png" alt="CEC Access Cube, palm-sized box with its own Ethernet" style="width: min(420px, 100%); height: auto; filter: drop-shadow(0 30px 60px rgb(0 0 0 / 0.55));">
+          <div aria-label="Access GO product reveal coming soon" style="width: min(420px, 100%); aspect-ratio: 4 / 3; display: grid; place-content: center; gap: 10px; text-align: center; border: 1px solid var(--border); border-radius: var(--r-lg); background: radial-gradient(circle at 50% 45%, color-mix(in oklch, var(--accent) 18%, transparent), transparent 68%), var(--surface); box-shadow: 0 30px 60px rgb(0 0 0 / 0.35);">
+            <strong style="font-family: var(--font-display); font-size: clamp(38px, 7vw, 68px); letter-spacing: -0.04em;">Access GO</strong>
+            <span class="kicker-tag">Product reveal coming soon</span>
+          </div>
         </div>
         <div>
-          <span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint);">[ AX-01 / entry ]</span>
-          <h3 class="display-m" style="margin: 14px 0 6px;">Access Cube</h3>
-          <div style="font-family: var(--font-display); font-size: 26px; font-weight: 700; margin-bottom: 14px;">$149.99<span style="font-size: 13px; font-weight: 500; color: var(--faint); font-family: var(--font-mono); letter-spacing: 0.1em; text-transform: uppercase;"> · once</span></div>
-          <p style="color: var(--dim); line-height: 1.6; max-width: 50ch; margin-bottom: 18px;">A palm-sized cube with its own network cable. Wired on purpose: no Wi-Fi to set up or drop. Enough to remote in, see the screen, type, and power-cycle the machine. The budget way in, and it still does the whole job.</p>
-          <div class="dev-chips"><span>1080p @ 60 capture</span><span>Wired only · own Ethernet</span><span>ATX power board included</span><span>Fanless</span></div>
-          <div style="margin-top: 18px;"><a class="btn btn-ghost btn-sm" href="https://www.criticalerrorcomputing.com/products/cec-access-cube">Buy the Access Cube <span aria-hidden="true">→</span></a></div>
-          <details class="spec">
-            <summary>Full technical specification · Access Cube</summary>
-            <div class="spec-row"><div class="k">Computing unit</div><div class="v">LicheeRV Nano · SG2002 · RISC-V</div></div>
-            <div class="spec-row"><div class="k">Resolution</div><div class="v">1080p @ 60fps</div></div>
-            <div class="spec-row"><div class="k">Video encoding</div><div class="v">MJPEG · H.264 (in development)</div></div>
-            <div class="spec-row"><div class="k">Video latency</div><div class="v">90–230 ms</div></div>
-            <div class="spec-row"><div class="k">UEFI / BIOS access</div><div class="v yes">✓</div></div>
-            <div class="spec-row"><div class="k">Emulated USB keyboard &amp; mouse</div><div class="v yes">✓</div></div>
-            <div class="spec-row"><div class="k">Emulated USB storage</div><div class="v yes">✓</div></div>
-            <div class="spec-row"><div class="k">IPMI</div><div class="v yes">✓</div></div>
-            <div class="spec-row"><div class="k">Wake-on-LAN</div><div class="v yes">✓</div></div>
-            <div class="spec-row"><div class="k">WebSSH</div><div class="v yes">✓</div></div>
-            <div class="spec-row"><div class="k">Custom scripts</div><div class="v yes">✓</div></div>
-            <div class="spec-row"><div class="k">Ethernet</div><div class="v">10/100M</div></div>
-            <div class="spec-row"><div class="k">Wi-Fi</div><div class="v none">none</div></div>
-            <div class="spec-row"><div class="k">ATX power control</div><div class="v">USB-interface IO control board (included)</div></div>
-            <div class="spec-row"><div class="k">OLED display</div><div class="v">0.96″ 128×64 · white</div></div>
-            <div class="spec-row"><div class="k">Serial terminal</div><div class="v">2 channels</div></div>
-            <div class="spec-row"><div class="k">microSD card</div><div class="v">Included · ready to use</div></div>
-            <div class="spec-row"><div class="k">Expansion</div><div class="v">PoE</div></div>
-            <div class="spec-row"><div class="k">Power</div><div class="v">0.2A @ 5V · PC USB or auxiliary</div></div>
-            <div class="spec-row"><div class="k">Cooling</div><div class="v">Silent · fanless</div></div>
-            <div class="spec-row"><div class="k">Dimensions</div><div class="v">40 × 36 × 36 mm</div></div>
-          </details>
+          <span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--warn);">[ coming soon / entry ]</span>
+          <h3 class="display-m" style="margin: 14px 0 6px;">Access GO</h3>
+          <div style="font-family: var(--font-display); font-size: 26px; font-weight: 700; margin-bottom: 14px;">TBD<span style="font-size: 13px; font-weight: 500; color: var(--faint); font-family: var(--font-mono); letter-spacing: 0.1em; text-transform: uppercase;"> · price to be announced</span></div>
+          <p style="color: var(--dim); line-height: 1.6; max-width: 50ch; margin-bottom: 18px;">The new external entry model is on the way. Final specifications, availability, and pricing will be announced before launch.</p>
+          <div class="dev-chips"><span>Coming soon</span><span>Price TBD</span></div>
         </div>
       </div>
 
@@ -576,7 +554,7 @@
           <div style="max-width: 60ch;">
             <span class="eyebrow">In stock · shipping now</span>
             <h2 class="display-m" style="margin: 14px 0 10px;">Fix it even when it won't boot.</h2>
-            <p style="color: var(--dim); line-height: 1.6; margin: 0;">Cube for the NAS in the closet, Internal for the rig you're building, Pro for the desk. Orders ship through Critical Error Computing.</p>
+            <p style="color: var(--dim); line-height: 1.6; margin: 0;">Access GO is coming soon. Internal is for the rig you're building; Pro is for the desk. Orders ship through Critical Error Computing.</p>
           </div>
           <div style="display: flex; gap: 12px; flex-wrap: wrap;">
             <a class="btn btn-primary" href="https://www.criticalerrorcomputing.com/collections/cec-access">Buy at criticalerrorcomputing.com</a>
