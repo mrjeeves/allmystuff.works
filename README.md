@@ -24,7 +24,7 @@ optional add-ons), one teaser per page, download, and the top three FAQs with a
 
 - `index.html`: the homepage/overview (uses `support.js`, the x-dc runtime).
 - `software/`: the free app, the core: the four scenes (console, shell + files, sharing, fleet) and the graph/mesh explainer. Plain HTML.
-- `hardware/`: optional, the Access line: OS-down recovery demo, wiring diagram, full specs. Plain HTML + vanilla JS, no framework.
+- `hardware/`: optional, the CEC KVM line: OS-down recovery demo, wiring diagram, full specs. Plain HTML + vanilla JS, no framework.
 - `service/`: optional, one service (coming soon): the Private Line, a managed VPS with its own cec.direct subdomain (auto-TLS, your own signaling/STUN/TURN venue set up by us, claimed into your fleet as a node), compared against the free shared layer. CTAs go to the CEC contact form; remote help hands off to support.cec.direct. Plain HTML.
 - `faq/`: every question, grouped by topic.
 - `download/`: downloads for every platform, with a "for this machine" suggestion sniffed from the user agent (hidden on phones / when unsure) and a tabbed one-liner picker (macOS/Linux · Windows · from source, auto-picked, with copy buttons, the same wiring myownmesh.net uses). Static links to `releases/latest`; a small script upgrades them to direct versioned asset URLs via the GitHub API when reachable.
