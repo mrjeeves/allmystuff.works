@@ -60,29 +60,29 @@
   .state-row:last-child { border-bottom: none; }
   .state-row .k { color: var(--faint); letter-spacing: 0.1em; text-transform: uppercase; }
   .state-row .v { color: var(--text); }
-  .kicker-tag { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); }
+  .kicker-tag { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); }
 
   /* ---- Devices + spec tables ---- */
   .dev-chips { display: flex; gap: 7px; flex-wrap: wrap; }
   .dev-chips span { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 9px; border: 1px solid var(--border); border-radius: 2px; color: var(--dim); }
   .spec { border: 1px solid var(--border); border-radius: 6px; margin-top: 22px; overflow: hidden; }
-  .spec summary { cursor: pointer; list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 13px 16px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--dim); background: var(--surface); }
+  .spec summary { cursor: pointer; list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 13px 16px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--dim); background: var(--surface); }
   .spec summary::-webkit-details-marker { display: none; }
   .spec summary::after { content: "+"; color: var(--accent); font-size: 14px; }
   .spec[open] summary::after { content: "–"; }
   .spec-row { display: grid; grid-template-columns: minmax(150px, 38%) 1fr; border-top: 1px solid var(--border); font-size: 13px; }
   .spec-row.cols3 { grid-template-columns: minmax(150px, 38%) 1fr 1fr; }
   .spec-row > div { padding: 9px 16px; }
-  .spec-row .k { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--faint); }
+  .spec-row .k { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--label); }
   .spec-row .v { color: var(--dim); border-left: 1px solid var(--border); }
   .spec-row .v.yes { color: var(--ok); }
   .spec-row .v.none { color: var(--faint); }
-  .spec-row.head .v { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
-  .spec-note { padding: 11px 16px; border-top: 1px solid var(--border); font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); }
+  .spec-row.head .v { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+  .spec-note { padding: 11px 16px; border-top: 1px solid var(--border); font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--label); }
 
   /* ---- Latency demo ---- */
   .lat-demo { border: 1px solid var(--border); border-radius: 6px; padding: 18px 18px 20px; background: var(--bg-2); cursor: crosshair; touch-action: none; }
-  .lat-legend { display: flex; justify-content: center; gap: 22px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; color: var(--faint); margin-bottom: 14px; flex-wrap: wrap; }
+  .lat-legend { display: flex; justify-content: center; gap: 22px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em; color: var(--faint); margin-bottom: 14px; flex-wrap: wrap; }
   .lat-legend i { font-style: normal; display: inline-flex; align-items: center; gap: 6px; }
   .lat-legend .ring { width: 11px; height: 11px; border-radius: 50%; border: 2px solid var(--dim); }
   .lat-legend .blob { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); }
@@ -152,15 +152,15 @@
         <div style="margin-top: 34px; display: flex; gap: 32px; flex-wrap: wrap; padding-top: 24px; border-top: 1px solid var(--border);">
           <div>
             <div style="font-family: var(--font-display); font-size: 30px; font-weight: 600; line-height: 1;">0<small style="font-size: 16px; color: var(--dim);"> apps</small></div>
-            <div style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); margin-top: 7px;">Installed on the PC</div>
+            <div style="font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--label); margin-top: 7px;">Installed on the PC</div>
           </div>
           <div>
             <div style="font-family: var(--font-display); font-size: 30px; font-weight: 600; line-height: 1;">4K<small style="font-size: 16px; color: var(--dim);">@45</small></div>
-            <div style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); margin-top: 7px;">Capture · 20–30 ms</div>
+            <div style="font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--label); margin-top: 7px;">Capture · 20–30 ms</div>
           </div>
           <div>
             <div style="font-family: var(--font-display); font-size: 30px; font-weight: 600; line-height: 1;">$149<small style="font-size: 16px; color: var(--dim);">.99+</small></div>
-            <div style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); margin-top: 7px;">Once · no subscription</div>
+            <div style="font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--label); margin-top: 7px;">Once · no subscription</div>
           </div>
         </div>
       </div>
@@ -291,7 +291,7 @@
           </div>
         </div>
       </div>
-      <p class="kicker-tag" style="display: block; text-align: center; margin-top: 16px; opacity: 0.8;">external: cec kvm go · internal: cec kvm internal / internal-pro · desk: cec kvm pro</p>
+      <p class="kicker-tag" style="display: block; text-align: center; margin-top: 16px; color: var(--label); font-size: 13px; letter-spacing: 0.06em;">external: cec kvm go · internal: cec kvm internal / internal-pro · desk: cec kvm pro</p>
     </div>
   </section>
 
@@ -315,7 +315,7 @@
         <div>
           <span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--warn);">[ coming soon / entry ]</span>
           <h3 class="display-m" style="margin: 14px 0 6px;">CEC KVM Go</h3>
-          <div style="font-family: var(--font-display); font-size: 26px; font-weight: 700; margin-bottom: 14px;">TBD<span style="font-size: 13px; font-weight: 500; color: var(--faint); font-family: var(--font-mono); letter-spacing: 0.1em; text-transform: uppercase;"> · price to be announced</span></div>
+          <div style="font-family: var(--font-display); font-size: 26px; font-weight: 700; margin-bottom: 14px;">TBD<span style="font-size: 13px; font-weight: 500; color: var(--label); font-family: var(--font-mono); letter-spacing: 0.1em; text-transform: uppercase;"> · price to be announced</span></div>
           <p style="color: var(--dim); line-height: 1.6; max-width: 50ch; margin-bottom: 18px;">The new external entry model is on the way. Final specifications, availability, and pricing will be announced before launch.</p>
           <div class="dev-chips"><span>Coming soon</span><span>Price TBD</span></div>
         </div>
@@ -324,14 +324,14 @@
       <!-- AX-02 Internal -->
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr)); gap: clamp(28px, 4vw, 56px); align-items: center; margin-bottom: clamp(56px, 7vw, 88px);">
         <div>
-          <span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint);">[ AX-02 / builder ]</span>
+          <span style="font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--label);">[ AX-02 / builder ]</span>
           <h3 class="display-m" style="margin: 14px 0 6px;">CEC KVM Internal</h3>
-          <div style="font-family: var(--font-display); font-size: 26px; font-weight: 700; margin-bottom: 14px;">$149.99<span style="font-size: 13px; font-weight: 500; color: var(--faint); font-family: var(--font-mono); letter-spacing: 0.1em; text-transform: uppercase;"> standard · $299.99 pro</span></div>
+          <div style="font-family: var(--font-display); font-size: 26px; font-weight: 700; margin-bottom: 14px;">$149.99<span style="font-size: 13px; font-weight: 500; color: var(--label); font-family: var(--font-mono); letter-spacing: 0.1em; text-transform: uppercase;"> standard · $299.99 pro</span></div>
           <p style="color: var(--dim); line-height: 1.6; max-width: 50ch; margin-bottom: 18px;">The same platform on a card that lives inside the case: no desk clutter, powered by the PSU's standby rail, wired straight to the front-panel header. Ships standard in every CEC build. The Pro card steps up to 4K capture, gigabit, and Wi-Fi 6.</p>
           <div class="dev-chips"><span>Low-profile card</span><span>Up to 4K@45 (Pro)</span><span>Wi-Fi on both tiers · Wi-Fi 6 (Pro)</span><span>Internal headers</span></div>
           <div style="margin-top: 18px;"><a class="btn btn-ghost btn-sm" href="https://www.criticalerrorcomputing.com/products/cec-kvm-internal">Buy the CEC KVM Internal <span aria-hidden="true">→</span></a></div>
           <details class="spec">
-            <summary>Full technical specification · CEC KVM Internal / Internal-Pro</summary>
+            <summary><span>Full technical specification · CEC KVM Internal / Internal&#8209;Pro</span></summary>
             <div class="spec-row cols3 head"><div class="k"></div><div class="v">Internal</div><div class="v">Internal-Pro</div></div>
             <div class="spec-row cols3"><div class="k">Computing unit</div><div class="v">SG2002 · RISC-V</div><div class="v">AX630C · 2× A53 @ 1.2GHz</div></div>
             <div class="spec-row cols3"><div class="k">Memory</div><div class="v">256MB DDR3</div><div class="v">1GB LPDDR4X</div></div>
@@ -371,7 +371,7 @@
         <div>
           <span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent);">[ AX-03 / flagship · most popular ]</span>
           <h3 class="display-m" style="margin: 14px 0 6px;">CEC KVM Pro</h3>
-          <div style="font-family: var(--font-display); font-size: 26px; font-weight: 700; margin-bottom: 14px;">$299.99<span style="font-size: 13px; font-weight: 500; color: var(--faint); font-family: var(--font-mono); letter-spacing: 0.1em; text-transform: uppercase;"> · once</span></div>
+          <div style="font-family: var(--font-display); font-size: 26px; font-weight: 700; margin-bottom: 14px;">$299.99<span style="font-size: 13px; font-weight: 500; color: var(--label); font-family: var(--font-mono); letter-spacing: 0.1em; text-transform: uppercase;"> · once</span></div>
           <p style="color: var(--dim); line-height: 1.6; max-width: 50ch; margin-bottom: 18px;">The desk unit. 4K capture at 20–30 ms, sharp enough to game on remotely, with its own screen telling you what it sees, gigabit plus Wi-Fi 6, and a 4K loop-out so your real monitor stays plugged in. Alive even when the PC isn't.</p>
           <div class="dev-chips"><span>4K@45 · 2K@95</span><span>20–30 ms</span><span>Onboard 1.47″ LCD</span><span>4K loop-out</span><span>USB-C / PoE</span></div>
           <div style="margin-top: 18px;"><a class="btn btn-ghost btn-sm" href="https://www.criticalerrorcomputing.com/products/cec-kvm-pro">Buy the CEC KVM Pro <span aria-hidden="true">→</span></a></div>
@@ -422,7 +422,7 @@
       <div style="display: grid; place-items: center;">
         <div style="width: min(460px, 100%); background: linear-gradient(180deg, var(--surface), var(--bg-2)); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; box-shadow: 0 36px 80px -36px rgb(0 0 0 / 0.85);">
           <div style="display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border-bottom: 1px solid var(--border);">
-            <span style="font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint);">node · access-pro-wifi</span>
+            <span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint);">node · access-pro-wifi</span>
             <span class="chip" style="padding: 4px 9px; font-size: 10px;"><span class="dot"></span>standby · listening</span>
           </div>
           <div style="padding: 16px;">
@@ -430,7 +430,7 @@
               <svg viewBox="0 0 256 256" aria-hidden="true" style="width: 26px; height: 26px; color: var(--accent);"><g stroke="currentColor" stroke-width="13" fill="none" stroke-linecap="round"><path d="M128 74 L77 165 M128 74 L181 160 M77 165 L181 160"></path></g><circle cx="128" cy="72" r="27" fill="currentColor"></circle><circle cx="76" cy="166" r="22" fill="currentColor"></circle><circle cx="182" cy="160" r="22" fill="currentColor"></circle></svg>
               <div>
                 <div style="font-weight: 600; font-size: 15px;">access-pro <span style="font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; padding: 2px 7px; border: 1px solid var(--border); color: var(--dim); border-radius: 2px; vertical-align: 2px;">hardware</span></div>
-                <div style="font-family: var(--font-mono); font-size: 10px; color: var(--faint);">watching: den-tower · HDMI + HID + ATX</div>
+                <div style="font-family: var(--font-mono); font-size: 11.5px; color: var(--faint);">watching: den-tower · HDMI + HID + ATX</div>
               </div>
             </div>
             <div style="display: grid; gap: 8px;">
@@ -464,7 +464,7 @@
             </div>
           </div>
           <div>
-            <div style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); margin-bottom: 6px;">01 · on power</div>
+            <div style="font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--label); margin-bottom: 6px;">01 · on power</div>
             <p style="font-size: 14px; color: var(--dim); line-height: 1.55; margin: 0;">It calls out over mDNS on a claim channel that never leaves your network. Clock-free: it works before NTP.</p>
           </div>
         </div>
@@ -486,7 +486,7 @@
             </div>
           </div>
           <div>
-            <div style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); margin-bottom: 6px;">02 · in the app</div>
+            <div style="font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--label); margin-bottom: 6px;">02 · in the app</div>
             <p style="font-size: 14px; color: var(--dim); line-height: 1.55; margin: 0;">Every device of yours on that LAN shows the newcomer instantly. No IPs typed, no cloud round-trip.</p>
           </div>
         </div>
@@ -506,13 +506,13 @@
             </div>
           </div>
           <div>
-            <div style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); margin-bottom: 6px;">03 · claimed</div>
+            <div style="font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--label); margin-bottom: 6px;">03 · claimed</div>
             <p style="font-size: 14px; color: var(--dim); line-height: 1.55; margin: 0;">It appears in your claim sheet. Tap Claim, done. Attach it to a machine and it renames itself to match.</p>
           </div>
         </div>
       </div>
 
-      <p style="margin-top: 18px; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); text-align: center;">allmystuff-local-claim-v1 · clock-free · public claims off by default · mesh transport by <a href="https://myownmesh.net" style="color: var(--dim);">MyOwnMesh</a></p>
+      <p style="margin-top: 18px; font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--label); text-align: center;">allmystuff-local-claim-v1 · clock-free · public claims off by default · mesh transport by <a href="https://myownmesh.net" style="color: var(--dim);">MyOwnMesh</a></p>
     </div>
   </section>
 
@@ -562,7 +562,7 @@
           </div>
         </div>
       </div>
-      <p style="margin-top: 22px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); text-align: center;">Out-of-band · works with the OS dead · no apps installed on the PC</p>
+      <p style="margin-top: 22px; font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--label); text-align: center;">Out-of-band · works with the OS dead · no apps installed on the PC</p>
     </div>
   </section>
 
@@ -586,7 +586,7 @@
           <p style="font-size: 14px; color: var(--faint); max-width: 32ch; line-height: 1.6;">Tech that works when you turn it on. Yours, with or without us.</p>
         </div>
         <div>
-          <h4 style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-bottom: 14px;">Explore</h4>
+          <h4 style="font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--label); margin-bottom: 14px;">Explore</h4>
           <ul style="list-style: none; display: grid; gap: 9px; font-size: 14px; color: var(--dim);">
             <li><a href="../software/">The software</a></li>
             <li><a href="../linux/">Linux</a></li>
@@ -597,7 +597,7 @@
           </ul>
         </div>
         <div>
-          <h4 style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-bottom: 14px;">Hardware</h4>
+          <h4 style="font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--label); margin-bottom: 14px;">Hardware</h4>
           <ul style="list-style: none; display: grid; gap: 9px; font-size: 14px; color: var(--dim);">
             <li><a href="../hardware/">The CEC KVM line</a></li>
             <li><a href="https://criticalerrorcomputing.com">The naval fleet</a></li>
@@ -605,7 +605,7 @@
           </ul>
         </div>
         <div>
-          <h4 style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-bottom: 14px;">Open</h4>
+          <h4 style="font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--label); margin-bottom: 14px;">Open</h4>
           <ul style="list-style: none; display: grid; gap: 9px; font-size: 14px; color: var(--dim);">
             <li><a href="https://github.com/mrjeeves/AllMyStuff">github.com/mrjeeves/AllMyStuff</a></li>
             <li><a href="https://myownmesh.net">Built on MyOwnMesh</a></li>
@@ -617,9 +617,9 @@
       <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-top: 22px; border-top: 1px solid var(--border);">
         <div style="display: flex; align-items: center; gap: 10px;">
           <img src="../assets/cec-logo.png" alt="Critical Error Computing" style="height: 26px; width: auto;">
-          <span style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);">A Critical Error Computing product · Humble, TX</span>
+          <span style="font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--label);">A Critical Error Computing product · Humble, TX</span>
         </div>
-        <span style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);">© 2026 allmystuff.works · MIT</span>
+        <span style="font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--label);">© 2026 allmystuff.works · MIT</span>
       </div>
     </div>
   </footer>
