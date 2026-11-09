@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>allmystuff.works · All my stuff. Works.</title>
-<meta name="description" content="One free app turns the gear you already own into one quiet system: see any screen, open any shell, reach any file, peer-to-peer and encrypted end to end. Open source and complete; add hardware or a server of your own only if you ever want them. Human help lives at support.cec.direct, and asking is free.">
+<meta name="description" content="One free app turns the gear you already own into one quiet system: see any screen, open any shell, reach any file or map it as a drive, peer-to-peer and encrypted end to end, on Linux, macOS and Windows. Open source and complete; add hardware or a server of your own only if you ever want them. Human help lives at support.cec.direct, and asking is free.">
 <meta name="theme-color" content="#070711">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="icon" sizes="48x48 32x32 16x16" href="favicon.ico">
@@ -55,6 +55,16 @@
   .copy-btn { position: absolute; top: 50%; right: 10px; transform: translateY(-50%); appearance: none; background: var(--surface); border: 1px solid var(--border); border-radius: 3px; cursor: pointer; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim); padding: 5px 11px; transition: color var(--dur-fast) ease, border-color var(--dur-fast) ease; }
   .copy-btn:hover { color: var(--text); border-color: var(--border-bright); }
   .copy-btn.copied { color: var(--ok); border-color: var(--ok); }
+
+  /* ---- "And everything around them": the compact feature grid ---- */
+  .ftiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr)); gap: 14px; }
+  .ftile { display: flex; flex-direction: column; gap: 7px; background: linear-gradient(180deg, var(--surface), var(--bg-2)); border: 1px solid var(--border); border-radius: 8px; padding: 18px 20px 20px; transition: border-color var(--dur-base) ease; }
+  a.ftile:hover { border-color: var(--accent-line); }
+  .ftile .k { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); }
+  .ftile .k.new { color: var(--accent); }
+  .ftile h4 { font-family: var(--font-display); font-size: 19px; font-weight: 600; line-height: 1.2; margin: 0; color: var(--text); }
+  .ftile p { font-size: 14px; color: var(--dim); line-height: 1.55; margin: 0; }
+  .ftile .go { margin-top: auto; padding-top: 6px; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }
 </style>
 </helmet>
 <div style="min-height: 100vh; background: var(--bg); color: var(--text); font-family: var(--font-body); overflow-x: clip;">
@@ -350,7 +360,7 @@
           <div style="padding: 20px 22px 22px; display: flex; flex-direction: column; gap: 8px; flex: 1;">
             <span style="font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint);">01 · power it on</span>
             <h3 style="font-family: var(--font-display); font-size: 21px; font-weight: 600; line-height: 1.15;">It calls out, quietly.</h3>
-            <p style="font-size: 14px; color: var(--dim); line-height: 1.6; margin: 0;">A fresh device announces itself over mDNS on a claim channel that never leaves your network. It works before the box even knows what time it is.</p>
+            <p style="font-size: 14px; color: var(--dim); line-height: 1.6; margin: 0;">A fresh KVM, or any computer you set to <em>Make claimable</em>, announces itself over mDNS on a claim channel that never leaves your network. It works before the box even knows what time it is.</p>
             <span style="margin-top: auto; font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); padding-top: 10px;">allmystuff-local-claim-v1 · mdns-only · clock-free</span>
           </div>
         </div>
@@ -578,6 +588,59 @@
         </div>
       </div>
 
+      <div style="margin-bottom: 22px;">
+        <span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint);">[ and everything around them ]</span>
+        <h3 class="display-m" style="margin: 14px 0 0;">The rest of the box.</h3>
+      </div>
+      <div class="ftiles">
+        <a class="ftile" href="software/consoles/files/">
+          <span class="k">Files</span>
+          <h4>Fleetfiles</h4>
+          <p>One filesystem for the whole fleet. Paths don't name a machine, changes keep their versions, and any version can be restored.</p>
+        </a>
+        <a class="ftile" href="software/consoles/files/#drives">
+          <span class="k">Files</span>
+          <h4>Native drives</h4>
+          <p>Map a folder from another machine as a real drive letter on Windows, a volume on macOS, or a mount point on Linux.</p>
+        </a>
+        <a class="ftile" href="software/consoles/remote-control/">
+          <span class="k">Remote control</span>
+          <h4>Monitors, popped out</h4>
+          <p>Pop several remote monitors into their own windows and spread them across your screens, so the whole remote desk stays in view.</p>
+        </a>
+        <a class="ftile" href="software/consoles/remote-control/">
+          <span class="k">Remote control</span>
+          <h4>Clipboard and drop</h4>
+          <p>Text, images and files ride a synchronized clipboard. Drag a file onto the remote desktop and it lands there.</p>
+        </a>
+        <a class="ftile" href="software/consoles/remote-control/">
+          <span class="k">Remote control</span>
+          <h4>Ready for games</h4>
+          <p>Relative mouse for games that grab the pointer, and a Game preset that aims for 4K at 60 frames a second.</p>
+        </a>
+        <a class="ftile" href="hardware/">
+          <span class="k">With a KVM</span>
+          <h4>Power, BIOS, install media</h4>
+          <p>Press the buttons, walk the BIOS, and hand a machine an ISO, IMG or USB stick to install from, before it has an OS at all.</p>
+        </a>
+        <div class="ftile">
+          <span class="k">Always On</span>
+          <h4>Reachable after reboot</h4>
+          <p>Runs as a system service, so a machine answers before anyone logs in and comes back on its own after every restart.</p>
+        </div>
+        <div class="ftile">
+          <span class="k">Command line</span>
+          <h4>amst and headless nodes</h4>
+          <p><code style="font-family: var(--font-mono); font-size: 12.5px; color: var(--text);">amst den-tower</code> opens a shell from your own terminal. <code style="font-family: var(--font-mono); font-size: 12.5px; color: var(--text);">allmystuff serve</code> puts servers on the graph with no desktop.</p>
+        </div>
+        <a class="ftile" href="linux/">
+          <span class="k new">Linux · fixed in v0.2.122</span>
+          <h4>Wayland control, rootless drives</h4>
+          <p>Keyboard and mouse now reach native apps on GNOME Wayland, and drive mapping runs as your own user, without root.</p>
+          <span class="go">What works where →</span>
+        </a>
+      </div>
+
       <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-top: 28px; padding-top: 22px; border-top: 1px solid var(--border);">
         <p style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); margin: 0;">Every feature &middot; every machine &middot; $0 forever · this is the whole product</p>
         <div style="display: flex; gap: 12px; flex-wrap: wrap;">
@@ -600,7 +663,7 @@
           <li style="display: flex; gap: 10px;"><span style="color: var(--violet);">&#9656;</span>Works across their fleet: laptop today, phone tomorrow</li>
           <li style="display: flex; gap: 10px;"><span style="color: var(--violet);">&#9656;</span>Take it back with a tap, no passwords to rotate</li>
         </ul>
-        <a class="btn btn-ghost" href="software/">How sharing works <span aria-hidden="true">→</span></a>
+        <a class="btn btn-ghost" href="layers/">How sharing works <span aria-hidden="true">→</span></a>
       </div>
       <div style="display: grid; place-items: center;">
         <div style="position: relative; width: min(480px, 100%); height: 250px;">
@@ -832,6 +895,7 @@
           <h4 style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-bottom: 14px;">Explore</h4>
           <ul style="list-style: none; display: grid; gap: 9px; font-size: 14px; color: var(--dim);">
             <li><a href="software/">The software</a></li>
+            <li><a href="linux/">Linux</a></li>
             <li><a href="hardware/">The hardware</a></li>
             <li><a href="service/">The service</a></li>
             <li><a href="faq/">FAQ</a></li>
@@ -943,7 +1007,7 @@ class Component extends DCLogic {
     ];
     return {
       hardwareCards: FleetCard ? cards.map((c) => React.createElement(FleetCard, c)) : null,
-      appVersion: this.state.appVersion || "v0.2.18",
+      appVersion: this.state.appVersion || "v0.2.123",
     };
   }
 }

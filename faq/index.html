@@ -62,7 +62,7 @@
         <a href="./" style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text); border-bottom: 2px solid var(--accent); padding-bottom: 2px;">FAQ</a>
       </div>
       <div style="display: flex; gap: 12px; align-items: center;">
-        <a class="chip" href="https://github.com/mrjeeves/AllMyStuff" title="View AllMyStuff on GitHub"><span class="dot"></span><span id="rel-version">v0.2.18</span></a>
+        <a class="chip" href="https://github.com/mrjeeves/AllMyStuff" title="View AllMyStuff on GitHub"><span class="dot"></span><span id="rel-version">v0.2.123</span></a>
         <a class="btn btn-primary btn-sm" href="../download/">Download free</a>
       </div>
     </div>
@@ -102,12 +102,24 @@
           <p>Streams travel directly between your devices, encrypted end to end; keys live on your machines, not on a server. When a relay has to carry traffic, it passes data it can't decrypt. Even a <a href="https://support.cec.direct">CEC Support</a> session starts with you approving the technician by name, shows only what you approved, and ends the moment you say so.</p>
         </details>
         <details>
+          <summary>What does it run on?</summary>
+          <p>Linux, macOS and Windows, with the same app on each. Linux is the reference platform, with .deb, .rpm and AppImage packages for x86_64 and arm64. On a Linux desktop, screen and control work on X11 and, since v0.2.122, on GNOME Wayland; other Wayland desktops can be viewed. <a href="../linux/">What works where, by session →</a></p>
+        </details>
+        <details>
+          <summary>Can a folder on another machine show up as a normal drive?</summary>
+          <p>Yes, that's Drives. Pick a folder or drive on one of your machines, or one someone shared with you, and it mounts as a drive letter on Windows, a volume on macOS, or a mount point on Linux, where it runs as your own user with no root. For files that shouldn't belong to any one machine there's Fleetfiles: one versioned filesystem across your whole fleet. <a href="../software/consoles/files/">Files, three ways →</a></p>
+        </details>
+        <details>
+          <summary>Is a machine still reachable after it reboots?</summary>
+          <p>Yes, with Always On. <code style="font-family: var(--font-mono); font-size: 0.9em; color: var(--text);">allmystuff service install</code> runs the node as a system service, so terminals, files and sites answer before anyone logs in. Seeing and driving the desktop still needs a logged-in, unlocked session. For the login screen, the BIOS, or a machine that won't boot, that's what <a href="../hardware/">a KVM</a> is for.</p>
+        </details>
+        <details>
           <summary>What happens if my internet goes out?</summary>
           <p>Your devices are on your local network, so they keep talking to each other: consoles, terminals, files, all of it. Discovery stays local too: peers on the same LAN find each other over mDNS, no server involved, so you can even claim a new device with the internet down. You lose reach from outside the house, and it comes back the moment the internet does.</p>
         </details>
         <details>
           <summary>How does a new device get claimed?</summary>
-          <p>It announces itself over mDNS on a claim channel that never leaves your LAN: no IPs to type, no cloud round-trip, and it works before the device even has the right time. It appears in your app's claim sheet, you tap Claim, and it joins your fleet. Claiming over the internet is off by default; if you turn it on for a device, it uses a rotating, hard-to-guess code instead of an open door. <a href="../layers/">The same-room shortcut, explained →</a></p>
+          <p>It announces itself over mDNS on a claim channel that never leaves your LAN: no IPs to type, no cloud round-trip, and it works before the device even has the right time. On a computer, choose Make claimable first. It appears in your app's claim sheet, you tap Claim, and it joins your fleet. Claiming over the internet is off by default; turn it on for a device and you claim it with a one-time ID that's only shown while it's claimable, instead of an open door. <a href="../layers/">The same-room shortcut, explained →</a></p>
         </details>
         <details>
           <summary>Am I locked in?</summary>
@@ -189,6 +201,7 @@
           <h4 style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-bottom: 14px;">Explore</h4>
           <ul style="list-style: none; display: grid; gap: 9px; font-size: 14px; color: var(--dim);">
             <li><a href="../software/">The software</a></li>
+            <li><a href="../linux/">Linux</a></li>
             <li><a href="../hardware/">The hardware</a></li>
             <li><a href="../service/">The service</a></li>
             <li><a href="../faq/">FAQ</a></li>

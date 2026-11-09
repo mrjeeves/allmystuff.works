@@ -113,7 +113,7 @@
         <a href="../../../faq/" style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim);">FAQ</a>
       </div>
       <div style="display: flex; gap: 12px; align-items: center;">
-        <a class="chip" href="https://github.com/mrjeeves/AllMyStuff" title="View AllMyStuff on GitHub"><span class="dot"></span><span id="rel-version">v0.2.18</span></a>
+        <a class="chip" href="https://github.com/mrjeeves/AllMyStuff" title="View AllMyStuff on GitHub"><span class="dot"></span><span id="rel-version">v0.2.123</span></a>
         <a class="btn btn-primary btn-sm" href="../../../download/">Download free</a>
       </div>
     </div>
@@ -155,7 +155,9 @@
         <span class="chip">MJPEG floor</span>
         <span class="chip">Multi-monitor tabs</span>
         <span class="chip">Listen-only audio</span>
-        <span class="chip">Owner-gated control</span>
+        <span class="chip">Pop-out monitors</span>
+        <span class="chip">Synced clipboard</span>
+        <span class="chip">GNOME Wayland &amp; X11</span>
       </div>
     </div>
   </section>
@@ -249,7 +251,7 @@
           <p style="color: var(--dim); line-height: 1.6; max-width: 50ch; margin-bottom: 18px;">A three-monitor tower opens three tabs. Switch with a click; your mouse coordinates normalize to whichever screen you're on. The webcam and the conference puck's wide camera sit in the same strip; the default is starred, anything popped into its own window is flagged.</p>
           <ul class="flist">
             <li>Screens first, cameras after; the default capture is marked <span style="color: var(--warn);">★</span></li>
-            <li>Pop any input into its own OS window with <span class="mono">⧉</span></li>
+            <li><span>Pop any input into its own OS window with <span class="mono">⧉</span>; pop out several monitors and arrange them across your own screens</span></li>
             <li>Older machines say so: "update it there and its cameras will stream here"</li>
           </ul>
         </div>
@@ -291,9 +293,10 @@
           <h3 class="display-m" style="margin: 14px 0 14px;">Flip it on and you're driving.</h3>
           <p style="color: var(--dim); line-height: 1.6; max-width: 50ch; margin-bottom: 18px;">With Control on, hovering the stage pins keyboard focus there: keys flow without a click, the cursor turns to a crosshair, and even Esc and Ctrl+W are forwarded. True KVM behaviour. Control only works over display tabs, never cameras.</p>
           <ul class="flist">
-            <li>Only the recorded owner can type; auto-accept can never inject input</li>
-            <li>Smooth enough to play your tower from a thin laptop</li>
-            <li>Clipboard-on-paste sends this machine's clipboard so it lands on the remote</li>
+            <li>Control is its own grant: your fleet, or someone you shared it with; auto-accept can never inject input</li>
+            <li>Relative mouse for games that grab the pointer, and a Game preset that aims for 4K60</li>
+            <li>A synchronized clipboard carries text, images and files; drop a file on the stage to send it</li>
+            <li><span>Linux hosts: full control on GNOME Wayland and X11, <a href="../../../linux/" style="color: var(--accent);">by session</a></span></li>
           </ul>
         </div>
       </div>
@@ -479,6 +482,7 @@
           <h4 style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-bottom: 14px;">The app</h4>
           <ul style="list-style: none; display: grid; gap: 9px; font-size: 14px; color: var(--dim);">
             <li><a href="../../../software/">The software</a></li>
+            <li><a href="../../../linux/">Linux</a></li>
             <li><a href="../../../layers/">How it works</a></li>
             <li><a href="../../../download/">Download</a></li>
             <li><a href="../../../faq/">FAQ</a></li>

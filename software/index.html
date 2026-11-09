@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The software · every machine you own, in a tab · allmystuff.works</title>
-<meta name="description" content="Five consoles, one app. Remote Control, Terminal, Files, Sites and Rooms: the real surfaces of AllMyStuff, each a faithful look at what installs. Free forever, peer-to-peer, encrypted end to end.">
+<meta name="description" content="Five consoles, one app. Remote Control, Terminal, Files (with Fleetfiles and native drives), Sites and Rooms: the real surfaces of AllMyStuff on Linux, macOS and Windows. Free forever, peer-to-peer, encrypted end to end.">
 <meta name="theme-color" content="#070711">
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <link rel="icon" sizes="48x48 32x32 16x16" href="../favicon.ico">
@@ -38,6 +38,15 @@
   .mini-bar { position: absolute; top: 0; left: 0; right: 0; height: 28px; display: flex; align-items: center; gap: 7px; padding: 0 12px; border-bottom: 1px solid var(--border); background: oklch(0.135 0.022 285 / 0.5); }
   .mini-bar .ld { width: 6px; height: 6px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 8px var(--ok); animation: amsPulse 1.8s ease-in-out infinite; }
   .mini-bar span { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); }
+  .ftiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr)); gap: 14px; }
+  .ftile { display: flex; flex-direction: column; gap: 7px; background: linear-gradient(180deg, var(--surface), var(--bg-2)); border: 1px solid var(--border); border-radius: 8px; padding: 18px 20px 20px; transition: border-color var(--dur-base) ease; }
+  a.ftile:hover { border-color: var(--accent-line); }
+  .ftile .k { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); }
+  .ftile .k.new { color: var(--accent); }
+  .ftile h4 { font-family: var(--font-display); font-size: 19px; font-weight: 600; line-height: 1.2; margin: 0; color: var(--text); }
+  .ftile p { font-size: 14px; color: var(--dim); line-height: 1.55; margin: 0; }
+  .ftile code { font-family: var(--font-mono); font-size: 12.5px; color: var(--text); }
+  .ftile .go { margin-top: auto; padding-top: 6px; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }
 </style>
 </head>
 <body>
@@ -65,7 +74,7 @@
         <a href="../faq/" style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim);">FAQ</a>
       </div>
       <div style="display: flex; gap: 12px; align-items: center;">
-        <a class="chip" href="https://github.com/mrjeeves/AllMyStuff" title="View AllMyStuff on GitHub"><span class="dot"></span><span id="rel-version">v0.2.18</span></a>
+        <a class="chip" href="https://github.com/mrjeeves/AllMyStuff" title="View AllMyStuff on GitHub"><span class="dot"></span><span id="rel-version">v0.2.123</span></a>
         <a class="btn btn-primary btn-sm" href="../download/">Download free</a>
       </div>
     </div>
@@ -95,7 +104,7 @@
       <div style="max-width: 880px;">
         <span class="eyebrow">Five consoles, one app</span>
         <h1 class="display-xl" style="margin: 16px 0 20px;">Every machine you own, in a tab.</h1>
-        <p class="lede" style="max-width: 64ch;">Claim a machine and it gets consoles: the real, free surfaces you reach it through. See its screen and drive it. Open a shell. Browse its disk. Reach the services it hosts. Pull several into a call. Each one is a faithful look at what actually installs. No trial, no tier.</p>
+        <p class="lede" style="max-width: 64ch;">Claim a machine and it gets consoles: the real, free surfaces you reach it through. See its screen and drive it. Open a shell. Reach its files, or mount them as a drive. Open the services it hosts. Pull several into a call. Each one is a faithful look at what actually installs, on Linux, macOS and Windows. No trial, no tier.</p>
       </div>
       <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px;">
         <a class="btn btn-primary" href="../download/">Download free</a>
@@ -122,7 +131,7 @@
           <div class="ccard-body">
             <span class="ccard-num">Console 01</span>
             <h3>Remote control</h3>
-            <p>Its screens, cameras and audio in tabs. H.264 to 4K, MJPEG floor. Flip Control on and your keyboard and mouse are its keyboard and mouse.</p>
+            <p>Its screens, cameras and audio in tabs, or popped out into windows of their own. Flip Control on and your keyboard and mouse are its keyboard and mouse; the clipboard and dropped files come along.</p>
             <span class="go">See it, drive it →</span>
           </div>
         </a>
@@ -157,9 +166,9 @@
           </div>
           <div class="ccard-body">
             <span class="ccard-num">Console 03</span>
-            <h3>Files</h3>
-            <p>Browse, preview, rename, fetch, for every machine you own. Downloads stream straight to disk, never through a server. Owner-gated.</p>
-            <span class="go">Browse the disk →</span>
+            <h3>Files &amp; drives</h3>
+            <p>Fleetfiles is one versioned filesystem across every machine. Open any one machine's disk when you need to, or map a folder in as a real drive.</p>
+            <span class="go">Reach your files →</span>
           </div>
         </a>
 
@@ -201,6 +210,28 @@
     </div>
   </section>
 
+  <!-- ════════ AROUND THE CONSOLES ════════ -->
+  <section class="section" style="padding-top: 0;">
+    <div class="wrap">
+      <div style="max-width: 760px; margin-bottom: 24px;">
+        <span class="eyebrow">Around the consoles</span>
+        <h2 class="display-m" style="margin: 14px 0 12px;">And the rest of the box.</h2>
+        <p style="color: var(--dim); line-height: 1.6; max-width: 62ch;">The pieces that make the consoles useful day to day. All of it is in the same free install.</p>
+      </div>
+      <div class="ftiles">
+        <a class="ftile" href="consoles/files/#drives"><span class="k">Files</span><h4>Native drives</h4><p>Map a folder from another machine as a drive letter on Windows, a volume on macOS, or a mount point on Linux. Every app sees ordinary storage.</p></a>
+        <a class="ftile" href="consoles/files/#fleetfiles"><span class="k">Files</span><h4>Version history</h4><p>Fleetfiles keeps retained versions for 30 days by default. Restore one and it becomes current, without erasing what came after.</p></a>
+        <a class="ftile" href="consoles/remote-control/"><span class="k">Remote control</span><h4>Ready for games</h4><p>Relative mouse for games that capture the pointer, and a Game preset that aims for 4K at 60 frames a second.</p></a>
+        <a class="ftile" href="../hardware/"><span class="k">With a KVM</span><h4>Power, BIOS, install media</h4><p>Wake, press, hold or reset; walk the BIOS; serve an ISO, IMG or USB stick to a machine so it can install an OS it doesn't have yet.</p></a>
+        <div class="ftile"><span class="k">Always On</span><h4>Reachable after reboot</h4><p><code>allmystuff service install</code> runs the node as a system service, before login and after every restart.</p></div>
+        <div class="ftile"><span class="k">Command line</span><h4>amst and headless nodes</h4><p><code>amst den-tower</code> opens a shell from your own terminal. <code>allmystuff serve</code> brings servers in, no desktop needed.</p></div>
+        <a class="ftile" href="../layers/"><span class="k">Sharing</span><h4>A grant, not a password</h4><p>Lend one thing to one person, across all of their devices. Sharing yours never opens theirs to you, and taking it back is a tap.</p></a>
+        <a class="ftile" href="https://support.cec.direct"><span class="k">Support</span><h4>A number on every machine</h4><p>Each PC and KVM shows a support number. Read it to a technician, then approve once or for three hours, or decline.</p></a>
+        <a class="ftile" href="../linux/"><span class="k new">Linux · fixed in v0.2.122</span><h4>Wayland control, rootless drives</h4><p>Keyboard and mouse now reach native apps on GNOME Wayland, and drive mapping runs as your own user, without root.</p><span class="go">What works where →</span></a>
+      </div>
+    </div>
+  </section>
+
   <!-- ════════ ONE MODEL ════════ -->
   <section class="section" style="padding-top: 0;">
     <div class="wrap">
@@ -208,7 +239,7 @@
         <div style="max-width: 760px; margin-bottom: 28px;">
           <span class="eyebrow">One model under all five</span>
           <h2 class="display-m" style="margin: 14px 0 12px;">Same graph. Same rules. Same gate.</h2>
-          <p style="color: var(--dim); line-height: 1.6; max-width: 62ch;">Every console rides one mesh route between machines you own: encrypted end to end, peer to peer, no server in the middle. The owner/fleet gate is the same everywhere, and nothing is shareable by default. Nothing.</p>
+          <p style="color: var(--dim); line-height: 1.6; max-width: 62ch;">Every console rides one mesh route between machines you own: encrypted end to end, peer to peer, no server in the middle. The owner/fleet gate is the same everywhere, and nothing is shared by default. Nothing.</p>
         </div>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 16px;">
           <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 20px 22px;">
@@ -216,8 +247,8 @@
             <p style="font-size: 14px; color: var(--dim); line-height: 1.6;">Traffic runs directly between your machines. Reference relays only introduce, and every one is a setting you can point at your own box.</p>
           </div>
           <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 20px 22px;">
-            <div style="font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px;">Owner-gated</div>
-            <p style="font-size: 14px; color: var(--dim); line-height: 1.6;">Terminal, Files and control open only for machines you own or are in your fleet. A guest can't even ask.</p>
+            <div style="font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px;">Fleet first, shared on purpose</div>
+            <p style="font-size: 14px; color: var(--dim); line-height: 1.6;">Your fleet reaches everything. Anyone else gets only what you share: remote control, a terminal, a folder, a site, each its own grant, revocable with a tap.</p>
           </div>
           <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 20px 22px;">
             <div style="font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px;">Free forever</div>
@@ -261,6 +292,7 @@
           <h4 style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-bottom: 14px;">The app</h4>
           <ul style="list-style: none; display: grid; gap: 9px; font-size: 14px; color: var(--dim);">
             <li><a href="./">The software</a></li>
+            <li><a href="../linux/">Linux</a></li>
             <li><a href="../layers/">How it works</a></li>
             <li><a href="../download/">Download</a></li>
             <li><a href="../faq/">FAQ</a></li>
