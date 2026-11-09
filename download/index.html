@@ -158,7 +158,7 @@
             <div class="dl-row"><span>.deb <span class="meta">· amd64 / arm64</span></span><span><a data-asset-end="_amd64.deb" href="https://github.com/mrjeeves/AllMyStuff/releases/latest">amd64</a> · <a data-asset-end="_arm64.deb" href="https://github.com/mrjeeves/AllMyStuff/releases/latest">arm64</a></span></div>
             <div class="dl-row"><span>.rpm <span class="meta">· x86_64 / aarch64</span></span><span><a data-asset-end=".x86_64.rpm" href="https://github.com/mrjeeves/AllMyStuff/releases/latest">x86_64</a> · <a data-asset-end=".aarch64.rpm" href="https://github.com/mrjeeves/AllMyStuff/releases/latest">aarch64</a></span></div>
           </div>
-          <p class="note" style="margin: 0;">Or just run the one-liner; it grabs the right build for your machine.</p>
+          <p class="note" style="margin: 0;">Or just run the one-liner; it grabs the right build for your machine. Full control on GNOME Wayland and X11. <a href="../linux/" style="color: var(--accent);">What works where →</a></p>
         </div>
 
         <!-- macOS -->
@@ -184,7 +184,6 @@
           </div>
           <div class="dl-list">
             <div class="dl-row"><span>Installer <span class="meta">· setup.exe</span></span><a data-asset-end="-setup.exe" href="https://github.com/mrjeeves/AllMyStuff/releases/latest">Download</a></div>
-            <div class="dl-row"><span>.msi <span class="meta">· for deployment</span></span><a data-asset-end="_en-US.msi" href="https://github.com/mrjeeves/AllMyStuff/releases/latest">Download</a></div>
             <div class="dl-row"><span>Portable GUI <span class="meta">· zip</span></span><a href="https://github.com/mrjeeves/AllMyStuff/releases/latest/download/allmystuff-gui-windows-x86_64.zip">Download</a></div>
           </div>
           <p class="note" style="margin: 0;">The PowerShell one-liner downloads the installer and runs it.</p>
@@ -202,7 +201,7 @@
           <div class="dl-row"><span>macOS <span class="meta">· arm / intel</span></span><span><a href="https://github.com/mrjeeves/AllMyStuff/releases/latest/download/allmystuff-macos-aarch64.tar.gz">arm</a> · <a href="https://github.com/mrjeeves/AllMyStuff/releases/latest/download/allmystuff-macos-x86_64.tar.gz">intel</a></span></div>
           <div class="dl-row"><span>Windows <span class="meta">· x64 zip</span></span><a href="https://github.com/mrjeeves/AllMyStuff/releases/latest/download/allmystuff-windows-x86_64.zip">Download</a></div>
         </div>
-        <p class="note" style="margin: 14px 0 0;">`curl -fsSL https://allmystuff.works/install.sh | sh -s -- --no-gui` skips the desktop app; you still get the CLI, the headless node, and the mesh daemon: everything a server needs to join.</p>
+        <p class="note" style="margin: 14px 0 0;">`curl -fsSL https://allmystuff.works/install.sh | sh -s -- --no-gui` skips the desktop app; you still get the CLI, the headless node, and the mesh daemon: everything a server needs to join. Then `allmystuff service install` keeps it up across reboots.</p>
       </div>
     </div>
   </section>
@@ -219,7 +218,7 @@
           <li>Puts them on your PATH: <code style="font-family: var(--font-mono); font-size: 13px;">/usr/local/bin</code> when it's already writable (it never prompts for a password), else <code style="font-family: var(--font-mono); font-size: 13px;">~/.local/bin</code>. A bare <code style="font-family: var(--font-mono); font-size: 13px;">allmystuff</code> opens the app.</li>
           <li>Makes sure the <code style="font-family: var(--font-mono); font-size: 13px;">myownmesh</code> daemon the live mesh runs on is in place: a recent one is used as-is, an old one updates itself, a missing one is installed and checksum-verified. <code style="font-family: var(--font-mono); font-size: 13px;">--no-mesh</code> leaves it alone; <code style="font-family: var(--font-mono); font-size: 13px;">--no-gui</code> skips the app on headless boxes.</li>
         </ol>
-        <p style="font-size: 15px; color: var(--dim); line-height: 1.6; margin: 16px 0 0;">No telemetry, no account. The portable app uses your system webview; for the full desktop integration (menu entry, icon, the daemon bundled inside the package) grab a .deb / .AppImage / .dmg / .msi above instead.</p>
+        <p style="font-size: 15px; color: var(--dim); line-height: 1.6; margin: 16px 0 0;">No telemetry, no account. The portable app uses your system webview; for the full desktop integration (menu entry, icon, the daemon bundled inside the package) grab a .deb / .rpm / .AppImage / .dmg / setup.exe above instead.</p>
       </div>
       <div>
         <span class="eyebrow">Verify anything</span>
@@ -253,11 +252,11 @@
         </div>
         <div style="display: flex; gap: 16px; padding: 16px 4px; border-bottom: 1px solid var(--border); align-items: baseline;">
           <span style="font-family: var(--font-mono); font-size: 11px; color: var(--accent); flex-shrink: 0;">03</span>
-          <p style="margin: 0; font-size: 15px; color: var(--dim); line-height: 1.6;"><strong style="color: var(--text);">Claim your machines.</strong> Install on the next device, then claim it into your fleet with the code both screens show you: read it aloud, tap, done.</p>
+          <p style="margin: 0; font-size: 15px; color: var(--dim); line-height: 1.6;"><strong style="color: var(--text);">Claim your machines.</strong> Install on the next device and choose <em>Make claimable</em> on its This Device card. On a machine already in your fleet, pick it under Ready to claim and tap <em>Claim this device</em>. Nothing to type.</p>
         </div>
         <div style="display: flex; gap: 16px; padding: 16px 4px; border-bottom: 1px solid var(--border); align-items: baseline;">
           <span style="font-family: var(--font-mono); font-size: 11px; color: var(--accent); flex-shrink: 0;">04</span>
-          <p style="margin: 0; font-size: 15px; color: var(--dim); line-height: 1.6;"><strong style="color: var(--text);">Access your stuff.</strong> Consoles, terminals, and files now work between them, at home or across the planet. Add hardware and humans as needed.</p>
+          <p style="margin: 0; font-size: 15px; color: var(--dim); line-height: 1.6;"><strong style="color: var(--text);">Access your stuff.</strong> Screens, terminals, Fleetfiles and drives now work between them, at home or across the planet. Add hardware and humans as needed.</p>
         </div>
       </div>
       <div style="display: flex; gap: 14px; margin-top: 26px; flex-wrap: wrap;">
@@ -291,6 +290,7 @@
           <h4 style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-bottom: 14px;">Explore</h4>
           <ul style="list-style: none; display: grid; gap: 9px; font-size: 14px; color: var(--dim);">
             <li><a href="../software/">The software</a></li>
+            <li><a href="../linux/">Linux</a></li>
             <li><a href="../hardware/">The hardware</a></li>
             <li><a href="../service/">The service</a></li>
             <li><a href="../faq/">FAQ</a></li>
