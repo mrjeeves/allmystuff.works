@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Linux · GNOME Wayland, X11, and everything else · allmystuff.works</title>
-<meta name="description" content="AllMyStuff on Linux: native GNOME Wayland screen and control, X11, portal viewing on other Wayland desktops, drive mapping as your own user with no root, .deb, .rpm and AppImage for x86_64 and arm64, and a headless node for servers.">
+<title>Linux · what works where · allmystuff.works</title>
+<meta name="description" content="AllMyStuff on Linux, by desktop session: screen and control on GNOME Wayland and X11, viewing on other Wayland desktops, drive mapping as your own user, packages for x86_64 and arm64, and a headless node for servers.">
 <meta name="theme-color" content="#070711">
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <link rel="icon" sizes="48x48 32x32 16x16" href="../favicon.ico">
 <link rel="apple-touch-icon" href="../apple-touch-icon.png">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Linux, all the way in · allmystuff.works">
-<meta property="og:description" content="Native GNOME Wayland control, X11, rootless drive mapping, and packages for x86_64 and arm64. What works where, plainly.">
+<meta property="og:title" content="Linux: what works where · allmystuff.works">
+<meta property="og:description" content="Screen and control by desktop session, drive mapping, packages, and the limits of unattended access. Plainly.">
 <meta property="og:url" content="https://allmystuff.works/linux/">
 <meta property="og:image" content="https://allmystuff.works/og.png">
 <link rel="stylesheet" href="../ds/cec/tokens/fonts.css">
@@ -50,6 +50,12 @@
     .m-row > .m-name, .m-row > .m-note { grid-column: 1 / -1; }
     .m-cell .lbl { display: block; margin-bottom: 5px; font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); }
   }
+
+  /* ---- What v0.2.122 fixed ---- */
+  .fixed { margin-top: 22px; padding: 16px 18px; border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 6px; background: var(--surface); display: grid; gap: 8px; }
+  .fixed-k { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
+  .fixed p { margin: 0; font-size: 14px; color: var(--dim); line-height: 1.55; }
+  .fixed strong { color: var(--text); font-weight: 600; }
 
   /* ---- Feature tiles ---- */
   .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 16px; }
@@ -123,8 +129,8 @@
     <div class="wrap" style="position: relative; z-index: 2; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(440px, 100%), 1fr)); gap: clamp(32px, 4vw, 56px); align-items: center;">
       <div>
         <span class="eyebrow">Linux · the reference platform</span>
-        <h1 class="display-xl" style="margin: 16px 0 20px;">Linux, all the way in.</h1>
-        <p class="lede" style="max-width: 60ch;">AllMyStuff is built and tested on Linux first. It now drives GNOME on Wayland through the desktop's own remote-desktop interface, keeps X11 fully working, maps drives as you with no root, and ships packages for x86_64 and arm64. Here's exactly what works where.</p>
+        <h1 class="display-xl" style="margin: 16px 0 20px;">Linux: what works where.</h1>
+        <p class="lede" style="max-width: 60ch;">Linux has always been AllMyStuff's reference platform. This page sets out what each kind of Linux setup supports, including two gaps closed in v0.2.122.</p>
         <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px;">
           <a class="btn btn-primary" href="../download/">Download for Linux</a>
           <a class="btn btn-ghost" href="#sessions">What works where <span aria-hidden="true">→</span></a>
@@ -146,6 +152,11 @@
           <span class="chip">glibc 2.35+</span>
         </div>
         <p style="font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); line-height: 1.7; margin: 14px 0 0;">Ubuntu 22.04+, Debian 12, and anything newer. The installer brings what drive mapping needs along with it.</p>
+        <div class="fixed">
+          <span class="fixed-k">Fixed in v0.2.122</span>
+          <p><strong>Control on GNOME Wayland.</strong> Keyboard and mouse used to go through X11, which native Wayland apps ignore. They now use GNOME's own remote-desktop interface.</p>
+          <p><strong>Drive mapping without root.</strong> Mapping used to need permission to mount, which in practice meant root. It now runs as your signed-in user over FUSE.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -168,7 +179,7 @@
         </div>
 
         <div class="m-row feat" role="row">
-          <div class="m-name" role="rowheader">GNOME on Wayland<span class="m-new">New</span><span class="m-sub">including GNOME 42</span></div>
+          <div class="m-name" role="rowheader">GNOME on Wayland<span class="m-new">Fixed</span><span class="m-sub">including GNOME 42</span></div>
           <div class="m-cell" role="cell"><span class="lbl">Screen</span><span class="yes">Yes</span><span class="m-how">GNOME's own screen-cast</span></div>
           <div class="m-cell" role="cell"><span class="lbl">Keyboard &amp; mouse</span><span class="yes">Yes</span><span class="m-how">GNOME's remote-desktop interface, paired to that same stream</span></div>
           <div class="m-cell m-note" role="cell">Controls native Wayland apps directly, with no XWayland in the way. Reconnects to your logged-in session without a new screen-sharing prompt every time.</div>
@@ -209,7 +220,7 @@
       </div>
       <div class="tiles">
         <div class="tile">
-          <span class="k">New · drives</span>
+          <span class="k">Drives · fixed in v0.2.122</span>
           <h3>Map drives as you. No root.</h3>
           <p>Map a folder from any fleet machine to a real mount point, and every app sees it as ordinary storage. It runs as your signed-in user over FUSE: no <code>sudo</code>, no <code>/etc/fstab</code> line, cleaned up safely even after a crash.</p>
         </div>

@@ -65,22 +65,6 @@
   .ftile h4 { font-family: var(--font-display); font-size: 19px; font-weight: 600; line-height: 1.2; margin: 0; color: var(--text); }
   .ftile p { font-size: 14px; color: var(--dim); line-height: 1.55; margin: 0; }
   .ftile .go { margin-top: auto; padding-top: 6px; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }
-
-  /* ---- Linux band: the compact session matrix ---- */
-  .lx { background: linear-gradient(180deg, var(--surface), var(--bg-2)); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; box-shadow: 0 40px 90px -40px rgb(0 0 0 / 0.8); }
-  .lx-row { display: grid; grid-template-columns: 1fr 86px 86px; gap: 12px; align-items: center; padding: 14px 18px; border-top: 1px solid var(--border); font-size: 14px; color: var(--dim); }
-  .lx-row:first-child { border-top: none; }
-  .lx-row.h { padding: 10px 18px; background: oklch(0.115 0.018 285); font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); }
-  .lx-row.feat { background: oklch(0.64 0.255 350 / 0.06); box-shadow: inset 3px 0 0 var(--accent); }
-  .lx-row b { color: var(--text); font-weight: 600; }
-  .lx-row .s { display: block; font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); margin-top: 3px; }
-  .lx-y, .lx-p, .lx-n { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; }
-  .lx-y { color: var(--ok); }
-  .lx-p { color: var(--warn); }
-  .lx-n { color: var(--faint); }
-  .lx-foot { display: flex; gap: 7px; flex-wrap: wrap; padding: 14px 18px; border-top: 1px solid var(--border); }
-  .lx-foot span { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 9px; border: 1px solid var(--border); border-radius: 2px; color: var(--dim); }
-  @media (max-width: 480px) { .lx-row { grid-template-columns: 1fr 64px 72px; padding-left: 14px; padding-right: 14px; } }
 </style>
 </helmet>
 <div style="min-height: 100vh; background: var(--bg); color: var(--text); font-family: var(--font-body); overflow-x: clip;">
@@ -121,7 +105,6 @@
 
     <div class="wrap" style="position: relative; z-index: 2; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(440px, 100%), 1fr)); gap: clamp(36px, 4.5vw, 64px); align-items: center;">
       <div>
-        <a href="linux/" class="chip" style="display: inline-flex; margin-bottom: 20px; border-color: var(--accent-line); color: var(--text);"><span class="dot"></span>New: full GNOME Wayland control on Linux <span aria-hidden="true" style="color: var(--accent);">→</span></a><br>
         <span class="eyebrow no-rule">Free · Open source · A Critical Error Computing product</span>
         <h1 style="font-family: var(--font-display); font-weight: 700; font-size: clamp(56px, 7.4vw, 108px); line-height: 0.96; letter-spacing: -0.01em; margin: 20px 0 22px; text-wrap: pretty;">All my stuff.<br><x-import component-from-global-scope="CriticalErrorComputingDesignSystem_0eecf1.GlitchText" alt="w0rks." accent="{{ true }}" hint-size="230px,1em">Works.</x-import></h1>
         <p class="lede" style="margin: 0 0 32px;">Yours can too. One free app, on the gear you already own.</p>
@@ -143,10 +126,6 @@
             <div style="font-family: var(--font-display); font-size: 30px; font-weight: 600; line-height: 1;">100<small style="font-size: 16px; color: var(--dim);">%</small></div>
             <div style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); margin-top: 7px;">Open source · self-hostable</div>
           </div>
-          <a href="linux/" style="display: block;">
-            <div style="font-family: var(--font-display); font-size: 30px; font-weight: 600; line-height: 1;">3<small style="font-size: 16px; color: var(--dim);"> OS</small></div>
-            <div style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); margin-top: 7px;">Linux · macOS · Windows</div>
-          </a>
         </div>
       </div>
 
@@ -654,11 +633,11 @@
           <h4>amst and headless nodes</h4>
           <p><code style="font-family: var(--font-mono); font-size: 12.5px; color: var(--text);">amst den-tower</code> opens a shell from your own terminal. <code style="font-family: var(--font-mono); font-size: 12.5px; color: var(--text);">allmystuff serve</code> puts servers on the graph with no desktop.</p>
         </div>
-        <a class="ftile" href="linux/" style="border-color: var(--accent-line);">
-          <span class="k new">New · Linux</span>
-          <h4>GNOME Wayland, natively</h4>
-          <p>Full screen and control on GNOME Wayland and X11, drive mapping with no root, and packages for x86_64 and arm64.</p>
-          <span class="go">Linux, in detail →</span>
+        <a class="ftile" href="linux/">
+          <span class="k new">Linux · fixed in v0.2.122</span>
+          <h4>Wayland control, rootless drives</h4>
+          <p>Keyboard and mouse now reach native apps on GNOME Wayland, and drive mapping runs as your own user, without root.</p>
+          <span class="go">What works where →</span>
         </a>
       </div>
 
@@ -805,31 +784,8 @@
     </div>
   </section>
 
-  <!-- ════════ LINUX · first-class, Wayland included ════════ -->
-  <section id="linux" data-screen-label="Linux" class="section" style="background: var(--bg-2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
-    <div class="wrap" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: clamp(32px, 4.5vw, 64px); align-items: center;">
-      <div>
-        <span class="eyebrow">Runs on · Linux · macOS · Windows</span>
-        <h2 class="display-l" style="margin: 16px 0 18px;">Linux, first-class.<br>Wayland included.</h2>
-        <p class="lede" style="margin-bottom: 26px;">AllMyStuff is built and tested on Linux first, and it now drives GNOME on Wayland through the desktop's own remote-desktop interface. X11 works as it always has, and drives map as you, with no root. Your Mac and your Windows PC run the same app, on the same graph.</p>
-        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-          <a class="btn btn-primary btn-sm" href="linux/">Linux, in detail <span aria-hidden="true">→</span></a>
-          <a class="btn btn-ghost btn-sm" href="download/">All downloads</a>
-        </div>
-      </div>
-      <div class="lx" role="table" aria-label="Linux remote control by desktop session">
-        <div class="lx-row h" role="row"><span role="columnheader">Linux session</span><span role="columnheader">Screen</span><span role="columnheader">Control</span></div>
-        <div class="lx-row feat" role="row"><span role="rowheader"><b>GNOME on Wayland</b><span class="s">new · native, no XWayland</span></span><span class="lx-y" role="cell">✓ yes</span><span class="lx-y" role="cell">✓ yes</span></div>
-        <div class="lx-row" role="row"><span role="rowheader"><b>X11</b><span class="s">any desktop</span></span><span class="lx-y" role="cell">✓ yes</span><span class="lx-y" role="cell">✓ yes</span></div>
-        <div class="lx-row" role="row"><span role="rowheader"><b>Other Wayland</b><span class="s">via the screen-cast portal</span></span><span class="lx-y" role="cell">✓ yes</span><span class="lx-p" role="cell">view only</span></div>
-        <div class="lx-row" role="row"><span role="rowheader"><b>Headless server</b><span class="s">terminal · files · sites</span></span><span class="lx-n" role="cell">n/a</span><span class="lx-n" role="cell">n/a</span></div>
-        <div class="lx-foot"><span>.deb</span><span>.rpm</span><span>AppImage</span><span>x86_64 · arm64</span><span>drives without root</span></div>
-      </div>
-    </div>
-  </section>
-
   <!-- ════════ FAQ (top three) ════════ -->
-  <section id="faq" data-screen-label="FAQ" class="section">
+  <section id="faq" data-screen-label="FAQ" class="section" style="padding-top: 0;">
     <div class="wrap" style="max-width: min(880px, 92vw);">
       <div style="margin-bottom: 32px;">
         <span class="eyebrow">FAQ · the short list</span>
