@@ -30,7 +30,7 @@
   .ccard:hover { border-color: var(--accent-line); transform: var(--lift-card); box-shadow: 0 30px 70px -40px rgb(0 0 0 / 0.85); }
   .ccard-vis { height: 168px; position: relative; overflow: hidden; border-bottom: 1px solid var(--border); background: linear-gradient(135deg, oklch(0.2 0.05 290), oklch(0.15 0.03 260)); }
   .ccard-body { padding: 22px 24px 26px; display: flex; flex-direction: column; flex: 1; }
-  .ccard-num { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); }
+  .ccard-num { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); }
   .ccard h3 { font-family: var(--font-display); font-size: 27px; font-weight: 600; margin: 8px 0 8px; }
   .ccard p { font-size: 14.5px; color: var(--dim); line-height: 1.6; margin-bottom: 18px; }
   .ccard .go { margin-top: auto; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
@@ -41,12 +41,12 @@
   .ftiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr)); gap: 14px; }
   .ftile { display: flex; flex-direction: column; gap: 7px; background: linear-gradient(180deg, var(--surface), var(--bg-2)); border: 1px solid var(--border); border-radius: 8px; padding: 18px 20px 20px; transition: border-color var(--dur-base) ease; }
   a.ftile:hover { border-color: var(--accent-line); }
-  .ftile .k { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); }
+  .ftile .k { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); }
   .ftile .k.new { color: var(--accent); }
   .ftile h4 { font-family: var(--font-display); font-size: 19px; font-weight: 600; line-height: 1.2; margin: 0; color: var(--text); }
   .ftile p { font-size: 14px; color: var(--dim); line-height: 1.55; margin: 0; }
   .ftile code { font-family: var(--font-mono); font-size: 12.5px; color: var(--text); }
-  .ftile .go { margin-top: auto; padding-top: 6px; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }
+  .ftile .go { margin-top: auto; padding-top: 6px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }
 </style>
 </head>
 <body>
@@ -84,13 +84,13 @@
   <nav aria-label="Console pages" style="position: sticky; top: 66px; z-index: 40; background: oklch(0.15 0.024 285 / 0.85); backdrop-filter: blur(12px) saturate(1.2); border-bottom: 1px solid var(--border);">
     <div class="wrap" style="display: flex; align-items: stretch; height: 46px; overflow-x: auto; scrollbar-width: none;">
       <div style="display: flex; align-items: stretch; gap: 2px; margin: 0 auto;">
-      <span style="display: inline-flex; align-items: center; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-right: 10px; flex-shrink: 0;">the consoles</span>
+      <span style="display: inline-flex; align-items: center; font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-right: 10px; flex-shrink: 0;">the consoles</span>
       <a href="./" aria-current="page" style="display: inline-flex; align-items: center; height: 100%; box-sizing: border-box; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; padding: 0 12px; border-bottom: 2px solid transparent; white-space: nowrap; flex-shrink: 0; color: var(--text); border-bottom-color: var(--accent);">Overview</a>
-      <a href="consoles/remote-control/" style="display: inline-flex; align-items: center; height: 100%; box-sizing: border-box; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; padding: 0 12px; border-bottom: 2px solid transparent; white-space: nowrap; flex-shrink: 0; color: var(--dim);">Remote control</a>
-      <a href="consoles/terminal/" style="display: inline-flex; align-items: center; height: 100%; box-sizing: border-box; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; padding: 0 12px; border-bottom: 2px solid transparent; white-space: nowrap; flex-shrink: 0; color: var(--dim);">Terminal</a>
-      <a href="consoles/files/" style="display: inline-flex; align-items: center; height: 100%; box-sizing: border-box; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; padding: 0 12px; border-bottom: 2px solid transparent; white-space: nowrap; flex-shrink: 0; color: var(--dim);">Files</a>
-      <a href="consoles/sites/" style="display: inline-flex; align-items: center; height: 100%; box-sizing: border-box; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; padding: 0 12px; border-bottom: 2px solid transparent; white-space: nowrap; flex-shrink: 0; color: var(--dim);">Sites</a>
-      <a href="consoles/rooms/" style="display: inline-flex; align-items: center; height: 100%; box-sizing: border-box; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; padding: 0 12px; border-bottom: 2px solid transparent; white-space: nowrap; flex-shrink: 0; color: var(--dim);">Rooms</a>
+      <a href="consoles/remote-control/" style="display: inline-flex; align-items: center; height: 100%; box-sizing: border-box; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; padding: 0 12px; border-bottom: 2px solid transparent; white-space: nowrap; flex-shrink: 0; color: var(--dim);">Remote control</a>
+      <a href="consoles/terminal/" style="display: inline-flex; align-items: center; height: 100%; box-sizing: border-box; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; padding: 0 12px; border-bottom: 2px solid transparent; white-space: nowrap; flex-shrink: 0; color: var(--dim);">Terminal</a>
+      <a href="consoles/files/" style="display: inline-flex; align-items: center; height: 100%; box-sizing: border-box; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; padding: 0 12px; border-bottom: 2px solid transparent; white-space: nowrap; flex-shrink: 0; color: var(--dim);">Files</a>
+      <a href="consoles/sites/" style="display: inline-flex; align-items: center; height: 100%; box-sizing: border-box; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; padding: 0 12px; border-bottom: 2px solid transparent; white-space: nowrap; flex-shrink: 0; color: var(--dim);">Sites</a>
+      <a href="consoles/rooms/" style="display: inline-flex; align-items: center; height: 100%; box-sizing: border-box; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; padding: 0 12px; border-bottom: 2px solid transparent; white-space: nowrap; flex-shrink: 0; color: var(--dim);">Rooms</a>
       </div>
     </div>
   </nav>
@@ -279,7 +279,7 @@
           <p style="font-size: 14px; color: var(--faint); max-width: 32ch; line-height: 1.6;">Tech that works when you turn it on. Yours, with or without us.</p>
         </div>
         <div>
-          <h4 style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-bottom: 14px;">The consoles</h4>
+          <h4 style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-bottom: 14px;">The consoles</h4>
           <ul style="list-style: none; display: grid; gap: 9px; font-size: 14px; color: var(--dim);">
             <li><a href="consoles/remote-control/">Remote control</a></li>
             <li><a href="consoles/terminal/">Terminal</a></li>
@@ -289,7 +289,7 @@
           </ul>
         </div>
         <div>
-          <h4 style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-bottom: 14px;">The app</h4>
+          <h4 style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-bottom: 14px;">The app</h4>
           <ul style="list-style: none; display: grid; gap: 9px; font-size: 14px; color: var(--dim);">
             <li><a href="./">The software</a></li>
             <li><a href="../linux/">Linux</a></li>
@@ -299,7 +299,7 @@
           </ul>
         </div>
         <div>
-          <h4 style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-bottom: 14px;">Open</h4>
+          <h4 style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-bottom: 14px;">Open</h4>
           <ul style="list-style: none; display: grid; gap: 9px; font-size: 14px; color: var(--dim);">
             <li><a href="https://github.com/mrjeeves/AllMyStuff">github.com/mrjeeves/AllMyStuff</a></li>
             <li><a href="https://myownmesh.net">Built on MyOwnMesh</a></li>
@@ -311,9 +311,9 @@
       <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-top: 22px; border-top: 1px solid var(--border);">
         <div style="display: flex; align-items: center; gap: 10px;">
           <img src="../assets/cec-logo.png" alt="Critical Error Computing" style="height: 26px; width: auto;">
-          <span style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);">A Critical Error Computing product · Humble, TX</span>
+          <span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);">A Critical Error Computing product · Humble, TX</span>
         </div>
-        <span style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);">© 2026 allmystuff.works · MIT</span>
+        <span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);">© 2026 allmystuff.works · MIT</span>
       </div>
     </div>
   </footer>

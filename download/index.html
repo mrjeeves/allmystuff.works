@@ -27,24 +27,24 @@
   .dl-list { display: grid; gap: 8px; }
   .dl-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 12px; background: var(--bg); border: 1px solid var(--border); border-radius: 4px; font-size: 14px; color: var(--dim); }
   .dl-row a { color: var(--accent); font-weight: 600; white-space: nowrap; }
-  .dl-row .meta { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); }
+  .dl-row .meta { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); }
   .cmd { background: oklch(0.115 0.018 285); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
-  .cmd .head { display: flex; align-items: center; justify-content: space-between; padding: 9px 14px; border-bottom: 1px solid var(--border); font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); }
+  .cmd .head { display: flex; align-items: center; justify-content: space-between; padding: 9px 14px; border-bottom: 1px solid var(--border); font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); }
   .cmd .body { padding: 15px 16px; font-family: var(--font-mono); font-size: 13px; color: var(--text); overflow-x: auto; white-space: nowrap; }
   .cmd .body .p { color: var(--faint); }
-  .note { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); line-height: 1.7; }
+  .note { font-family: var(--font-mono); font-size: 12.5px; letter-spacing: 0.01em; color: var(--faint); line-height: 1.7; }
 
   /* ---- Install tabs + copy buttons (the myownmesh.net wiring) ---- */
   #oneliner { margin-top: 30px; max-width: 980px; }
   #for-you:not([hidden]) + #oneliner { margin-top: 16px; }
-  .term-tab { appearance: none; background: none; border: none; border-bottom: 2px solid transparent; cursor: pointer; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); padding: 11px 13px 9px; }
+  .term-tab { appearance: none; background: none; border: none; border-bottom: 2px solid transparent; cursor: pointer; font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); padding: 11px 13px 9px; }
   .term-tab:hover { color: var(--dim); }
   .term-tab[aria-selected="true"] { color: var(--text); border-bottom-color: var(--accent); }
   .term-tab[aria-selected="true"]:hover { color: var(--text); }
   .snippet { display: none; position: relative; }
   .snippet.active { display: block; }
   .snippet .body { padding-right: 96px; }
-  .copy-btn { position: absolute; top: 50%; right: 10px; transform: translateY(-50%); appearance: none; background: var(--surface); border: 1px solid var(--border); border-radius: 3px; cursor: pointer; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim); padding: 5px 11px; transition: color var(--dur-fast) ease, border-color var(--dur-fast) ease; }
+  .copy-btn { position: absolute; top: 50%; right: 10px; transform: translateY(-50%); appearance: none; background: var(--surface); border: 1px solid var(--border); border-radius: 3px; cursor: pointer; font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim); padding: 5px 11px; transition: color var(--dur-fast) ease, border-color var(--dur-fast) ease; }
   .copy-btn:hover { color: var(--text); border-color: var(--border-bright); }
   .copy-btn.copied { color: var(--ok); border-color: var(--ok); }
 </style>
@@ -104,7 +104,7 @@
           <div style="min-width: 0; flex: 1;">
             <div style="font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px;">for this machine · best guess, everything else is below</div>
             <div id="fy-name" style="font-family: var(--font-display); font-size: 24px; font-weight: 600; line-height: 1.1;"></div>
-            <div id="fy-meta" style="font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); margin-top: 7px;"></div>
+            <div id="fy-meta" style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); margin-top: 7px;"></div>
           </div>
           <div style="display: flex; gap: 14px; align-items: center; flex-wrap: wrap;">
             <a class="btn btn-primary" id="fy-btn" href="https://github.com/mrjeeves/AllMyStuff/releases/latest">Download</a>
@@ -158,7 +158,7 @@
             <div class="dl-row"><span>.deb <span class="meta">· amd64 / arm64</span></span><span><a data-asset-end="_amd64.deb" href="https://github.com/mrjeeves/AllMyStuff/releases/latest">amd64</a> · <a data-asset-end="_arm64.deb" href="https://github.com/mrjeeves/AllMyStuff/releases/latest">arm64</a></span></div>
             <div class="dl-row"><span>.rpm <span class="meta">· x86_64 / aarch64</span></span><span><a data-asset-end=".x86_64.rpm" href="https://github.com/mrjeeves/AllMyStuff/releases/latest">x86_64</a> · <a data-asset-end=".aarch64.rpm" href="https://github.com/mrjeeves/AllMyStuff/releases/latest">aarch64</a></span></div>
           </div>
-          <p class="note" style="margin: 0;">Or just run the one-liner; it grabs the right build for your machine. Full control on GNOME Wayland and X11. <a href="../linux/" style="color: var(--accent);">What works where →</a></p>
+          <p class="note" style="margin: 0;">Or just run the one-liner; it grabs the right build for your machine. Full control on GNOME Wayland and X11. <a href="../linux/" style="color: var(--accent); white-space: nowrap;">What works where →</a></p>
         </div>
 
         <!-- macOS -->
@@ -287,7 +287,7 @@
           <p style="font-size: 14px; color: var(--faint); max-width: 32ch; line-height: 1.6;">Tech that works when you turn it on. Yours, with or without us.</p>
         </div>
         <div>
-          <h4 style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-bottom: 14px;">Explore</h4>
+          <h4 style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-bottom: 14px;">Explore</h4>
           <ul style="list-style: none; display: grid; gap: 9px; font-size: 14px; color: var(--dim);">
             <li><a href="../software/">The software</a></li>
             <li><a href="../linux/">Linux</a></li>
@@ -298,7 +298,7 @@
           </ul>
         </div>
         <div>
-          <h4 style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-bottom: 14px;">Hardware</h4>
+          <h4 style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-bottom: 14px;">Hardware</h4>
           <ul style="list-style: none; display: grid; gap: 9px; font-size: 14px; color: var(--dim);">
             <li><a href="../hardware/">The CEC KVM line</a></li>
             <li><a href="https://criticalerrorcomputing.com">The naval fleet</a></li>
@@ -306,7 +306,7 @@
           </ul>
         </div>
         <div>
-          <h4 style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-bottom: 14px;">Open</h4>
+          <h4 style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-bottom: 14px;">Open</h4>
           <ul style="list-style: none; display: grid; gap: 9px; font-size: 14px; color: var(--dim);">
             <li><a href="https://github.com/mrjeeves/AllMyStuff">github.com/mrjeeves/AllMyStuff</a></li>
             <li><a href="https://github.com/mrjeeves/AllMyStuff/releases">All releases</a></li>
@@ -318,9 +318,9 @@
       <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-top: 22px; border-top: 1px solid var(--border);">
         <div style="display: flex; align-items: center; gap: 10px;">
           <img src="../assets/cec-logo.png" alt="Critical Error Computing" style="height: 26px; width: auto;">
-          <span style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);">A Critical Error Computing product · Humble, TX</span>
+          <span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);">A Critical Error Computing product · Humble, TX</span>
         </div>
-        <span style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);">© 2026 allmystuff.works · MIT</span>
+        <span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);">© 2026 allmystuff.works · MIT</span>
       </div>
     </div>
   </footer>

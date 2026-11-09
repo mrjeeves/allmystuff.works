@@ -83,7 +83,7 @@
   .switch a { display: flex; flex-direction: column; gap: 6px; padding: 16px 18px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); transition: border-color var(--dur-base) ease, transform var(--dur-fast) ease; }
   .switch a:hover { border-color: var(--border-bright); transform: var(--lift); }
   .switch a.cur { border-color: var(--accent-line); background: linear-gradient(180deg, var(--surface-2), var(--surface)); }
-  .switch .sn { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); }
+  .switch .sn { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); }
   .switch .st { font-family: var(--font-display); font-size: 19px; font-weight: 600; }
   .switch a.cur .st { color: var(--accent); }
 </style>
@@ -123,13 +123,13 @@
   <nav aria-label="Console pages" style="position: sticky; top: 66px; z-index: 40; background: oklch(0.15 0.024 285 / 0.85); backdrop-filter: blur(12px) saturate(1.2); border-bottom: 1px solid var(--border);">
     <div class="wrap" style="display: flex; align-items: stretch; height: 46px; overflow-x: auto; scrollbar-width: none;">
       <div style="display: flex; align-items: stretch; gap: 2px; margin: 0 auto;">
-      <span style="display: inline-flex; align-items: center; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-right: 10px; flex-shrink: 0;">the consoles</span>
-      <a href="../../" style="display: inline-flex; align-items: center; height: 100%; box-sizing: border-box; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; padding: 0 12px; border-bottom: 2px solid transparent; white-space: nowrap; flex-shrink: 0; color: var(--dim);">Overview</a>
+      <span style="display: inline-flex; align-items: center; font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-right: 10px; flex-shrink: 0;">the consoles</span>
+      <a href="../../" style="display: inline-flex; align-items: center; height: 100%; box-sizing: border-box; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; padding: 0 12px; border-bottom: 2px solid transparent; white-space: nowrap; flex-shrink: 0; color: var(--dim);">Overview</a>
       <a href="./" aria-current="page" style="display: inline-flex; align-items: center; height: 100%; box-sizing: border-box; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; padding: 0 12px; border-bottom: 2px solid transparent; white-space: nowrap; flex-shrink: 0; color: var(--text); border-bottom-color: var(--accent);">Remote control</a>
-      <a href="../terminal/" style="display: inline-flex; align-items: center; height: 100%; box-sizing: border-box; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; padding: 0 12px; border-bottom: 2px solid transparent; white-space: nowrap; flex-shrink: 0; color: var(--dim);">Terminal</a>
-      <a href="../files/" style="display: inline-flex; align-items: center; height: 100%; box-sizing: border-box; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; padding: 0 12px; border-bottom: 2px solid transparent; white-space: nowrap; flex-shrink: 0; color: var(--dim);">Files</a>
-      <a href="../sites/" style="display: inline-flex; align-items: center; height: 100%; box-sizing: border-box; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; padding: 0 12px; border-bottom: 2px solid transparent; white-space: nowrap; flex-shrink: 0; color: var(--dim);">Sites</a>
-      <a href="../rooms/" style="display: inline-flex; align-items: center; height: 100%; box-sizing: border-box; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; padding: 0 12px; border-bottom: 2px solid transparent; white-space: nowrap; flex-shrink: 0; color: var(--dim);">Rooms</a>
+      <a href="../terminal/" style="display: inline-flex; align-items: center; height: 100%; box-sizing: border-box; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; padding: 0 12px; border-bottom: 2px solid transparent; white-space: nowrap; flex-shrink: 0; color: var(--dim);">Terminal</a>
+      <a href="../files/" style="display: inline-flex; align-items: center; height: 100%; box-sizing: border-box; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; padding: 0 12px; border-bottom: 2px solid transparent; white-space: nowrap; flex-shrink: 0; color: var(--dim);">Files</a>
+      <a href="../sites/" style="display: inline-flex; align-items: center; height: 100%; box-sizing: border-box; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; padding: 0 12px; border-bottom: 2px solid transparent; white-space: nowrap; flex-shrink: 0; color: var(--dim);">Sites</a>
+      <a href="../rooms/" style="display: inline-flex; align-items: center; height: 100%; box-sizing: border-box; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; padding: 0 12px; border-bottom: 2px solid transparent; white-space: nowrap; flex-shrink: 0; color: var(--dim);">Rooms</a>
       </div>
     </div>
   </nav>
@@ -140,7 +140,7 @@
     <div class="grid-bg"></div>
     <div class="glow" style="width: 520px; height: 420px; left: 62%; top: -10%; background: var(--accent); opacity: 0.12;"></div>
     <div class="wrap" style="position: relative; z-index: 2;">
-      <div style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); margin-bottom: 22px;">
+      <div style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); margin-bottom: 22px;">
         <a href="../../../software/" style="color: var(--faint);">The software</a>
         <span style="color: var(--border-bright); margin: 0 8px;">/</span>
         <span style="color: var(--accent);">Remote control</span>
@@ -197,7 +197,7 @@
               <span style="font-family: var(--font-mono); font-size: 9.5px; color: var(--faint); margin-left: 6px;">blender · final_render.blend</span>
             </div>
             <div style="padding: 13px 13px 15px;">
-              <div style="font-family: var(--font-mono); font-size: 10px; color: var(--dim); margin-bottom: 8px;">Rendering frame 1184 / 1400 · sample 96</div>
+              <div style="font-family: var(--font-mono); font-size: 11.5px; color: var(--dim); margin-bottom: 8px;">Rendering frame 1184 / 1400 · sample 96</div>
               <div style="height: 7px; background: var(--bg); border-radius: 2px; overflow: hidden;"><div style="width: 84%; height: 100%; background: linear-gradient(90deg, var(--violet), var(--accent));"></div></div>
             </div>
           </div>
@@ -219,7 +219,7 @@
           <span class="tgl" title="Open a shell on this machine over the mesh">📟 Terminal</span>
         </div>
         <div class="ctl-row" style="border-top: 1px dashed var(--border); padding-top: 11px;">
-          <span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--faint); margin-right: 4px;">Quality</span>
+          <span style="font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--faint); margin-right: 4px;">Quality</span>
           <span class="qpill">Res · Auto</span>
           <span class="qpill">FPS · 60</span>
           <span class="qpill">Rate · 18 Mbps</span>
@@ -230,7 +230,7 @@
           <span class="btn btn-sm" style="background: oklch(0.2 0.05 14); border: 1px solid oklch(0.38 0.11 14); color: oklch(0.82 0.1 14);">End session</span>
         </div>
       </div>
-      <p style="text-align: center; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); margin-top: 18px;">The real interface · control on, audio listening, render watched live</p>
+      <p style="text-align: center; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); margin-top: 18px;">The real interface · control on, audio listening, render watched live</p>
     </div>
   </section>
 
@@ -274,14 +274,14 @@
       <!-- F2 control -->
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr)); gap: clamp(28px, 4vw, 56px); align-items: center; margin-bottom: clamp(48px, 6vw, 80px);">
         <div class="win" style="order: 2;">
-          <div class="win-bar"><span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint);">control</span><span class="stat live"><span class="ld"></span>live · 23 ms</span></div>
+          <div class="win-bar"><span style="font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint);">control</span><span class="stat live"><span class="ld"></span>live · 23 ms</span></div>
           <div style="padding: 22px 18px; display: grid; gap: 14px;">
             <div class="ctl-row" style="border: none; padding: 0;">
               <span class="tgl on"><span class="pip"></span>⌨️ Control</span>
               <span class="tgl on"><span class="pip"></span>🔊 Audio</span>
               <span class="tgl"><span class="pip"></span>📋 Clipboard</span>
             </div>
-            <div style="font-family: var(--font-mono); font-size: 11px; color: var(--dim); line-height: 1.7; background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 12px 14px;">
+            <div style="font-family: var(--font-mono); font-size: 12px; color: var(--dim); line-height: 1.7; background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 12px 14px;">
               <div style="color: var(--ok);">▸ keyboard &amp; mouse → den-tower</div>
               <div style="color: var(--faint);">▸ cursor: crosshair · focus pinned</div>
               <div style="color: var(--faint);">▸ Esc &amp; Ctrl+W go to the remote</div>
@@ -314,15 +314,15 @@
           </ul>
         </div>
         <div class="win">
-          <div class="win-bar"><span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint);">quality</span></div>
+          <div class="win-bar"><span style="font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint);">quality</span></div>
           <div style="padding: 24px 22px 26px;">
             <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
-              <span style="font-family: var(--font-mono); font-size: 11px; color: var(--faint);">Speed</span>
+              <span style="font-family: var(--font-mono); font-size: 12px; color: var(--faint);">Speed</span>
               <div style="flex: 1; height: 4px; background: var(--border); border-radius: 999px; position: relative;">
                 <div style="position: absolute; left: 0; width: 52%; height: 100%; background: linear-gradient(90deg, var(--violet), var(--accent)); border-radius: 999px;"></div>
                 <div style="position: absolute; left: 52%; top: 50%; transform: translate(-50%,-50%); width: 16px; height: 16px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft);"></div>
               </div>
-              <span style="font-family: var(--font-mono); font-size: 11px; color: var(--faint);">Quality</span>
+              <span style="font-family: var(--font-mono); font-size: 12px; color: var(--faint);">Quality</span>
             </div>
             <div style="text-align: center; font-family: var(--font-display); font-size: 22px; font-weight: 600; color: var(--text); margin-bottom: 20px;">Balanced</div>
             <div style="display: flex; gap: 7px; flex-wrap: wrap; justify-content: center;">
@@ -433,15 +433,15 @@
           <div>
             <div style="background: oklch(0.115 0.018 285); border: 1px solid var(--border); border-radius: 6px; overflow: hidden;">
               <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; border-bottom: 1px solid var(--border);">
-                <span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint);">or the one-liner</span>
-                <span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint);">sh</span>
+                <span style="font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint);">or the one-liner</span>
+                <span style="font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint);">sh</span>
               </div>
               <div style="padding: 18px 16px; font-family: var(--font-mono); font-size: 13.5px; color: var(--text); overflow-x: auto; white-space: nowrap;"><span style="color: var(--faint);">$</span> curl -fsSL https://allmystuff.works/install.sh | sh</div>
             </div>
             <div style="display: flex; gap: 18px; flex-wrap: wrap; margin-top: 16px;">
-              <span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);">✓ free forever</span>
-              <span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);">✓ mit licensed</span>
-              <span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);">✓ no account</span>
+              <span style="font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);">✓ free forever</span>
+              <span style="font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);">✓ mit licensed</span>
+              <span style="font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);">✓ no account</span>
             </div>
           </div>
         </div>
@@ -469,7 +469,7 @@
           <p style="font-size: 14px; color: var(--faint); max-width: 32ch; line-height: 1.6;">Tech that works when you turn it on. Yours, with or without us.</p>
         </div>
         <div>
-          <h4 style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-bottom: 14px;">The consoles</h4>
+          <h4 style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-bottom: 14px;">The consoles</h4>
           <ul style="list-style: none; display: grid; gap: 9px; font-size: 14px; color: var(--dim);">
             <li><a href="../remote-control/">Remote control</a></li>
             <li><a href="../terminal/">Terminal</a></li>
@@ -479,7 +479,7 @@
           </ul>
         </div>
         <div>
-          <h4 style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-bottom: 14px;">The app</h4>
+          <h4 style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-bottom: 14px;">The app</h4>
           <ul style="list-style: none; display: grid; gap: 9px; font-size: 14px; color: var(--dim);">
             <li><a href="../../../software/">The software</a></li>
             <li><a href="../../../linux/">Linux</a></li>
@@ -489,7 +489,7 @@
           </ul>
         </div>
         <div>
-          <h4 style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-bottom: 14px;">Open</h4>
+          <h4 style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-bottom: 14px;">Open</h4>
           <ul style="list-style: none; display: grid; gap: 9px; font-size: 14px; color: var(--dim);">
             <li><a href="https://github.com/mrjeeves/AllMyStuff">github.com/mrjeeves/AllMyStuff</a></li>
             <li><a href="https://myownmesh.net">Built on MyOwnMesh</a></li>
@@ -501,9 +501,9 @@
       <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-top: 22px; border-top: 1px solid var(--border);">
         <div style="display: flex; align-items: center; gap: 10px;">
           <img src="../../../assets/cec-logo.png" alt="Critical Error Computing" style="height: 26px; width: auto;">
-          <span style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);">A Critical Error Computing product · Humble, TX</span>
+          <span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);">A Critical Error Computing product · Humble, TX</span>
         </div>
-        <span style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);">© 2026 allmystuff.works · MIT</span>
+        <span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);">© 2026 allmystuff.works · MIT</span>
       </div>
     </div>
   </footer>

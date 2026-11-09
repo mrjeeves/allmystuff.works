@@ -17,7 +17,7 @@
   /* ---- Ink (text on dark) ---- */
   --text:  oklch(0.97 0.004 285);  /* primary text, near-white */
   --dim:   oklch(0.74 0.02 285);   /* secondary / body-on-card */
-  --faint: oklch(0.55 0.025 285);  /* tertiary / mono labels */
+  --faint: oklch(0.66 0.025 285);  /* tertiary / mono labels · ≥5:1 on every surface (WCAG AA) */
 
   /* ---- Accents ---- */
   --accent:      oklch(0.64 0.255 350);                          /* CEC magenta */
