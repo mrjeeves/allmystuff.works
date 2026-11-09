@@ -83,7 +83,7 @@
   .switch a { display: flex; flex-direction: column; gap: 6px; padding: 16px 18px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); transition: border-color var(--dur-base) ease, transform var(--dur-fast) ease; }
   .switch a:hover { border-color: var(--border-bright); transform: var(--lift); }
   .switch a.cur { border-color: var(--accent-line); background: linear-gradient(180deg, var(--surface-2), var(--surface)); }
-  .switch .sn { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); }
+  .switch .sn { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--label); }
   .switch .st { font-family: var(--font-display); font-size: 19px; font-weight: 600; }
   .switch a.cur .st { color: var(--accent); }
 
@@ -134,7 +134,7 @@
   <nav aria-label="Console pages" style="position: sticky; top: 66px; z-index: 40; background: oklch(0.15 0.024 285 / 0.85); backdrop-filter: blur(12px) saturate(1.2); border-bottom: 1px solid var(--border);">
     <div class="wrap" style="display: flex; align-items: stretch; height: 46px; overflow-x: auto; scrollbar-width: none;">
       <div style="display: flex; align-items: stretch; gap: 2px; margin: 0 auto;">
-      <span style="display: inline-flex; align-items: center; font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-right: 10px; flex-shrink: 0;">the consoles</span>
+      <span style="display: inline-flex; align-items: center; font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--label); margin-right: 10px; flex-shrink: 0;">the consoles</span>
       <a href="../../" style="display: inline-flex; align-items: center; height: 100%; box-sizing: border-box; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; padding: 0 12px; border-bottom: 2px solid transparent; white-space: nowrap; flex-shrink: 0; color: var(--dim);">Overview</a>
       <a href="../remote-control/" style="display: inline-flex; align-items: center; height: 100%; box-sizing: border-box; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; padding: 0 12px; border-bottom: 2px solid transparent; white-space: nowrap; flex-shrink: 0; color: var(--dim);">Remote control</a>
       <a href="./" aria-current="page" style="display: inline-flex; align-items: center; height: 100%; box-sizing: border-box; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; padding: 0 12px; border-bottom: 2px solid transparent; white-space: nowrap; flex-shrink: 0; color: var(--text); border-bottom-color: var(--accent);">Terminal</a>
@@ -152,7 +152,7 @@
     <div class="glow" style="width: 520px; height: 420px; left: 62%; top: -10%; background: var(--accent); opacity: 0.12;"></div>
     <div class="wrap" style="position: relative; z-index: 2;">
       <div style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); margin-bottom: 22px;">
-        <a href="../../../software/" style="color: var(--faint);">The software</a>
+        <a href="../../../software/" style="color: var(--label);">The software</a>
         <span style="color: var(--border-bright); margin: 0 8px;">/</span>
         <span style="color: var(--accent);">Terminal</span>
       </div>
@@ -208,7 +208,7 @@
           <div><span class="pr-user">nate@desk-pc</span><span class="pr-host">:~$</span> <span class="term-cursor"></span></div>
         </div>
       </div>
-      <p style="text-align: center; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); margin-top: 18px;">The real interface · a real PTY on the far side, shared tmux-style</p>
+      <p style="text-align: center; font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--label); margin-top: 18px;">The real interface · a real PTY on the far side, shared tmux-style</p>
     </div>
   </section>
 
@@ -224,7 +224,7 @@
       <!-- F1 real PTY -->
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr)); gap: clamp(28px, 4vw, 56px); align-items: center; margin-bottom: clamp(48px, 6vw, 80px);">
         <div>
-          <span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint);">[ a real shell ]</span>
+          <span style="font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--label);">[ a real shell ]</span>
           <h3 class="display-m" style="margin: 14px 0 14px;">Real PTY, no sshd.</h3>
           <p style="color: var(--dim); line-height: 1.6; max-width: 50ch; margin-bottom: 18px;">Open a tab and the far side spawns your actual shell in a real PTY: no daemon to configure, no port forwarding, no cloud in the middle. Keystrokes go to the far PTY; its bytes come straight back. Job control, colours, full-screen TUIs, all of it works because it's the real thing.</p>
           <ul class="flist">
@@ -263,7 +263,7 @@
           </div>
         </div>
         <div style="order: 1;">
-          <span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint);">[ shared ]</span>
+          <span style="font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--label);">[ shared ]</span>
           <h3 class="display-m" style="margin: 14px 0 14px;">Shared, tmux-style.</h3>
           <p style="color: var(--dim); line-height: 1.6; max-width: 50ch; margin-bottom: 18px;">Multiple windows can join the same shell: same scrollback, same keyboard. The host reconciles the shared PTY to the smallest attached window so the shell wraps identically for everyone. Join from another window, or from a fleet member's machine.</p>
           <ul class="flist">
@@ -277,7 +277,7 @@
       <!-- F3 owner-gated -->
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr)); gap: clamp(28px, 4vw, 56px); align-items: center;">
         <div>
-          <span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint);">[ gated ]</span>
+          <span style="font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--label);">[ gated ]</span>
           <h3 class="display-m" style="margin: 14px 0 14px;">Owner-gated by the network.</h3>
           <p style="color: var(--dim); line-height: 1.6; max-width: 50ch; margin-bottom: 18px;">A terminal opens only for a machine you own or one in your fleet. The gate is enforced at the network level, not in the UI; there's no button to disable, no race to win. A machine that isn't yours simply won't accept the offer.</p>
           <ul class="flist">
@@ -404,15 +404,15 @@
           <div>
             <div style="background: oklch(0.115 0.018 285); border: 1px solid var(--border); border-radius: 6px; overflow: hidden;">
               <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; border-bottom: 1px solid var(--border);">
-                <span style="font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint);">or the one-liner</span>
+                <span style="font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--label);">or the one-liner</span>
                 <span style="font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint);">sh</span>
               </div>
               <div style="padding: 18px 16px; font-family: var(--font-mono); font-size: 13.5px; color: var(--text); overflow-x: auto; white-space: nowrap;"><span style="color: var(--faint);">$</span> curl -fsSL https://allmystuff.works/install.sh | sh</div>
             </div>
             <div style="display: flex; gap: 18px; flex-wrap: wrap; margin-top: 16px;">
-              <span style="font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);">✓ free forever</span>
-              <span style="font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);">✓ mit licensed</span>
-              <span style="font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);">✓ no account</span>
+              <span style="font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--label);">✓ free forever</span>
+              <span style="font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--label);">✓ mit licensed</span>
+              <span style="font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--label);">✓ no account</span>
             </div>
           </div>
         </div>
@@ -440,7 +440,7 @@
           <p style="font-size: 14px; color: var(--faint); max-width: 32ch; line-height: 1.6;">Tech that works when you turn it on. Yours, with or without us.</p>
         </div>
         <div>
-          <h4 style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-bottom: 14px;">The consoles</h4>
+          <h4 style="font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--label); margin-bottom: 14px;">The consoles</h4>
           <ul style="list-style: none; display: grid; gap: 9px; font-size: 14px; color: var(--dim);">
             <li><a href="../remote-control/">Remote control</a></li>
             <li><a href="../terminal/">Terminal</a></li>
@@ -450,7 +450,7 @@
           </ul>
         </div>
         <div>
-          <h4 style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-bottom: 14px;">The app</h4>
+          <h4 style="font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--label); margin-bottom: 14px;">The app</h4>
           <ul style="list-style: none; display: grid; gap: 9px; font-size: 14px; color: var(--dim);">
             <li><a href="../../../software/">The software</a></li>
             <li><a href="../../../linux/">Linux</a></li>
@@ -460,7 +460,7 @@
           </ul>
         </div>
         <div>
-          <h4 style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-bottom: 14px;">Open</h4>
+          <h4 style="font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--label); margin-bottom: 14px;">Open</h4>
           <ul style="list-style: none; display: grid; gap: 9px; font-size: 14px; color: var(--dim);">
             <li><a href="https://github.com/mrjeeves/AllMyStuff">github.com/mrjeeves/AllMyStuff</a></li>
             <li><a href="https://myownmesh.net">Built on MyOwnMesh</a></li>
@@ -472,9 +472,9 @@
       <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-top: 22px; border-top: 1px solid var(--border);">
         <div style="display: flex; align-items: center; gap: 10px;">
           <img src="../../../assets/cec-logo.png" alt="Critical Error Computing" style="height: 26px; width: auto;">
-          <span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);">A Critical Error Computing product · Humble, TX</span>
+          <span style="font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--label);">A Critical Error Computing product · Humble, TX</span>
         </div>
-        <span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);">© 2026 allmystuff.works · MIT</span>
+        <span style="font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--label);">© 2026 allmystuff.works · MIT</span>
       </div>
     </div>
   </footer>

@@ -17,7 +17,8 @@
   /* ---- Ink (text on dark) ---- */
   --text:  oklch(0.97 0.004 285);  /* primary text, near-white */
   --dim:   oklch(0.74 0.02 285);   /* secondary / body-on-card */
-  --faint: oklch(0.66 0.025 285);  /* tertiary / mono labels · ≥5:1 on every surface (WCAG AA) */
+  --faint: oklch(0.66 0.025 285);  /* tertiary / UI text inside app mockups · ≥5:1 on every surface */
+  --label: oklch(0.82 0.06 292);   /* mono subtext (eyebrows under cards, captions, footnotes) · soft violet, ≥8:1 */
 
   /* ---- Accents ---- */
   --accent:      oklch(0.64 0.255 350);                          /* CEC magenta */
